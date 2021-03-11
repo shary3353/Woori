@@ -4,6 +4,27 @@
     <meta charset="utf-8" />
     <title>제목</title>
     <style>
+        #wrapper {
+            overflow: hidden;
+        }
+        
+        #naviBox {
+            float: left;
+        }
+        
+        #myInfo {
+            width: 1000px;
+            height: 500px;
+            float: left;
+            margin: 50px 150px;
+            text-align: center;
+        }
+        
+        #infoBox {
+            width: 550px;
+            margin: 50px 50px;
+        }
+        
         div.C_MyPageNavi {
             width: 150px;
             height: 100px;
@@ -34,8 +55,8 @@
             color: black;
         }
         
-        #myInfo {
-            display: inline-block;
+        #memInfo {
+            background-color: rgb(138, 138, 138);
         }
         
         table,
@@ -53,7 +74,7 @@
         }
         
         th {
-            width: 112.5px;
+            width: 125px;
             text-align: right;
         }
     </style>
@@ -61,42 +82,50 @@
 
 <body>
     <iframe src="navi.html" style="width: 100%" height="70px" scrolling="no" frameborder="none"></iframe>
-    <div id="naviBox " style="max-width: 150px;">
-        <div id="mainMyPage " class="C_MyPageNavi "><a href="# " style="text-decoration: none; color: black ">마이페이지&nbsp;</a></div>
-        <div class="C_MyPageNavi "><a href="# ">회원정보&nbsp;</a></div>
-        <div class="C_MyPageNavi "><a href="# ">위시리스트&nbsp;</a></div>
-        <div class="C_MyPageNavi "><a href="# ">문의내역&nbsp;</a></div>
-        <div class="C_MyPageNavi "><a href="# ">예약내역&nbsp;</a></div>
-        <div class="C_MyPageNavi "><a href="# ">신고내역&nbsp;</a></div>
-    </div>
-    <div id="myInfo">
-        <form action="# " method="GET ">
-            <table>
-                <h3 style="font-size: 25px; font-weight: 600; color: mediumslateblue ">나의 정보</h3>
-                <tr>
-                    <th>아이디</th>
-                    <td>아이디 가져오기</td>
-                </tr>
-                <tr>
-                    <th>생년월일</th>
-                    <td>아이디 가져오기</td>
-                </tr>
-                <tr>
-                    <th>성별</td>
-                        <td>아이디 가져오기</td>
-                </tr>
-                <tr>
-                    <th>이메일</th>
-                    <td>아이디 가져오기</td>
-                </tr>
-                <tr>
-                    <th>전화번호</th>
-                    <td>아이디 가져오기</td>
-                </tr>
-            </table>
-        </form>
+    <div id="wrapper">
+        <div id="naviBox">
+            <div id="mainMyPage " class="C_MyPageNavi "><a href="# " style="text-decoration: none; color: black ">마이페이지&nbsp;</a></div>
+            <div id="memInfo" class="C_MyPageNavi "><a href="# ">회원정보&nbsp;</a></div>
+            <div class="C_MyPageNavi "><a href="# ">위시리스트&nbsp;</a></div>
+            <div class="C_MyPageNavi "><a href="# ">문의내역&nbsp;</a></div>
+            <div class="C_MyPageNavi "><a href="# ">예약내역&nbsp;</a></div>
+            <div class="C_MyPageNavi "><a href="# ">신고내역&nbsp;</a></div>
+        </div>
+
+        <div id="myInfo">
+            <form action="# " method="GET ">
+                <div id="infoBox">
+                    <p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue ">나의 정보</p>
+                    <table>
+                        <tr>
+                            <th>아이디</th>
+                            <td>아이디 가져오기</td>
+                        </tr>
+                        <tr>
+                            <th>생년월일</th>
+                            <td>생년월일 가져오기</td>
+                        </tr>
+                        <tr>
+                            <th>성별</td>
+                                <td>성별 가져오기</td>
+                        </tr>
+                        <tr>
+                            <th>이메일</th>
+                            <td>이메일 가져오기</td>
+                        </tr>
+                        <tr>
+                            <th>전화번호</th>
+                            <td>전화번호 가져오기</td>
+                        </tr>
+                    </table>
+                    <span>비밀번호: <input id="pwBox"type="password" name="pw" display="hidden"></span>
+                    <span><input type="button" value="수정하기" onclick="modifyBtn()" /></span>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
-<script></script>
+<script>
+</script>
 
 </html>
