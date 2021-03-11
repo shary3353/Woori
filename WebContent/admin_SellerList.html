@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>우리 양주</title>
+    <style>
+        
+        #Wrapper{
+            min-width: 1920px;
+        }
+        #Admin_Header{
+            margin: 40px;
+
+        }
+        table, th, td{
+            border: 1px solid none;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        nav {
+            height: 100px;
+            width: 1920px;
+            background: #FCDCDC;
+            text-align: center;
+	    }
+        .Admin_Navlist{
+            display: inline-block;
+            font-size: 30px;
+            font-weight: 600;
+            text-align: center;
+            width: 300px;
+            height: 100px;
+            line-height: 100px;
+        }
+        .Admin_Navlist:hover{
+            opacity: 0.5;
+            background-color: #F15F5F;
+        }
+        table.sellerlist {
+            border-collapse: separate;
+            border-spacing: 1px;
+            text-align: left;
+            line-height: 1.5;
+            border-top: 1px solid #ccc;
+            margin : 20px 10px;
+        }
+        table.sellerlist th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background-color: #F6F6F6;
+        }
+        table.sellerlist td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table{
+            font-size: large;
+            width: 1400px;
+            margin-top: 50px;
+        }
+        #Admin_Login_Notice{
+            width: 20px; 
+            height: 20px;
+        }
+        #Main_Logo{
+            width: 100px; 
+            height: 60px;
+            margin-right: 100px;
+        }
+        #Header_Logo{
+            float: right;
+        }
+        #Admin_Searching{
+            text-align: right;
+            margin-right: 200px;
+        }
+        #Admin_Seller_List_Paging{
+            text-align: center;
+
+        }
+        .Page_Content{
+            padding: 5px 5px;
+            background-color: #F6F6F6 ;
+        }
+        .Page_Number{
+            padding: 5px 10px;
+            background-color: #FCDCDC;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="Wrapper">
+        <div id="Admin_Header">  <!-- 헤더 영역 -->
+            <span id="Mark"><img id="Admin_Login_Notice" src="./img/admin_login_notice.png" alt="로그인알림"></span>
+            <span id="Inform_Text">현재 <b>관리자</b> 아이디로 로그인중입니다.</span>
+            <span id="Logout_Link"><a href="">로그아웃 ></a></span>
+            <div id="Header_Logo"><img id="Main_Logo" src="./img/main_logo.png" alt="우리양주로고"></div>
+        </div>  <!--헤더 닫음-->
+
+        <nav>    <!-- 관리자 네비게이션-->
+            <div class="Admin_Navlist">구매자회원관리</div>
+            <div class="Admin_Navlist">판매자회원관리</div>
+            <div class="Admin_Navlist">블랙리스트관리</div>
+            <div class="Admin_Navlist">신고관리</div>
+
+            <!-- <div class="Admin_Navlist"><a href="#">구매자회원관리</a></div>
+        	<div class="Admin_Navlist"><a href="#">판매자회원관리</a></div>
+       		<div class="Admin_Navlist"><a href="#">블랙리스트관리</a></div>
+        	<div class="Admin_Navlist"><a href="#">신고관리</a></div> -->
+        </nav>  <!--네비게이션 닫음-->
+
+        <div id="Admin_Seller_Content"> <!--판매자관리컨텐츠-->
+            <div id="Admin_Seller_List">    <!--판매자 리스트-->
+                <table class="sellerlist" style="margin-left:auto; margin-right:auto;">
+                    <tr>
+                        <th colspan="6">판매 회원 목록</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>신고 누적</th>
+                        <th>블랙리스트 누적</th>
+                        <th>블랙리스트 여부</th>
+                        <th>가입날짜</th>
+                        <th>블랙리스트 등록</th>
+                    </tr>
+                    <tr>
+                        <td>216dfd</td>
+                        <td>10</td>
+                        <td>6</td>
+                        <td>true</td>
+                        <td>2021.03.02</td>
+                        <td>이미등록된회원입니다.</td>
+                    </tr>
+                    <tr>
+                        <td>asv54</td>
+                        <td>1</td>
+                        <td>7</td>
+                        <td>false</td>
+                        <td>2021.03.02</td>
+                        <td><button style="color: red;">등록</button></td>
+                    </tr>
+                </table>
+            </div>  <!--리스트 닫음-->
+
+            <div id="Admin_Searching">   <!--판매자리스트 검색 부분-->
+                <input type="text" name="searchingSeller" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
+            </div>  <!--판매자리스트 검색 닫음-->
+
+            <div id="Admin_Seller_List_Paging"> <!--판매자리스트 페이징부분-->
+                <span class="Page_Content">처음</span>
+                <span class="Page_Content">이전</span>
+                <span class="Page_Number">1</span>
+                <span class="Page_Content">다음</span>
+                <span class="Page_Content">마지막</span>
+            </div>  <!--페이징 닫음-->
+
+        </div>  <!--판매자관리 컨텐츠 닫음-->
+
+        <div id="Admin_Footer"> <!--관리자 푸터-->
+            푸터
+        </div>  <!--관리자 푸터 닫음-->
+    </div>  <!--Wrapper 닫음-->
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>회원정보 상세보기</title>
+    <title>회원정보수정</title>
 
     <style>
         #wrapper {
@@ -75,8 +75,28 @@
         }
         
         th {
-            width: 125px;
+            width: 130px;
             text-align: right;
+        }
+        
+        .inputs {
+            width: 350px;
+            height: 35px;
+            margin: 9px 0 0 9px;
+            border: 2px solid lightslategrey;
+            line-height: 21px;
+            font-weight: bold;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        #pwCfmMsg {
+            color: red;
+            font-size: 12px;
+        }
+        
+        #modifyBtn {
+            text-align: center;
         }
     </style>
 </head>
@@ -94,13 +114,24 @@
         </div>
 
         <div id="myInfo">
-            <form action="# " method="GET ">
+            <form action="#" method="POST">
                 <div id="infoBox">
                     <p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue ">나의 정보</p>
                     <table>
                         <tr>
                             <th>아이디</th>
                             <td>아이디 가져오기</td>
+                        </tr>
+                        <tr>
+                            <th>비밀번호</th>
+                            <td><input type="password" name="pw" class="inputs" /></td>
+                        </tr>
+                        <tr>
+                            <th>비밀번호 확인</th>
+                            <td>
+                                <input type="password" name="pwCfm" class="inputs" /><br>
+                                <span id="pwCfmMsg">비밀번호가 일치하지 않습니다.</span>
+                            </td>
                         </tr>
                         <tr>
                             <th>생년월일</th>
@@ -112,16 +143,15 @@
                         </tr>
                         <tr>
                             <th>이메일</th>
-                            <td>이메일 가져오기</td>
+                            <td><input type="email" name="email" class="inputs" /></td>
                         </tr>
                         <tr>
                             <th>전화번호</th>
-                            <td>전화번호 가져오기</td>
+                            <td><input type="text" name="phone" class="inputs" /></td>
                         </tr>
                     </table>
-                    <div id="pwInputBox">
-                        <span>비밀번호: <input id="pwBox"type="password" placeholder="수정하려면 비밀번호를 입력하세요." name="pw" display="hidden" style="width: 225px;"></span>
-                        <span><input type="button" value="수정하기" onclick="modifyBtn()" /></span>
+                    <div id="modifyBtn">
+                        <span><input type="submit" value="수정하기"/></span>
                     </div>
                 </div>
             </form>
