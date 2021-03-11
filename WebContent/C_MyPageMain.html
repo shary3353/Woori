@@ -25,37 +25,65 @@
       div.C_MyPageNavi:hover {
         background-color: rgb(138, 138, 138);
       }
-      #naviBox{
-          float: left;
+      #naviBox {
+        float: left;
       }
-      .reservationInnerBox{
-          float: left;
-          width: 250px;
-          height: 200px;
-          border: 1px solid black;
-          border-radius: 25px;
-          margin: 10px 25px;
+      .reservationBox{
+          display: inline-block;
+      }
+      .reservationInnerBox {
+        float: left;
+        width: 250px;
+        height: 200px;
+        border: 1px solid black;
+        border-radius: 25px;
+        margin: 10px 50px;
+      }
+      .wishListBox{
+        position: relative;
+        display: inline-block;
+      }
+      .wishListInnerBox {
+        float: left;
+        width: 250px;
+        height: 200px;
+        border: 1px solid black;
+        border-radius: 25px;
+        margin: 10px 50px;
       }
     </style>
   </head>
 
   <body>
-    <div id="naviBox">
-      <div id="mainMyPage" class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">마이페이지&nbsp;</a></div>
-      <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">회원정보&nbsp;</a></div>
-      <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">위시리스트&nbsp;</a></div>
-      <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">문의내역&nbsp;</a></div>
-      <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">예약내역&nbsp;</a></div>
-      <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">신고내역&nbsp;</a></div>
+    <iframe src="navi.html" style="width:100%;" height="50px" scrolling="no" frameborder="none"></iframe>
+    <div style="min-width: 1920px">
+      <div id="naviBox">
+        <div id="mainMyPage" class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">마이페이지&nbsp;</a></div>
+        <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">회원정보&nbsp;</a></div>
+        <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">위시리스트&nbsp;</a></div>
+        <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">문의내역&nbsp;</a></div>
+        <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">예약내역&nbsp;</a></div>
+        <div class="C_MyPageNavi"><a href="#" style="text-decoration: none; color: black">신고내역&nbsp;</a></div>
+      </div>
+      <form action="#" method="GET">
+        <div>
+          <div class="reservationBox">
+            <h3 style="font-size: 25px; font-weight: 600; color: mediumslateblue">예약내역</h3>
+            <div class="reservationInnerBox"><img src="" alt="상품사진"/>,상품제목,가격,방문예정일</div>
+            <div class="reservationInnerBox"><img src="" alt="상품사진"/>사진,상품제목,가격,방문예정일</div>
+            <div class="reservationInnerBox"><img src="" alt="상품사진"/>사진,상품제목,가격,방문예정일</div>
+          </div>
+        </div>
+        <div>
+          <div class="wishListBox">
+            <h3 style="font-size: 25px; font-weight: 600; color: mediumslateblue">위시리스트</h3>
+            <div class="wishListInnerBox"><img src="" alt="상품사진"/>,상품제목,가격</div>
+            <div class="wishListInnerBox"><img src="" alt="상품사진"/>,상품제목,가격</div>
+            <div class="wishListInnerBox"><img src="" alt="상품사진"/>,상품제목,가격</div>
+          </div>
+        </div>
+      </form>
     </div>
-        <form action="#" method="GET">
-            <div class="reservationBox">
-                <h3 style="font-size: 25px; font-weight: 600; color: mediumslateblue;">예약내역</h3>
-                <div class="reservationInnerBox">사진,상품제목,가격,방문예정일</div>
-                <div class="reservationInnerBox">사진,상품제목,가격,방문예정일</div>
-                <div class="reservationInnerBox">사진,상품제목,가격,방문예정일</div>
-            </div>
-        </form>
   </body>
   <script></script>
 </html>
