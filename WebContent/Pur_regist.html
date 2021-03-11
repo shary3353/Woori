@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>구매자회원가입</title>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<style>
+   table {
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 400px;
+    /* To see the outline of the form */
+    padding: 1 ;
+    
+    
+}
+
+</style>
+</head>
+<body>
+    <h1>회원가입</h1>
+   
+    <form>
+  <table>
+      <tr>
+         <th>이름</th>
+         <td>
+             <input type="text" name="Purchasername" value="" placeholder="이름을 입력해주세요."/>
+          </td> 
+      </tr>
+     <tr>
+      <th>아이디</th>
+     <td>
+          <input type="text" name="PurchaserId" value="" placeholder="아이디를 입력해주세요."/>
+          <input type="button" value="중복확인" onclick="idCheck()">
+          
+     </td>
+     </tr>
+     <tr>
+         <th>비밀번호 </th>
+          <td>
+              <input type="password" name="PurchaerPw" value="" placeholder="비밀번호를 입력해주세요."/>
+          </td>
+      </tr> 
+      <tr>
+          <th>비밀번호 확인</th>
+          <td>
+              <input type="password" name="PwChk" value="" placeholder="비밀번호를 입력해주세요."/>
+          </td>
+          </tr>
+      <tr>
+          <th>생년월일</th>  
+          <td>
+              <form name="birth" action="값을 보낼 주소" method="post">
+                  <input type='date' name='userBirthday'/>
+              </form>
+          </td>
+      </tr>
+      <tr>
+          <th>성별</th>
+          <td>
+              <input type="radio" name="gender" value="male"/>남자
+              <input type="radio" name="gender" value="female"/>여자
+          </td>
+      </tr>
+      <tr>
+          <th>이메일</th>
+          <td>
+              <input type="email" name="email" placeholder="이메일을 입력해주세요."/>
+          </td>
+      </tr>
+      <tr>
+          <th>전화번호</th>
+          <td>
+              <input type="number" name="phoneNumber" placeholder="전화번호를 입력해주세요."/>
+          </td>
+      </tr>
+      
+      <td colspan="2" align="center">
+            <input type="submit" value="회원가입완료">
+      
+   
+  
+      
+  </table>
+      </form>
+  </body>
+  </html>
+    
+          
+     
+
