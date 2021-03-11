@@ -4,15 +4,28 @@
 <title>구매자회원가입</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style>
-   table {
-    /* Just to center the form on the page */
-    margin: 0 auto;
-    width: 400px;
-    /* To see the outline of the form */
-    padding: 1 ;
+ tr,th {
+   /* margin: 0 auto;삭제*/
+   
+    width: 150px;
+  }
+
+
     
     
+th,td{
+    padding-top: 4;
 }
+
+input[type='submit']{
+    height: 30;
+    background-color: rgb(94, 198, 240);
+    color: white;
+    font-weight: bold;
+
+}
+
+
 
 </style>
 </head>
@@ -21,20 +34,22 @@
    
     <form>
   <table>
-      <tr>
+     <tr>
          <th>이름</th>
          <td>
              <input type="text" name="Purchasername" value="" placeholder="이름을 입력해주세요."/>
           </td> 
-      </tr>
+      
+     </tr>
      <tr>
       <th>아이디</th>
      <td>
           <input type="text" name="PurchaserId" value="" placeholder="아이디를 입력해주세요."/>
-          <input type="button" value="중복확인" onclick="idCheck()">
+          <input type="button" value="중복확인" onclick="idCheck()"/>
+        </td>
+        </tr>
           
-     </td>
-     </tr>
+    
      <tr>
          <th>비밀번호 </th>
           <td>
