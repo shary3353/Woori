@@ -14,7 +14,7 @@
         }
         
         #myInfo {
-            width: 1000px;
+            width: auto;
             height: 500px;
             float: left;
             margin: 50px 150px;
@@ -24,6 +24,7 @@
         #infoBox {
             width: 550px;
             margin: 50px 50px;
+            text-align: center;
         }
         
         div.C_MyPageNavi {
@@ -75,7 +76,7 @@
         }
         
         th {
-            width: 130px;
+            width: 160px;
             text-align: right;
         }
         
@@ -102,7 +103,7 @@
 </head>
 
 <body>
-    <iframe src="navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
+    <iframe src="../include/navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
     <div id="wrapper">
         <div id="naviBox">
             <div id="mainMyPage " class="C_MyPageNavi "><a href="# " style="text-decoration: none; color: black ">마이페이지&nbsp;</a></div>
@@ -116,7 +117,7 @@
         <div id="myInfo">
             <form action="#" method="POST">
                 <div id="infoBox">
-                    <p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue ">나의 정보</p>
+                    <p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue ">나의 정보 수정</p>
                     <table>
                         <tr>
                             <th>아이디</th>
@@ -150,9 +151,7 @@
                             <td><input type="text" name="phone" class="inputs" /></td>
                         </tr>
                     </table>
-                    <div id="modifyBtn">
                         <span><input type="submit" value="수정하기"/></span>
-                    </div>
                 </div>
             </form>
         </div>
