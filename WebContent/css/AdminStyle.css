@@ -1,0 +1,259 @@
+		#Wrapper{
+            min-width: 1920px;
+        }
+        #Admin_Header{
+            margin: 40px;
+
+        }
+        table, th, td{
+            border: 1px solid none;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        nav {
+            height: 100px;
+            width: 1920px;
+            background: #FCDCDC;
+            text-align: center;
+	    }
+        .Admin_Navlist{
+            display: inline-block;
+            font-size: 30px;
+            font-weight: 600;
+            text-align: center;
+            width: 300px;
+            height: 100px;
+            line-height: 100px;
+        }
+        .Admin_Navlist:hover{
+            opacity: 0.5;
+            background-color: #F15F5F;
+        }
+        table.sellerlist {
+            border-collapse: separate;
+            border-spacing: 1px;
+            text-align: left;
+            line-height: 1.5;
+            border-top: 1px solid #ccc;
+            margin : 20px 10px;
+            width: 1400px;
+        }
+        table.sellerlist th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background-color: #F6F6F6;
+        }
+        table.sellerlist td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.CustomerReportList{
+            border-collapse: separate;
+            border-spacing: 1px;
+            text-align: left;
+            line-height: 1.5;
+            border-top: 1px solid #ccc;
+            margin : 20px 10px;
+            width: 630px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        table.CustomerReportList th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background-color: #F6F6F6;
+        }
+        table.CustomerReportList td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.SellerReportList{
+            border-collapse: separate;
+            border-spacing: 1px;
+            text-align: left;
+            line-height: 1.5;
+            border-top: 1px solid #ccc;
+            margin : 20px 10px;
+            width: 630px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        table.SellerReportList th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background-color: #F6F6F6;
+        }
+        table.SellerReportList td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.sellerlist {
+            border-collapse: separate;
+            border-spacing: 1px;
+            text-align: left;
+            line-height: 1.5;
+            border-top: 1px solid #ccc;
+            margin : 20px 10px;
+            width:1400px;
+        }
+        table.sellerlist th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background-color: #F6F6F6;
+        }
+        table.sellerlist td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table{
+            font-size: large;
+            margin-top: 50px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #Admin_Login_Notice{
+            width: 20px; 
+            height: 20px;
+        }
+        #Main_Logo{
+            width: 100px; 
+            height: 60px;
+            margin-right: 100px;
+        }
+        #Header_Logo{
+            float: right;
+        }
+        #Admin_Searching{
+            text-align: right;
+            margin-right: 200px;
+        }
+        #Admin_Customer_ReportList_Paging{
+            text-align: center;
+        }
+        #Admin_Seller_List_Paging{
+            text-align: center;
+        }
+        #Admin_Seller_ReportList_Paging{
+        	margin-top :30px;
+            text-align: center;
+        }
+        .Page_Content{
+            padding: 5px 5px;
+            background-color: #F6F6F6 ;
+        }
+        .Page_Number{
+            padding: 5px 10px;
+            background-color: #FCDCDC;
+        }
+        #SellerDetailInform{
+            text-align: center;
+            margin: 50px;
+        }
+        #SellerDetailData{
+            text-align: center;
+            margin: 30px;
+            font-size: large;
+        }
+        #CustomerDetailInform{
+            text-align: center;
+            margin: 50px;
+        }
+        #CustomerDetailData{
+            text-align: center;
+            margin: 30px;
+            font-size: large;
+        }
+        .dataname{
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            margin: 2px;
+            background-color: #F6F6F6;
+            border: 1px solid black;
+        }
+        .readdata{
+            display: inline-block;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            margin: 2px;
+            border: 1px solid black;
+        }
+
+        #BlacklistTable{
+        	width: 630px;
+            border: 1px solid black; 
+            border-collapse: collapse; 
+            text-align: center; 
+        }
+        #CustomerBlacklistState{
+            margin: 40px;
+            margin-bottom: 50px;
+        }
+        
+        /*관리자메인디자인*/
+        #Admin_Content{
+            text-align: center;
+            margin-top: 180px;
+        }
+        #Admin_Menu{
+            display: inline-block;
+            margin: 20px auto;
+            padding-top: 20px;
+            width: 100%;
+            height: 320px;
+            text-align: center;
+            background-color: #EAEAEA;
+        }
+        .Admin_Btn{
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        #Logo_Content{
+            text-align: center;
+            margin: 30px;
+        }
+        .Menu_Btn{
+            width: 250px;
+            height: 300px;
+            display: inline-block;
+            font-size: 30px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 250px;
+            border-radius: 20px;
+        }
+        .Menu_Btn:hover{
+            opacity: 0.5;
+            background-color: lightgray;
+        }
+        #Mark{
+            margin-top: 10px;
+        }
+        #Main_Logo2{
+            width: 200px;
+            height: 100px; 
+            margin-top: 100px;
+        }
