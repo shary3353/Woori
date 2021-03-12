@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <title>seller main</title><!--판매자메인-->
+    <style>
+        *{ margin: 0; padding: 0; }
+        table,th,td{
+            border-bottom: 1px solid gray;
+            border-collapse: collapse;
+            padding: 10pX;
+            text-align: center;
+        }
+        #content{/*본문*/
+            width: 100%;
+            margin-top: 40px;
+        }
+        table{
+            border-top: 1px solid gray;
+            margin: auto;
+            width: 900px;
+        }
+        th{
+            background-color: rgb(231, 231, 231);
+        }
+        #goods-img{/*상품이미지 크기조정*/
+            height: 80px;
+        }
+        #List_Paging{/*페이징*/
+            margin: 80px;
+            text-align: center;
+        }
+        .Page_Content{
+            padding: 5px 5px;
+            background-color: #F6F6F6 ;
+        }
+        .Page_Number{
+            padding: 5px 10px;
+            background-color: #c0e1eb;
+        }
+        button{/*버튼스타일*/
+            padding: 4px;
+        }
+        .title{/*타이틀스타일*/
+            font-size: 24px;
+            text-align: left;
+        }
+        td>a{
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+    
+    <div id="content"><!--본문 : 판매자 메인-->
+        <table><!--물품등록리스트-->
+            <tr>
+                <th colspan="5" class="title">내가 등록한 물품</th>
+                <th style="text-align: right;"><button>물품등록하기</button></th>
+            </tr>
+            <tr>
+                <th>No</th>
+                <th>상품번호</th>
+                <th colspan="2">상품정보</th>
+                <th>가격</th>
+                <th>좋아요</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>123548</td>
+                <td><a href="#상품상세보기로">상품이름입니다...</a></td>
+                <td><img id="goods-img" src="../img/no-image.png" alt="상품사진"/></td>
+                <td>0원</td>
+                <td>1000</td>
+            </tr>
+        </table>
+        <div id="List_Paging"> <!--페이징-->
+            <span class="Page_Content">처음</span>
+            <span class="Page_Content">이전</span>
+            <span class="Page_Number">1</span>
+            <span class="Page_Content">다음</span>
+            <span class="Page_Content">마지막</span>
+        </div>
+    </div>
+</body>
+</html>

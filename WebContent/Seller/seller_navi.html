@@ -2,7 +2,7 @@
 <html lang="kor">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>seller navi</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
         *{ margin: 0; padding: 0; }
@@ -26,21 +26,26 @@
         #seller-navi {
             display: flex;
             flex-direction: row;
+            justify-content: center;
             width: 100%;
             background-color: lightblue;
             list-style-type: none;
+            height: 72px;
         }
         .seller-navi-menu{
-            float: left;
+            display: block;
+		    text-align: center;
         }
         .seller-navi-menu a {
-            display: block;
+            display:inline-block ;
             background-color: lightblue;
             color: black;
             padding : 10px 40px;
             text-decoration: none;
             text-align: center;
             font-weight: 600;
+            font-size: 18pt;
+		    line-height: 51px;
         }
         .seller-navi-menu a:hover{
             background-color: cadetblue;
@@ -60,7 +65,7 @@
         <img id="logo-img" src="../img/small_logo.png" alt="logo">
     </div>
     <nav>
-        <ul id="seller-navi">
+        <ul id="seller-navi"><!--판매자 네이게이션-->
             <li class="seller-navi-menu"><a href="#회원정보">회원정보</a></li>
             <li class="seller-navi-menu"><a href="#물품관리">물품관리</a></li>
             <li class="seller-navi-menu"><a href="#문의내역">문의내역</a></li>

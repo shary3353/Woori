@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <title>seller answer detail</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        #content{
+            width: 100%;
+            margin-top: 40px;
+        }
+        table{
+            width: 800px;
+            margin: auto;
+        }
+        table,th,td{
+            border-bottom: 1px solid gray;
+            border-collapse: collapse;
+            margin-top: 5px;
+            padding: 10pX;
+        }
+        .btnArea{
+            text-align: right;
+            border-bottom: 1px solid white;
+        }
+        button{
+            padding: 4px;
+        }
+        .title{
+            border-top: 1px solid white;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .column-name {
+            background-color: rgb(231, 231, 231);
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+    
+    <div id="content"> <!--본문 : 문의답변하기 -->
+        <table>
+            <tr>
+                <td colspan="6" class="title">문의 및 답변 보기</td>
+            </tr>
+            <tr>
+                <td class="column-name">제목</td>
+                <td colspan="5">문의드립니다</td>
+            </tr>
+            <tr>
+                <td class="column-name" >질문자</td>
+                <td>구매자87</td>
+                <td class="column-name" >질문분류</td>
+                <td>상품관련</td>
+                <td class="column-name" >문의날짜</td>
+                <td>2021.03.08</td>
+            </tr>
+            <tr>
+                <td class="column-name">내용</td>
+                <td colspan="5">문의내용입니다</td>
+            </tr>
+            <tr>
+                <td class="column-name">답변내용</td>
+                <td colspan="5">
+                    *이외의 문의 있을시 새로운 문의작성 부탁드립니다.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="btnArea">
+                    <button>목록으로가기</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

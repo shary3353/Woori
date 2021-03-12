@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goods Info</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        #content{
+            width: 100%;
+            margin-top: 40px;
+        }
+        table{
+            width: 800px;
+            margin: auto;
+        }
+        table,th,td{
+            border-bottom: 1px solid gray;
+            border-collapse: collapse;
+            margin-top: 5px;
+            padding: 10pX;
+        }
+        .btnArea{
+            text-align: right;
+            border-bottom: 1px solid white;
+        }
+        button{
+            padding: 5px;
+        }
+        .title{
+            border-top: 1px solid white;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .column-name {
+            background-color: rgb(231, 231, 231);
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+
+    <div id="content"><!--본문 : 등록된물품상세보기 -->
+        <table>
+            <tr>
+                <td colspan="3" class="title">등록된 물품 상세보기</td>
+            </tr>
+            <tr>
+                <td rowspan="5" style="width: 300px;">
+                    <img style="width: 300px;" src="./img/no-image.png" alt="상품이미지"/>
+                </td>
+                <td class="column-name" >물품이름</td>
+                <td>물품이름158</td>
+            </tr>
+            <tr>
+                <td class="column-name">카테고리</td>
+                <td>와인</td>
+            </tr>
+            <tr>
+                <td class="column-name">가격</td>
+                <td>888,888원</td>
+            </tr>
+            <tr>
+                <td class="column-name">예약수</td>
+                <td style="color: red;">28건</td>
+            </tr>
+            <tr>
+                <td class="column-name">상품설명</td>
+                <td>상품설명입니다.</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="btnArea">
+                    <button>물품목록으로돌아가기</button>
+                    <button>수정하기</button>
+                </td>
+            </tr>
+        </table>
+    </div>  
+</body>
+</html>
