@@ -98,10 +98,10 @@
 <body>
     <div id="Wrapper">
         <div id="Admin_Header">  <!-- 헤더 영역 -->
-            <span id="Mark"><img id="Admin_Login_Notice" src="./img/admin_login_notice.png" alt="로그인알림"></span>
+            <span id="Mark"><img id="Admin_Login_Notice" src="../img/admin_login_notice.png" alt="로그인알림"></span>
             <span id="Inform_Text">현재 <b>관리자</b> 아이디로 로그인중입니다.</span>
             <span id="Logout_Link"><a href="">로그아웃 ></a></span>
-            <div id="Header_Logo"><img id="Main_Logo" src="./img/main_logo.png" alt="우리양주로고"></div>
+            <div id="Header_Logo"><img id="Main_Logo" src="../img/main_logo.png" alt="우리양주로고"></div>
         </div>  <!--헤더 닫음-->
 
         <nav>    <!-- 관리자 네비게이션-->
@@ -120,40 +120,31 @@
             <div id="Admin_Seller_List">    <!--판매자 리스트-->
                 <table class="sellerlist" style="margin-left:auto; margin-right:auto;">
                     <tr>
-                        <th colspan="7">블랙리스트 목록</th>
+                        <th colspan="6">판매 회원 목록</th>
                     </tr>
                     <tr>
-                        <th>번호</th>
-                        <th>신고분류</th>
-                        <th>신고제목</th>
-                        <th>신고자</th>
-                        <th>신고대상자</th>
-                        <th>신고날짜</th>
-                        <th>신고상태</th>
+                        <th>ID</th>
+                        <th>신고 누적</th>
+                        <th>블랙리스트 누적</th>
+                        <th>블랙리스트 여부</th>
+                        <th>가입날짜</th>
+                        <th>블랙리스트 등록</th>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>기타</td>
-                        <td>억울해요</td>
-                        <td>판매자 123546789</td>
-                        <td>구매자 zz123</td>
-                        <td>2021.03.07</td>
-                        <td><select name="reportstate" id="">
-                            <option value="100">처리중</option>
-                            <option value="200">처리완료</option>
-                        </select><br><button>신고상태저장</button></td>
+                        <td>216dfd</td>
+                        <td>10</td>
+                        <td>6</td>
+                        <td>true</td>
+                        <td>2021.03.02</td>
+                        <td>이미등록된회원입니다.</td>
                     </tr>
                     <tr>
+                        <td>asv54</td>
                         <td>1</td>
-                        <td>기타</td>
-                        <td>신고합니다.</td>
-                        <td>구매자 123546789</td>
-                        <td>판매자 zz123</td>
-                        <td>2021.03.07</td>
-                        <td><select name="reportstate" id="">
-                            <option value="100">처리중</option>
-                            <option value="200">처리완료</option>
-                        </select><br><button>신고상태저장</button></td>
+                        <td>7</td>
+                        <td>false</td>
+                        <td>2021.03.02</td>
+                        <td><button style="color: red;">등록</button></td>
                     </tr>
                 </table>
             </div>  <!--리스트 닫음-->
