@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <title>우리 양주</title>
-    <link rel="stylesheet" type="text/css" href="../css/AdminStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/AdminStyle.css">
 </head>
 <body>
     <div id="Wrapper">
@@ -31,22 +32,16 @@
                         <th>가입날짜</th>
                         <th>블랙리스트 등록</th>
                     </tr>
-                    <tr>
-                        <td>216dfd</td>
-                        <td>10</td>
-                        <td>6</td>
-                        <td>true</td>
-                        <td>2021.03.02</td>
-                        <td>이미등록된회원입니다.</td>
-                    </tr>
-                    <tr>
-                        <td>asv54</td>
-                        <td>1</td>
-                        <td>7</td>
-                        <td>false</td>
-                        <td>2021.03.02</td>
-                        <td><button style="color: red;">등록</button></td>
-                    </tr>
+                    <c:forEach items="${sList }" var="seller">
+	                    <tr>
+	                        <td>${seller.sid }</td>
+	                        <td>신고누적</td>
+	                        <td>6</td>
+	                        <td>true</td>
+	                        <td>2021.03.02</td>
+	                        <td>이미등록된회원입니다.</td>
+	                    </tr>
+                    </c:forEach>
                 </table>
             </div>  <!--리스트 닫음-->
 

@@ -7,7 +7,7 @@ public class SellerDTO {
 	private String pw;		//비밀번호
 	private String name;	//이름
 	private String gender;	//성별
-	private String store_call;	//매장번호
+	private String store_call;//매장번호
 	private Date birthday;	//생일
 	private String s_phone;	//개인번호
 	private String email;	//이메일

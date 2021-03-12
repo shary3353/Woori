@@ -6,12 +6,12 @@
     <meta charset='utf-8'>
     <title>우리 양주</title>   
     <script src='main.js'></script>
-    <link rel="stylesheet" type="text/css" href="../css/AdminStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}css/AdminStyle.css">
 </head>
 <body>
     <div id="Wrapper">
         <div id="Admin_Header">  <!-- 로그인 알림 영역 -->
-            <span id="Inform_Text"><img id="Admin_Login_Notice" src="../img/admin_login_notice.png" alt="/로그인알림로고/" />&nbsp;현재 <b>관리자</b> 아이디로 로그인중입니다.</span>
+            <span id="Inform_Text"><img id="Admin_Login_Notice" src="${pageContext.request.contextPath}img/admin_login_notice.png" alt="/로그인알림로고/" />&nbsp;현재 <b>관리자</b> 아이디로 로그인중입니다.</span>
             <span id="Logout_Link"><a href="">로그아웃 ></a></span>
         </div>
 
@@ -28,7 +28,7 @@
         </div>
 
         <div id="Logo_Content">  <!-- 페이지 하단 로고이미지 영역 -->
-            <img id="Main_Logo2" src="../img/main_logo.png" alt="/우리양주로고/" />
+            <img id="Main_Logo2" src="${pageContext.request.contextPath}img/main_logo.png" alt="/우리양주로고/" />
         </div>
     </div>
 </body>
