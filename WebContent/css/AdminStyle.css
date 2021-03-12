@@ -257,3 +257,12 @@
             height: 100px; 
             margin-top: 100px;
         }
+        nav div a{
+        	color:black
+        }
+        nav div a:link{
+        	color:black;
+        }
+        nav div a:visited{
+        	color:black;
+        }
