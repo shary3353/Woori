@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>위시리스트</title>
+    <title>문의내역</title>
 
     <style>
       #wrapper {
@@ -30,24 +30,24 @@
         color: black;
       }
 
-      #memWishList {
+      #memQList {
         background-color: rgb(138, 138, 138);
       }
 
       table,
         td,
         th {
-            border: 1px solid lightgray;
+            border: 0px 1px;
             border-collapse: collapse;
             padding: 10px 10px;
             margin: 10px;
             line-height: 100%;
-            text-align: center;
+            text-align: left;
       }
-      th{
-        background-color: bisque;
+      th {
+        border-bottom: 2px solid black;
       }
-      
+
       .p_PhoNDesc{
         border: none;
         margin: 0px;
@@ -55,7 +55,7 @@
         text-align: left;
       }
 
-      #wishListBox{
+      #reservationBox{
         position: relative;
         display: inline-block;
         text-align: center;
@@ -107,65 +107,44 @@
       <div id="naviBox">
           <div id="mainMyPage " class="C_MyPageNavi "><a href="# " style="text-decoration: none; color: black ">마이페이지&nbsp;</a></div>
           <div class="C_MyPageNavi "><a href="# ">회원정보&nbsp;</a></div>
-          <div id="memWishList" class="C_MyPageNavi "><a href="# ">위시리스트&nbsp;</a></div>
-          <div class="C_MyPageNavi "><a href="# ">문의내역&nbsp;</a></div>
+          <div class="C_MyPageNavi "><a href="# ">위시리스트&nbsp;</a></div>
+          <div id="memQList" class="C_MyPageNavi "><a href="# ">문의내역&nbsp;</a></div>
           <div class="C_MyPageNavi "><a href="# ">예약내역&nbsp;</a></div>
           <div class="C_MyPageNavi "><a href="# ">신고내역&nbsp;</a></div>
       </div>
-      <div id="wishListBox">
+      <div id="reservationBox">
         <form action="" method="GET">
-          <span><p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;" >위시리스트</p></span>
+          <span><p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;" >문의 내역</p></span>
           <table>
             <tr>
-              <th>No</th>
-              <th>상품번호</th>
-              <th>상품정보</th>
-              <th>가격</th>
-              <th>판매자</th>
-              <th>예약</th>
-              <th>삭제</th>
+              <th>No│</th>
+              <th style="width: 800px; text-align: left;">문의 제목</th>
+              <th style="width: 150px;">│진행 상태</th>
+              <th style="width: 200px;">│등록 날짜</th>
             </tr>
             <tr>
-              <td style="width: auto;">3</td>
-              <td>상품번호 가져오기</td>
-              <td>
-                <table class="p_PhoNDesc">
-                  <tr><td class="p_PhoNDesc" rowspan="3" style="width: 650px;"><img src="../img/no-image.png" alt="상품사진" style="width: 125px; height: 125px;"/></td></tr>
-                  <tr><td class="p_PhoNDesc" >상품이름 가져오기</td></tr>
-                </table>
-              </td>
-              <td>가격 가져오기</td>
-              <td>판매자 가져오기</td>
-              <td><a href="#" class="reserBtn">예약하기</a></td>
-              <td><input class="delBtn" type="button" value="X" /></td>
+              <td>4</td>
+              <td><a href="#" style="text-decoration: none; color: black;">제목 가져오기</a></td>
+              <td style="color: steelblue;">&nbsp;&nbsp;처리완료</td>
+              <td>&nbsp;&nbsp;2021-03-22</td>
             </tr>
             <tr>
-              <td style="width: auto;">2</td>
-              <td>상품번호 가져오기</td>
-              <td>
-                <table class="p_PhoNDesc">
-                  <tr><td class="p_PhoNDesc" rowspan="3" style="width: 650px;"><img src="../img/no-image.png" alt="상품사진" style="width: 125px; height: 125px;"/></td></tr>
-                  <tr><td class="p_PhoNDesc" >상품이름 가져오기</td></tr>
-                </table>                
-              </td>
-              <td>가격 가져오기</td>
-              <td>판매자 가져오기</td>
-              <td><a href="#" class="reserBtn">예약하기</a></td>
-              <td><input class="delBtn" type="button" value="X" /></td>
+              <td>3</td>
+              <td><a href="#" style="text-decoration: none; color: black;">제목 가져오기</a></td>
+              <td style="color: steelblue;">&nbsp;&nbsp;처리완료</td>
+              <td>&nbsp;&nbsp;2021-03-22</td>
             </tr>
             <tr>
-              <td style="width: auto;">1</td>
-              <td>상품번호 가져오기</td>
-              <td>
-                <table class="p_PhoNDesc">
-                  <tr><td class="p_PhoNDesc" rowspan="3" style="width: 650px;"><img src="../img/no-image.png" alt="상품사진" style="width: 125px; height: 125px;" /></td></tr>
-                  <tr><td class="p_PhoNDesc" >상품이름 가져오기</td></tr>
-                </table>               
-              </td>
-              <td>가격 가져오기</td>
-              <td>판매자 가져오기</td>
-              <td><a href="#" class="reserBtn">예약하기</a></td>
-              <td><input class="delBtn" type="button" value="X" /></td>
+              <td>2</td>
+              <td><a href="#" style="text-decoration: none; color: black;">제목 가져오기</a></td>
+              <td style="color: steelblue;">&nbsp;&nbsp;처리완료</td>
+              <td>&nbsp;&nbsp;2021-03-22</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><a href="#" style="text-decoration: none; color: black;">제목 가져오기</a></td>
+              <td style="color: crimson;">&nbsp;&nbsp;처리중</td>
+              <td>&nbsp;&nbsp;2021-03-22</td>
             </tr>
           </table>
         </form>
