@@ -2,3 +2,4 @@
 .project
 .settings/
 WebContent/WEB-INF/lib/
+WebContent/META_INF/
