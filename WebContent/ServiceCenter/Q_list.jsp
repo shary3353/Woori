@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -93,7 +95,7 @@
     <body>
         <div style="min-width: 1920px">
             <div>
-                <iframe src="./img/navi/navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
+                <iframe src="../Include/navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
             </div>
             <div class="seMain">
                 <div class="sideMenu">
