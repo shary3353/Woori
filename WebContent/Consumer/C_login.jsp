@@ -167,7 +167,7 @@
 
                                 </th>
                                 <td>
-                                    <input type="password" placeholder="비밀번호를 입력해주세요" name="paswword"
+                                    <input type="password" id="password" placeholder="비밀번호를 입력해주세요" name="password"
                                         style="width: 300px;">
 
                                 </td>
