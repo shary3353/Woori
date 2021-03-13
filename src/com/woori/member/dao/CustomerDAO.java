@@ -54,9 +54,10 @@ public class CustomerDAO {
 				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
 				dto.setGender(rs.getString("gender"));
-				dto.setBirthday(rs.getDate("birthday"));
+				dto.setBirthday(rs.getString("birthday"));
 				dto.setEmail(rs.getString("email"));
 				dto.setPhone(rs.getString("phone"));
+				dto.setReg_date(rs.getString("reg_Date"));
 				list.add(dto);
 			}
 		} catch (SQLException e) {

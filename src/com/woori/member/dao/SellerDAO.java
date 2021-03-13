@@ -49,11 +49,12 @@ public class SellerDAO {
 				dto.setSid(rs.getString("sid"));
 				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
-				dto.setBirthday(rs.getDate("birthday"));
+				dto.setBirthday(rs.getString("birthday"));
 				dto.setEmail(rs.getString("email"));
 				dto.setGender(rs.getString("gender"));
 				dto.setStore_call(rs.getString("store_call"));
 				dto.setS_phone(rs.getString("s_phone"));
+				dto.setReg_date(rs.getString("reg_date"));
 				sList.add(dto);
 			}
 		} catch (SQLException e) {

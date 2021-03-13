@@ -3,10 +3,10 @@ package com.woori.wish.dto;
 import java.sql.Date;
 
 public class WishDTO {
-	private int wish_idx;//목록번호pk
-	private Date w_date;//추가한날짜
-	private String cId;//구매자 아이디fk
-	private String p_idx;//상품번호fk
+	private int wish_idx;
+	private String w_date;
+	private String cId;
+	private String p_idx;
 	
 	public int getWish_idx() {
 		return wish_idx;
@@ -14,10 +14,10 @@ public class WishDTO {
 	public void setWish_idx(int wish_idx) {
 		this.wish_idx = wish_idx;
 	}
-	public Date getW_date() {
+	public String getW_date() {
 		return w_date;
 	}
-	public void setW_date(Date w_date) {
+	public void setW_date(String w_date) {
 		this.w_date = w_date;
 	}
 	public String getcId() {

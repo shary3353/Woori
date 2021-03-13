@@ -1,12 +1,12 @@
 package com.woori.black.dto;
 
 public class S_BlackDTO {
-	private int B_IDX;		//블랙리스트 pk
-	private String reason;	//블락사유
-	private String sid;		//판매자 아이디
-	private String admin_ID;//관리자 아이디
-	private int stack;		//블락횟수
-	private int isBlack;	//블락 여부
+	private int B_IDX;
+	private String reason;
+	private String sid;
+	private String admin_ID;
+	private int stack;
+	private int isBlack;
 	
 	public int getB_IDX() {
 		return B_IDX;

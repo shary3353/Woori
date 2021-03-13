@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class QuestionDTO {
 	/*Question*/
-	private int q_idx;//문의글번호pk
-	private String subject;//문의제목
-	private String content;//문의내용
-	private String s_answer;//답변
-	private int q_pw;//글비밀번호
-	private Date q_reg_date;//문의날짜
-	private String cid;//구매자아이디fk
-	private String sid;//판매자아이디fk
+	private int q_idx;
+	private String subject;
+	private String content;
+	private String s_answer;
+	private int q_pw;
+	private String q_reg_date;
+	private String cid;
+	private String sid;
 	/*Q_Categories*/
-	private int qc_idx;//문의카테고리번호pk-fk
-	private String category;//카테고리이름
+	private int qc_idx;
+	private String category;
 	
 	//
 	public int getQ_idx() {
@@ -47,10 +47,10 @@ public class QuestionDTO {
 	public void setQ_pw(int q_pw) {
 		this.q_pw = q_pw;
 	}
-	public Date getQ_reg_date() {
+	public String getQ_reg_date() {
 		return q_reg_date;
 	}
-	public void setQ_reg_date(Date q_reg_date) {
+	public void setQ_reg_date(String q_reg_date) {
 		this.q_reg_date = q_reg_date;
 	}
 	public String getCid() {

@@ -8,10 +8,10 @@ public class SellerDTO {
 	private String name;
 	private String gender;
 	private String store_call;
-	private Date birthday;
+	private String birthday;
 	private String s_phone;
 	private String email;
-	
+	private String reg_date;
 	public String getSid() {
 		return sid;
 	}
@@ -42,10 +42,10 @@ public class SellerDTO {
 	public void setStore_call(String store_call) {
 		this.store_call = store_call;
 	}
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getS_phone() {
@@ -60,6 +60,15 @@ public class SellerDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+	
+	
+	
 	
 	
 	

@@ -1,15 +1,15 @@
 package com.woori.product.dto;
 
 public class ProductDTO {
-	private int p_idx;			//물품번호
-	private String p_name;		//물품이름
-	private String p_content;	//물품설명
-	private int likes;			//물품의 좋아요 개수
-	private int p_price;		//물품가격
-	private int c_idx;			//카테고리번호
-	private String sid;			//판매자아이디
-	private int isSold;			//판매여부
-	
+	private int p_idx;
+	private String p_name;
+	private String p_content;
+	private int likes;
+	private int p_price;
+	private int c_idx;
+	private String sid;
+	private int isSold;
+	private String reg_date;
 	public int getP_idx() {
 		return p_idx;
 	}
@@ -57,6 +57,12 @@ public class ProductDTO {
 	}
 	public void setIsSold(int isSold) {
 		this.isSold = isSold;
+	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	
 	

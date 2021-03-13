@@ -2,16 +2,15 @@ package com.woori.report.dto;
 
 public class ReportDTO {
 	/*report*/
-	private int r_idx;//신고목록번호pk
-	private String content;//신고내용
-	private String reporter_id;//신고자ID
-	private String target_id;//신고대상자ID
-	private String Status;//신고처리상태
+	private int r_idx;
+	private String content;
+	private String reporter_id;
+	private String target_id;
+	private String Status;
+	private String r_date;
 	/*Report_Categories*/
-	private int rc_idx;//신고카테고리번호pk-fk
-	private String category;//신고카테고리내용
-	
-	//
+	private int rc_idx;
+	private String category;
 	public int getR_idx() {
 		return r_idx;
 	}
@@ -41,6 +40,12 @@ public class ReportDTO {
 	}
 	public void setStatus(String status) {
 		Status = status;
+	}
+	public String getR_date() {
+		return r_date;
+	}
+	public void setR_date(String r_date) {
+		this.r_date = r_date;
 	}
 	public int getRc_idx() {
 		return rc_idx;

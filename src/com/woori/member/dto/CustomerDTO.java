@@ -8,8 +8,9 @@ public class CustomerDTO {
 	private String name;
 	private String gender;
 	private String email;
-	private Date birthday;
+	private String birthday;
 	private String phone;
+	private String reg_date;
 	
 	public String getCid() {
 		return cid;
@@ -41,10 +42,10 @@ public class CustomerDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getPhone() {
@@ -52,6 +53,12 @@ public class CustomerDTO {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	
 	
