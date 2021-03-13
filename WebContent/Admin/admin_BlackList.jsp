@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,24 +34,20 @@
                         <th>블랙리스트 취소</th>
                         <th>블랙리스트 등록 관리자</th>
                     </tr>
-                    <tr>
-                        <td>23444222</td>
-                        <td>판매</td>
-                        <td>6</td>
-                        <td>불량배송</td>
-                        <td>2021.03.02</td>
-                        <td><button>취소</button></td>
-                        <td>admin_01</td>
-                    </tr>
-                    <tr>
-                        <td>2685641</td>
-                        <td>판매</td>
-                        <td>7</td>
-                        <td>욕설</td>
-                        <td>2021.03.02</td>
-                        <td><button>취소</button></td>
-                        <td>admin_03</td>
-                    </tr>
+                    <c:forEach items="${bList }" var="black">
+	                    <tr>
+	                        <td>${black.id }</td>
+	                        <td>판매자</td>
+	                       	<!--<c:if test="${fn:indexOf('zzz', '-') } < 0">	<!-- 포함시 판매자 --> 
+	                       	<!-- <td>판매자</td>
+	                        </c:if> -->	
+	                        <td>${black.stack }</td>
+	                        <td>${black.reason }</td>
+	                        <td>${black.reg_date }</td>
+	                         <td><button>취소</button></td>
+	                          <td>${black.admin_id }</td>
+	                    </tr>
+                    </c:forEach>
                 </table>
             </div>  <!--리스트 닫음-->
 

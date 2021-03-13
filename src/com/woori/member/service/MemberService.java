@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.woori.member.dao.ListDAO;
+import com.woori.member.dto.BlackListDTO;
 import com.woori.member.dto.CustomerDTO;
 import com.woori.member.dto.CustomerListDTO;
+import com.woori.member.dto.ReportListDTO;
 import com.woori.member.dto.SellerDTO;
+import com.woori.member.dto.SellerListDTO;
 
 public class MemberService {
 	HttpServletRequest req = null;
@@ -32,8 +35,35 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
+	public void sList() throws ServletException, IOException {
+		ListDAO dao = new ListDAO();
+		ArrayList<SellerListDTO> sList = new ArrayList<>();
+		sList = dao.sList();
+		
+		req.setAttribute("sList", sList);
+		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
+		dis.forward(req, resp);
+	}
 
-	
-	
+	public void blackList() throws ServletException, IOException {
+		ListDAO dao = new ListDAO();
+		ArrayList<BlackListDTO> bList = new ArrayList<>();
+		bList = dao.bList();
+		
+		req.setAttribute("bList", bList);
+		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_BlackList.jsp");
+		dis.forward(req, resp);
+	}
+
+	public void reportList() throws ServletException, IOException {
+		ListDAO dao = new ListDAO();
+		ArrayList<ReportListDTO> rList = new ArrayList<>();
+		rList = dao.rList();
+		
+		req.setAttribute("rList", rList);
+		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
+		dis.forward(req, resp);
+	}
+
 
 }

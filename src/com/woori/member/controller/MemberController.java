@@ -28,15 +28,15 @@ public class MemberController extends HttpServlet {
 				break;
 			case "/sList":
 				System.out.println("Request Seller List");
-				//service.sList();
+				service.sList();
 				break;
 			case "/blackList":
 				System.out.println("Request Seller List");
-				//service.sList();
+				service.blackList();
 				break;
 			case "/reportList":
 				System.out.println("Request Seller List");
-				//service.sList();
+				service.reportList();
 				break;
 			case "/logout":
 				System.out.println("Request Logout");

@@ -35,11 +35,21 @@
                     <c:forEach items="${sList }" var="seller">
 	                    <tr>
 	                        <td>${seller.sid }</td>
-	                        <td>신고누적</td>
-	                        <td>6</td>
-	                        <td>true</td>
-	                        <td>2021.03.02</td>
-	                        <td>이미등록된회원입니다.</td>
+	                        <td>${seller.cntReport }</td>
+	                        <td>${seller.cntBlack}</td>
+	                        <c:if test="${seller.isBlack == 1}">	<!-- 블랙리스트 true -->
+	                        	<td>true</td>
+	                        </c:if>
+	                        <c:if test="${seller.isBlack == 0}">	<!-- 블랙리스트 false -->
+	                        	<td>false</td>
+	                        </c:if>
+	                        <td>${seller.reg_date}</td>
+	                        <c:if test="${seller.isBlack == 1}">	<!-- 블랙리스트 true -->
+	                        	<td>이미등록된회원입니다.</td>
+	                        </c:if>
+	                        <c:if test="${seller.isBlack == 0}">	<!-- 블랙리스트 false -->
+	                        	<td><button style="color:red;">등록</button></td>
+	                        </c:if>
 	                    </tr>
                     </c:forEach>
                 </table>

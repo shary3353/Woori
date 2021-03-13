@@ -1,16 +1,16 @@
 package com.woori.member.dto;
 
-public class CustomerListDTO {
-	private String cid;
+public class SellerListDTO {
+	private String sid;
 	private int cntReport;
 	private int cntBlack;
 	private int isBlack;
 	private String reg_date;
-	public String getCid() {
-		return cid;
+	public String getSid() {
+		return sid;
 	}
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 	public int getCntReport() {
 		return cntReport;
@@ -36,7 +36,6 @@ public class CustomerListDTO {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-	
 	
 	
 	

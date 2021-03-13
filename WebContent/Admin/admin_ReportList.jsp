@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <title>우리 양주</title>
-	<link rel="stylesheet" type="text/css" href="../css/AdminStyle.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/AdminStyle.css">
 </head>
 <body>
     <div id="Wrapper">
@@ -32,6 +33,17 @@
                         <th>신고날짜</th>
                         <th>신고상태</th>
                     </tr>
+                    <c:forEach items="${rList }" var="report">
+                    	<tr>
+                    		<td>${report.r_idx }</td>
+                    		<td>${report.rc_code }</td>
+                    		<td>${report.subject }</td>
+                    		<td>${report.reporter_id }</td>
+                    		<td>${report.target_id }</td>
+                    		<td>${report.r_date }</td>
+                    		<td>${report.status }</td>
+                    	</tr>
+                    </c:forEach>
                     <tr>
                         <td>2</td>
                         <td>기타</td>

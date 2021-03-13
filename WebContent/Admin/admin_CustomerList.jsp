@@ -35,10 +35,20 @@
 	                    <tr>
 	                        <td>${customer.cid }</td>
 	                        <td>${customer.cntReport }</td>
-	                        <td>${customer.cntBlock }</td>
-	                        <td>${customer.isBlack }</td>
+	                        <td>${customer.cntBlack }</td>
+	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
+	                        	<td>true</td>
+	                        </c:if>
+	                        <c:if test="${customer.isBlack == 0}">	<!-- 블랙리스트 false -->
+	                        	<td>false</td>
+	                        </c:if>
 	                        <td>${customer.reg_date }</td>
-	                        <td>이미등록된회원입니다.</td>
+	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
+	                        	<td>이미등록된회원입니다.</td>
+	                        </c:if>
+	                        <c:if test="${customer.isBlack == 0}">	<!-- 블랙리스트 false -->
+	                        	<td><button style="color:red;">등록</button></td>
+	                        </c:if>
 	                    </tr>
                     </c:forEach>
                 </table>
