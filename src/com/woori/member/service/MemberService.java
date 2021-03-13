@@ -8,9 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.woori.member.dao.CustomerDAO;
-import com.woori.member.dao.SellerDAO;
+import com.woori.member.dao.ListDAO;
 import com.woori.member.dto.CustomerDTO;
+import com.woori.member.dto.CustomerListDTO;
 import com.woori.member.dto.SellerDTO;
 
 public class MemberService {
@@ -22,20 +22,17 @@ public class MemberService {
 		this.resp = resp;
 	}
 
-	public void cList() {
-		CustomerDAO dao = new CustomerDAO();
-		ArrayList<CustomerDTO> cList = dao.cList();
+	public void cList() throws ServletException, IOException {
+		ListDAO dao = new ListDAO();
+		ArrayList<CustomerListDTO> cList = new ArrayList<>();
+		cList = dao.cList();
+		
 		req.setAttribute("cList", cList);
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_Customerlist");
-	}
-
-	public void sList() throws ServletException, IOException {
-		SellerDAO dao = new SellerDAO();
-		ArrayList<SellerDTO> sList = dao.sList();
-		req.setAttribute("sList", sList);
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
 		dis.forward(req, resp);
 	}
+
+
 	
 	
 

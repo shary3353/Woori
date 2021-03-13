@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.member.service.MemberService;
 
-@WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList"})
+@WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -24,11 +24,19 @@ public class MemberController extends HttpServlet {
 		switch(sub) {
 			case "/cList":
 				System.out.println("Request Customer List");
-				//service.cList();
+				service.cList();
 				break;
 			case "/sList":
 				System.out.println("Request Seller List");
-				service.sList();
+				//service.sList();
+				break;
+			case "/blackList":
+				System.out.println("Request Seller List");
+				//service.sList();
+				break;
+			case "/reportList":
+				System.out.println("Request Seller List");
+				//service.sList();
 				break;
 			case "/logout":
 				System.out.println("Request Logout");
