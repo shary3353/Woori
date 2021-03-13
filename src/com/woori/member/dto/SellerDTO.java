@@ -3,14 +3,14 @@ package com.woori.member.dto;
 import java.sql.Date;
 
 public class SellerDTO {
-	private String sid;		//사업자아이디
-	private String pw;		//비밀번호
-	private String name;	//이름
-	private String gender;	//성별
-	private String store_call;//매장번호
-	private Date birthday;	//생일
-	private String s_phone;	//개인번호
-	private String email;	//이메일
+	private String sid;
+	private String pw;
+	private String name;
+	private String gender;
+	private String store_call;
+	private Date birthday;
+	private String s_phone;
+	private String email;
 	
 	public String getSid() {
 		return sid;

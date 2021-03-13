@@ -15,20 +15,23 @@ public class MemberController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//회원수정, 회원상세보기, 회원리스트
+		//logout, list
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
-		System.out.println("요청 url : "+sub);
+		System.out.println("request url : "+sub);
 		
 		MemberService service = new MemberService(req, resp);
 		
 		switch(sub) {
 			case "/cList":
-				System.out.println("구매자 리스트 요청");
+				System.out.println("Request Customer List");
 				//service.cList();
 				break;
 			case "/sList":
-				System.out.println("판매자 리스트 요청");
+				System.out.println("Request Seller List");
 				service.sList();
+				break;
+			case "/logout":
+				System.out.println("Request Logout");
 				break;
 			
 		}
@@ -36,28 +39,25 @@ public class MemberController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//회원가입, 로그인
+		//join, login
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
-		System.out.println("요청 url : "+sub);
+		System.out.println("request url : "+sub);
 		
 		switch(sub) {
 		case "/cLogin":
-			System.out.println("구매자 로그인 요청");
+			System.out.println("Request Customer Login");
 			break;
 		case "/sLogin":
-			System.out.println("판매자 로그인 요청");
+			System.out.println("Request Seller Login");
 			break;
 		case "/adminLogin":
-			System.out.println("관리자 로그인 요청");
-			break;
-		case "/logout":
-			System.out.println("로그아웃 요청");
+			System.out.println("Request Admin Login");
 			break;
 		case "/cJoin":
-			System.out.println("구매자 회원가입 요청");
+			System.out.println("Request Customer Join");
 			break;
 		case "/sJoin":
-			System.out.println("판매자 회원가입 요청");
+			System.out.println("Request Seller Join");
 			break;
 			
 		}
