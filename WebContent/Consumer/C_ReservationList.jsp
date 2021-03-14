@@ -84,6 +84,15 @@ form {
 .reserProcess {
 	color: crimson;
 }
+
+.headDESC {
+	font-size: 25px;
+	font-weight: 600;
+	text-align: left;
+	color: mediumslateblue;
+	margin-left: 20px;
+	margin-top: 30px;
+}
 </style>
 </head>
 
@@ -93,9 +102,7 @@ form {
 		<jsp:include page="../Include/SideBar.html"></jsp:include>
 			<div id="wishListBox">
 				<form action="" method="GET">
-					<span><p
-							style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">예약
-							내역</p></span>
+					<p class="headDESC">위시리스트</p>
 					<table>
 						<tr>
 							<th>No</th>

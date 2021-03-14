@@ -9,7 +9,6 @@
 <title>문의내역</title>
 
 <style>
-
 table, td, th {
 	border: 0px 1px;
 	border-collapse: collapse;
@@ -60,6 +59,23 @@ th {
 	border: 1px white;
 }
 
+.pagingBtnDisable {
+	text-decoration: none;
+	color: black;
+	font-weight: 600;
+	background-color: lightgray;
+	margin: 1px 2px;
+	margin-top: 0px;
+	padding: 3px;
+	border: 1px white;
+	width: 50px;
+}
+
+.pagingBtnDisable:hover {
+	cursor: default;
+	text-decoration: none;
+}
+
 .pagingBtn:hover {
 	background-color: steelblue;
 }
@@ -78,6 +94,15 @@ form {
 .reserBtn:hover {
 	background-color: lightblue;
 }
+
+.headDESC {
+	font-size: 25px;
+	font-weight: 600;
+	text-align: left;
+	color: mediumslateblue;
+	margin-left: 20px;
+	margin-top: 30px;
+}
 </style>
 </head>
 
@@ -85,52 +110,58 @@ form {
 	<div style="min-width: 1920px">
 		<jsp:include page="../Include/navi.html"></jsp:include>
 		<jsp:include page="../Include/SideBar.html"></jsp:include>
-			<div id="reservationBox">
-				<form action="" method="GET">
-					<span><p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">문의
-							내역</p></span>
-					<table>
+		<div id="reservationBox">
+			<form action="" method="GET">
+				<p class="headDESC">문의 내역</p>
+				<table>
+					<tr>
+						<th>No│</th>
+						<th style="width: 800px; text-align: left;">문의 제목</th>
+						<th style="width: 150px;">│진행 상태</th>
+						<th style="width: 200px;">│등록 날짜</th>
+					</tr>
+					<c:forEach items="${list}" var="list">
 						<tr>
-							<th>No│</th>
-							<th style="width: 800px; text-align: left;">문의 제목</th>
-							<th style="width: 150px;">│진행 상태</th>
-							<th style="width: 200px;">│등록 날짜</th>
+							<td>${list.q_idx}</td>
+							<td><a href="cQuestionDetail?q_idx=${list.q_idx}" style="text-decoration: none; color: black;">${list.subject}</a></td>
+							<c:if test="${list.s_answer != null}">
+								<td style="color: steelblue;">&nbsp;&nbsp;답변 완료</td>
+							</c:if>
+							<c:if test="${list.s_answer == null}">
+								<td style="color: tomato;">&nbsp;&nbsp;답변 대기중</td>
+							</c:if>
+							<td>&nbsp;&nbsp;${list.q_reg_date}</td>
 						</tr>
-						<tr>
-							<td>4</td>
-							<td><a href="#" style="text-decoration: none; color: black;">제목
-									가져오기</a></td>
-							<td style="color: steelblue;">&nbsp;&nbsp;처리완료</td>
-							<td>&nbsp;&nbsp;2021-03-22</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td><a href="#" style="text-decoration: none; color: black;">제목
-									가져오기</a></td>
-							<td style="color: steelblue;">&nbsp;&nbsp;처리완료</td>
-							<td>&nbsp;&nbsp;2021-03-22</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td><a href="#" style="text-decoration: none; color: black;">제목
-									가져오기</a></td>
-							<td style="color: steelblue;">&nbsp;&nbsp;처리완료</td>
-							<td>&nbsp;&nbsp;2021-03-22</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td><a href="#" style="text-decoration: none; color: black;">제목
-									가져오기</a></td>
-							<td style="color: crimson;">&nbsp;&nbsp;처리중</td>
-							<td>&nbsp;&nbsp;2021-03-22</td>
-						</tr>
-					</table>
-				</form>
-				<span> <a href="#" class="pagingBtn">처음</a> <a href="#"
-					class="pagingBtn">이전</a> <a href="#" class="pagingBtn"
-					style="background-color: skyblue; color: white;">&nbsp;1&nbsp;</a>
-					<a href="#" class="pagingBtn">다음</a> <a href="#" class="pagingBtn">마지막</a>
-				</span>
+					</c:forEach>
+				</table>
+			</form>
+			<div>
+				<c:if test="${currPage == 1}">
+					<a href="#" class="pagingBtnDisable">처음</a>
+				</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="cQuestionList?page=1" class="pagingBtn">처음</a>
+				</c:if>
+				<c:if test="${currPage == 1}">
+					<a href="#" class="pagingBtnDisable">이전</a>
+				</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="cQuestionList?page=${currPage-1}" class="pagingBtn">이전</a>
+				</c:if>
+				<a href="#" class="pagingBtnDisable"
+					style="background-color: skyblue; color: white;">&nbsp;${currPage}&nbsp;</a>
+				<c:if test="${currPage == maxPage}">
+					<a href="#" class="pagingBtnDisable">다음</a>
+				</c:if>
+				<c:if test="${currPage < maxPage}">
+					<a href="cQuestionList?page=${currPage+1}" class="pagingBtn">다음</a>
+				</c:if>
+				<c:if test="${currPage == maxPage}">
+					<a href="#" class="pagingBtnDisable">마지막</a>
+				</c:if>
+				<c:if test="${currPage < maxPage}">
+					<a href="cQuestionList?page=${maxPage}" class="pagingBtn">마지막</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

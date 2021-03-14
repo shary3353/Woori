@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -99,19 +100,19 @@
             <table id="table">
                 <tr>
                     <th>제목</th>
-                    <td colspan="5">혹시 발렌타인 재고 있나요?</td>
+                    <td colspan="5">${list.subject}</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>shary3057</td>
+                    <td>${list.cid}</td>
                     <th>카테고리</th>
-                    <td>상품관련</td>
+                    <td>${list.category}</td>
                     <th>작성일</th>
-                    <td>2021-03-08</td>
+                    <td>${list.q_reg_date}</td>
                 </tr>
                 <tr>
                     <th>판매자</th>
-                    <td>123-456-78910</td>
+                    <td>${list.sid}</td>
                     <th>문의상품</th>
                     <td colspan="3">Ballantine’s</td>
                 </tr>
@@ -119,11 +120,17 @@
                     <th colspan="6">문의내용</th>
                 </tr>
                 <tr>
-                    <td colspan="6" style="height: 150px;">혹시 발렌타인 재고 있나요?</td>
+                    <td colspan="6" style="height: 150px;">${list.content}</td>
                 </tr>
-                <tr>
-                    <th colspan="6" style="height: 70px;" >등록된 답변이 없습니다.</th>
-                </tr>
+                <c:if test="${list.s_answer == null}">
+	                <tr>
+	                    <th colspan="6" style="height: 70px;" >등록된 답변이 없습니다.</th>
+	                </tr>
+                </c:if>
+                <c:if test="${list.s_answer != null}"><tr>
+	                    <th colspan="6" style="height: 70px;" >${list.s_answer}</th>
+	                </tr>
+	            </c:if>
                 <tr>
                     <th colspan="6"><button>목록으로 돌아가기</button></th>
                 </tr>

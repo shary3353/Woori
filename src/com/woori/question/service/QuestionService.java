@@ -2,6 +2,7 @@ package com.woori.question.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import com.woori.product.dao.ProductDAO;
 import com.woori.product.dto.ProductDTO;
 import com.woori.question.dao.QuestionDAO;
 import com.woori.question.dto.QuestionDTO;
+import com.woori.wish.dao.WishDAO;
 
 public class QuestionService {
 	
@@ -39,6 +41,42 @@ public class QuestionService {
 		req.setAttribute("list", list);
 		dis = req.getRequestDispatcher("S_QnAList.jsp"); //S_QnAList.jsp로 이동
 		dis.forward(req, resp);//값보냄
+	}
+
+	public void cQuestionList() throws ServletException, IOException {
+			req.getSession().setAttribute("loginId", "test1"); // 테스트용
+			String cid = (String) req.getSession().getAttribute("loginId");
+			System.out.println(cid + " 의 문의내역 불러오기");
+			
+			String pageParam = req.getParameter("page");
+			System.out.println("이동하고 싶은 page : " + pageParam);
+			int group = 1;
+			if (pageParam != null) {
+				group = Integer.parseInt(pageParam);
+			}
+			
+			QuestionDAO dao = new QuestionDAO();
+			HashMap<String, Object> map = dao.cQuestionList(group, cid);
+
+			req.setAttribute("maxPage", map.get("maxPage"));
+			req.setAttribute("list", map.get("list"));
+			req.setAttribute("currPage", group);
+
+			RequestDispatcher dis = req.getRequestDispatcher("./C_QuestionList.jsp");
+			dis.forward(req, resp);
+
+	}
+
+	public void cQuestionDetail() throws ServletException, IOException {
+		String q_idx = req.getParameter("q_idx");
+		System.out.println(q_idx +"번 문의 상세보기 요청");
+		QuestionDAO dao = new QuestionDAO();
+		QuestionDTO dto =  dao.cQuestionDetail(q_idx);
+		
+		req.setAttribute("list", dto);
+		RequestDispatcher dis = req.getRequestDispatcher("../ServiceCenter/Q_detail.jsp");
+		dis.forward(req, resp);
+		
 	}
 
 }

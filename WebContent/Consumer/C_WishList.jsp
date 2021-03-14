@@ -71,6 +71,7 @@ th {
 	border: 1px white;
 	width: 50px;
 }
+
 .pagingBtnDisable:hover {
 	cursor: default;
 	text-decoration: none;
@@ -150,7 +151,7 @@ form {
 			</form>
 			<div>
 				<c:if test="${currPage == 1}">
-					<a href="wishPaging?page=1" class="pagingBtnDisable">처음</a>
+					<a href="#" class="pagingBtnDisable">처음</a>
 				</c:if>
 				<c:if test="${currPage > 1}">
 					<a href="wishPaging?page=1" class="pagingBtn">처음</a>
