@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -44,8 +46,7 @@
     </style>
 </head>
 <body>
-    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
-
+	<jsp:include page="S_navi.jsp" flush="false"/>
     <div id="content"><!--본문 : 판매자 회원정보-->
         <table>
             <tr>

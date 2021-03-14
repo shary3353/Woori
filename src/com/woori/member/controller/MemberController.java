@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.woori.member.service.MemberService;
-
-@WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"})
+/*처리 : (회원가입, 로그인, 회원수정, 회원상세보기, 회원리스트)
+ 	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
+	,판매자회원상세보기
+ */
+@WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"
+	, "/sPfpDetail"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -43,6 +47,8 @@ public class MemberController extends HttpServlet {
 				break;
 			
 		}
+		
+		dual(req,resp);
 	}
 
 	@Override
@@ -66,6 +72,21 @@ public class MemberController extends HttpServlet {
 			break;
 		case "/sJoin":
 			System.out.println("Request Seller Join");
+			break;
+			
+		}
+		
+		dual(req,resp);
+	}
+
+	private void dual(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		
+		String sub = req.getRequestURI().substring(req.getContextPath().length());
+		System.out.println("request url : "+sub);
+		switch(sub) {
+		
+		case "/sPfpDetail":
+			System.out.println("Request  seller profile Detail");
 			break;
 			
 		}
