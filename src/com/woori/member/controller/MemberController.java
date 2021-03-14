@@ -15,7 +15,7 @@ import com.woori.member.service.MemberService;
  */
 @WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/bList", "/rList"
 	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/cSearch", "/sSearch", "/bSearch", "/rSearch"
-	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo", "/Consumer/wishList"})
+	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -132,9 +132,6 @@ public class MemberController extends HttpServlet {
 		case "/Consumer/cDetail":
 			System.out.println("Request Custumer Info");
 			service.cDetail();
-			break;
-		case "/Consumer/wishList":
-			System.out.println("Request Custumer WishList");
 			break;
 		}
 	}

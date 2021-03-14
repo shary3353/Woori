@@ -9,7 +9,6 @@
 <title>위시리스트</title>
 
 <style>
-
 table, td, th {
 	border: 1px solid lightgray;
 	border-collapse: collapse;
@@ -85,23 +84,24 @@ form {
 	<div style="min-width: 1920px">
 		<jsp:include page="../Include/navi.html"></jsp:include>
 		<jsp:include page="../Include/SideBar.html"></jsp:include>
-			<div id="wishListBox">
-				<form action="" method="GET">
-					<span><p
-							style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">위시리스트</p></span>
-					<table>
+		<div id="wishListBox">
+			<form action="" method="GET">
+				<span><p
+						style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">위시리스트</p></span>
+				<table>
+					<tr>
+						<th>No</th>
+						<th>상품번호</th>
+						<th>상품정보</th>
+						<th>가격</th>
+						<th>판매자</th>
+						<th>예약</th>
+						<th>삭제</th>
+					</tr>
+					<c:forEach items="${list}" var="list">
 						<tr>
-							<th>No</th>
-							<th>상품번호</th>
-							<th>상품정보</th>
-							<th>가격</th>
-							<th>판매자</th>
-							<th>예약</th>
-							<th>삭제</th>
-						</tr>
-						<tr>
-							<td style="width: auto;">3</td>
-							<td>상품번호 가져오기</td>
+							<td style="width: auto;">${list.wish_idx}</td>
+							<td>${list.p_idx}</td>
 							<td>
 								<table class="p_PhoNDesc">
 									<tr>
@@ -110,64 +110,25 @@ form {
 											style="width: 125px; height: 125px;" /></td>
 									</tr>
 									<tr>
-										<td class="p_PhoNDesc">상품이름 가져오기</td>
+										<td class="p_PhoNDesc">${list.p_name}</td>
 									</tr>
 								</table>
 							</td>
-							<td>가격 가져오기</td>
-							<td>판매자 가져오기</td>
+							<td>${list.p_price}</td>
+							<td>${list.sid}</td>
 							<td><a href="#" class="reserBtn">예약하기</a></td>
 							<td><input class="delBtn" type="button" value="X" /></td>
 						</tr>
-						<tr>
-							<td style="width: auto;">2</td>
-							<td>상품번호 가져오기</td>
-							<td>
-								<table class="p_PhoNDesc">
-									<tr>
-										<td class="p_PhoNDesc" rowspan="3" style="width: 650px;"><img
-											src="../img/no-image.png" alt="상품사진"
-											style="width: 125px; height: 125px;" /></td>
-									</tr>
-									<tr>
-										<td class="p_PhoNDesc">상품이름 가져오기</td>
-									</tr>
-								</table>
-							</td>
-							<td>가격 가져오기</td>
-							<td>판매자 가져오기</td>
-							<td><a href="#" class="reserBtn">예약하기</a></td>
-							<td><input class="delBtn" type="button" value="X" /></td>
-						</tr>
-						<tr>
-							<td style="width: auto;">1</td>
-							<td>상품번호 가져오기</td>
-							<td>
-								<table class="p_PhoNDesc">
-									<tr>
-										<td class="p_PhoNDesc" rowspan="3" style="width: 650px;"><img
-											src="../img/no-image.png" alt="상품사진"
-											style="width: 125px; height: 125px;" /></td>
-									</tr>
-									<tr>
-										<td class="p_PhoNDesc">상품이름 가져오기</td>
-									</tr>
-								</table>
-							</td>
-							<td>가격 가져오기</td>
-							<td>판매자 가져오기</td>
-							<td><a href="#" class="reserBtn">예약하기</a></td>
-							<td><input class="delBtn" type="button" value="X" /></td>
-						</tr>
-					</table>
-				</form>
-				<span> <a href="#" class="pagingBtn">처음</a> <a href="#"
-					class="pagingBtn">이전</a> <a href="#" class="pagingBtn"
-					style="background-color: skyblue; color: white;">&nbsp;1&nbsp;</a>
-					<a href="#" class="pagingBtn">다음</a> <a href="#" class="pagingBtn">마지막</a>
-				</span>
-			</div>
+					</c:forEach>
+				</table>
+			</form>
+			<span> <a href="#" class="pagingBtn">처음</a> <a href="#"
+				class="pagingBtn">이전</a> <a href="#" class="pagingBtn"
+				style="background-color: skyblue; color: white;">&nbsp;1&nbsp;</a> <a
+				href="#" class="pagingBtn">다음</a> <a href="#" class="pagingBtn">마지막</a>
+			</span>
 		</div>
+	</div>
 	</div>
 </body>
 <script></script>

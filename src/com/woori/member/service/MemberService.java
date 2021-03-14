@@ -271,10 +271,6 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	public void wishList() {
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		
-	}
+	
 
 }
