@@ -117,7 +117,7 @@ form {
 							<td>${list.p_price}</td>
 							<td>${list.sid}</td>
 							<td><a href="#" class="reserBtn">예약하기</a></td>
-							<td><input class="delBtn" type="button" value="X" /></td>
+							<td><input class="delBtn" type="button"  value="X" onclick="location.href='wishDel?wish_idx=${list.wish_idx}'"/></td>
 						</tr>
 					</c:forEach>
 				</table>

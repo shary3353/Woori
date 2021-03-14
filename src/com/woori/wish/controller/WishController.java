@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.woori.member.service.MemberService;
 import com.woori.wish.serivce.WishService;
 
-@WebServlet({"/Consumer/wishList"})
+@WebServlet({"/Consumer/wishList", "/Consumer/wishDel"})
 public class WishController extends HttpServlet {
 
 	@Override
@@ -34,6 +34,10 @@ public class WishController extends HttpServlet {
 		case "/Consumer/wishList":
 			System.out.println("Request Consumer WishList");
 			service.wishList();
+			break;
+		case "/Consumer/wishDel":
+			System.out.println("Requset Delete Wishlist");
+			service.delWishList();
 			break;
 
 		}

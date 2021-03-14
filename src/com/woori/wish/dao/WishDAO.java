@@ -62,5 +62,26 @@ public class WishDAO {
 		}
 		return list;
 	}
+	public int delWishList(String wish_idx) {
+		String sql = "DELETE wishlist WHERE wish_idx=?";
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, wish_idx);
+			if(ps.executeUpdate() > 0) {
+				success = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		if(success > 0) {
+			System.out.println("삭제 성공");
+		} else {
+			System.out.println("삭제 실패");
+		}
+		return success;
+	}
 
 }

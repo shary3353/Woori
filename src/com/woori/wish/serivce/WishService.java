@@ -35,4 +35,13 @@ public class WishService {
 		RequestDispatcher dis = req.getRequestDispatcher("./C_WishList.jsp");
 		dis.forward(req, resp);
 	}
+
+	public void delWishList() throws ServletException, IOException {
+		String wish_idx = req.getParameter("wish_idx");
+		System.out.println("삭제하고 싶은 WishList idx : " + wish_idx);
+		WishDAO dao = new WishDAO();
+		int success = dao.delWishList(wish_idx);
+		
+		resp.sendRedirect("wishList");
+	}
 }
