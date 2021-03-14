@@ -103,5 +103,16 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
+	public void sPfpUpdateForm() throws ServletException, IOException{
+		String sid = req.getParameter("sid");
+		System.out.println("수정할 sid :" + sid);
+		
+		MemberDAO dao = new MemberDAO();
+		SellerDTO dto = dao.sPfpDetail(sid);
+		req.setAttribute("detail", dto);
+		RequestDispatcher dis = req.getRequestDispatcher("./S_profileRevise.jsp");
+		dis.forward(req, resp);
+	}
+
 
 }

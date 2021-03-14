@@ -39,7 +39,7 @@ public class MemberDAO {
 		}
 	}
 	
-	//판매자메인 - 판매자 회원정보 상세보기
+	//판매자메인 - 판매자 회원정보 상세보기, 수정보기 요청
 	public SellerDTO sPfpDetail(String sid) {
 		String sql = "SELECT sid, pw, name, birthday, gender, email,phone, store_call FROM seller WHERE sid=?";
 		

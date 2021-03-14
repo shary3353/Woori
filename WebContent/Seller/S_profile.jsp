@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-	<jsp:include page="S_navi.jsp" flush="false"/>
+	<jsp:include page="S_navi.jsp"/>
     <div id="content"><!--본문 : 판매자 회원정보-->
         <table>
             <tr>
@@ -84,18 +84,28 @@
                 <td colspan="2" style="text-align: right; border-bottom:1px solid white;"> 
                     <span id="chk-pw"><!--수정하기버튼 눌렀을시에 보임-->
                         비밀번호 확인 :
-                        <input type="password"/>
-                        <button>확인</button>
+                        <input type="password" id="chkPw"/>
+                        <button onclick="chkPw()")>확인</button>
                     </span>
-                    <button onclick="chkPw()">수정하기</button>
+                    <button onclick="chkPwBox()">수정하기</button>
                 </td>
             </tr>
         </table>
     </div>
 </body>
 <script>
-    function chkPw(){
+    function chkPwBox(){
         $('#chk-pw').css('display','inline');
+    };
+    function chkPw(){
+       var inPw = $('#chkPw').val();
+       console.log(inPw);
+       if(inPw === "${detail.pw}"){
+    	   alert("비밀번호 일치");
+    	   location.href='./sPfpUpdateForm?sid=${detail.sid}';
+       } else{
+    	   alert("비밀번호가 다릅니다.");
+       }
     };
 </script>
 </html>

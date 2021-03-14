@@ -77,6 +77,7 @@
     </nav>
 </body>
 <script>
+    /*
     var menu = document.getElementsByClassName('seller-navi-menu');
     for (var i = 0; i < menu.length; i++) {
         menu[i].addEventListener('click', function(){
@@ -86,5 +87,6 @@
             this.classList.add('clicked');
         })
     }
+    */
 </script>
 </html>

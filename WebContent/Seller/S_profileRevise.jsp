@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -64,9 +65,9 @@
     </style>
 </head>
 <body>
-    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
-
-    <div id="content"><!--본문 : 판매자 회원정보-->
+    <jsp:include page="S_navi.jsp"/>
+    
+    <div id="content"><!--본문 : 판매자 회원정보수정폼-->
         <table>
             <tr>
                 <td colspan="2" class="title">나의정보 수정</td>
@@ -93,15 +94,15 @@
             </tr>
             <tr>
                 <td class="column-name">이메일</td>
-                <td class="info"><input type="text" placeholder="value에는 이전 이메일값을 넣을예정" class="newProfile"></td>
+                <td class="info"><input type="text" value="${detail.email}" class="newProfile"></td>
             </tr>
             <tr>
                 <td class="column-name">전화번호</td>
-                <td class="info"><input type="text" placeholder="value에는 이전 전화번호값을 넣을예정" class="newProfile"></td>
+                <td class="info"><input type="text" value="${detail.phone}" class="newProfile"></td>
             </tr>
             <tr>
                 <td class="column-name">사업장전화번호</td>
-                <td class="info"><input type="text" placeholder="value에는 이전 사업장 전화번호 값을 넣을예정" class="newProfile"></td>
+                <td class="info"><input type="text" value="${detail.store_call}" class="newProfile"></td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: right; border-bottom:1px solid white;"> 

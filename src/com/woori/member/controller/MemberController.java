@@ -14,7 +14,7 @@ import com.woori.member.service.MemberService;
 	,판매자회원상세보기
  */
 @WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"
-	, "/Seller/sPfpDetail"})
+	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm"})
 
 public class MemberController extends HttpServlet {
 
@@ -91,6 +91,11 @@ public class MemberController extends HttpServlet {
 		case "/Seller/sPfpDetail": //판매자 회원 상세보기 요청 
 			System.out.println("Request  seller profile Detail");
 			service.sPfpDatail();
+			break;
+			
+		case "/Seller/sPfpUpdateForm": //판매자 회원정보 수정보기 요청
+			System.out.println("Request  seller profile UpdateForm");
+			service.sPfpUpdateForm();
 			break;
 			
 		}
