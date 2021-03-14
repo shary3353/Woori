@@ -59,11 +59,11 @@
             </div>  <!--구매자리스트 검색 닫음-->
 
             <div id="Admin_Seller_List_Paging"> <!--구매자리스트 페이징부분-->
-                <span class="Page_Content">처음</span>
-                <span class="Page_Content">이전</span>
-                <span class="Page_Number">1</span>
-                <span class="Page_Content">다음</span>
-                <span class="Page_Content">마지막</span>
+                <span class="Page_Content"><a href="./cList?page=1">처음</a></span>
+                <span class="Page_Content"><a href="./cList?page=${currPage-1 }">이전</a></span>
+                <span class="Page_Number">${currPage }</span>
+                <span class="Page_Content"><a href="./cList?page=${currPage+1 }">다음</a></span>
+                <span class="Page_Content"><a href="./cList?page=${maxSellerPage }">마지막</a></span>
             </div>  <!--페이징 닫음-->
 
         </div>  <!--구매자관리 컨텐츠 닫음-->
