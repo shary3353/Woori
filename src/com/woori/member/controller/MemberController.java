@@ -14,14 +14,14 @@ import com.woori.member.service.MemberService;
 	,판매자회원상세보기
  */
 @WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"
-	, "/sPfpDetail"})
+	, "/Seller/sPfpDetail"})
 public class MemberController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//logout, list
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
-		System.out.println("request url : "+sub);
+		System.out.println("get request url : "+sub);
 		
 		MemberService service = new MemberService(req, resp);
 		
@@ -55,7 +55,7 @@ public class MemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//join, login
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
-		System.out.println("request url : "+sub);
+		System.out.println("post request url : "+sub);
 		
 		switch(sub) {
 		case "/cLogin":
@@ -82,10 +82,10 @@ public class MemberController extends HttpServlet {
 	private void dual(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
-		System.out.println("request url : "+sub);
+		System.out.println("dual request url : "+sub);
 		switch(sub) {
 		
-		case "/sPfpDetail":
+		case "/Seller/sPfpDetail": //판매자 회원 상세보기 요청 
 			System.out.println("Request  seller profile Detail");
 			break;
 			

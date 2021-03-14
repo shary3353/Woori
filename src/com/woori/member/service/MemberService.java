@@ -2,6 +2,7 @@ package com.woori.member.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,11 +57,19 @@ public class MemberService {
 	}
 
 	public void reportList() throws ServletException, IOException {
-		ListDAO dao = new ListDAO();
-		ArrayList<ReportListDTO> rList = new ArrayList<>();
-		rList = dao.rList();
+		int group = 1;
+		String page = req.getParameter("page");
 		
-		req.setAttribute("rList", rList);
+		if(page != null) {
+			group = Integer.parseInt(page);
+		}
+		
+		ListDAO dao = new ListDAO();
+		HashMap<String, Object> map = dao.rList(group);
+		
+		req.setAttribute("rList", map.get("rList"));
+		req.setAttribute("currPage", group);
+		req.setAttribute("maxReportPage", map.get("maxReportPage"));
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
 		dis.forward(req, resp);
 	}
