@@ -61,7 +61,7 @@ th {
 
 .pagingBtnDisable {
 	text-decoration: none;
-	color: black;
+	color: gray;
 	font-weight: 600;
 	background-color: lightgray;
 	margin: 1px 2px;
