@@ -2,8 +2,8 @@ package com.woori.login.dto;
 
 public class A_LoginDTO {
 
-	private String userid;
-	private String password;
+	private String id;
+	private String pw;
 	
 	
 	//생성자
@@ -12,22 +12,22 @@ public class A_LoginDTO {
 		
 	}
 	//getter,setter
-	public void MemberDTO(String userid, String password) {
+	public void MemberDTO(String id, String pw) {
 		
-		this.userid = userid;
-		this.password = password;
+		this.id = id;
+		this.pw = pw;
 	}
-	public String getUserid() {
-		return userid;
+	public String getid() {
+		return id;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setid(String id) {
+		this.id = id;
 	}
-	public String getPassword() {
-		return password;
+	public String getpw() {
+		return pw;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setpw(String pw) {
+		this.pw = pw;
 	}
 	
 	
