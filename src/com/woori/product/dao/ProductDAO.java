@@ -38,7 +38,7 @@ public class ProductDAO {
 		}
 	}
 
-	public ArrayList<ProductDTO> sItemList() {
+	public ArrayList<ProductDTO> sItemList() { //판매자 등록물품리스트
 		ArrayList<ProductDTO> list =new ArrayList<ProductDTO>();
 		String sql = "SELECT p.p_idx, c.category, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName" + 
 				" FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx ORDER BY p.p_idx DESC";
@@ -63,6 +63,51 @@ public class ProductDAO {
 			resClose();
 		}
 		return list;
+	}
+
+	public ProductDTO sItemDetail(int p_idx) {//판매자 물품상세보기
+		String sql = "SELECT p.p_idx, c.category, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName" + 
+				" FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx AND p.p_idx = ?";
+		
+		ProductDTO dto = new ProductDTO();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, p_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setP_idx(rs.getInt("p_idx"));
+				dto.setCategory(rs.getString("category"));
+				dto.setP_name(rs.getString("p_name"));
+				dto.setP_content(rs.getString("p_content"));
+				dto.setP_price(rs.getInt("p_price"));
+				dto.setOriFileName(rs.getString("oriFileName"));
+				dto.setNewFileName(rs.getString("newFileName"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
+	
+	public int sItemRcount(int p_idx) { //해당 물품 예약수
+		String sql = "SELECT COUNT(*) count FROM reservation WHERE p_idx=?";
+		int r_count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, p_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				r_count = rs.getInt("count");
+				System.out.println("예약수 : "+ r_count);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return r_count;
 	}
 
 }

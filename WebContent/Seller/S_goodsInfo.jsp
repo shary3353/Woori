@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +42,7 @@
     </style>
 </head>
 <body>
-    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+     <jsp:include page="S_navi.jsp"/>
 
     <div id="content"><!--본문 : 등록된물품상세보기 -->
         <table>
@@ -50,29 +52,33 @@
             <tr>
                 <td rowspan="5" style="width: 300px;">
                     <img style="width: 300px;" src="../img/no-image.png" alt="상품이미지"/>
+                    <!-- <img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"/> -->
+                    <!--	server.xml에 추가 할 것 
+			      			<Context docBase="C:\upload" path="/Woori/photo"/>
+			         -->
                 </td>
-                <td class="column-name" >물품이름</td>
-                <td>물품이름158</td>
+                <td class="column-name" >물품명</td>
+                <td>${dto.p_name}</td>
             </tr>
             <tr>
-                <td class="column-name">카테고리</td>
-                <td>와인</td>
+                <td class="column-name">상품분류</td>
+                <td>${dto.category}</td>
             </tr>
             <tr>
                 <td class="column-name">가격</td>
-                <td>888,888원</td>
+                <td>${dto.p_price}원</td>
             </tr>
             <tr>
                 <td class="column-name">예약수</td>
-                <td style="color: red;">28건</td>
+                <td style="color: red;">${r_count}건</td>
             </tr>
             <tr>
-                <td class="column-name">상품설명</td>
-                <td>상품설명입니다.</td>
+                <td class="column-name">내용</td>
+                <td>${dto.p_content}</td>
             </tr>
             <tr>
                 <td colspan="3" class="btnArea">
-                    <button>물품목록으로돌아가기</button>
+                    <button onclick="location.href='./sItemList'">물품목록으로돌아가기</button>
                     <button>수정하기</button>
                 </td>
             </tr>

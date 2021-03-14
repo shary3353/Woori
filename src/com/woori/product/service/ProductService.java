@@ -32,5 +32,22 @@ public class ProductService {
 		dis = req.getRequestDispatcher("S_ItemManage.jsp"); //S_ItemManage.jsp로 이동
 		dis.forward(req, resp);//값보냄
 	}
+
+	public void sItemDetail() throws ServletException, IOException {//판매자 등록뭎룸 상세보기
+		//로그인검사 추가예정
+		int p_idx = Integer.parseInt(req.getParameter("p_idx"));//물품번호
+		System.out.println("상세보기할 물품 번호 : " +p_idx);
+		
+		ProductDAO dao = new ProductDAO();
+		ProductDTO dto = dao.sItemDetail(p_idx);//물품정보
+		System.out.println("상세보기 dto : "+dto);
+		dao = new ProductDAO();
+		int r_count = dao.sItemRcount(p_idx);//예약수
+		
+		req.setAttribute("dto", dto);
+		req.setAttribute("r_count", r_count);
+		dis = req.getRequestDispatcher("S_goodsInfo.jsp"); //S_goodsInfo.jsp로 이동
+		dis.forward(req, resp);//값보냄
+	}
 	
 }

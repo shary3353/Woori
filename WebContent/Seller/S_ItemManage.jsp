@@ -66,7 +66,7 @@
                 <td>${item.p_idx}</td>
                 <td>${item.category}</td>
                 <td id="registContent">
-                    <p>${item.p_name}</p>
+                    <p><a href="sItemDetail?p_idx=${item.p_idx}">${item.p_name}</a></p>
                 </td>
                 <td>
                     <img src="../img/no-image.png" width="100px" height="100px">
