@@ -393,6 +393,7 @@ public class ListDAO {
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, inputR);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				int cnt = rs.getInt(1);
@@ -410,6 +411,7 @@ public class ListDAO {
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, inputR);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				int cnt = rs.getInt(1);
