@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -48,14 +49,18 @@
             color: black;
             text-decoration: none;
         }
+       	.red{ color: red;}
+        .green{ color: green;}
+        .blue{ color: blue;}
     </style>
 </head>
 <body>
-    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+    <jsp:include page="S_navi.jsp"/>
+    
     <div id="content"><!--본문 : 예약내역 - 리스트 -->
         <table>
             <tr>
-                <td colspan="6" class="title">예약내역</td>
+                <td colspan="8" class="title">예약내역</td>
             </tr>
             <tr>
                 <th>No</th>
@@ -67,21 +72,24 @@
                 <th>예약현황</th>
                 <th>신고하기</th>
             </tr>
+            <c:forEach items="${list}" var="rlist">
             <tr>
-                <td>1</td>
-                <td>12345</td>
-                <td><a href="#상품상세보기"><img src="이미지.png">Ballantine's</a></td>
-                <td>김**</td>
-                <td>21.03.04</td>
-                <td>21.03.04</td>
-                <td><select name="reportstate" id="">
+                <td>${rlist.r_idx }</td>
+                <td>${rlist.p_idx }</td>
+                <td><a href="#상품상세보기"><img src="이미지.png">${rlist.p_name }</a></td>
+                <td>${rlist.cid }</td>
+                <td>${rlist.visit_date }</td>
+                <td>${rlist.reg_date }</td>
+                <td>
+                <span  class="chk">${rlist.status}</span><br/>
+                <select name="reportstate" id="">
                     <option value="100">신청중</option>
                     <option value="200">예약완료</option>
                     <option value="300">상담완료</option>
-                </select><br/><br/><button>예약현황저장</button></td>
+                </select><br/><button>예약현황변경</button></td>
                 <td><button>신고하기</button></td>
-                
             </tr>
+            </c:forEach>
         </table>
 
         <div id="List_Paging"> <!--페이징부분-->
@@ -93,4 +101,16 @@
         </div>
     </div>
 </body>
+<script>
+	var chktext = $('.chk'); //진행중, 답변완료 색표시
+	for (var i = 0; i < chktext.length; i++) {
+	    if(chktext[i].textContent ==="신청중"){
+	        chktext[i].classList.add('red');
+	    } else if(chktext[i].textContent === "상담완료"){
+	        chktext[i].classList.add('green');
+	    } else if (chktext[i].textContent === "예약완료"){
+	        chktext[i].classList.add('blue');
+		}
+	}
+</script>
 </html>

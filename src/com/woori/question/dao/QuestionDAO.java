@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 import com.woori.question.dto.QuestionDTO;
 
 public class QuestionDAO {
+	
+	//공통
 	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;

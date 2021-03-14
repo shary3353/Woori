@@ -6,13 +6,31 @@ public class ReservationDTO {
 	
 	private int r_idx;
 	private String visit_date;
-	private String r_date;
-	private String cId;
+	private String reg_date;
+	private String cid;
+	/*물품*/
 	private int p_idx;
-	
+	private String p_name;
+	/*예약상황*/
 	private int rs_idx;
 	private String status;
 	
+	
+	
+	
+	
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+	public String getP_name() {
+		return p_name;
+	}
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
 	public int getR_idx() {
 		return r_idx;
 	}
@@ -25,17 +43,12 @@ public class ReservationDTO {
 	public void setVisit_date(String visit_date) {
 		this.visit_date = visit_date;
 	}
-	public String getR_date() {
-		return r_date;
+	
+	public String getCid() {
+		return cid;
 	}
-	public void setR_date(String r_date) {
-		this.r_date = r_date;
-	}
-	public String getcId() {
-		return cId;
-	}
-	public void setcId(String cId) {
-		this.cId = cId;
+	public void setCid(String cid) {
+		this.cid = cid;
 	}
 	public int getP_idx() {
 		return p_idx;
