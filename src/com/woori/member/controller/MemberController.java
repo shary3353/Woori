@@ -15,6 +15,7 @@ import com.woori.member.service.MemberService;
  */
 @WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"
 	, "/Seller/sPfpDetail"})
+
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -83,10 +84,13 @@ public class MemberController extends HttpServlet {
 		
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("dual request url : "+sub);
-		switch(sub) {
 		
+		MemberService service = new MemberService(req, resp);
+		
+		switch(sub) {
 		case "/Seller/sPfpDetail": //판매자 회원 상세보기 요청 
 			System.out.println("Request  seller profile Detail");
+			service.sPfpDatail();
 			break;
 			
 		}

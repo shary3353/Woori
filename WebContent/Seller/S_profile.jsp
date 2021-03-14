@@ -54,31 +54,31 @@
             </tr>
             <tr>
                 <td class="column-name">아이디</td>
-                <td class="info">123-12-12345</td>
+                <td class="info">${detail.sid}</td>
             </tr>
             <tr>
                 <td class="column-name">이름</td>
-                <td class="info">고길동</td>
+                <td class="info">${detail.name}</td>
             </tr>
             <tr>
                 <td class="column-name">생년월일</td>
-                <td class="info">2000.12.31</td>
+                <td class="info">${detail.birthday}</td>
             </tr>
             <tr>
                 <td class="column-name">성별</td>
-                <td class="info">남</td>
+                <td class="info">${detail.gender}</td>
             </tr>
             <tr>
                 <td class="column-name">이메일</td>
-                <td class="info">wooowoo@naver.com</td>
+                <td class="info">${detail.email}</td>
             </tr>
             <tr>
                 <td class="column-name">전화번호</td>
-                <td class="info">010-1234-1234</td>
+                <td class="info">${detail.phone}</td>
             </tr>
             <tr>
                 <td class="column-name">사업장전화번호</td>
-                <td class="info">1588-1588</td>
+                <td class="info">${detail.store_call}</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: right; border-bottom:1px solid white;"> 

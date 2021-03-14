@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.woori.member.dao.ListDAO;
+import com.woori.member.dao.MemberDAO;
 import com.woori.member.dto.BlackListDTO;
 import com.woori.member.dto.CustomerDTO;
 import com.woori.member.dto.CustomerListDTO;
@@ -71,6 +72,19 @@ public class MemberService {
 		req.setAttribute("currPage", group);
 		req.setAttribute("maxReportPage", map.get("maxReportPage"));
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
+		dis.forward(req, resp);
+	}
+
+	public void sPfpDatail() throws ServletException, IOException { //판매자메인 - 판매자 회원정보 상세보기
+		req.getSession().setAttribute("loginId","123-12-12345");//test용
+		String sid = (String)req.getSession().getAttribute("loginId");
+		System.out.println(sid); //로그인한 아이디 확인
+		
+		MemberDAO dao = new MemberDAO();
+		SellerDTO dto = dao.sPfpDetail(sid);
+		System.out.println(dto);//해당판매자정보
+		req.setAttribute("detail", dto);
+		RequestDispatcher dis = req.getRequestDispatcher("./S_profile.jsp");
 		dis.forward(req, resp);
 	}
 
