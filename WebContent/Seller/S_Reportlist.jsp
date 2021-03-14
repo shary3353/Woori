@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -51,7 +52,7 @@
     </style>
 </head>
 <body>
-    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+    <jsp:include page="S_navi.jsp"/>
 
     <div id="content"><!--본문 : 문의내역 - 리스트 -->
         <table>
@@ -66,14 +67,19 @@
                 <th>신고날짜</th>
                 <th>진행상태</th>
             </tr>
+            <c:forEach items="${list}" var="reportlist">
             <tr>
-                <td>1</td>
-                <td>응답</td>
-                <td><a href="#신고상세보기">고객이 잠수함에 갇힌 것 같습니다.</a></td>
-                <td>USER158</td>
-                <td>21.03.05</td>
-                <td id="chkAnswer">진행중</td>
+                <td>${reportlist.r_idx}</td>
+                <td>${reportlist.category}</td>
+                <td><a href="#신고상세보기">${reportlist.subject}</a></td>
+                <td>${reportlist.target_id}</td>
+                <td>${reportlist.r_date}</td>
+                <td id="chkAnswer">
+                	<c:if test="${reportlist.status == 0}"><span style="color:red;">처리중</span></c:if>
+					<c:if test="${reportlist.status == 1}"><span style="color:green;">처리완료</span></c:if>
+                </td>
             </tr>
+            </c:forEach>
         </table>
 
         <div id="List_Paging"> <!--페이징부분-->
@@ -85,13 +91,4 @@
         </div>
     </div>
 </body>
-<script>
-    var chktext = $('#chkAnswer').text();
-    console.log(chktext);
-    if(chktext=="진행중"){
-        $('#chkAnswer').css("color","red");
-    } else if(chktext=="답변완료"){
-        $('#chkAnswer').css("color","green");
-    }
-</script>
 </html>

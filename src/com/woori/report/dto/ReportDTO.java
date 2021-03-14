@@ -6,11 +6,27 @@ public class ReportDTO {
 	private String content;
 	private String reporter_id;
 	private String target_id;
-	private String Status;
+	private int Status;
 	private String r_date;
+	private String subject;
 	/*Report_Categories*/
 	private int rc_idx;
 	private String category;
+	
+	
+	
+	public int getStatus() {
+		return Status;
+	}
+	public void setStatus(int status) {
+		Status = status;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	public int getR_idx() {
 		return r_idx;
 	}
@@ -35,12 +51,7 @@ public class ReportDTO {
 	public void setTarget_id(String target_id) {
 		this.target_id = target_id;
 	}
-	public String getStatus() {
-		return Status;
-	}
-	public void setStatus(String status) {
-		Status = status;
-	}
+	
 	public String getR_date() {
 		return r_date;
 	}

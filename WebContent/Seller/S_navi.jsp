@@ -72,7 +72,7 @@
             <li class="seller-navi-menu"><a href="./sItemList">물품관리</a></li>
             <li class="seller-navi-menu"><a href="./sQAList">문의내역</a></li>
             <li class="seller-navi-menu"><a href="./sReservationList">예약내역</a></li>
-            <li class="seller-navi-menu"><a href="#신고내역">신고내역</a></li>
+            <li class="seller-navi-menu"><a href="./sReportList">신고내역</a></li>
         </ul>
     </nav>
 </body>
