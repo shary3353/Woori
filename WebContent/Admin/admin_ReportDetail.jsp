@@ -51,30 +51,30 @@
         <nav>    <!-- ê´ë¦¬ì ë¤ë¹ê²ì´ì-->
             <%@include file="admin_Nav.jsp" %>
         </nav>  <!--ë¤ë¹ê²ì´ì ë«ì-->
-            <div id="ReportDetail">
+          <div id="ReportDetail">
                 <table>
                     <tr>
-                        <th>ì ê³ ì ëª©</th>
-                        <td>ì ê³ ê¸ ì ëª©</td>
+                        <th>신고제목</th>
+                        <td>신고글 제목</td>
                     </tr>
                     <tr>
-                        <th>ì ê³ ì</th>
-                        <td>ì ê³ ì ID</td>
+                        <th>신고자</th>
+                        <td>신고자 ID</td>
                     </tr>
                     <tr>
-                        <th>ì ê³ ëìì</th>
-                        <td>ì ê³  ëìì ID</td>
+                        <th>신고대상자</th>
+                        <td>신고 대상자 ID</td>
                     </tr>
                     <tr>
-                        <th>ì ê³ ì¹´íê³ ë¦¬</th>
-                        <td>ì¹´íê³ ë¦¬ ë´ì©</td>
+                        <th>신고카테고리</th>
+                        <td>카테고리 내용</td>
                     </tr>
                     <tr id="content">
-                        <td colspan="2"> ì ê³ ê¸ ë´ì©</td>
+                        <td colspan="2"> 신고글 내용</td>
                     </tr>
                 </table>
                 <div id="listbutton">
-                    <button style="width: 200px; height: 30px;">ì ê³ ê´ë¦¬ ë¦¬ì¤í¸</button>
+                    <button style="width: 200px; height: 30px;">신고관리 리스트</button>
                 </div>
                 
             </div>
