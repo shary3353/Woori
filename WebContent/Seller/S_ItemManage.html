@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goods Info</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        #content{
+            width: 100%;
+            margin-top: 40px;
+        }
+        table{
+            width: 800px;
+            margin: auto;
+        }
+        table,th,td{
+            border-bottom: 1px solid gray;
+            border-collapse: collapse;
+            margin-top: 5px;
+            padding: 10pX;
+            text-align: center;
+        }
+        .btnArea{
+            text-align: right;
+            border-bottom: 1px solid white;
+        }
+        button{
+            padding: 5px;
+        }
+        .title{
+            border-top: 1px solid white;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .column-name {
+            background-color: rgb(231, 231, 231);
+            width: 100px;
+            text-align: center;
+        }
+        
+
+       
+    </style>
+</head>
+<body>
+    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+
+    <div id="content"><!--본문 : 등록 물품 리스트 -->
+        <table>
+            <tr>
+                <td colspan="3" class="title">등록 물품 리스트</td>
+            </tr>
+            <tr>
+                <th>
+                    물품 번호
+                </th>
+                <th>
+                    카테고리
+                </th>
+                <th>
+                    물품 정보
+                </th>
+                <th>
+                    물품 사진
+                </th>
+                <th>
+                    가격                
+                </th>
+                <th>
+                    수정
+                </th>
+                <th>
+                    삭제
+                </th>
+            </tr>
+            <tr>
+                <td>1231</td>
+                <td>양주</td>
+                <td id="registContent">
+                    <p>vino tinto Sembro 2018</p>
+                </td>
+                <td>
+                    <img src="../img/no-image.png" width="100px" height="100px">
+                </td>
+                <td>1.000.000 원</td>
+                <td><button id="reviseButton">수정하기</button></td>
+                <td><button id="delButton">❌</button></td>
+            </tr>
+            <tr>
+                
+            </tr>
+            <tr>
+                
+            </tr>
+            <tr>
+                
+            </tr>
+            
+        </table>
+    </div>  
+</body>
+</html>
