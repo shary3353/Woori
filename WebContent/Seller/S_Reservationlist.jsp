@@ -81,12 +81,17 @@
                 <td>${rlist.visit_date }</td>
                 <td>${rlist.reg_date }</td>
                 <td>
-                <span  class="chk">${rlist.status}</span><br/>
-                <select name="reportstate" id="">
-                    <option value="100">신청중</option>
-                    <option value="200">예약완료</option>
-                    <option value="300">상담완료</option>
-                </select><br/><button>예약현황변경</button></td>
+                	<form action="updateResevationStatus">
+                		<input type="hidden" name="r_idx" value="${rlist.r_idx }"/>
+		                <span  class="chk">${rlist.status}</span><br/>
+		                <select name="reservationState" id="">
+		                    <option value="0">신청중</option>
+		                    <option value="1">예약완료</option>
+		                    <option value="2">상담완료</option>
+		                </select><br/>
+		                <button>예약현황변경</button>
+	                </form>
+	            </td>
                 <td><button>신고하기</button></td>
             </tr>
             </c:forEach>

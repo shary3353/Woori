@@ -68,4 +68,21 @@ public class ReservationDAO {
 		return list;
 	}
 
+	public void updateResevationStatus(int r_idx, int rs_idx) { //판매자 예약현황 변경
+		String sql = "UPDATE reservation SET rs_idx=? WHERE r_idx=?";
+		
+		int success =0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rs_idx);
+			ps.setInt(2, r_idx);
+			success = ps.executeUpdate();
+			System.out.println("예약현황 변경 수 : " +success);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+	}
+
 }

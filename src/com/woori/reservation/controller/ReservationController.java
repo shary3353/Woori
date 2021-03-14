@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.reservation.service.ReservationService;
 /*
- 요청 : 판매자 예약내역 리스트
+ 요청 : 판매자 예약내역 리스트, 판매자 예약현황변경
  */
-@WebServlet({"/Seller/sReservationList"})
+@WebServlet({"/Seller/sReservationList","/Seller/updateResevationStatus"})
 public class ReservationController extends HttpServlet {
 
 	@Override
@@ -45,7 +45,10 @@ public class ReservationController extends HttpServlet {
 			System.out.println("판매자 예약내역 리스트 요청");
 			service.sReservationList();
 			break;
-			
+		case "/Seller/updateResevationStatus":
+			System.out.println("판매자 예약현황 변경 요청");
+			service.updateResevationStatus();
+			break;
 			
 			
 		}

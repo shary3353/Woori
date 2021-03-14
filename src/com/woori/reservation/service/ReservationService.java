@@ -39,4 +39,20 @@ public class ReservationService {
 		dis.forward(req, resp);//값보냄
 	}
 
+	public void updateResevationStatus() throws ServletException, IOException {//판매자 예약현황변경
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginId","123-12-12345");//test용
+		String sid = (String)req.getSession().getAttribute("loginId");
+		System.out.println("판매자"+ sid +"가 예약 현황을 변경합니다."); //로그인한 아이디 확인& 판매자 확인
+		
+		int r_idx = Integer.parseInt(req.getParameter("r_idx"));
+		int rs_idx = Integer.parseInt(req.getParameter("reservationState"));
+		System.out.println("변경예약:"+r_idx+"/"+rs_idx);
+		
+		ReservationDAO dao = new ReservationDAO();
+		dao.updateResevationStatus(r_idx, rs_idx);
+		
+		resp.sendRedirect("./sReservationList");//예약리스트로 이동
+	}
+
 }
