@@ -85,7 +85,7 @@
                 </div> 
             </div>
             <div id="image">
-                <img src="./img/FQA.PNG" width="1000" height="400"/>
+                <img src="../img/FQA.PNG" width="1000" height="400"/>
             </div>
         </div>
     </div>

@@ -75,6 +75,14 @@ th {
 	text-align: center;
 	font-size: 15px;
 }
+.headDESC {
+	font-size: 25px;
+	font-weight: 600;
+	text-align: left;
+	color: mediumslateblue;
+	margin-left: 20px;
+	margin-top: 30px;
+}
 </style>
 </head>
 
@@ -84,9 +92,7 @@ th {
 	<div id="myInfo">
 		<form action="cUpdateInfo" method="POST" name="updateForm">
 			<div id="infoBox">
-				<p
-					style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue">나의
-					정보 수정</p>
+				<p class="headDESC">나의 정보 수정</p>
 				<table>
 					<tr>
 						<th>아이디</th>

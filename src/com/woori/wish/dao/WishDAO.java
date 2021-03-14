@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,12 +15,12 @@ import com.woori.product.dto.ProductDTO;
 import com.woori.wish.dto.WishDTO;
 
 public class WishDAO {
-	
+
 	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
-	
-	public WishDAO() {//db접근
+
+	public WishDAO() {// db접근
 		try {
 			Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Oracle");
@@ -28,23 +29,40 @@ public class WishDAO {
 			e.printStackTrace();
 		}
 	}
-	private void resClose() { //자원 반납
+
+	private void resClose() { // 자원 반납
 		try {
-			if(rs != null) {rs.close();}
-			if(ps != null) {ps.close();}
-			if(conn != null) {conn.close();}
+			if (rs != null) {
+				rs.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public ArrayList<WishDTO> wishList(String cid) {
-		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.fileidx, w.w_date FROM wishlist w, product p WHERE w.cid=? and w.p_idx = p.p_idx(+) ORDER BY w_date DESC";
-		 ArrayList<WishDTO> list = new ArrayList<WishDTO>();
+
+	public HashMap<String, Object> pagingList(int group, String cid) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int pagePerCnt = 3;
+		int end = group * pagePerCnt;
+		int start = end - (pagePerCnt - 1);
+		System.out.println(start + " ~ " + end + "까지의 리스트");
+		ArrayList<WishDTO> list = new ArrayList<WishDTO>();
+		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.fileidx, w.w_date "
+				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist) w, product p	"
+				+ "WHERE w.cid=? and w.p_idx = p.p_idx(+) and rnum BETWEEN ? AND ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				WishDTO dto = new WishDTO();
 				dto.setWish_idx(rs.getInt(1));
 				dto.setP_idx(rs.getString(2));
@@ -54,21 +72,44 @@ public class WishDAO {
 				dto.setFileIdx(6);
 				list.add(dto);
 			}
-			System.out.println("위시리스트 데이터 수 : "+list.size());
+			System.out.println("위시리스트 데이터 수 : " + list.size());
+
+			int maxPage = getMaxPage(pagePerCnt, cid);
+			map.put("list", list);
+			map.put("maxPage", maxPage);
+			System.out.println("max page : " + maxPage);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			resClose();
 		}
-		return list;
+		return map;
 	}
+
+	private int getMaxPage(int pagePerCnt, String cid) {
+		String sql = "SELECT COUNT(wish_idx) FROM wishlist WHERE cid=?";
+		int max = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt / (double) pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
+	}
+
 	public int delWishList(String wish_idx) {
 		String sql = "DELETE wishlist WHERE wish_idx=?";
 		int success = 0;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, wish_idx);
-			if(ps.executeUpdate() > 0) {
+			if (ps.executeUpdate() > 0) {
 				success = 1;
 			}
 		} catch (SQLException e) {
@@ -76,7 +117,7 @@ public class WishDAO {
 		} finally {
 			resClose();
 		}
-		if(success > 0) {
+		if (success > 0) {
 			System.out.println("삭제 성공");
 		} else {
 			System.out.println("삭제 실패");

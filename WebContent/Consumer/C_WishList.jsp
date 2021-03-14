@@ -57,6 +57,23 @@ th {
 	margin-top: 0px;
 	padding: 3px;
 	border: 1px white;
+	width: 50px;
+}
+
+.pagingBtnDisable {
+	text-decoration: none;
+	color: black;
+	font-weight: 600;
+	background-color: lightgray;
+	margin: 1px 2px;
+	margin-top: 0px;
+	padding: 3px;
+	border: 1px white;
+	width: 50px;
+}
+.pagingBtnDisable:hover {
+	cursor: default;
+	text-decoration: none;
 }
 
 .pagingBtn:hover {
@@ -77,6 +94,15 @@ form {
 .reserBtn:hover {
 	background-color: lightblue;
 }
+
+.headDESC {
+	font-size: 25px;
+	font-weight: 600;
+	text-align: left;
+	color: mediumslateblue;
+	margin-left: 20px;
+	margin-top: 30px;
+}
 </style>
 </head>
 
@@ -86,8 +112,7 @@ form {
 		<jsp:include page="../Include/SideBar.html"></jsp:include>
 		<div id="wishListBox">
 			<form action="" method="GET">
-				<span><p
-						style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">위시리스트</p></span>
+				<p class="headDESC">위시리스트</p>
 				<table>
 					<tr>
 						<th>No</th>
@@ -117,18 +142,41 @@ form {
 							<td>${list.p_price}</td>
 							<td>${list.sid}</td>
 							<td><a href="#" class="reserBtn">예약하기</a></td>
-							<td><input class="delBtn" type="button"  value="X" onclick="location.href='wishDel?wish_idx=${list.wish_idx}'"/></td>
+							<td><input class="delBtn" type="button" value="X"
+								onclick="location.href='wishDel?wish_idx=${list.wish_idx}'" /></td>
 						</tr>
 					</c:forEach>
 				</table>
 			</form>
-			<span> <a href="#" class="pagingBtn">처음</a> <a href="#"
-				class="pagingBtn">이전</a> <a href="#" class="pagingBtn"
-				style="background-color: skyblue; color: white;">&nbsp;1&nbsp;</a> <a
-				href="#" class="pagingBtn">다음</a> <a href="#" class="pagingBtn">마지막</a>
-			</span>
+			<div>
+				<c:if test="${currPage == 1}">
+					<a href="wishPaging?page=1" class="pagingBtnDisable">처음</a>
+				</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="wishPaging?page=1" class="pagingBtn">처음</a>
+				</c:if>
+				<c:if test="${currPage == 1}">
+					<a href="#" class="pagingBtnDisable">이전</a>
+				</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="wishPaging?page=${currPage-1}" class="pagingBtn">이전</a>
+				</c:if>
+				<a href="#" class="pagingBtnDisable"
+					style="background-color: skyblue; color: white;">&nbsp;${currPage}&nbsp;</a>
+				<c:if test="${currPage == maxPage}">
+					<a href="#" class="pagingBtnDisable">다음</a>
+				</c:if>
+				<c:if test="${currPage <= 1}">
+					<a href="wishPaging?page=${currPage+1}" class="pagingBtn">다음</a>
+				</c:if>
+				<c:if test="${currPage == maxPage}">
+					<a href="#" class="pagingBtnDisable">마지막</a>
+				</c:if>
+				<c:if test="${currPage < maxPage}">
+					<a href="wishPaging?page=${maxPage}" class="pagingBtn">마지막</a>
+				</c:if>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 <script></script>
