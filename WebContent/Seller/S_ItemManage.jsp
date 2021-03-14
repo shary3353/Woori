@@ -75,7 +75,7 @@
 			      			<Context docBase="C:\upload" path="/Woori/photo"/>
 			         -->
                 </td>
-                <td>${item.p_price}</td>
+                <td>${item.p_price} 원</td>
                 <td><button id="reviseButton">수정하기</button></td>
                 <td><button id="delButton">❌</button></td>
             </tr>
