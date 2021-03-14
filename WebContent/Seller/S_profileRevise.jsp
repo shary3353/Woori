@@ -68,51 +68,75 @@
     <jsp:include page="S_navi.jsp"/>
     
     <div id="content"><!--본문 : 판매자 회원정보수정폼-->
-        <table>
-            <tr>
-                <td colspan="2" class="title">나의정보 수정</td>
-            </tr>
-            <tr>
-                <td class="column-name">아이디</td>
-                <td class="info">123-12-12345</td>
-            </tr>
-            <tr>   
-                <td class="column-name">새로운 비밀번호</td>
-                <td><input type="password" placeholder="새로운 비밀번호를 입력하세요" class="newPassword"></td>
-            </tr>
-            <tr>   
-                <td class="column-name">비밀번호 확인</td>
-                <td><input type="password" placeholder="새로운 비밀번호를 확인하세요" class="newPassword"></td>
-            </tr>
-            <tr>
-                <td class="column-name">생년월일</td>
-                <td class="info">2000.12.31</td>
-            </tr>
-            <tr>
-                <td class="column-name">성별</td>
-                <td class="info">남</td>
-            </tr>
-            <tr>
-                <td class="column-name">이메일</td>
-                <td class="info"><input type="text" value="${detail.email}" class="newProfile"></td>
-            </tr>
-            <tr>
-                <td class="column-name">전화번호</td>
-                <td class="info"><input type="text" value="${detail.phone}" class="newProfile"></td>
-            </tr>
-            <tr>
-                <td class="column-name">사업장전화번호</td>
-                <td class="info"><input type="text" value="${detail.store_call}" class="newProfile"></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: right; border-bottom:1px solid white;"> 
-                    <button onclick="chkPw()">수정사항 저장</button>
-                </td>
-            </tr>
-        </table>
+    	<form action="sPfpUpdate" method="post">
+	        <table>
+	            <tr>
+	                <td colspan="2" class="title">나의정보 수정</td>
+	            </tr>
+	            <tr>
+	                <td class="column-name">아이디</td>
+	                <td class="info">${detail.sid}
+	                	<input type="hidden" name="sid" value="${detail.sid}"/>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td class="column-name">이름</td>
+	                <td class="info"><input type="text" value="${detail.name}" class="newProfile" name="name"></td>
+            	</tr>
+	            <tr>   
+	                <td class="column-name">새로운 비밀번호</td>
+	                <td>
+	                	<input type="password" placeholder="새로운 비밀번호를 입력하세요" class="newPassword" id="pw" 
+	                		onkeyup="chkPw()">
+	                </td>
+	            </tr>
+	            <tr>   
+	                <td class="column-name">비밀번호 확인</td>
+	                <td>
+	                	<input type="password" placeholder="새로운 비밀번호를 확인하세요" class="newPassword" id="pw_ck"  
+	                		onkeyup="chkPw()" name="pw">
+	                	<br/>
+	                	<span id="chkPw"></span>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td class="column-name">생년월일</td>
+	                <td class="info">${detail.birthday}</td>
+	            </tr>
+	            <tr>
+	                <td class="column-name">성별</td>
+	                <td class="info">${detail.gender}</td>
+	            </tr>
+	            <tr>
+	                <td class="column-name">이메일</td>
+	                <td class="info"><input type="text" value="${detail.email}" class="newProfile" name="email"></td>
+	            </tr>
+	            <tr>
+	                <td class="column-name">전화번호</td>
+	                <td class="info"><input type="text" value="${detail.phone}" class="newProfile" name="phone"></td>
+	            </tr>
+	            <tr>
+	                <td class="column-name">사업장전화번호</td>
+	                <td class="info"><input type="text" value="${detail.store_call}" class="newProfile" name="storeCall"></td>
+	            </tr>
+	            <tr>
+	                <td colspan="2" style="text-align: right; border-bottom:1px solid white;"> 
+	                    <button>수정사항 저장</button>
+	                </td>
+	            </tr>
+	        </table>
+        </form>
     </div>
 </body>
 <script>
-   
+function chkPw() { //비밀번호 일치여부 확인
+    var pw = document.getElementById('pw').value; 
+    var pw_ck = document.getElementById('pw_ck').value; 
+    if (pw!=pw_ck) { 
+    document.getElementById('chkPw').innerHTML = "비밀번호가 다릅니다."; 
+    } else { 
+        document.getElementById('chkPw').innerHTML = "비밀번호가 일치합니다.";
+    }
+}
 </script>
 </html>

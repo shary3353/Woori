@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.woori.member.service.MemberService;
 /*처리 : (회원가입, 로그인, 회원수정, 회원상세보기, 회원리스트)
  	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
-	,판매자회원상세보기
+	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
 @WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"
-	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm"})
+	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate"})
 
 public class MemberController extends HttpServlet {
 
@@ -82,6 +82,7 @@ public class MemberController extends HttpServlet {
 
 	private void dual(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		
+		req.setCharacterEncoding("UTF-8");
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("dual request url : "+sub);
 		
@@ -96,6 +97,11 @@ public class MemberController extends HttpServlet {
 		case "/Seller/sPfpUpdateForm": //판매자 회원정보 수정보기 요청
 			System.out.println("Request  seller profile UpdateForm");
 			service.sPfpUpdateForm();
+			break;
+		
+		case "/Seller/sPfpUpdate": //판매자 회원정보 수정 요청
+			System.out.println("Request  seller profile Update");
+			service.sPfpUpdate();
 			break;
 			
 		}

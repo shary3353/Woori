@@ -76,17 +76,4 @@
         </ul>
     </nav>
 </body>
-<script>
-    /*
-    var menu = document.getElementsByClassName('seller-navi-menu');
-    for (var i = 0; i < menu.length; i++) {
-        menu[i].addEventListener('click', function(){
-            for (var j = 0; j < menu.length; j++) {
-                menu[j].classList.remove('clicked');
-            }
-            this.classList.add('clicked');
-        })
-    }
-    */
-</script>
 </html>

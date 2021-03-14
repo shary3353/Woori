@@ -103,7 +103,7 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	public void sPfpUpdateForm() throws ServletException, IOException{
+	public void sPfpUpdateForm() throws ServletException, IOException{//판매자메인 - 판매자 수정폼 보기
 		String sid = req.getParameter("sid");
 		System.out.println("수정할 sid :" + sid);
 		
@@ -112,6 +112,28 @@ public class MemberService {
 		req.setAttribute("detail", dto);
 		RequestDispatcher dis = req.getRequestDispatcher("./S_profileRevise.jsp");
 		dis.forward(req, resp);
+	}
+
+	public void sPfpUpdate() throws ServletException, IOException{//판매자메인 - 판매자 회원정보 수정
+		String sid = req.getParameter("sid");
+		String name = req.getParameter("name");
+		String pw = req.getParameter("pw");
+		String email = req.getParameter("email");
+		String phone = req.getParameter("phone");
+		String storeCall = req.getParameter("storeCall");
+		System.out.println("변경정보:"+sid+"/"+name+"/"+pw+"/"+email+"/"+phone+"/"+storeCall);
+
+		SellerDTO dto = new SellerDTO();
+		dto.setSid(sid);
+		dto.setName(name);
+		dto.setPw(pw);
+		dto.setEmail(email);
+		dto.setPhone(phone);
+		dto.setStore_call(storeCall);
+		
+		MemberDAO dao = new MemberDAO();
+		dao.sPfpUpdate(dto);
+		resp.sendRedirect("sPfpDetail?sid="+dto.getSid());
 	}
 
 

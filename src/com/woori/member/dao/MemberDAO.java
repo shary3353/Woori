@@ -65,6 +65,27 @@ public class MemberDAO {
 		}		
 		return dto;
 	}
+
+	public void sPfpUpdate(SellerDTO dto) { //판매자 회원정보 수정
+		String sql = "UPDATE seller SET pw=?, name=?, email=?, phone=?, store_call=? WHERE sid=?";
+		
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getPw());
+			ps.setString(2, dto.getName());
+			ps.setString(3, dto.getEmail());
+			ps.setString(4, dto.getPhone());
+			ps.setString(5, dto.getStore_call());
+			ps.setString(6, dto.getSid());
+			success = ps.executeUpdate();
+			System.out.println("업데이트 완료 :"+success);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+	}
 	
 	//
 	
