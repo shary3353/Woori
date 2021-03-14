@@ -28,11 +28,18 @@ public class MemberService {
 	}
 
 	public void cList() throws ServletException, IOException {
-		ListDAO dao = new ListDAO();
-		ArrayList<CustomerListDTO> cList = new ArrayList<>();
-		cList = dao.cList();
+		int group = 1;
+		String page = req.getParameter("page");
 		
-		req.setAttribute("cList", cList);
+		if(page != null) {
+			group = Integer.parseInt(page);
+		}
+		ListDAO dao = new ListDAO();
+		HashMap<String, Object> map = dao.cList(group);
+		
+		req.setAttribute("cList", map.get("cList"));
+		req.setAttribute("currPage", group);
+		req.setAttribute("maxCustomerPage", map.get("maxCustomerPage"));
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
 		dis.forward(req, resp);
 	}
@@ -46,7 +53,6 @@ public class MemberService {
 		}
 		
 		ListDAO dao = new ListDAO();
-		ArrayList<SellerListDTO> sList = new ArrayList<>();
 		HashMap<String, Object> map = dao.sList(group);
 		
 		req.setAttribute("sList", map.get("sList"));
