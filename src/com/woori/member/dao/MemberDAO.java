@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.woori.member.dto.CustomerDTO;
 import com.woori.member.dto.SellerDTO;
 
 //회원가입, 로그인, 회원정보 상세보기, 회원정보 수정 
@@ -86,6 +88,71 @@ public class MemberDAO {
 			resClose();
 		}
 	}
+
+	public CustomerDTO cDetail(String cid) {
+		String sql = "SELECT cid, gender, email, to_char(birthday, 'yyyy-mm-dd') birthday, phone FROM consumer WHERE cid=?";
+		CustomerDTO dto = new CustomerDTO();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setCid(rs.getString(1));
+				dto.setGender(rs.getString(2));
+				dto.setEmail(rs.getString(3));
+				dto.setBirthday(rs.getString(4));
+				dto.setPhone(rs.getString(5));
+			}
+			System.out.println(dto.getCid()+" / "+dto.getGender()+" / "+dto.getEmail()+" / "+dto.getBirthday()+" / "+dto.getPhone());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	public CustomerDTO cUpadateForm(String cid, String pw) {
+		String sql = "SELECT cid, gender, email, to_char(birthday, 'yyyy-mm-dd') birthday, phone FROM consumer WHERE cid=? and pw=?";
+		CustomerDTO dto = new CustomerDTO();
+		try {
+			ps= conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			ps.setString(2, pw);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setCid(rs.getString(1));
+				dto.setGender(rs.getString(2));
+				dto.setEmail(rs.getString(3));
+				dto.setBirthday(rs.getString(4));
+				dto.setPhone(rs.getString(5));
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	public int cUpdateInfo(CustomerDTO dto) {
+		String sql = "UPDATE consumer SET pw=?, email=?, phone=? WHERE cid=?";
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,dto.getPw());
+			ps.setString(2, dto.getEmail());
+			ps.setString(3, dto.getPhone());
+			ps.setString(4, dto.getCid());
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
+
 	
 	//
 	

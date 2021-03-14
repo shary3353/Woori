@@ -30,35 +30,6 @@
 	margin: 50px 50px;
 }
 
-div.C_MyPageNavi {
-	width: 150px;
-	height: 100px;
-	line-height: 100px;
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: right;
-	font-weight: 600;
-	font-size: 18px;
-	background-color: rgb(202, 202, 202);
-}
-
-#mainMyPage {
-	width: 150px;
-	height: 125px;
-	line-height: 125px;
-	font-size: 25px;
-	font-weight: 600;
-	text-align: right;
-	background-color: rgb(202, 202, 202);
-}
-
-div.C_MyPageNavi:hover {
-	background-color: rgb(138, 138, 138);
-}
-
-div.C_MyPageNavi>a {
-	text-decoration: none;
-	color: black;
-}
 
 #memInfo {
 	background-color: rgb(138, 138, 138);
@@ -80,75 +51,60 @@ th {
 	width: 125px;
 	text-align: right;
 }
+
+#pwInputBox {
+	text-align: right;
+	margin-right: 10px;
+}
 </style>
 </head>
 
 <body>
 	<jsp:include page="../Include/navi.html"></jsp:include>
-	<div id="wrapper">
-		<div id="naviBox">
-			<div id="mainMyPage " class="C_MyPageNavi ">
-				<a href="# " style="text-decoration: none; color: black">마이페이지&nbsp;</a>
-			</div>
-			<div id="memInfo" class="C_MyPageNavi ">
-				<a href="# ">회원정보&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi ">
-				<a href="# ">위시리스트&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi ">
-				<a href="# ">문의내역&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi ">
-				<a href="# ">예약내역&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi ">
-				<a href="# ">신고내역&nbsp;</a>
-			</div>
-		</div>
-
+	<jsp:include page="../Include/SideBar.html"></jsp:include>
 		<div id="myInfo">
-			<form action="# " method="GET">
+			<form action="cUpadateForm" method="POST">
 				<div id="infoBox">
 					<p
 						style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue">나의
 						정보</p>
+					<input type="text"  value="${list.cid}" name="cid" readonly="readonly" hidden="hidden"/>
 					<table>
 						<tr>
 							<th>아이디</th>
-							<td>아이디 가져오기</td>
+							<td>${list.cid}</td>
 						</tr>
 						<tr>
 							<th>생년월일</th>
-							<td>생년월일 가져오기</td>
+							<td>${list.birthday}</td>
 						</tr>
 						<tr>
 							<th>성별
-							</td>
-							<td>성별 가져오기</td>
+							<td>${list.gender}</td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td>이메일 가져오기</td>
+							<td>${list.email}</td>
 						</tr>
 						<tr>
 							<th>전화번호</th>
-							<td>전화번호 가져오기</td>
+							<td>${list.phone}</td>
 						</tr>
 					</table>
 					<div id="pwInputBox">
-						<span>비밀번호: <input id="pwBox" type="password"
-							placeholder="수정하려면 비밀번호를 입력하세요." name="pw" display="hidden"
-							style="width: 225px;"></span> <span><input type="button"
-							value="수정하기" onclick="modifyBtn()" /></span>
+						<span id="pwBox" style="visibility: hidden">비밀번호 : <input type="password"
+							placeholder="비밀번호를 입력하세요." name="pw" 
+							style="width: 150px;"><input type="submit" value="확인"></span> 
+						<span style="text-align: right"><input type="button"value="수정하기" onclick="modifyBtn()" /></span>
 					</div>
 				</div>
 			</form>
 		</div>
-	</div>
 </body>
 <script>
-	
+function modifyBtn() {
+    document.getElementById('pwBox').style.visibility ='visible';
+}
 </script>
 
 </html>

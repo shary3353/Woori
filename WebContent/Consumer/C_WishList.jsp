@@ -9,37 +9,6 @@
 <title>위시리스트</title>
 
 <style>
-#wrapper {
-	overflow: hidden;
-}
-
-#naviBox {
-	float: left;
-}
-
-div.C_MyPageNavi {
-	width: 150px;
-	height: 100px;
-	line-height: 100px;
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: right;
-	font-weight: 600;
-	font-size: 18px;
-	background-color: rgb(202, 202, 202);
-}
-
-div.C_MyPageNavi:hover {
-	background-color: rgb(138, 138, 138);
-}
-
-div.C_MyPageNavi>a {
-	text-decoration: none;
-	color: black;
-}
-
-#memWishList {
-	background-color: rgb(138, 138, 138);
-}
 
 table, td, th {
 	border: 1px solid lightgray;
@@ -115,27 +84,7 @@ form {
 <body>
 	<div style="min-width: 1920px">
 		<jsp:include page="../Include/navi.html"></jsp:include>
-		<div id="wrapper">
-			<div id="naviBox">
-				<div id="mainMyPage " class="C_MyPageNavi ">
-					<a href="# " style="text-decoration: none; color: black">마이페이지&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">회원정보&nbsp;</a>
-				</div>
-				<div id="memWishList" class="C_MyPageNavi ">
-					<a href="# ">위시리스트&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">문의내역&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">예약내역&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">신고내역&nbsp;</a>
-				</div>
-			</div>
+		<jsp:include page="../Include/SideBar.html"></jsp:include>
 			<div id="wishListBox">
 				<form action="" method="GET">
 					<span><p

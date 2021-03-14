@@ -217,5 +217,64 @@ public class MemberService {
 		resp.sendRedirect("sPfpDetail?sid="+dto.getSid());
 	}
 
+	public void cDetail() throws ServletException, IOException {
+		req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String cid = (String) req.getSession().getAttribute("loginId");
+		System.out.println("상세보기할 cid : " + cid );
+		
+		MemberDAO dao = new MemberDAO();
+		CustomerDTO dto = new CustomerDTO();
+		dto = dao.cDetail(cid);
+		req.setAttribute("list", dto);
+		RequestDispatcher dis = req.getRequestDispatcher("./C_MyInfo.jsp");
+		dis.forward(req, resp);
+	}
+
+	public void cUpdateForm() throws ServletException, IOException {
+		String cid = req.getParameter("cid");
+		String pw = req.getParameter("pw");
+		System.out.println("cid / pw : " + cid +" / "+ pw);
+		
+		MemberDAO dao = new MemberDAO();
+		CustomerDTO dto = dao.cUpadateForm(cid, pw);
+		
+		String page = "cDetail"; 
+		if(dto != null) {
+			page = "./C_MyInfoModify.jsp";
+			req.setAttribute("list", dto);
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+
+	public void cUpdateInfo() throws ServletException, IOException {
+		String cid = req.getParameter("cid");
+		String pw = req.getParameter("pw");
+		String email = req.getParameter("email");
+		String phone = req.getParameter("phone");
+		System.out.println(cid+" / "+pw+" / "+email+" / "+phone);
+		CustomerDTO dto = new CustomerDTO();
+		dto.setCid(cid);
+		dto.setPw(pw);
+		dto.setEmail(email);
+		dto.setPhone(phone);
+		
+		MemberDAO dao = new MemberDAO();
+		int success = 0;
+		success = dao.cUpdateInfo(dto);
+		
+		String page = "cUpadateForm";
+		if(success>0) {
+			page = "cDetail";
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+
+	public void wishList() {
+		req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String cid = (String) req.getSession().getAttribute("loginId");
+		
+	}
 
 }

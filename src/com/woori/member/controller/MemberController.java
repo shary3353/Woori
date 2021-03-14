@@ -14,7 +14,8 @@ import com.woori.member.service.MemberService;
 	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
 @WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/bList", "/rList"
-	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/cSearch", "/sSearch", "/bSearch", "/rSearch"})
+	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/cSearch", "/sSearch", "/bSearch", "/rSearch"
+	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo", "/Consumer/wishList"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -73,6 +74,8 @@ public class MemberController extends HttpServlet {
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("post request url : "+sub);
 		
+		MemberService service = new MemberService(req, resp);
+		
 		switch(sub) {
 		case "/cLogin":
 			System.out.println("Request Customer Login");
@@ -89,7 +92,15 @@ public class MemberController extends HttpServlet {
 		case "/sJoin":
 			System.out.println("Request Seller Join");
 			break;
-			
+		case "/Consumer/cUpadateForm":
+			System.out.println("Requset Customer UpdateForm");
+			service.cUpdateForm();
+			break;
+		case "/Consumer/cUpdateInfo":
+			System.out.println("Requset Customer UpdateInfo");
+			service.cUpdateInfo();
+			break;
+
 		}
 		
 		dual(req,resp);
@@ -118,7 +129,13 @@ public class MemberController extends HttpServlet {
 			System.out.println("Request  seller profile Update");
 			service.sPfpUpdate();
 			break;
-			
+		case "/Consumer/cDetail":
+			System.out.println("Request Custumer Info");
+			service.cDetail();
+			break;
+		case "/Consumer/wishList":
+			System.out.println("Request Custumer WishList");
+			break;
 		}
 	}
 	

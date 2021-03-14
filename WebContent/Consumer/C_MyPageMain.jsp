@@ -8,39 +8,7 @@
 <meta charset="utf-8" />
 <title>구매회원 마이페이지</title>
 <style>
-div.C_MyPageNavi {
-	width: 150px;
-	height: 100px;
-	line-height: 100px;
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: right;
-	font-weight: 600;
-	font-size: 18px;
-	background-color: rgb(202, 202, 202);
-}
 
-#mainMyPage {
-	width: 150px;
-	height: 125px;
-	line-height: 125px;
-	font-size: 25px;
-	font-weight: 600;
-	text-align: right;
-	background-color: rgb(202, 202, 202);
-}
-
-div.C_MyPageNavi:hover {
-	background-color: rgb(138, 138, 138);
-}
-
-div.C_MyPageNavi>a {
-	text-decoration: none;
-	color: black;
-}
-
-#naviBox {
-	float: left;
-}
 
 .reservationBox {
 	display: inline-block;
@@ -83,26 +51,8 @@ table, td, th {
 <body>
 	<jsp:include page="../Include/navi.html"></jsp:include>
 	<div style="min-width: 1920px">
-		<div id="naviBox">
-			<div id="mainMyPage" class="C_MyPageNavi">
-				<a href="#" style="text-decoration: none; color: black">마이페이지&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi">
-				<a href="#">회원정보&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi">
-				<a href="#">위시리스트&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi">
-				<a href="#">문의내역&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi">
-				<a href="#">예약내역&nbsp;</a>
-			</div>
-			<div class="C_MyPageNavi">
-				<a href="#">신고내역&nbsp;</a>
-			</div>
-		</div>
+	<jsp:include page="../Include/SideBar.html"></jsp:include>
+	
 		<form action="#" method="GET">
 			<div>
 				<div class="reservationBox">
