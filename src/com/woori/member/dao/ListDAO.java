@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -21,6 +22,7 @@ public class ListDAO {
 	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	int pagePerCnt = 5;
 	
 	public ListDAO() {
 		try {
@@ -126,11 +128,21 @@ public class ListDAO {
 		return bList;
 	}
 
-	public ArrayList<ReportListDTO> rList() {
+	public HashMap<String, Object> rList(int group) {
 		ArrayList<ReportListDTO> rList = new ArrayList<ReportListDTO>();
-		String sql = "SELECT r_idx, rc_code, subject, reporter_id, target_id, to_char(r_date, 'YYYY-MM-DD') AS r_date, status FROM report";
+		HashMap<String, Object> map = new HashMap<>();
+		int start = 0;
+		int end = 0;
+		
+		//pagePerCnt : 리스트는 무조건 5개씩 
+		end = pagePerCnt*group;
+		start = end-(pagePerCnt-1);
+		
+		String sql = "SELECT r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM(SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM report) WHERE rnum BETWEEN ? AND ?";
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ReportListDTO dto = new ReportListDTO();
@@ -143,12 +155,16 @@ public class ListDAO {
 				dto.setStatus(rs.getInt("status"));
 				rList.add(dto);
 			}
+			int maxPage = getMaxReportPage();
+			map.put("rList", rList);
+			map.put("maxReportPage", maxPage);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		return rList;
+		return map;
 	}
 
 	public ArrayList<CustomerListDTO> cSearch(String inputC) {
@@ -303,6 +319,23 @@ public class ListDAO {
 			resClose();
 		}
 		return rList;
+	}
+	
+	private int getMaxReportPage() {
+		String sql="SELECT COUNT(r_idx) AS cnt FROM report";	
+		int max = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
 	}
 
 
