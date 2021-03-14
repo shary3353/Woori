@@ -52,7 +52,7 @@ public class MemberDAO {
 				dto.setSid(rs.getString("sid"));
 				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
-				dto.setBirthday(rs.getString("birthday"));
+				dto.setBirthday(rs.getString("birthday").substring(0,10));
 				dto.setGender(rs.getString("gender"));
 				dto.setEmail(rs.getString("email"));
 				dto.setPhone(rs.getString("phone"));
