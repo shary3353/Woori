@@ -6,10 +6,44 @@ public class ProductDTO {
 	private String p_content;
 	private int likes;
 	private int p_price;
+	/*물품 카테고리*/
 	private int c_idx;
+	private String category;
+	
 	private String sid;
 	private int isSold;
 	private String reg_date;
+	
+	/*thumbFile*/
+	private int fileIdx;
+	private String oriFileName;
+	private String newFileName;
+	
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public int getFileIdx() {
+		return fileIdx;
+	}
+	public void setFileIdx(int fileIdx) {
+		this.fileIdx = fileIdx;
+	}
+	public String getOriFileName() {
+		return oriFileName;
+	}
+	public void setOriFileName(String oriFileName) {
+		this.oriFileName = oriFileName;
+	}
+	public String getNewFileName() {
+		return newFileName;
+	}
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
+	}
 	public int getP_idx() {
 		return p_idx;
 	}

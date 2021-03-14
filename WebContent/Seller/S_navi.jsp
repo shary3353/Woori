@@ -69,7 +69,7 @@
     <nav>
         <ul id="seller-navi"><!--판매자 네이게이션-->
             <li class="seller-navi-menu"><a href="./sPfpDetail">회원정보</a></li>
-            <li class="seller-navi-menu"><a href="#물품관리">물품관리</a></li>
+            <li class="seller-navi-menu"><a href="./sItemList">물품관리</a></li>
             <li class="seller-navi-menu"><a href="#문의내역">문의내역</a></li>
             <li class="seller-navi-menu"><a href="#예약내역">예약내역</a></li>
             <li class="seller-navi-menu"><a href="#신고내역">신고내역</a></li>
