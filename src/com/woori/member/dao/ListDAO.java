@@ -320,7 +320,7 @@ public class ListDAO {
 				dto.setStatus(rs.getInt("status"));
 				rList.add(dto);
 			}
-			int maxPage = getMaxSearchReportPage(inputR);
+			int maxPage = getMaxSearchReporterReportPage(inputR);
 			map.put("maxReportPage", maxPage);
 			map.put("rList", rList);
 		} catch (SQLException e) {
@@ -331,13 +331,22 @@ public class ListDAO {
 		return map;
 	}
 
-	public ArrayList<ReportListDTO> rTargetSearch(String inputR) {
+	public HashMap<String, Object> rTargetSearch(String inputR, int group) {
+		HashMap<String, Object> map = new HashMap<>();
 		ArrayList<ReportListDTO> rList = new ArrayList<>();
-		String sql = "SELECT r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM report WHERE target_id=?";
-
+		//String sql = "SELECT r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM report WHERE target_id=?";
+		String sql = "SELECT r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM(SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM report WHERE target_id=?) WHERE rnum BETWEEN ? AND ?";
+		int start = 0;
+		int end = 0;
+		
+		//pagePerCnt : 리스트는 무조건 5개씩 
+		end = pagePerCnt*group;
+		start = end-(pagePerCnt-1);
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, inputR);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ReportListDTO dto = new ReportListDTO();
@@ -350,12 +359,15 @@ public class ListDAO {
 				dto.setStatus(rs.getInt("status"));
 				rList.add(dto);
 			}
+			int maxPage = getMaxSearchTargetReportPage(inputR);
+			map.put("maxReportPage", maxPage);
+			map.put("rList", rList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		return rList;
+		return map;
 	}
 	
 	private int getMaxReportPage() {
@@ -375,12 +387,31 @@ public class ListDAO {
 		return max;
 	}
 	
-	private int getMaxSearchReportPage(String inputR) {
-		String sql="SELECT COUNT(r_idx) AS cnt FROM report WHERE = ?";	
+	private int getMaxSearchReporterReportPage(String inputR) {
+		String sql="SELECT COUNT(r_idx) AS cnt FROM report WHERE reporter_id = ?";	
 		int max = 0;
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, inputR);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
+	}
+	
+	private int getMaxSearchTargetReportPage(String inputR) {
+		String sql="SELECT COUNT(r_idx) AS cnt FROM report WHERE target_id = ?";	
+		int max = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, inputR);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				int cnt = rs.getInt(1);

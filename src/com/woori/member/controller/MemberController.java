@@ -13,9 +13,8 @@ import com.woori.member.service.MemberService;
  	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
 	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
-@WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/blackList", "/reportList"
-	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate"})
-
+@WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/bList", "/rList"
+	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/cSearch", "/sSearch", "/bSearch", "/rSearch"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -35,14 +34,30 @@ public class MemberController extends HttpServlet {
 				System.out.println("Request Seller List");
 				service.sList();
 				break;
-			case "/blackList":
+			case "/bList":
 				System.out.println("Request Seller List");
-				service.blackList();
+				service.bList();
 				break;
-			case "/reportList":
+			case "/rList":
 				System.out.println("Request Seller List");
-				service.reportList();
+				service.rList();
 				break;
+            case "/cSearch":
+                System.out.println("Request Customer Search");
+                service.cSearch();
+                break;
+            case "/sSearch":
+                System.out.println("Request Seller Search");
+                service.sSearch();
+                break;
+            case "/bSearch":
+                System.out.println("Request BlackList Search");
+                service.bSearch();
+                break;
+            case "/rSearch":
+                System.out.println("Request Report Search");
+                service.rSearch();
+                break;
 			case "/logout":
 				System.out.println("Request Logout");
 				break;

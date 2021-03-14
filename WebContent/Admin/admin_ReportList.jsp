@@ -41,38 +41,34 @@
                     		<td>${report.reporter_id }</td>
                     		<td>${report.target_id }</td>
                     		<td>${report.r_date }</td>
-                    		<td>${report.status }</td>
+                    		<c:if test="${report.status == 0}">
+                                <td>
+                                    <select name="reportstate" id="">
+                                        <option value="100" selected="selected">처리중</option>
+                                        <option value="200">처리완료</option>
+                                    </select><br><button>신고상태저장</button>
+                                </td>
+                            </c:if>
+                            <c:if test="${report.status == 1}">
+                                <td>
+                                    <select name="reportstate" id="">
+                                        <option value="100">처리중</option>
+                                        <option value="200" selected="selected">처리완료</option>
+                                    </select><br><button>신고상태저장</button>
+                                </td>
+                            </c:if>
                     	</tr>
                     </c:forEach>
-                    <tr>
-                        <td>2</td>
-                        <td>기타</td>
-                        <td>억울해요</td>
-                        <td>판매자 123546789</td>
-                        <td>구매자 zz123</td>
-                        <td>2021.03.07</td>
-                        <td><select name="reportstate" id="">
-                            <option value="100">처리중</option>
-                            <option value="200">처리완료</option>
-                        </select><br><button>신고상태저장</button></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>기타</td>
-                        <td>신고합니다.</td>
-                        <td>구매자 123546789</td>
-                        <td>판매자 zz123</td>
-                        <td>2021.03.07</td>
-                        <td><select name="reportstate" id="">
-                            <option value="100">처리중</option>
-                            <option value="200">처리완료</option>
-                        </select><br><button>신고상태저장</button></td>
-                    </tr>
                 </table>
             </div>  <!--리스트 닫음-->
 
             <div id="Admin_Searching">   <!--판매자리스트 검색 부분-->
-                <input type="text" name="searchingSeller" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
+				<form action="rSearch">
+                    <select name="rSearchOption" id="">
+                        <option value="100"  selected="selected">신고자ID</option>
+                        <option value="200">신고대상자ID</option>
+                    </select><input type="text" name="rSearch" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
+                </form>
             </div>  <!--판매자리스트 검색 닫음-->
 
             <div id="Admin_Seller_List_Paging"> <!--판매자리스트 페이징부분-->
