@@ -144,7 +144,8 @@ form {
 			</div>
 			<div id="wishListBox">
 				<form action="" method="GET">
-					<span><p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">예약
+					<span><p
+							style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">예약
 							내역</p></span>
 					<table>
 						<tr>

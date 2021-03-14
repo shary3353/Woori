@@ -173,6 +173,7 @@ th {
 	</div>
 </body>
 <script>
-    </script>
+	
+</script>
 
 </html>

@@ -131,7 +131,8 @@ form {
 			</div>
 			<div id="reportBox">
 				<form action="" method="GET">
-					<span><p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">신고
+					<span><p
+							style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">신고
 							내역</p></span>
 					<table>
 						<tr>

@@ -138,7 +138,8 @@ form {
 			</div>
 			<div id="wishListBox">
 				<form action="" method="GET">
-					<span><p style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">위시리스트</p></span>
+					<span><p
+							style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">위시리스트</p></span>
 					<table>
 						<tr>
 							<th>No</th>
