@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>네비게이션을 만들어보자</title>
+<style>
+
+	*   {
+        margin: 0;
+        padding: 0;
+    }
+
+	body{
+		min-width: 1920px;
+	}
+
+    #detail{
+        width: 1920px;
+        height: auto;
+    }
+
+    table{
+        margin-top: 120px;
+        margin-left: 60px;
+
+    }
+    table td{
+        padding-left: 150px;
+    }
+
+    table #detailImg{
+        padding: 5px;
+    }
+
+    .detailName{
+        font-size: 50px;
+        font-family: Arial, sans-serif;
+        text-align: left;
+        font-weight: 550;
+    }
+
+    .detailPrice{
+        font-size: 37px;
+        font-family: Arial, sans-serif;
+        font-weight: 500;
+        text-align: left;
+        color: gray;
+    }
+
+    .detailContent{
+        font-size: 23px;
+        font-family: Arial, sans-serif;
+    }
+
+    .detailButtons{
+        float: left;
+    }
+    .detailButtons button{
+        background-color: #283744;
+        color: white;
+        width: 130px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: bold;
+        margin-right: 25px;
+        font-family: Arial, sans-serif;
+    }
+
+    
+</style>
+</head>
+<body>
+	<div id="wrap">
+		<iframe src="../Include/navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
+    	<div id="detail">
+            <table>
+                <tr>
+                    <td rowspan="6" id="detailImg"><img src="../img/no-image.png" width="400px" height="600px"/></td>
+                    <td class="detailName" colspan="2">[2016] A 21 오퍼스원 2016 OPUS ONE</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="detailPrice">690,000 원</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="detailContent">
+                        최상의 품질을 유지하기 위해 이른 아침에 손으로만 수확하여 100% French new oak 에서 22개월간 숙성.
+                        바이올렛 빛이 도는 짙은 루비색,라즈베리, 블랙베리, 블루베리 등과 같은 신선한 검 붉은 과실의 향이 조화를 이뤄 풍부한 아로마를 형성하며 오크 숙성에서 오는 바닐라의 풍미와 toasty 한 느낌이 복합미를 이룸.
+                        입 안에서는 붉은 과실 풍미가 클로브와 육두구, 섬세한 삼나무의 풍미와 어우러진다. 유연한 타닌감과 뛰어난 구조감, 균형감으로 인해 우아하면서도 복합적인 풍미를 느끼게 해준다.
+                        ROBERT PARKER
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="detailButtons">
+                        <button id="questionButton">문의하기</button>
+                        <button id="reservationButton">예약하기</button>
+                        <button id="likeButton">🤍&nbsp;좋아요</button>
+                        <button id="wishlistButton">위시리스트</button>
+                        <button id="reportButton">신고하기</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</body>
+<script>
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
