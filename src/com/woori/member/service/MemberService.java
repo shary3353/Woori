@@ -62,7 +62,7 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	public void blackList() throws ServletException, IOException {
+	public void bList() throws ServletException, IOException {
 		ListDAO dao = new ListDAO();
 		ArrayList<BlackListDTO> bList = new ArrayList<>();
 		bList = dao.bList();
@@ -72,7 +72,7 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	public void reportList() throws ServletException, IOException {
+	public void rList() throws ServletException, IOException {
 		int group = 1;
 		String page = req.getParameter("page");
 		
@@ -89,6 +89,87 @@ public class MemberService {
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
 		dis.forward(req, resp);
 	}
+	
+    public void cSearch() throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        String inputC = req.getParameter("cSearch");
+        System.out.println("검색할 구매자 : "+inputC);
+        
+        ListDAO dao = new ListDAO();
+        ArrayList<CustomerListDTO> searchedC = dao.cSearch(inputC);
+        
+        req.setAttribute("cList", searchedC);
+        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
+        dis.forward(req, resp);
+    }
+
+    public void sSearch() throws ServletException, IOException{
+        req.setCharacterEncoding("utf-8");
+        String inputS = req.getParameter("sSearch");
+        System.out.println("검색할 판매자 : "+inputS);
+        
+        ListDAO dao = new ListDAO();
+        ArrayList<SellerListDTO> searchedS = dao.sSearch(inputS);
+        
+        req.setAttribute("sList", searchedS);
+        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
+        dis.forward(req, resp);
+    }
+
+    public void bSearch() throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        String inputB = req.getParameter("bSearch");
+        String bSearchOption = req.getParameter("bSearchOption");
+        
+        if(bSearchOption.equals("100")) {                //판매자 검색
+            System.out.println("검색할 판매자 id : "+inputB);
+            ListDAO dao = new ListDAO();
+            ArrayList<BlackListDTO> searchedB = dao.bSellerSearch(inputB);
+            req.setAttribute("bList", searchedB);
+        }else if(bSearchOption.equals("200")) {    //구매자 검색
+            System.out.println("검색할 구매자 id : "+inputB);
+            ListDAO dao = new ListDAO();
+            ArrayList<BlackListDTO> searchedB = dao.bCustomerSearch(inputB);
+            req.setAttribute("bList", searchedB);
+        }
+        
+        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_BlackList.jsp");
+        dis.forward(req, resp);
+    }
+
+    public void rSearch() throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        int group = 1;
+		String page = req.getParameter("page");
+		
+		if(page != null) {
+			group = Integer.parseInt(page);
+		}
+		
+        String inputR = req.getParameter("rSearch");
+        String rSearchOption = req.getParameter("rSearchOption");
+        
+        if(rSearchOption.equals("100")) {                //신고자ID 검색
+            System.out.println("검색할 신고자 id : "+inputR);
+            ListDAO dao = new ListDAO();
+            HashMap<String, Object> map = dao.rReporterSearch(inputR, group);
+            req.setAttribute("rList", map.get("rList"));
+            req.setAttribute("currPage", group);
+            req.setAttribute("maxReportPage", map.get("maxReportPage"));
+        }else if(rSearchOption.equals("200")) {    //신고대상자ID 검색
+            System.out.println("검색할 신고대상자 id : "+inputR);
+            ListDAO dao = new ListDAO();
+            HashMap<String, Object> map = dao.rTargetSearch(inputR, group);
+            req.setAttribute("rList", map.get("rList"));
+            req.setAttribute("currPage", group);
+            req.setAttribute("maxReportPage", map.get("maxReportPage"));
+        }
+        
+        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
+        dis.forward(req, resp);
+        
+    }
+
 
 	public void sPfpDatail() throws ServletException, IOException { //판매자메인 - 판매자 회원정보 상세보기
 		req.getSession().setAttribute("loginId","123-12-12345");//test용
