@@ -38,13 +38,15 @@ public class ProductDAO {
 		}
 	}
 
-	public ArrayList<ProductDTO> sItemList() { //판매자 등록물품리스트
+	public ArrayList<ProductDTO> sItemList(String sid) { //판매자 등록물품리스트
 		ArrayList<ProductDTO> list =new ArrayList<ProductDTO>();
 		String sql = "SELECT p.p_idx, c.category, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName" + 
-				" FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx ORDER BY p.p_idx DESC";
+				" FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx"
+				+ " AND p.sid=? ORDER BY p.p_idx DESC";
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();

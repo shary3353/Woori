@@ -23,8 +23,12 @@ public class ProductService {
 
 	public void sItemList() throws ServletException, IOException {//판매자 등록물품리스트 요청
 		//로그인검사 추가예정
+		req.getSession().setAttribute("loginId","123-12-12345");//test용
+		String sid = (String)req.getSession().getAttribute("loginId");
+		System.out.println("판매자"+ sid +"의 물품 리스트입니다."); //로그인한 아이디 확인& 판매자 확인
+		
 		ProductDAO dao = new ProductDAO();
-		ArrayList<ProductDTO> list = dao.sItemList(); //ArrayList(여러개의 dto)
+		ArrayList<ProductDTO> list = dao.sItemList(sid); //ArrayList(여러개의 dto)
 		System.out.println(list); //리스트 확인
 		System.out.println(list.size()); //리스트 사이즈 확인
 		
