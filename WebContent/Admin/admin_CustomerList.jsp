@@ -55,9 +55,7 @@
             </div>  <!--리스트 닫음-->
 
             <div id="Admin_Searching">   <!--구매자자리스트 검색 부분-->
-            	<form action="cSearch">
-                	<input type="text" name="cSearch" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
-            	</form>
+                <input type="text" name="searchingSeller" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
             </div>  <!--구매자리스트 검색 닫음-->
 
             <div id="Admin_Seller_List_Paging"> <!--구매자리스트 페이징부분-->

@@ -52,13 +52,7 @@
             </div>  <!--리스트 닫음-->
 
             <div id="Admin_Searching">   <!--판매자리스트 검색 부분-->
-            	<form action="bSearch">
-	            	<select name="bSearchOption" id="">
-						<option value="100"  selected="selected">판매자</option>
-						<option value="200">구매자</option>
-					</select>
-	                <input type="text" name="bSearch" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
-            	</form>
+                <input type="text" name="searchingSeller" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
             </div>  <!--판매자리스트 검색 닫음-->
 
             <div id="Admin_Seller_List_Paging"> <!--판매자리스트 페이징부분-->
