@@ -30,7 +30,7 @@ public class ProductService {
 		ProductDAO dao = new ProductDAO();
 		ArrayList<ProductDTO> list = dao.sItemList(sid); //ArrayList(여러개의 dto)
 		System.out.println(list); //리스트 확인
-		System.out.println(list.size()); //리스트 사이즈 확인
+		System.out.println("물품리스트 수:" + list.size()); //리스트 사이즈 확인
 		
 		req.setAttribute("list", list);
 		dis = req.getRequestDispatcher("S_ItemManage.jsp"); //S_ItemManage.jsp로 이동

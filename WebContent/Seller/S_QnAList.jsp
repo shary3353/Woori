@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -46,10 +48,16 @@
             color: black;
             text-decoration: none;
         }
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
     </style>
 </head>
 <body>
-    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+    <jsp:include page="S_navi.jsp"/>
 
     <div id="content"><!--본문 : 문의내역 - 리스트 -->
         <table>
@@ -64,14 +72,19 @@
                 <th>문의날짜</th>
                 <th>상태</th>
             </tr>
+            <c:forEach items="${list}" var="qlist">
             <tr>
-                <td>1</td>
-                <td>상품문의</td>
-                <td><a href="#문의상세보기">문의드립니다...</a></td>
-                <td>구매자158</td>
-                <td>1800.03.05</td>
-                <td id="chkAnswer">진행중</td>
+                <td>${qlist.q_idx}</td>
+                <td>${qlist.category}</td>
+                <td><a href="#문의상세보기">${qlist.subject}</a></td>
+                <td>${qlist.cid}</td>
+                <td>${qlist.q_reg_date}</td>
+                <td class="chkAnswer">
+	                <c:if test="${empty qlist.s_answer}"><span style="color:red;">진행중</span></c:if>
+					<c:if test="${not empty qlist.s_answer}"><span style="color:green;">답변완료</span></c:if>
+                </td>
             </tr>
+            </c:forEach>
         </table>
 
         <div id="List_Paging"> <!--페이징부분-->
@@ -84,12 +97,13 @@
     </div>
 </body>
 <script>
-    var chktext = $('#chkAnswer').text();
-    console.log(chktext);
-    if(chktext=="진행중"){
-        $('#chkAnswer').css("color","red");
-    } else if(chktext=="답변완료"){
-        $('#chkAnswer').css("color","green");
-    }
+	var chktext = $('.chkAnswer'); //진행중, 답변완료 색표시
+	for (var i = 0; i < chktext.length; i++) {
+	    if(chktext[i].textContent ==="진행중"){
+	        chktext[i].classList.add('red');
+	    } else if(chktext[i].textContent === "답변완료"){
+	        chktext[i].classList.add('green');
+	    }
+	}
 </script>
 </html>
