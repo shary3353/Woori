@@ -38,11 +38,20 @@ public class MemberService {
 	}
 
 	public void sList() throws ServletException, IOException {
+		int group = 1;
+		String page = req.getParameter("page");
+		
+		if(page != null) {
+			group = Integer.parseInt(page);
+		}
+		
 		ListDAO dao = new ListDAO();
 		ArrayList<SellerListDTO> sList = new ArrayList<>();
-		sList = dao.sList();
+		HashMap<String, Object> map = dao.sList(group);
 		
-		req.setAttribute("sList", sList);
+		req.setAttribute("sList", map.get("sList"));
+		req.setAttribute("currPage", group);
+		req.setAttribute("maxSellerPage", map.get("maxPage"));
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
 		dis.forward(req, resp);
 	}
