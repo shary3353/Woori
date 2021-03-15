@@ -51,10 +51,16 @@
             </tr>
             <tr>
                 <td rowspan="5" style="width: 300px;">
-                    <img style="width: 300px;" src="../img/no-image.png" alt="상품이미지"/>
+                    <c:if test="${empty dto.oriFileName}">
+                    	<img src="../img/no-image.png" width="300px">
+                    </c:if>
+					<c:if test="${not empty dto.oriFileName}">
+						<img src ="<%=request.getContextPath()%>/img/${dto.oriFileName}" alt="${dto.oriFileName}"
+						style="width:300px;"/>
+					</c:if>
                     <!-- <img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"/> -->
                     <!--	server.xml에 추가 할 것 
-			      			<Context docBase="C:\upload" path="/Woori/photo"/>
+			      			<Context docBase="D:\MVC\Woori\WebContent\img" path="/Woori/Seller/photo"/>
 			         -->
                 </td>
                 <td class="column-name" >물품명</td>

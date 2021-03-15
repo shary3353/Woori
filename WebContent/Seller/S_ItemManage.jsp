@@ -69,10 +69,16 @@
                     <p><a href="sItemDetail?p_idx=${item.p_idx}">${item.p_name}</a></p>
                 </td>
                 <td>
-                    <img src="../img/no-image.png" width="100px" height="100px">
+                    <c:if test="${empty item.oriFileName}">
+                    	<img src="../img/no-image.png" width="100px" height="100px">
+                    </c:if>
+					<c:if test="${not empty item.oriFileName}">
+						<img src ="<%=request.getContextPath()%>/img/${item.oriFileName}" alt="${item.oriFileName}"
+						style="width:100px;"/>
+					</c:if>
                     <!-- <img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"/> -->
                     <!--	server.xml에 추가 할 것 
-			      			<Context docBase="C:\upload" path="/Woori/photo"/>
+			      			<Context docBase="D:\MVC\Woori\WebContent\img" path="/Woori/Seller/photo"/>
 			         -->
                 </td>
                 <td>${item.p_price} 원</td>
