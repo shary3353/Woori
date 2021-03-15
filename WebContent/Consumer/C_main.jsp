@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,9 +113,8 @@
 </head>
 <body>
 	<div id="wrap">
-		<iframe src="../Include/navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
+		<jsp:include page="../Include/navi.html"></jsp:include>
     	<!--  메인페이지 시작 -->
-
 		<!-- 메인컨텐츠 박스 -->
 		<div id="mainBox">
 		<!-- 상단 타이틀 -->
@@ -122,128 +122,140 @@
 				<p>인기상품!!</p>
 				<span>HOT</span>
 			</div>
-
 			<div class="mainContent1">
 				<div class="bestItem">
+					<c:forEach items="${list1}" var="best">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="../img/no-image.png" width="300px" height="400px"/>
+								<img src="img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								베스트1 임시이름 입니다 임시이름
+								${best.p_name}
 							</td>
 						</tr>
 						<tr>
 							<td class="bestLike">
-								❤️500
+								❤️${best.likes}
 							</td>
 						</tr>
 						<tr>
-							<td class="bestPrice">1.000.000 원</td>
+							<td class="bestPrice">${best.p_price} 원</td>
 						</tr>
 					</table>
+					</c:forEach>
+					
+					<c:forEach items="${list2}" var="best2">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="../img/no-image.png" width="300px" height="400px"/>
+								<img src="img/${best2.newFileName}"  alt="${best2.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								베스트1 임시이름 입니다 임시이름
+								${best2.p_name}
 							</td>
 						</tr>
 						<tr>
 							<td class="bestLike">
-								❤️500
+								❤️ ${best2.likes}
 							</td>
 						</tr>
 						<tr>
-							<td class="bestPrice">1.000.000 원</td>
+							<td class="bestPrice">
+								${best2.p_price} 원
+							</td>
 						</tr>
 					</table>
+					</c:forEach>
+					
+					<c:forEach items="${list3}" var="best3">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="../img/no-image.png" width="300px" height="400px"/>
+								<img src="img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								베스트1 임시이름 입니다 임시이름
+								${best3.p_name}
 							</td>
 						</tr>
 						<tr>
 							<td class="bestLike">
-								❤️500
+								❤️ ${best3.likes}
 							</td>
 						</tr>
 						<tr>
-							<td class="bestPrice">1.000.000 원</td>
+							<td class="bestPrice">${best3.p_price}원</td>
 						</tr>
 					</table>
+					</c:forEach>
+					
+					<c:forEach items="${list4}" var="best4">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="../img/no-image.png" width="300px" height="400px"/>
+								<img src="img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								베스트1 임시이름 입니다 임시이름
+								${best4.p_name}
 							</td>
 						</tr>
 						<tr>
 							<td class="bestLike">
-								❤️500
+								❤️ ${best4.likes}
 							</td>
 						</tr>
 						<tr>
-							<td class="bestPrice">1.000.000 원</td>
+							<td class="bestPrice">${best4.p_price} 원</td>
 						</tr>
 					</table>
+					</c:forEach>
+					
+					<c:forEach items="${list5}" var="best5">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="../img/no-image.png" width="300px" height="400px"/>
+								<img src="img/${best5.newFileName}"  alt="${best5.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								베스트1 임시이름 입니다 임시이름
+								${best5.p_name}
 							</td>
 						</tr>
 						<tr>
 							<td class="bestLike">
-								❤️500
+								❤️ ${best5.likes}
 							</td>
 						</tr>
 						<tr>
-							<td class="bestPrice">1.000.000 원</td>
+							<td class="bestPrice">${best5.p_price} 원</td>
 						</tr>
 					</table>
+					</c:forEach>
+					
+					<c:forEach items="${list6}" var="best6">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="../img/no-image.png" width="300px" height="400px"/>
+								<img src="img/${best6.newFileName}"  alt="${best6.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								베스트1 임시이름 입니다 임시이름
+								${best6.p_name}
 							</td>
 						</tr>
 						<tr>
 							<td class="bestLike">
-								❤️500
+								❤️ ${best6.likes}
 							</td>
 						</tr>
 						<tr>
-							<td class="bestPrice">1.000.000 원</td>
+							<td class="bestPrice">${best6.p_price} 원</td>
 						</tr>
 					</table>
+					</c:forEach>
 				</div>
 				
 			</div>
 		</div>
 	</div>
-    
-
-
-
-
-
 
 </body>
 <script>
