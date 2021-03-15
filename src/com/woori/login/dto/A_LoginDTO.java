@@ -5,33 +5,17 @@ public class A_LoginDTO {
 	private String id;
 	private String pw;
 	
-	
-	//생성자
-	public void MemberDTO() {
-		
-		
-	}
-	//getter,setter
-	public void MemberDTO(String id, String pw) {
-		
-		this.id = id;
-		this.pw = pw;
-	}
-	public String getid() {
+
+	public String getId() {
 		return id;
 	}
-	public void setid(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public String getpw() {
+	public String getPw() {
 		return pw;
 	}
-	public void setpw(String pw) {
+	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	
-	
-	
 }
-
-
