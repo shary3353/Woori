@@ -43,7 +43,7 @@ public class ReportDAO {
 		ArrayList<ReportDTO> list = new ArrayList<ReportDTO>();
 		String sql = "SELECT r.r_idx, rs.categories, r.subject, r.target_id, r.r_date, r.status" + 
 				"    FROM report r, report_categories rs\r\n" + 
-				"    WHERE r.rc_code=rs.rc_idx AND r.reporter_id=? ORDER BY r.r_date DESC";
+				"    WHERE r.rc_code=rs.rc_idx AND r.reporter_id=? ORDER BY r.r_idx DESC";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -51,11 +51,11 @@ public class ReportDAO {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ReportDTO dto = new ReportDTO();
-				dto.setR_date(rs.getString("r_idx"));//신고글번호
+				dto.setR_idx(Integer.parseInt(rs.getString("r_idx")));//신고글번호
 				dto.setCategory(rs.getString("categories"));//신고카테고리
 				dto.setSubject(rs.getString("subject"));//신고제목
 				dto.setTarget_id(rs.getString("target_id"));//신고대상자
-				dto.setR_date(rs.getString("r_date"));//신고날짜
+				dto.setR_date(rs.getString("r_date").substring(0,10));//신고날짜
 				dto.setStatus(rs.getInt("status"));//신고상태 0-처리중 1-처리완료
 				list.add(dto);
 			}
