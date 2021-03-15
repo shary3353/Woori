@@ -48,14 +48,16 @@ public class ReservationDAO {
 
 	public ArrayList<ReservationDTO> sReservationList(String sid) {
 		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
-		String sql = "SELECT r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid"
-				+ " FROM reservation r, reservation_status rs, product p, seller s"
-				+ " WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND s.sid = ?";
+		String sql = "SELECT r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid, th.orifilename, th.newfilename"
+				+ " FROM reservation r, reservation_status rs, product p, seller s, thumbfile th"
+				+ " WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND p.p_idx=th.p_idx(+)"
+				+ " AND s.sid = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, sid);
 			rs = ps.executeQuery();
+			
 			while (rs.next()) {
 				ReservationDTO dto = new ReservationDTO();
 				dto.setR_idx(rs.getInt("r_idx"));// 문의번호
@@ -65,6 +67,8 @@ public class ReservationDAO {
 				dto.setVisit_date(rs.getString("visit_date").substring(0, 10));// 예약일
 				dto.setReg_date(rs.getString("reg_date").substring(0, 10));// 신청한 날짜
 				dto.setStatus(rs.getString("status"));// 예약현황
+				dto.setOriFileName(rs.getString("orifilename"));//원본파일
+				dto.setNewFileName(rs.getString("newfilename"));//새파일
 				list.add(dto);
 			}
 		} catch (SQLException e) {

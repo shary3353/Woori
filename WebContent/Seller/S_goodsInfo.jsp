@@ -84,7 +84,7 @@
             </tr>
             <tr>
                 <td colspan="3" class="btnArea">
-                    <button onclick="location.href='./sItemList'">물품목록으로돌아가기</button>
+                    <button onclick="location.href='./sItemList'">물품목록으로가기</button>
                     <button>수정하기</button>
                 </td>
             </tr>

@@ -60,12 +60,12 @@
     <div id="content"><!--본문 : 예약내역 - 리스트 -->
         <table>
             <tr>
-                <td colspan="8" class="title">예약내역</td>
+                <td colspan="9" class="title">예약내역</td>
             </tr>
             <tr>
                 <th>No</th>
                 <th>상품번호</th>
-                <th>상품명</th>
+                <th colspan="2">상품정보</th>
                 <th>구매자</th>
                 <th>예약일</th>
                 <th>신청한 날짜</th>
@@ -76,7 +76,18 @@
             <tr>
                 <td>${rlist.r_idx }</td>
                 <td>${rlist.p_idx }</td>
-                <td><a href="#상품상세보기"><img src="이미지.png">${rlist.p_name }</a></td>
+                <td>
+                <a href="sItemDetail?p_idx=${rlist.p_idx}">
+               		<c:if test="${empty rlist.oriFileName}">
+                    	<img src="../img/no-image.png" width="100px" height="100px">
+                    </c:if>
+					<c:if test="${not empty rlist.oriFileName}">
+						<img src ="<%=request.getContextPath()%>/img/${rlist.oriFileName}" alt="${rlist.oriFileName}"
+						 style="width:100px;"/>
+	                </c:if>
+	            </a>
+	            </td>
+                <td><a href="sItemDetail?p_idx=${rlist.p_idx}">${rlist.p_name }</a></td>
                 <td>${rlist.cid }</td>
                 <td>${rlist.visit_date }</td>
                 <td>${rlist.reg_date }</td>

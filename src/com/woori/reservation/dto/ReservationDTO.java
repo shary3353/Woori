@@ -16,10 +16,24 @@ public class ReservationDTO {
 	private int rs_idx;
 	private String status;
 	
+	/*상품사진*/
+	private String oriFileName;
+	private String newFileName;
 	
 	
 	
-	
+	public String getOriFileName() {
+		return oriFileName;
+	}
+	public void setOriFileName(String oriFileName) {
+		this.oriFileName = oriFileName;
+	}
+	public String getNewFileName() {
+		return newFileName;
+	}
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
+	}
 	public String getSid() {
 		return sid;
 	}
