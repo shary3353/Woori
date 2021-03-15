@@ -6,6 +6,7 @@
 <head>
     <meta charset='utf-8'>
     <title>우리 양주</title>
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/AdminStyle.css">
 </head>
 <body>
@@ -20,9 +21,9 @@
 
         <div id="Admin_Seller_Content"> <!--판매자관리컨텐츠-->
             <div id="Admin_Seller_List">    <!--판매자 리스트-->
-                <table class="sellerlist" style="margin-left:auto; margin-right:auto;">
+				<table class="sellerlist" style="margin-left:auto; margin-right:auto;">
                     <tr>
-                        <th colspan="6">판매 회원 목록</th>
+                        <th colspan="7">판매 회원 목록</th>
                     </tr>
                     <tr>
                         <th>ID</th>
@@ -30,6 +31,7 @@
                         <th>블랙리스트 누적</th>
                         <th>블랙리스트 여부</th>
                         <th>가입날짜</th>
+                        <th>블랙리스트 사유</th>
                         <th>블랙리스트 등록</th>
                     </tr>
                     <c:forEach items="${sList }" var="seller">
@@ -45,10 +47,11 @@
 	                        </c:if>
 	                        <td>${seller.reg_date}</td>
 	                        <c:if test="${seller.isBlack == 1}">	<!-- 블랙리스트 true -->
-	                        	<td>이미등록된회원입니다.</td>
+	                        	<td colspan="2">이미등록된회원입니다.</td>
 	                        </c:if>
 	                        <c:if test="${seller.isBlack == 0}">	<!-- 블랙리스트 false -->
-	                        	<td><button style="color:red;">등록</button></td>
+	                        	<td id="inputReason"><input type="text" id="bReason" placeholder="블락사유를 적어주세요."></td>
+		                        <td id="blackBtn"><button style="color:red;" value="${seller.sid }" id="bRegistBtn">등록</button></td>
 	                        </c:if>
 	                    </tr>
                     </c:forEach>
@@ -56,8 +59,8 @@
             </div>  <!--리스트 닫음-->
 
             <div id="Admin_Searching">   <!--판매자리스트 검색 부분-->
-				<form action="cSearch">
-                    <input type="text" name="sSearch" id="searchingSellerInput" placeholder="ID검색란"><button>검색</button>
+				<form>
+                    <input type="text" name="sSearch" id="searchingSellerInput" placeholder="ID검색란"><button type="submit" formaction="sSearch">검색</button>
                 </form>
             </div>  <!--판매자리스트 검색 닫음-->
 
@@ -76,4 +79,33 @@
         </div>  <!--관리자 푸터 닫음-->
     </div>  <!--Wrapper 닫음-->
 </body>
+<script type="text/javascript">
+ 	$('#bRegistBtn').click(function(){
+		var sid = $(this).val();
+		var bReason = $('#bReason').val();
+		console.log(sid+' / '+bReason);
+		
+		$.ajax({
+			type:"GET"
+			,url:"sBlackRegist"
+			,data:{"id":sid, "bReason":bReason}
+			,dataType:"JSON"
+			,success:function(obj){
+				console.log(obj);
+				if(obj.addBlack){
+					$('#inputReason').attr('colspan', '2');
+					$('#inputReason').html('이미등록된회원입니다.');
+					$('td').remove('#blackBtn');
+				}else{
+					alert('블랙리스트 등록에 실패하였습니다.');
+				}
+			}
+			,error:function(e){
+				console.log(e);
+			}
+		});
+	}); 
+	
+	
+</script>
 </html>

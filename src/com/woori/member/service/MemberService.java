@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.woori.member.dao.ListDAO;
 import com.woori.member.dao.MemberDAO;
 import com.woori.member.dto.BlackListDTO;
@@ -175,8 +176,40 @@ public class MemberService {
         dis.forward(req, resp);
     }
     
-    
-    
+    //블랙리스트에 추가시 필요한 데이터 - id, admin_id, reason
+  	public void sBlackRegist() throws ServletException, IOException {
+  		req.setCharacterEncoding("utf-8");
+  		HashMap<String, Object> map = new HashMap<>();
+  		String sid = req.getParameter("id");
+  		//String admin_id = (String) req.getSession().getAttribute("loginID");
+  		String admin_id = "admin001";	//테스트용
+  		String reason = req.getParameter("bReason");
+  		System.out.println(sid+" / "+reason);
+  		MemberDAO dao = new MemberDAO();
+  		boolean success = dao.sBlackRegist(sid, admin_id, reason);
+  		if(success) {	//작성 성공 시
+  			System.out.println("해당 판매자를 블랙리스트에 등록하였습니다.");
+  			map.put("addBlack", success);
+  			Gson gson = new Gson();
+  			String json = gson.toJson(map);
+  			System.out.println(json);
+  			resp.getWriter().print(json);
+  		};
+  	}
+  	public void cBlackRegist() throws ServletException, IOException {
+  		req.setCharacterEncoding("utf-8");
+  		HashMap<String, Object> map = new HashMap<>();
+  		String cid = req.getParameter("id");
+  		//String admin_id = (String) req.getSession().getAttribute("loginID");
+  		String admin_id = "admin001";	//테스트용
+  		String reason = req.getParameter("bReason");
+  		System.out.println(cid+" / "+reason);
+  		
+  		MemberDAO dao = new MemberDAO();
+  		if(dao.cBlackRegist(cid, admin_id, reason)) {	//작성 성공 시
+  			System.out.println("해당 구매자를 블랙리스트에 등록하였습니다.");
+  		}
+  	}
 
 
 	public void sPfpDatail() throws ServletException, IOException { //판매자메인 - 판매자 회원정보 상세보기
@@ -279,17 +312,7 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	//블랙리스트에 추가시 필요한 데이터 - id, admin_id, reason
-	//id - 뷰에서 받아오기
-	//admin_id - 세션에서 받아오기
-	//reason - id로 신고테이블의 target_id 검색 후 가장 최근 이유 가져오기
-	public void sBlackRegist() {
-		String sid = req.getParameter("id");
-	}
-	public void cBlackRegist() {
-		String cid = req.getParameter("id");
-	}
-
+	
 	
 
 }

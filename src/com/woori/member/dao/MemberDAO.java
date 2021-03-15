@@ -153,7 +153,45 @@ public class MemberDAO {
 		return success;
 	}
 
+	public boolean sBlackRegist(String sid, String admin_id, String reason) {
+		boolean success  = false;
+		String sql = "INSERT INTO s_blacklist (b_idx, sid, admin_id, reason) values (s_blacklist_seq.nextval, ?,?,?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			ps.setString(2, admin_id);
+			ps.setString(3, reason);
+			if(ps.executeUpdate() > 0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
 	
-	//
 	
+	public boolean cBlackRegist(String cid, String admin_id, String reason) {
+		boolean success  = false;
+		String sql = "INSERT INTO c_blacklist (b_idx, cid, admin_id, reason) values (c_blacklist_seq.nextval, ?,?,?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			ps.setString(2, admin_id);
+			ps.setString(3, reason);
+			if(ps.executeUpdate() > 0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
 }
