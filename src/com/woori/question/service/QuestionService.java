@@ -79,4 +79,24 @@ public class QuestionService {
 		
 	}
 
+	public void q_list() throws ServletException, IOException {
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		
+		String pageParam = req.getParameter("page");
+		System.out.println("Request page : "+ pageParam);
+		QuestionDAO dao = new QuestionDAO();
+		int group = 1;
+		
+		if(pageParam != null) {
+			group = Integer.parseInt(pageParam);
+		}
+		map = dao.q_list(group);
+		req.setAttribute("maxPage", map.get("maxPage"));
+		req.setAttribute("list", map.get("list"));
+		req.setAttribute("currPage", group);
+		
+		dis = req.getRequestDispatcher("/ServiceCenter/Q_list.jsp");
+		dis.forward(req, resp);
+	}
+
 }

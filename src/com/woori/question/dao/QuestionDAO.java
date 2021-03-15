@@ -160,4 +160,57 @@ public class QuestionDAO {
 
 	}
 
+	public HashMap<String, Object> q_list(int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int pagePerCnt = 5;
+		int end = page * pagePerCnt;
+		int start = end -(pagePerCnt - 1);
+		ArrayList<QuestionDTO> list = new ArrayList<QuestionDTO>();
+		String sql = "SELECT q_idx,subject,q_reg_date FROM"
+				+"(SELECT ROW_NUMBER() OVER(ORDER BY q_idx DESC) AS rnum, q_idx,subject,q_reg_date FROM Question)"
+				 +"WHERE rnum BETWEEN ? AND ?";
+			
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				QuestionDTO dto = new QuestionDTO();
+				dto.setQ_idx(rs.getInt("q_idx"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setQ_reg_date(rs.getString("q_reg_Date"));
+				list.add(dto);
+			}
+			map.put("list", list);
+			System.out.println("list size : "  + list.size());
+			int maxPage = getQuestionListMaxPage(pagePerCnt);
+			System.out.println("maxPage : " + maxPage);
+			map.put("maxPage", maxPage);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		
+		
+		return map;
+	}
+	private int getQuestionListMaxPage(int pagePerCnt) {
+		String sql = "SELECT COUNT(q_idx) FROM question";
+		int max = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt / (double) pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
+	}
+
 }

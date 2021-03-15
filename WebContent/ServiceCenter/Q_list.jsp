@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -114,55 +116,44 @@
                             <th class="subject">제목</th>
                             <th class="date">날짜</th>
                         </tr>
+               <c:forEach items="${list }" var="list">
                         <tr>
-                            <th class="num">5</th>
-                            <th class="subject"><a href="#">발렌타인 재고 있나요?</a></th>
-                            <th class="date">2021.02.01</th>
+                            <th class="num">${list.q_idx }</th>
+                            <th class="subject"><a href="./q_detail?q_idx=${list.q_idx }">${list.subject }</a></th>
+                            <th class="date">${list.q_reg_date }</th>
                         </tr>
                         <tr class="pass">
                             <td colspan="3"><input type="password" maxlength="4" id="p5"><button>확인</button></td>
                         </tr>
-                        <tr>
-                            <th class="num">4</th>
-                            <th class="subject"><a href="#">발렌타인 재고 있나요?</a></th>
-                            <th class="date">2021.02.01</th>
-                        </tr>
-                        <tr class="pass">
-                            <td colspan="3"><input type="password" maxlength="4" id="p4"><button>확인</button></td>
-                        </tr>
-                        <tr>
-                            <th class="num">3</th>
-                            <th class="subject"><a href="#">발렌타인 재고 있나요?</a></th>
-                            <th class="date">2021.02.01</th>
-                        </tr>
-                        <tr class="pass">
-                            <td colspan="3"><input type="password" maxlength="4" id="p3"><button>확인</button></td>
-                        </tr>
-                        <tr>
-                            <th class="num">2</th>
-                            <th class="subject"><a href="#">발렌타인 재고 있나요?</a></th>
-                            <th class="date">2021.02.01</th>
-                        </tr>
-                        <tr class="pass">
-                            <td colspan="3"><input type="password" maxlength="4" id="p2"><button>확인</button></td>
-                        </tr>
-                        <tr>
-                            <th class="num">1</th>
-                            <th class="subject"><a href="#">발렌타인 재고 있나요?</a></th>
-                            <th class="date">2021.02.01</th>
-                        </tr>
-                        <tr class="pass">
-                            <td colspan="3"><input type="password" maxlength="4" id="p1" ><button>확인</button></td>
-                        </tr>
+               </c:forEach>
                     </div>
                     
                     </table>
                     <div id="Admin_Seller_List_Paging"> <!--판매자리스트 페이징부분-->
-                        <span class="Page_Content"><a href="#">처음</a></span>
-                        <span class="Page_Content"><a href="#">이전</a></span>
-                        <span class="Page_Number"><a>1</a></span>
-                        <span class="Page_Content"><a href="#">다음</a></span>
-                        <span class="Page_Content"><a href="#">마지막</a></span>
+                        <span class="Page_Content">
+                        <c:if test="${currnPage == 1}">처음</c:if>
+                        <c:if test="${currPage > 1 }">
+                        <a href="./q_list?page=${1 }">처음</a>
+                        </c:if>
+                        </span>
+                        <span class="Page_Content">
+                       		<c:if test="${currPage == 1 }">이전</c:if>
+                        	<c:if test="${currPage > 1}">
+                        	<a href="./q_list?page=${currPage-1 }">이전</a>
+                        	</c:if>
+                        </span>
+                        <span id="Page_Number"><a>${currPage}</a></span>
+                        <span class="Page_Content">
+                        <c:if test="${currPage == maxPage }">다음</c:if>
+                        <c:if test="${currPage < maxPage }">
+                        <a href="./q_list?page=${currPage + 1}">다음</a>
+                        </c:if>
+                        </span>
+                        <span class="Page_Content">
+						<c:if test="${currPage < maxPage }">
+                        <a href="./q_list?page=${maxPage}">마지막</a>
+						</c:if>                        
+                        </span>
                     </div>
                 </div>
                 
