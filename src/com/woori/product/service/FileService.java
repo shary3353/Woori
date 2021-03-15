@@ -17,8 +17,8 @@ public class FileService {
 		this.req = req;
 	}
 
-	public ProductDTO regist() { //물품등록하기
-		String savePath = "D:/MVC/Woori/WebContent/img";//1. 저장할 폴더 지정
+	public ProductDTO regist() { //물품파일 등록하기
+		String savePath = "D:/MVC/Woori/WebContent/img/";//1. 저장할 폴더 지정
 		int maxSize = 10*1024*1024;//2. 사이즈 지정
 		ProductDTO dto = null; //초기값- null
 		
@@ -26,18 +26,17 @@ public class FileService {
 		try {
 			MultipartRequest multi = new MultipartRequest(req, savePath, maxSize,"UTF-8"); //파일저장 끝
 			dto = new ProductDTO(); //dto 객체 생성
-			//String idx = multi.getParameter("idx");//수정시 고칠것
+			String p_idx = multi.getParameter("p_idx");//수정시 사용
 			String p_name = multi.getParameter("p_name"); // enctype="multipart/form-data" 로 보내기때문에 req로는 받을 수 없다. -- multi로 받을 것 
 			int c_idx = Integer.parseInt(multi.getParameter("c_idx"));
 			int p_price =  Integer.parseInt(multi.getParameter("p_price"));
 			String p_content = multi.getParameter("p_content");
 			String sid = multi.getParameter("sid");
-			System.out.println("등록할 물품정보: "+p_name+"/"+c_idx+"/"+p_price+"/"+p_content+"/"+sid); //값확인
-			/*
-			if(idx != null) {//수정시 고칠것
-				dto.setIdx(Integer.parseInt(idx));
+			System.out.println("등록할 물품정보: "+p_name+"/"+c_idx+"/"+p_price+"/"+p_content+"/"+sid+"/ 수정 시p_idx:"+p_idx); //값확인
+			
+			if(p_idx != null) {//수정시 사용
+				dto.setP_idx(Integer.parseInt(p_idx));
 			}
-			*/
 			dto.setP_name(p_name);//dto에 넣어줌.
 			dto.setC_idx(c_idx);
 			dto.setP_price(p_price);
@@ -59,6 +58,15 @@ public class FileService {
 			e.printStackTrace();
 		}
 		return dto;
+	}
+
+	public void delete(String delFileName) { //파일삭제
+		File file = new File("D:/MVC/Woori/WebContent/img/"+delFileName);
+		if(file.exists()) {//이 파일이 존재 하는지?
+			boolean success = file.delete();
+			System.out.println("기존 사진 파일 삭제 성공 여부 : "+success);
+		}
+		
 	}
 	
 	

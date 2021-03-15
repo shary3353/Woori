@@ -63,19 +63,19 @@ public class ProductService {
 		System.out.println(dto.getOriFileName()+"=>"+dto.getNewFileName());
 		//DB 저장 (작성자, 제목, 내용 + 파일 이름)
 		ProductDAO dao = new ProductDAO();
-					
-		String page = "writeForm.jsp";//실패시
-					
-		long p_idx = dao.registItem(dto); //글쓰기db처리요청- dto 보냄(받은 파라메터와 업로드 파일 정보)
-		if(p_idx>0) {//반환 받은 pk 의 값 == idx번호 0보다 크면 성공
-			page="sItemList?p_idx="+p_idx; //list 요청-- detail로 수정예정
+		
+		String page="sItemList";
+		
+		long p_idx = dao.registItem(dto); //dto 보냄(받은 파라메터와 업로드 파일 정보)
+		if(p_idx>0) {//0보다 크면 성공
+			page="sItemDetail?p_idx="+p_idx; //detail로 수정
 		}
 		
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}
 
-	public void sUpdateItemForm() throws ServletException, IOException {
+	public void sUpdateItemForm() throws ServletException, IOException {//등록물품 수정하기 폼 보이기
 		int p_idx = Integer.parseInt(req.getParameter("p_idx"));
 		System.out.println("업데이트폼 p_idx = "+p_idx);
 		ProductDAO dao = new ProductDAO();
@@ -87,6 +87,34 @@ public class ProductService {
 		}
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
+	}
+
+	public void sUpdateItem() throws IOException { //물품상세보기 수정
+		FileService upload = new FileService(req);//파일처리객체생성
+		ProductDTO dto = upload.regist(); //수정할 정보 추출 + 파일 업로드 여부
+		//product
+		ProductDAO dao = new ProductDAO();
+		dao.sUpdateItem(dto); //db처리 요청 - product
+		
+		if(dto.getOriFileName()!=null) { //2. 업로드 파일이 있는지 확인
+			//3. 업로드 파일이 있다면... 기존 파일 지우기, 새로운 내용을 thumbFile 에 update
+			int p_idx = dto.getP_idx();
+			//3-1. 이전파일 이름 가져오기(그래야 지울 수 있으니깐....)
+			dao= new ProductDAO();
+			String delFileName = dao.getFileName(p_idx);
+			System.out.println("삭제할 파일명 : "+delFileName);
+			
+			//이전파일 이름 -> 새파일 이름으로 변경...
+			dao= new ProductDAO();
+			dao.updateFileName(delFileName, dto);
+			
+			//파일 삭제
+			if(delFileName!=null) {
+				upload.delete(delFileName);
+			}
+			
+		}	
+		resp.sendRedirect("sItemDetail?p_idx="+dto.getP_idx());
 	}
 	
 }

@@ -51,11 +51,11 @@
             </tr>
             <tr>
                 <td rowspan="5" style="width: 300px;">
-                    <c:if test="${empty dto.oriFileName}">
+                    <c:if test="${empty dto.newFileName}">
                     	<img src="../img/no-image.png" width="300px">
                     </c:if>
-					<c:if test="${not empty dto.oriFileName}">
-						<img src ="<%=request.getContextPath()%>/img/${dto.oriFileName}" alt="${dto.oriFileName}"
+					<c:if test="${not empty dto.newFileName}">
+						<img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"
 						style="width:300px;"/>
 					</c:if>
                     <!-- <img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"/> -->

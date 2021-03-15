@@ -154,4 +154,68 @@ public class ProductDAO {
 		return p_idx; //pk -- product로 부터 받은 p_idx 반환
 	}
 
+	public String getFileName(int p_idx) { // 파일이름 추출 - 삭제할
+		String newFileName =null; //파일이 없다면 null
+		String sql = "SELECT newFileName FROM thumbfile WHERE p_idx=?";//특정 p_idx의 newFileName 추출
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, p_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) { // 값이 있는가?
+				newFileName = rs.getString("newFileName"); //파일이름 넣어줌
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return newFileName; //파일이름 반환
+	}
+
+	public int sUpdateItem(ProductDTO dto) {//product 테이블 수정
+		String sql = "UPDATE product SET p_name=?, c_idx=?, p_price=?, p_content=? WHERE p_idx=?";
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getP_name());
+			ps.setInt(2, dto.getC_idx());
+			ps.setInt(3, dto.getP_price());
+			ps.setString(4, dto.getP_content());
+			ps.setInt(5, dto.getP_idx());
+			success =ps.executeUpdate();
+			System.out.println("업데이트 완료된 갯수 : "+success);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
+	
+	public int updateFileName(String delFileName, ProductDTO dto) { //thumbFile 파일정보수정 
+		String sql = "";
+		int success = 0;
+		try {
+			if(delFileName != null) { //기존파일이 있다.
+				sql = "UPDATE thumbfile SET newFileName=?, oriFileName=? WHERE p_idx=?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, dto.getNewFileName());//?처리
+				ps.setString(2, dto.getOriFileName());
+				ps.setInt(3, dto.getP_idx());
+			} else { //신규 업로드
+				sql = "INSERT INTO thumbfile(fileidx, OriFileName, NewFileName, p_idx)"
+						+ "VALUES(thumbfile_seq.nextval,?,?,?)";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, dto.getOriFileName());//원본파일이름
+				ps.setString(2, dto.getNewFileName());//새파일이름
+				ps.setInt(3, dto.getP_idx());//(product 에서 가져온 p_idx를 추가)
+			}			
+			success = ps.executeUpdate();//쿼리실행
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		System.out.println(sql+" 성공여부 :"+success);
+		return success;
+	}
+
 }

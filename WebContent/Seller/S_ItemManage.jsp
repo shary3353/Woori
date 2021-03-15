@@ -69,11 +69,11 @@
                     <p><a href="sItemDetail?p_idx=${item.p_idx}">${item.p_name}</a></p>
                 </td>
                 <td>
-                    <c:if test="${empty item.oriFileName}">
+                    <c:if test="${empty item.newFileName}">
                     	<img src="../img/no-image.png" width="100px" height="100px">
                     </c:if>
-					<c:if test="${not empty item.oriFileName}">
-						<img src ="<%=request.getContextPath()%>/img/${item.oriFileName}" alt="${item.oriFileName}"
+					<c:if test="${not empty item.newFileName}">
+						<img src ="photo/${item.newFileName}" alt="${item.oriFileName}"
 						style="width:100px;"/>
 					</c:if>
                     <!-- <img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"/> -->
@@ -82,7 +82,7 @@
 			         -->
                 </td>
                 <td>${item.p_price} 원</td>
-                <td><button id="reviseButton">수정하기</button></td>
+                <td><button id="reviseButton" onclick="location.href='./sUpdateItemForm?p_idx=${item.p_idx}'">수정하기</button></td>
                 <td><button id="delButton">❌</button></td>
             </tr>
             </c:forEach>
