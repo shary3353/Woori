@@ -12,9 +12,9 @@ import com.woori.member.service.MemberService;
 import com.woori.product.service.ProductService;
 
 /*
-처리요청 : 판매자등록물품리스트,판매자물품상세보기, 판매자 물품 등록하기
+처리요청 : 판매자등록물품리스트,판매자물품상세보기, 판매자 물품 등록하기, 판매자 물품수정폼 보이기
 */
-@WebServlet({"/Seller/sItemList","/Seller/sItemDetail","/Seller/registItem"})
+@WebServlet({"/Seller/sItemList","/Seller/sItemDetail","/Seller/registItem","/Seller/sUpdateItemForm"})
 public class ProductController extends HttpServlet {
 
 	@Override
@@ -57,6 +57,11 @@ public class ProductController extends HttpServlet {
 		case "/Seller/registItem":
 			System.out.println("판매자 물품 등록하기");
 			service.registItem();
+			break;
+		
+		case "/Seller/sUpdateItemForm":
+			System.out.println("판매자 물품 수정 폼 보이기");
+			service.sUpdateItemForm();
 			break;
 			
 		}

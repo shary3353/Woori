@@ -74,5 +74,19 @@ public class ProductService {
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}
+
+	public void sUpdateItemForm() throws ServletException, IOException {
+		int p_idx = Integer.parseInt(req.getParameter("p_idx"));
+		System.out.println("업데이트폼 p_idx = "+p_idx);
+		ProductDAO dao = new ProductDAO();
+		ProductDTO dto = dao.sItemDetail(p_idx); //볼 정보가져오기
+		String page = "/sItemList"; //실패시
+		if(dto != null) { //성공시
+			page = "S_goodsRevise.jsp";
+			req.setAttribute("dto", dto); //${dto}
+		}
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
 	
 }
