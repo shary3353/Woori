@@ -185,6 +185,7 @@ public class MemberService {
   		String admin_id = "admin001";	//테스트용
   		String reason = req.getParameter("bReason");
   		System.out.println(sid+" / "+reason);
+  		
   		MemberDAO dao = new MemberDAO();
   		boolean success = dao.sBlackRegist(sid, admin_id, reason);
   		if(success) {	//작성 성공 시
@@ -194,7 +195,7 @@ public class MemberService {
   			String json = gson.toJson(map);
   			System.out.println(json);
   			resp.getWriter().print(json);
-  		};
+  		}
   	}
   	public void cBlackRegist() throws ServletException, IOException {
   		req.setCharacterEncoding("utf-8");
@@ -206,8 +207,14 @@ public class MemberService {
   		System.out.println(cid+" / "+reason);
   		
   		MemberDAO dao = new MemberDAO();
-  		if(dao.cBlackRegist(cid, admin_id, reason)) {	//작성 성공 시
+  		boolean success = dao.cBlackRegist(cid, admin_id, reason);
+  		if(success) {	//작성 성공 시
   			System.out.println("해당 구매자를 블랙리스트에 등록하였습니다.");
+  			map.put("addBlack", success);
+  			Gson gson = new Gson();
+  			String json = gson.toJson(map);
+  			System.out.println(json);
+  			resp.getWriter().print(json);
   		}
   	}
 
