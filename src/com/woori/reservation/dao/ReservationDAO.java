@@ -99,10 +99,11 @@ public class ReservationDAO {
 		int start = end - (pagePerCnt - 1);
 		System.out.println(start + " ~ " + end + "까지의 리스트");
 		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
-		
-		String sql = "SELECT rnum, r.r_idx, r.p_idx, r.p_name, r.sid, r.reg_date, r.visit_date, rs.status "
+
+		String sql = "SELECT rnum, r.r_idx, r.p_idx, r.p_name, r.sid, to_char(r.reg_date,'yyyy-mm-dd') reg_date,"
+				+ " to_char(r.visit_date, 'yyyy-mm-dd') visit_date, rs.status "
 				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r.r_idx, r.p_idx, r.reg_date, r.visit_date, r.cid, r.rs_idx, p.p_name, p.sid "
-					+ "FROM reservation r, product p WHERE r.cid='test1' AND r.p_idx = p.p_idx) r, reservation_status rs "
+				+ "FROM reservation r, product p WHERE r.cid='test1' AND r.p_idx = p.p_idx) r, reservation_status rs "
 				+ "WHERE r.cid=? AND rs.rs_idx = r.rs_idx AND rnum BETWEEN ? AND ?";
 
 		try {
