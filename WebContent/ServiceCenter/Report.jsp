@@ -107,7 +107,7 @@
         <div id="form">
 
             <h3>신고하기</h3>
-            <form>
+            <form action="report" method="post">
                 <table>
                     <tr>
                         <th>신고제목</th>
@@ -115,11 +115,12 @@
                     </tr>
                     <tr>
                         <th>신고자</th>
-                        <th>testCustomer</th>
+                        <td ><input type="text" name="userName"/></td> 
+                       <!--  value="${sessionScope.loginId}" readonly/> -->
                     </tr>
                     <tr>
                         <th>신고대상자</th>
-                        <th>testSeller</th>
+                        <th ><input type="text" name="sellerId"></th>
                     </tr>  
                     <tr>
                         <th>신고 카테고리</th>
@@ -127,9 +128,9 @@
                             카테고리 선택
                             <select name="categorie" id="cate">
                                 <option value="신고사유/카테고리" selected="selected">신고사유/카테고리</option>
-                                <option value="상품관련">상품관련</option>
-                                <option value="판매자관련">판매자관련</option>
-                                <option value="기타">기타</option>
+                                <option value="100">상품관련</option>
+                                <option value="200">판매자관련</option>
+                                <option value="300">기타</option>
                             </select>
                         </th>
                     </tr>

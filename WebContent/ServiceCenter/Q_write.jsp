@@ -4,8 +4,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>q.write</title>
     <style>
             body{
@@ -111,28 +109,29 @@
         <div>
         </div>
         <div id="form">
+        <form action="q_Write" method="post">
             <h3>1:1문의 작성</h3>
             <table id="table">
                 <tr>
                     <td class="column1">작성자</td>
-                    <td class="colum2">shary3057</td>
+                    <td class="column2"><input type="text" name="userName" value="${sessionScope.loginId}" readonly/></td>
                     <td>
                         카테고리
-                        <select name="categorie" value="문의/카테고리">
+                        <select name="category" value="문의/카테고리">
                             <option value="상품관련" selected="selected">상품관련</option>
                             <option value="예약관련">예약관련</option>
                             <option value="매장관련" >매장관련</option>
                             <option value="교환/반품/반납">교환/반품/반납</option>
                         </select>
                     </td>
-                    <td class="column1">문의상품</td>
-                    <td>Ballantine’s</td>
+                    <td class="column1" >문의상품</td>
+                    <td class="culumn1"  name="productName">Ballantine’s</td>
                 </tr>
                 <tr>
                     <td class="column1">제목</td>
-                    <td colspan="2"><input type="text" placeholder="제목을 입력해주세요" style="width: 380px" maxlength='30'></td>
+                    <td colspan="2"><input type="text" placeholder="제목을 입력해주세요" style="width: 380px" maxlength='30' name="subject"></td>
                     <td class="column1">판매자 </td>
-                    <td>123-456-78910</td>
+                    <td name="sellerId">123-456-78910</td>
                 </tr>
                 <tr>
                     <td class="column1">내용</td>
@@ -145,7 +144,7 @@
                     확인 비빌번호
                 </td>
                 <td colspan="4" id="setpass">
-                    <input type="password" id="pass" placeholder="비밀번호4자리 입력" style="text-align: left;" maxlength='4'/>
+                    <input type="password" id="pass" placeholder="비밀번호4자리 입력" style="text-align: left;" maxlength='4' name="passWord"/>
                     <button style="display: inline;">저장</button>
                     <div style="display: inline; color:gray">비밀번호는 작성하신 글 확인시 사용됩니다.</div>
                     
@@ -153,6 +152,7 @@
                 
             </tr>
         </table>
+        </form>
     </div>
 </div>
 </body>

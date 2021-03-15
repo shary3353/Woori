@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!DOCTYPE html>
 <html>
     <head>
@@ -85,7 +86,7 @@
           .date{
               width: 10%;
           }
-          .pass{
+          #pass{
               display: none;
           }
           #list_div{
@@ -119,11 +120,11 @@
                <c:forEach items="${list }" var="list">
                         <tr>
                             <th class="num">${list.q_idx }</th>
-                            <th class="subject"><a href="./q_detail?q_idx=${list.q_idx }">${list.subject }</a></th>
+                            <th class="subject" id="subjectDetail"><a href="#" onclick="showPw('pass')">${list.subject }</a></th>
                             <th class="date">${list.q_reg_date }</th>
                         </tr>
-                        <tr class="pass">
-                            <td colspan="3"><input type="password" maxlength="4" id="p5"><button>확인</button></td>
+                        <tr>
+                            <td colspan="3" id="pass"><input type="password" maxlength="4" id="p5"><button>확인</button></td>
                         </tr>
                </c:forEach>
                     </div>
@@ -156,13 +157,17 @@
                         </span>
                     </div>
                 </div>
-                
-                
-                
-                
-            </body>
-            <script>
-    
+  	
+       </body>
+       <script>
+       function showPw(id){
+   	    obj = document.getElementById(id);
+   	    if(obj.style.display == "none"){
+   	        obj.style.display = "";
+   	    }else{
+   	        obj.style.display = "none";
+   	    }
+   	  }
     
 </script>
 </html>

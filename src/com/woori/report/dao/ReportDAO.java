@@ -67,4 +67,53 @@ public class ReportDAO {
 		return list;
 	}
 
+	public long report(ReportDTO dto) {
+
+		String sql = "INSERT INTO report (R_IDX, CONTENT,RC_code,Reporter_ID,Target_ID,"
+				+"SUBJECT)VALUES(Report_seq.NEXTVAL, ?, ?, ?, ?, ?)";
+		long r_idx = 0;
+		try {
+			ps = conn.prepareStatement(sql,new String[] {"R_IDX"});
+			ps.setString(1, dto.getContent());
+			ps.setString(2, dto.getCategory());
+			ps.setString(3, dto.getReporter_id());	
+			ps.setString(4, dto.getTarget_id());
+			ps.setString(5, dto.getSubject());
+			ps.executeUpdate();
+			System.out.println("실행완료");
+			rs = ps.getGeneratedKeys();
+			if(rs.next()) {
+				r_idx = rs.getLong(1);
+				System.out.println("r_idx : " + r_idx);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}return r_idx;
+	}
+
+	public ReportDTO detail(String idx) {
+		
+		String sql = "SELECT subject, Reporter_ID, Target_ID, rs.categories, status, content FROM\r\n" + 
+				"Report r, report_categories rs WHERE r.rc_code = rs.rc_idx AND r_idx = ?";
+		ReportDTO dto = null;
+		try {
+			ps.setString(1, idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto = new ReportDTO();
+				dto.setSubject(rs.getString("subject"));
+				dto.setReporter_id(rs.getString("Report_ID"));
+				dto.setTarget_id(rs.getString("Target_ID"));
+				dto.setCategory(rs.getString("rs.categories"));
+				dto.setContent(rs.getString("content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}return dto;
+	}
+
 }

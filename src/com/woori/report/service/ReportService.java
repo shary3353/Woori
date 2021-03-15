@@ -39,6 +39,47 @@ public class ReportService {
 		dis = req.getRequestDispatcher("S_Reportlist.jsp"); //S_Reportlist.jsp로 이동
 		dis.forward(req, resp);//값보냄
 	}
+
+	public void report() throws ServletException, IOException {
+		String subejct = req.getParameter("subject");
+		String reporter_id = req.getParameter("userName");
+		String target_id = req.getParameter("sellerId");
+		String category = req.getParameter("categorie");
+		String content = req.getParameter("content");
+		
+		System.out.println(subejct + "/" + reporter_id + "/" + target_id + "/" + category + "/" + content  );
+		ReportDTO dto = new ReportDTO();
+		dto.setSubject(subejct);
+		dto.setReporter_id(reporter_id);
+		dto.setTarget_id(target_id);
+		dto.setCategory(category);
+		dto.setContent(content);
+		String page = "Service/report.jsp";
+		String msg = "신고 등록에 실패하였습니다.";
+		ReportDAO dao = new ReportDAO();
+		long idx = dao.report(dto);
+			if(idx >0) {
+				page = "Service/reportDetail?idx="+idx;
+			}
+		
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+		
+	}
+
+	public void detail() throws ServletException, IOException {
+		String idx = req.getParameter("idx");
+		
+		ReportDAO dao = new ReportDAO();
+		ReportDTO dto = new ReportDTO();
+		dto = dao.detail(idx);
+		
+		req.setAttribute("dto", dto);
+		dis = req.getRequestDispatcher("ServiceCenter/ReportDetail.jsp");
+		dis.forward(req, resp);
+		
+	}
 	
 
 }

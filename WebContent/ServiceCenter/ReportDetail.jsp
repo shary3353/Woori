@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,26 +105,30 @@
         <table>
             <tr>
                 <th>신고제목</th>
-                <td>신고제목 내용</td>
+                <td>${dto.subject }</td>
             </tr>
             <tr>
                 <th>신고자</th>
-                <td>신고자 이름</td>
+                <td>${dto.Reporter_ID }</td>
             </tr>
             <tr>
                 <th>신고대상자</th>
-                <td>신고대상자 ID</td>
+                <td>${dto.Target_ID}</td>
             </tr>
             <tr>
                 <th>신고 카테고리</th>
-                <td>상품 관련</td>
+                <td>${dto.Category }</td>
             </tr>
             <tr>
                 <th>처리상태</th>
-                <td>처리중</td>
+                <td>
+                <c:if test="${dto.status == 0}">처리중</c:if>
+                <c:if test="${dto.status > 0}">완료됨</c:if>
+                </td>
+                
             </tr>
             <tr>
-                <td colspan="2" id="content">분명 그저께 A 21 OpusOne 2016년산 800,000원으로 예약을 했는데, 오늘 보니까 390,000원으로 바껴있네요? 판매자가 너무 양심 없는 것 아닙니까???????? 신고합니다.</td>
+                <td colspan="2" id="content">${dto.content }</td>
             </tr>
         </table>
     </div>
