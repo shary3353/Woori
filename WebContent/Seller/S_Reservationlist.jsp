@@ -78,11 +78,11 @@
                 <td>${rlist.p_idx }</td>
                 <td>
                 <a href="sItemDetail?p_idx=${rlist.p_idx}">
-               		<c:if test="${empty rlist.oriFileName}">
+               		<c:if test="${empty rlist.newFileName}">
                     	<img src="../img/no-image.png" width="100px" height="100px">
                     </c:if>
-					<c:if test="${not empty rlist.oriFileName}">
-						<img src ="<%=request.getContextPath()%>/img/${rlist.newFileName}" alt="${rlist.oriFileName}"
+					<c:if test="${not empty rlist.newFileName}">
+						<img src ="photo/${rlist.newFileName}" alt="${rlist.oriFileName}"
 						 style="width:100px;"/>
 	                </c:if>
 	            </a>

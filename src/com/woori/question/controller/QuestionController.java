@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.woori.product.service.ProductService;
 import com.woori.question.service.QuestionService;
 /*
-처리요청 : 판매자 문의내역 리스트
+처리요청 : 판매자 문의내역 리스트, 판매자 문의 답변하기폼, 답변하기, 판매자 문의 상세보기
            구매자 문의내역 리스트, 구매자 문의내역 상세보기
 */
-@WebServlet({"/Seller/sQAList", "/Consumer/cQuestionList", "/Consumer/cQuestionDetail" , "/q_list"})
+@WebServlet({"/Seller/sQAList","/Seller/sAnswerForm","/Seller/sAnswerDetail" ,"/Seller/sAnswer"
+	,"/Consumer/cQuestionList", "/Consumer/cQuestionDetail" , "/q_list"})
 public class QuestionController extends HttpServlet {
 
 	@Override
@@ -46,6 +47,18 @@ public class QuestionController extends HttpServlet {
 		case "/Seller/sQAList":
 			System.out.println("판매자 문의내역 리스트 요청");
 			service.sQAList();
+			break;
+		case "/Seller/sAnswerForm":
+			System.out.println("판매자 문의내역 답변하기 폼 요청");
+			service.sAnswerForm();
+			break;
+		case "/Seller/sAnswer":
+			System.out.println("판매자 문의내역 답변하기");
+			service.sAnswer();
+			break;
+		case "/Seller/sAnswerDetail":
+			System.out.println("판매자 문의내역 상세보기 요청");
+			service.sAnswerDetail();
 			break;
 		
 		case "/Consumer/cQuestionList":

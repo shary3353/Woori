@@ -213,4 +213,48 @@ public class QuestionDAO {
 		return max;
 	}
 
+	public QuestionDTO sAnswerDetail(int q_idx) { // 판매자 문의 상세보기 
+		String sql = "SELECT q.q_idx, qc.category, q.subject, q.content, q.cid, q.q_reg_date, q.s_answer " + 
+				"    FROM question q, q_categories qc WHERE q.qc_idx = qc.qc_idx AND q_idx=?";
+		
+		QuestionDTO dto = new QuestionDTO();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, q_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setQ_idx(rs.getInt("q_idx"));
+				dto.setCategory(rs.getString("category"));
+				dto.setSubject(rs.getString("subject"));//제목
+				dto.setContent(rs.getString("content"));//내용
+				dto.setCid(rs.getString("cid"));
+				dto.setQ_reg_date(rs.getString("q_reg_date"));
+				dto.setS_answer(rs.getString("s_answer"));//답변
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	public int sAnswer(int q_idx, String s_answer) { //판매자 문의 답변하기
+		String sql = "UPDATE question SET s_answer=? WHERE q_idx=?";
+		
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, s_answer);
+			ps.setInt(2, q_idx);
+			success = ps.executeUpdate();
+			System.out.println("답변 성공 여부 :"+success);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return success;
+	}
+
 }

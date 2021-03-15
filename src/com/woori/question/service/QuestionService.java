@@ -99,4 +99,39 @@ public class QuestionService {
 		dis.forward(req, resp);
 	}
 
+	public void sAnswerDetail() throws ServletException, IOException { //판매자 문의내역 상세보기
+		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
+		System.out.println("상세보기할 문의 p_idx :"+q_idx);
+		
+		QuestionDAO dao = new QuestionDAO();
+		QuestionDTO dto = dao.sAnswerDetail(q_idx);
+		req.setAttribute("dto", dto);
+		dis = req.getRequestDispatcher("./S_answer.jsp");
+		dis.forward(req, resp);
+		
+	}
+	public void sAnswerForm() throws ServletException, IOException { //판매자 문의답변하기 폼
+		// TODO Auto-generated method stub
+		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
+		System.out.println("상세보기할 문의 p_idx :"+q_idx);
+		
+		QuestionDAO dao = new QuestionDAO();
+		QuestionDTO dto = dao.sAnswerDetail(q_idx);
+		req.setAttribute("dto", dto);
+		dis = req.getRequestDispatcher("./S_noAnswer.jsp");
+		dis.forward(req, resp);
+	}
+
+	public void sAnswer() throws IOException { //판매자 문의답변하기
+		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
+		String s_answer = req.getParameter("s_answer");
+		System.out.println("문의번호/답변 : " +q_idx+"/"+s_answer);
+		
+		QuestionDAO dao = new QuestionDAO();
+		dao.sAnswer(q_idx, s_answer);
+		
+		resp.sendRedirect("./sAnswerDetail?q_idx="+q_idx);
+		
+	}
+
 }

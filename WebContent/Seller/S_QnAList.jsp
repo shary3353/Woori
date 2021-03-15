@@ -48,12 +48,6 @@
             color: black;
             text-decoration: none;
         }
-        .red{
-            color: red;
-        }
-        .green{
-            color: green;
-        }
     </style>
 </head>
 <body>
@@ -76,7 +70,10 @@
             <tr>
                 <td>${qlist.q_idx}</td>
                 <td>${qlist.category}</td>
-                <td><a href="#문의상세보기">${qlist.subject}</a></td>
+                <td>
+                	<c:if test="${empty qlist.s_answer}"><a href="./sAnswerForm?q_idx=${qlist.q_idx}">${qlist.subject}</a></c:if>
+					<c:if test="${not empty qlist.s_answer}"><a href="./sAnswerDetail?q_idx=${qlist.q_idx}">${qlist.subject}</a></c:if>
+                </td>
                 <td>${qlist.cid}</td>
                 <td>${qlist.q_reg_date}</td>
                 <td class="chkAnswer">
@@ -96,14 +93,5 @@
         </div>
     </div>
 </body>
-<script>
-	var chktext = $('.chkAnswer'); //진행중, 답변완료 색표시
-	for (var i = 0; i < chktext.length; i++) {
-	    if(chktext[i].textContent ==="진행중"){
-	        chktext[i].classList.add('red');
-	    } else if(chktext[i].textContent === "답변완료"){
-	        chktext[i].classList.add('green');
-	    }
-	}
-</script>
+
 </html>

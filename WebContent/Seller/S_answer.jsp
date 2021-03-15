@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -40,38 +43,39 @@
     </style>
 </head>
 <body>
-    <iframe src="seller_navi.html" width=100% scrolling="no" frameborder="0"></iframe>
+    <jsp:include page="S_navi.jsp"/>
     
-    <div id="content"> <!--본문 : 문의답변하기 -->
+    <div id="content"> <!--본문 : 문의상세보기 -->
         <table>
             <tr>
                 <td colspan="6" class="title">문의 및 답변 보기</td>
             </tr>
             <tr>
                 <td class="column-name">제목</td>
-                <td colspan="5">문의드립니다</td>
+                <td colspan="5">${dto.subject}</td>
             </tr>
             <tr>
                 <td class="column-name" >질문자</td>
-                <td>구매자87</td>
+                <td>${dto.cid}</td>
                 <td class="column-name" >질문분류</td>
-                <td>상품관련</td>
+                <td>${dto.category}</td>
                 <td class="column-name" >문의날짜</td>
-                <td>2021.03.08</td>
+                <td>${dto.q_reg_date}</td>
             </tr>
             <tr>
                 <td class="column-name">내용</td>
-                <td colspan="5">문의내용입니다</td>
+                <td colspan="5">${dto.content}</td>
             </tr>
             <tr>
                 <td class="column-name">답변내용</td>
                 <td colspan="5">
-                    *이외의 문의 있을시 새로운 문의작성 부탁드립니다.
+                	${dto.s_answer}
+                    <div style="background:lightgray;margin-top: 5px;">*이외의 문의 있을시 새로운 문의작성 부탁드립니다.</div>
                 </td>
             </tr>
             <tr>
                 <td colspan="6" class="btnArea">
-                    <button>목록으로가기</button>
+                    <button onclick="location.href='./sQAList'">목록으로가기</button>
                 </td>
             </tr>
         </table>
