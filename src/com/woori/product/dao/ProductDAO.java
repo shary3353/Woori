@@ -38,11 +38,11 @@ public class ProductDAO {
 		}
 	}
 
-	public ArrayList<ProductDTO> sItemList(String sid) { //판매자 등록물품리스트
+	public ArrayList<ProductDTO> sItemList(String sid) { //판매자 등록물품리스트 - 판매중인 상품만 :판매-1
 		ArrayList<ProductDTO> list =new ArrayList<ProductDTO>();
 		String sql = "SELECT p.p_idx, c.category, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName" + 
 				" FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx"
-				+ " AND p.sid=? ORDER BY p.p_idx DESC";
+				+ " AND p.sid=? AND p.is_sold=1 ORDER BY p.p_idx DESC";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -218,4 +218,21 @@ public class ProductDAO {
 		return success;
 	}
 
+	public int sDeleteItem(int p_idx) {//판매중지 0
+		String sql = "UPDATE product SET is_sold=0 WHERE p_idx=?";
+		
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, p_idx);
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		System.out.println("판매중지 성공여부 :"+success);
+		return success;
+	}
+	
 }

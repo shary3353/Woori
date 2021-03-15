@@ -83,7 +83,7 @@
                 </td>
                 <td>${item.p_price} 원</td>
                 <td><button id="reviseButton" onclick="location.href='./sUpdateItemForm?p_idx=${item.p_idx}'">수정하기</button></td>
-                <td><button id="delButton">❌</button></td>
+                <td><button id="delButton" onclick="location.href='./sDeleteItem?p_idx=${item.p_idx}'">❌</button></td>
             </tr>
             </c:forEach>
         </table>

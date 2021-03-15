@@ -116,5 +116,15 @@ public class ProductService {
 		}	
 		resp.sendRedirect("sItemDetail?p_idx="+dto.getP_idx());
 	}
+
+	public void sDeleteItem() throws IOException {
+		int p_idx = Integer.parseInt(req.getParameter("p_idx"));
+		System.out.println("판매중지할 p_idx = "+p_idx);
+		ProductDAO dao = new ProductDAO();
+		
+		dao.sDeleteItem(p_idx);
+		resp.sendRedirect("sItemList");
+		
+	}
 	
 }
