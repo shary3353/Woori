@@ -38,8 +38,8 @@ public class MemberService {
 		HashMap<String, Object> map = dao.cList(group);
 		
 		req.setAttribute("cList", map.get("cList"));
-		req.setAttribute("currPage", group);
 		req.setAttribute("maxCustomerPage", map.get("maxCustomerPage"));
+		req.setAttribute("currPage", group);
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
 		dis.forward(req, resp);
 	}
@@ -63,11 +63,18 @@ public class MemberService {
 	}
 
 	public void bList() throws ServletException, IOException {
-		ListDAO dao = new ListDAO();
-		ArrayList<BlackListDTO> bList = new ArrayList<>();
-		bList = dao.bList();
+		int group = 1;
+		String page = req.getParameter("page");
 		
-		req.setAttribute("bList", bList);
+		if(page != null) {
+			group = Integer.parseInt(page);
+		}
+		ListDAO dao = new ListDAO();
+		HashMap<String, Object> map = dao.bList(group);
+		
+		req.setAttribute("bList", map.get("bList"));
+		req.setAttribute("maxBlackPage", map.get("maxBlackPage"));
+		req.setAttribute("currPage", group);
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_BlackList.jsp");
 		dis.forward(req, resp);
 	}
@@ -84,8 +91,8 @@ public class MemberService {
 		HashMap<String, Object> map = dao.rList(group);
 		
 		req.setAttribute("rList", map.get("rList"));
-		req.setAttribute("currPage", group);
 		req.setAttribute("maxReportPage", map.get("maxReportPage"));
+		req.setAttribute("currPage", group);
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
 		dis.forward(req, resp);
 	}

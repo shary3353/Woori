@@ -117,12 +117,24 @@ public class ListDAO {
 		return map;
 	}
 
-	public ArrayList<BlackListDTO> bList() {
+	public HashMap<String, Object> bList(int group) {
+		HashMap<String, Object> map = new HashMap<>();
 		ArrayList<BlackListDTO> bList = new ArrayList<>();
-		String sql = "SELECT sid AS id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid)";
+		//String sql = "SELECT sid AS id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid)";
+		//String sql = "SELECT sid AS id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid)"
+		//			+" UNION " +"SELECT cid AS id, reason, stack,to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid)";
+		String sql = "SELECT * FROM( SELECT ROW_NUMBER() OVER(ORDER BY reg_date DESC) AS rnum, id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM (SELECT sid AS id, reason, stack, reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid) UNION SELECT cid AS id, reason, stack, reg_date, admin_id FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid))) WHERE rnum BETWEEN ? AND ?";
 		
+		int start = 0;
+		int end = 0;
+		
+		//pagePerCnt : 리스트는 무조건 5개씩 
+		end = pagePerCnt*group;
+		start = end-(pagePerCnt-1);
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				BlackListDTO dto = new BlackListDTO();
@@ -133,24 +145,15 @@ public class ListDAO {
 				dto.setAdmin_id(rs.getString("admin_id"));
 				bList.add(dto);
 			}
-			sql = "SELECT cid AS id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid)";
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				BlackListDTO dto = new BlackListDTO();
-				dto.setId(rs.getString("id"));
-				dto.setReason(rs.getString("reason"));
-				dto.setStack(rs.getInt("stack"));
-				dto.setReg_date(rs.getString("reg_date"));
-				dto.setAdmin_id(rs.getString("admin_id"));
-				bList.add(dto);
-			}
+			int maxPage = getMaxBlackPage();
+			map.put("maxBlackPage", maxPage);
+			map.put("bList", bList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		return bList;
+		return map;
 	}
 
 	public HashMap<String, Object> rList(int group) {
@@ -449,6 +452,28 @@ public class ListDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
+	}
+	
+	private int getMaxBlackPage() {
+		String sql= "SELECT count(sid) AS cnt FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid)"
+						+" UNION "
+						+"SELECT count(cid) AS cnt FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid)";	
+		int max = 0;
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				cnt += rs.getInt("cnt");
+			}		
+			if(cnt != 0) {
 				max = (int) Math.ceil(cnt/(double)pagePerCnt);
 			}
 		} catch (SQLException e) {
