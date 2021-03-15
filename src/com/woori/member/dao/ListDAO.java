@@ -22,7 +22,7 @@ public class ListDAO {
 	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
-	int pagePerCnt = 5;
+	int pagePerCnt = 10;
 	
 	public ListDAO() {
 		try {
@@ -48,7 +48,7 @@ public class ListDAO {
 		ArrayList<CustomerListDTO> cList = new ArrayList<>();
 		HashMap<String, Object> map = new HashMap<>();
 		//String sql = "SELECT a.cid, count(c.target_id) AS cntReport, count(b.cid) AS cntBlack, b.isblack, to_char(a.reg_date, 'YYYY-MM-DD') AS reg_date FROM consumer a left outer join c_blacklist b on a.cid = b.cid left outer join report c on a.cid = c.target_id GROUP BY a.cid, b.isblack, a.reg_date ORDER BY a.reg_date";
-		String sql = "SELECT *FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.reg_date) AS rnum, a.cid, count(c.target_id) AS cntReport, count(b.cid) AS cntBlack, b.isblack, to_char(a.reg_date, 'YYYY-MM-DD') AS reg_date FROM consumer a left outer join c_blacklist b on a.cid = b.cid left outer join report c on a.cid = c.target_id GROUP BY a.cid, b.isblack, a.reg_date) WHERE rnum between ? and ?";
+		String sql = "SELECT *FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.reg_date) AS rnum, a.cid, count(c.target_id) AS cntReport, b.stack, b.isblack, to_char(a.reg_date, 'YYYY-MM-DD') AS reg_date FROM consumer a left outer join c_blacklist b on a.cid = b.cid left outer join report c on a.cid = c.target_id GROUP BY a.cid, b.isblack, a.reg_date, b.stack) WHERE rnum between ? and ?";
 		int start = 0;
 		int end = 0;
 		
@@ -65,7 +65,7 @@ public class ListDAO {
 				CustomerListDTO dto = new CustomerListDTO();
 				dto.setCid(rs.getString("cid"));
 				dto.setCntReport(rs.getInt("cntreport"));
-				dto.setCntBlack(rs.getInt("cntblack"));
+				dto.setStack(rs.getInt("stack"));
 				dto.setIsBlack(rs.getInt("isblack"));
 				dto.setReg_date(rs.getString("reg_date"));
 				cList.add(dto);
@@ -85,7 +85,7 @@ public class ListDAO {
 		HashMap<String, Object> map = new HashMap<>();
 		ArrayList<SellerListDTO> sList = new ArrayList<SellerListDTO>();
 		//String sql = "SELECT a.sid, count(c.target_id) AS cntReport, count(b.sid) AS cntBlack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id GROUP BY a.sid, b.isblack, a.reg_date ORDER BY a.reg_date";
-		String sql = "SELECT * FROM ( SELECT ROW_NUMBER() OVER(ORDER BY a.reg_date) AS rnum, a.sid, count(c.target_id) AS cntReport, count(b.sid) AS cntBlack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id GROUP BY a.sid, b.isblack, a.reg_date ) WHERE rnum between ? and ?";
+		String sql = "SELECT * FROM ( SELECT ROW_NUMBER() OVER(ORDER BY a.reg_date) AS rnum, a.sid, count(c.target_id) AS cntReport, b.stack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id GROUP BY a.sid, b.isblack, a.reg_date, b.stack ) WHERE rnum between ? and ?";
 		int start = 0;
 		int end = 0;
 		
@@ -101,7 +101,7 @@ public class ListDAO {
 				SellerListDTO dto = new SellerListDTO();
 				dto.setSid(rs.getString("sid"));
 				dto.setCntReport(rs.getInt("cntreport"));
-				dto.setCntBlack(rs.getInt("cntblack"));
+				dto.setStack(rs.getInt("stack"));
 				dto.setIsBlack(rs.getInt("isblack"));
 				dto.setReg_date(rs.getString("reg_date"));
 				sList.add(dto);
@@ -123,7 +123,7 @@ public class ListDAO {
 		//String sql = "SELECT sid AS id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid)";
 		//String sql = "SELECT sid AS id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid)"
 		//			+" UNION " +"SELECT cid AS id, reason, stack,to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid)";
-		String sql = "SELECT * FROM( SELECT ROW_NUMBER() OVER(ORDER BY reg_date DESC) AS rnum, id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM (SELECT sid AS id, reason, stack, reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid) UNION SELECT cid AS id, reason, stack, reg_date, admin_id FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid))) WHERE rnum BETWEEN ? AND ?";
+		String sql = "SELECT * FROM( SELECT ROW_NUMBER() OVER(ORDER BY reg_date DESC) AS rnum, id, reason, stack, to_char(reg_date, 'YYYY-MM-DD') AS reg_date, admin_id FROM (SELECT sid AS id, reason, stack, reg_date, admin_id FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid) AND isblack=1 UNION SELECT cid AS id, reason, stack, reg_date, admin_id FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid)  AND isblack=1 )) WHERE rnum BETWEEN ? AND ?";
 		
 		int start = 0;
 		int end = 0;
@@ -197,7 +197,7 @@ public class ListDAO {
 
 	public ArrayList<CustomerListDTO> cSearch(String inputC) {
 		ArrayList<CustomerListDTO> search = new ArrayList<CustomerListDTO>();
-		String sql = "SELECT a.cid, count(c.target_id) AS cntReport, count(b.cid) AS cntBlack, b.isblack, to_char(a.reg_date, 'YYYY-MM-DD') AS reg_date FROM consumer a left outer join c_blacklist b on a.cid = b.cid left outer join report c on a.cid = c.target_id WHERE a.cid=? GROUP BY a.cid, b.isblack, a.reg_date ORDER BY a.reg_date";
+		String sql = "SELECT a.cid, count(c.target_id) AS cntReport, b.stack, b.isblack, to_char(a.reg_date, 'YYYY-MM-DD') AS reg_date FROM consumer a left outer join c_blacklist b on a.cid = b.cid left outer join report c on a.cid = c.target_id WHERE a.cid=? GROUP BY a.cid, b.isblack, a.reg_date, b.stack ORDER BY a.reg_date";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -207,7 +207,7 @@ public class ListDAO {
 				CustomerListDTO dto = new CustomerListDTO();
 				dto.setCid(rs.getString("cid"));
 				dto.setCntReport(rs.getInt("cntreport"));
-				dto.setCntBlack(rs.getInt("cntblack"));
+				dto.setStack(rs.getInt("stack"));
 				dto.setIsBlack(rs.getInt("isblack"));
 				dto.setReg_date(rs.getString("reg_date"));
 				search.add(dto);
@@ -222,7 +222,7 @@ public class ListDAO {
 
 	public ArrayList<SellerListDTO> sSearch(String inputS) {
 		ArrayList<SellerListDTO> search = new ArrayList<SellerListDTO>();
-		String sql = "SELECT a.sid, count(c.target_id) AS cntReport, count(b.sid) AS cntBlack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id WHERE a.sid=? GROUP BY a.sid, b.isblack, a.reg_date ORDER BY a.reg_date";
+		String sql = "SELECT a.sid, count(c.target_id) AS cntReport, b.stack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id WHERE a.sid=? GROUP BY a.sid, b.isblack, a.reg_date b.stack ORDER BY a.reg_date";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, inputS);
@@ -231,7 +231,7 @@ public class ListDAO {
 				SellerListDTO dto = new SellerListDTO();
 				dto.setSid(rs.getString("sid"));
 				dto.setCntReport(rs.getInt("cntreport"));
-				dto.setCntBlack(rs.getInt("cntblack"));
+				dto.setStack(rs.getInt("stack"));
 				dto.setIsBlack(rs.getInt("isblack"));
 				dto.setReg_date(rs.getString("reg_date"));
 				search.add(dto);

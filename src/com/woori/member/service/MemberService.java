@@ -217,6 +217,25 @@ public class MemberService {
   			resp.getWriter().print(json);
   		}
   	}
+  	
+	public void blackUpdate() throws ServletException, IOException{
+		req.setCharacterEncoding("utf-8");
+		String id = req.getParameter("id");
+		System.out.println("블랙리스트 업데이트 할 아이디 : "+id);
+		if(id.indexOf("-")>0) {	//-를 포함할 경우 판매자
+			MemberDAO dao = new MemberDAO();
+			if(dao.sBlackUpdate(id)) {
+				System.out.println(id+"의 블랙리스트 수정완료");
+			}
+		}else {							//그렇지 않을 경우 구매자
+			MemberDAO dao = new MemberDAO();
+			if(dao.cBlackUpdate(id)) {
+				System.out.println(id+"의 블랙리스트 수정완료");
+			}
+		}
+		resp.sendRedirect("./bList");
+		
+	}
 
 
 	public void sPfpDatail() throws ServletException, IOException { //판매자메인 - 판매자 회원정보 상세보기
@@ -318,6 +337,8 @@ public class MemberService {
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}
+
+
 
 	
 	

@@ -194,4 +194,40 @@ public class MemberDAO {
 		return success;
 	}
 
+	public boolean sBlackUpdate(String id) {
+		boolean success  = false;
+		String sql = "UPDATE s_blacklist SET isblack=0 , stack = stack+1 WHERE sid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			if(ps.executeUpdate() > 0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+	public boolean cBlackUpdate(String id) {
+		boolean success  = false;
+		String sql = "UPDATE c_blacklist SET isblack=0 , stack = stack+1 WHERE cid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			if(ps.executeUpdate() > 0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
 }

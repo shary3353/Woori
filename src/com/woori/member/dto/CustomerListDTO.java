@@ -3,7 +3,7 @@ package com.woori.member.dto;
 public class CustomerListDTO {
 	private String cid;
 	private int cntReport;
-	private int cntBlack;
+	private int stack;
 	private int isBlack;
 	private String reg_date;
 	public String getCid() {
@@ -18,11 +18,11 @@ public class CustomerListDTO {
 	public void setCntReport(int cntReport) {
 		this.cntReport = cntReport;
 	}
-	public int getCntBlack() {
-		return cntBlack;
+	public int getStack() {
+		return stack;
 	}
-	public void setCntBlack(int cntBlack) {
-		this.cntBlack = cntBlack;
+	public void setStack(int stack) {
+		this.stack = stack;
 	}
 	public int getIsBlack() {
 		return isBlack;

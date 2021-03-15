@@ -41,7 +41,7 @@
 	                        <td>${black.stack }</td>
 	                        <td>${black.reason }</td>
 	                        <td>${black.reg_date }</td>
-	                        <td><button>취소</button></td>
+	                        <td><a href="blackUpdate?id=${black.id }">취소</a></td>
 	                        <td>${black.admin_id }</td>
 	                    </tr>
                     </c:forEach>

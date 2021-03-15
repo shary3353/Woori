@@ -37,7 +37,7 @@
 	                    <tr>
 	                        <td>${customer.cid }</td>
 	                        <td>${customer.cntReport }</td>
-	                        <td>${customer.cntBlack }</td>
+	                        <td>${customer.stack }</td>
 	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td>true</td>
 	                        </c:if>

@@ -38,7 +38,7 @@
 	                    <tr>
 	                        <td>${seller.sid }</td>
 	                        <td>${seller.cntReport }</td>
-	                        <td>${seller.cntBlack}</td>
+	                        <td>${seller.stack}</td>
 	                        <c:if test="${seller.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td>true</td>
 	                        </c:if>
