@@ -112,4 +112,45 @@ public class ProductDAO {
 		return r_count;
 	}
 
+	public long registItem(ProductDTO dto) {
+		//1. bbs 에 데이터 넣기
+		String sql ="INSERT INTO product(p_idx, p_name, p_content, p_price, c_idx, sid)" + 
+				"         VALUES (product_seq.nextval,?,?,?,?,?)";
+		long p_idx = 0; //pk 초기값 - 0
+		
+		try {
+			//new String[] {"반환받을 컬럼명"}
+			//ojdbc8 버전 이하에서는 동작하지 않는다.
+			ps = conn.prepareStatement(sql, new String[] {"p_idx"}); //p_idx 반환 받을 거임.
+			ps.setString(1, dto.getP_name());//상품명
+			ps.setString(2, dto.getP_content());//상품설명
+			ps.setInt(3, dto.getP_price());//가격
+			ps.setInt(4, dto.getC_idx());//상품카테고리c_idx
+			ps.setString(5, dto.getSid());//판매자
+			ps.executeUpdate(); //쿼리실행
+			
+			//방금 실행된 INSERT 문의 p_idx 가져오기
+			rs = ps.getGeneratedKeys(); //
+			if(rs.next()) {//값이 있는가?
+				p_idx = rs.getLong(1); //p_idx 값넣기
+				System.out.println("생성 p_idx :"+p_idx);//2. thumbFile 에 데이터 넣기(product 에서 가져온 p_idx를 추가)
+				
+				if(dto.getOriFileName() != null ) { //파일 업로드가 된 경우에만 실행 -- 받은 dto에 원본파일명이 있느지 체크
+					sql = "INSERT INTO thumbfile(fileidx, OriFileName, NewFileName, p_idx)"
+							+ "VALUES(thumbfile_seq.nextval,?,?,?)";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, dto.getOriFileName());//원본파일이름
+					ps.setString(2, dto.getNewFileName());//새파일이름
+					ps.setLong(3, p_idx); //(product 에서 가져온 p_idx를 추가)
+					ps.executeUpdate();//쿼리실행
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {//자원반납.
+			resClose();
+		}
+		return p_idx; //pk -- product로 부터 받은 p_idx 반환
+	}
+
 }

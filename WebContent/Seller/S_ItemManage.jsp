@@ -49,7 +49,7 @@
         <table>
             <tr>
                 <td colspan="6" class="title">등록 물품 리스트</td>
-                <td><button>물품등록</button></td>
+                <td><button onclick = "location.href='S_registGoods.jsp'">물품등록</button></td>
             </tr>
             <tr>
                 <th>물품 번호</th>

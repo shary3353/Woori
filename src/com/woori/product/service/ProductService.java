@@ -53,5 +53,26 @@ public class ProductService {
 		dis = req.getRequestDispatcher("S_goodsInfo.jsp"); //S_goodsInfo.jsp로 이동
 		dis.forward(req, resp);//값보냄
 	}
+
+	public void registItem() throws ServletException, IOException {// 판매자 물품 등록하기
+		String loginId = (String) req.getSession().getAttribute("loginId");//로그인 체크 추가예정
+		
+		// FileService 에 파일과 관련된 내용을 추가 예정
+		FileService upload = new FileService(req); //FileService 에 req 보내서 객체 생성.
+		ProductDTO dto = upload.regist();//파일 등록(받은 파라메터와 업로드 파일 정보 반환)
+		System.out.println(dto.getOriFileName()+"=>"+dto.getNewFileName());
+		//DB 저장 (작성자, 제목, 내용 + 파일 이름)
+		ProductDAO dao = new ProductDAO();
+					
+		String page = "writeForm.jsp";//실패시
+					
+		long p_idx = dao.registItem(dto); //글쓰기db처리요청- dto 보냄(받은 파라메터와 업로드 파일 정보)
+		if(p_idx>0) {//반환 받은 pk 의 값 == idx번호 0보다 크면 성공
+			page="sItemList?p_idx="+p_idx; //list 요청-- detail로 수정예정
+		}
+		
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
 	
 }
