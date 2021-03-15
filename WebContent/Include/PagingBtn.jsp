@@ -48,13 +48,13 @@
 			<a href="#" class="pagingBtnDisable">처음</a>
 		</c:if>
 		<c:if test="${currPage > 1}">
-			<a href="url?page=1" class="pagingBtn">처음</a>
+			<a href="cReservationList?page=1" class="pagingBtn">처음</a>
 		</c:if>
 		<c:if test="${currPage == 1}">
 			<a href="#" class="pagingBtnDisable">이전</a>
 		</c:if>
 		<c:if test="${currPage > 1}">
-			<a href="url?page=${currPage-1}" class="pagingBtn">이전</a>
+			<a href="cReservationList?page=${currPage-1}" class="pagingBtn">이전</a>
 		</c:if>
 		<a href="#" class="pagingBtnDisable"
 			style="background-color: skyblue; color: white;">&nbsp;${currPage}&nbsp;</a>
@@ -62,13 +62,13 @@
 			<a href="#" class="pagingBtnDisable">다음</a>
 		</c:if>
 		<c:if test="${currPage <= 1}">
-			<a href="url?page=${currPage+1}" class="pagingBtn">다음</a>
+			<a href="cReservationList?page=${currPage+1}" class="pagingBtn">다음</a>
 		</c:if>
 		<c:if test="${currPage == maxPage}">
 			<a href="#" class="pagingBtnDisable">마지막</a>
 		</c:if>
 		<c:if test="${currPage < maxPage}">
-			<a href="url?page=${maxPage}" class="pagingBtn">마지막</a>
+			<a href="cReservationList?page=${maxPage}" class="pagingBtn">마지막</a>
 		</c:if>
 	</div>
 </body>

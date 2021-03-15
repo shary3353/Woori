@@ -11,6 +11,7 @@ public class ReservationDTO {
 	/*물품*/
 	private int p_idx;
 	private String p_name;
+	private String sid;
 	/*예약상황*/
 	private int rs_idx;
 	private String status;
@@ -19,6 +20,12 @@ public class ReservationDTO {
 	
 	
 	
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
 	public String getReg_date() {
 		return reg_date;
 	}

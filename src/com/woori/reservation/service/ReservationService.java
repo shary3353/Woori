@@ -2,6 +2,7 @@ package com.woori.reservation.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,6 +54,27 @@ public class ReservationService {
 		dao.updateResevationStatus(r_idx, rs_idx);
 		
 		resp.sendRedirect("./sReservationList");//예약리스트로 이동
+	}
+
+	public void cReservationList() throws ServletException, IOException {
+		req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String cid = (String) req.getSession().getAttribute("loginId");
+		System.out.println(cid + " 의 예약내역 불러오기");
+		String pageParam = req.getParameter("page");
+		System.out.println("이동하고 싶은 page : " + pageParam);
+		int group = 1;
+		if (pageParam != null) {
+			group = Integer.parseInt(pageParam);
+		}
+		ReservationDAO dao = new ReservationDAO();
+		HashMap<String, Object> map = dao.cReservationList(group, cid);
+
+		req.setAttribute("maxPage", map.get("maxPage"));
+		req.setAttribute("list", map.get("list"));
+		req.setAttribute("currPage", group);
+
+		RequestDispatcher dis = req.getRequestDispatcher("./C_ReservationList.jsp");
+		dis.forward(req, resp);
 	}
 
 }
