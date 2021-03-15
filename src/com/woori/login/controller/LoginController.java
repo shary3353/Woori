@@ -40,6 +40,7 @@ public class LoginController extends HttpServlet {
 		
 		
 		RequestDispatcher dis = null;
+		
 		switch(sub) {
 		case"/clogin":
 			System.out.println("로그인 요청");
