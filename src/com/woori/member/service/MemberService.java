@@ -171,11 +171,12 @@ public class MemberService {
             req.setAttribute("currPage", group);
             req.setAttribute("maxReportPage", map.get("maxReportPage"));
         }
-        
         RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
         dis.forward(req, resp);
-        
     }
+    
+    
+    
 
 
 	public void sPfpDatail() throws ServletException, IOException { //판매자메인 - 판매자 회원정보 상세보기
@@ -276,6 +277,17 @@ public class MemberService {
 		}
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
+	}
+
+	//블랙리스트에 추가시 필요한 데이터 - id, admin_id, reason
+	//id - 뷰에서 받아오기
+	//admin_id - 세션에서 받아오기
+	//reason - id로 신고테이블의 target_id 검색 후 가장 최근 이유 가져오기
+	public void sBlackRegist() {
+		String sid = req.getParameter("id");
+	}
+	public void cBlackRegist() {
+		String cid = req.getParameter("id");
 	}
 
 	

@@ -38,14 +38,11 @@
 	                    <tr>
 	                        <td>${black.id }</td>
 	                        <td>판매자</td>
-	                       	<!--<c:if test="${fn:indexOf('zzz', '-') } < 0">	<!-- 포함시 판매자 --> 
-	                       	<!-- <td>판매자</td>
-	                        </c:if> -->	
 	                        <td>${black.stack }</td>
 	                        <td>${black.reason }</td>
 	                        <td>${black.reg_date }</td>
-	                         <td><button>취소</button></td>
-	                          <td>${black.admin_id }</td>
+	                        <td><button>취소</button></td>
+	                        <td>${black.admin_id }</td>
 	                    </tr>
                     </c:forEach>
                 </table>

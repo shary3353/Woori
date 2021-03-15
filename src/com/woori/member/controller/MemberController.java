@@ -14,7 +14,7 @@ import com.woori.member.service.MemberService;
 	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
 @WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList", "/bList", "/rList"
-	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/cSearch", "/sSearch", "/bSearch", "/rSearch"
+	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/cSearch", "/sSearch", "/bSearch", "/rSearch", "/cBlackRegist", "/sBlackRegist"
 	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"})
 public class MemberController extends HttpServlet {
 
@@ -59,6 +59,14 @@ public class MemberController extends HttpServlet {
                 System.out.println("Request Report Search");
                 service.rSearch();
                 break;
+            case "/sBlackRegist":
+                System.out.println("Request Report Search");
+                service.sBlackRegist();
+                break;
+            case "/cBlackRegist":
+            	System.out.println("Request Report Search");
+            	service.cBlackRegist();
+            	break;
 			case "/logout":
 				System.out.println("Request Logout");
 				break;
