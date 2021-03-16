@@ -6,8 +6,9 @@ public class C_LoginDTO {
 	private String pw;
 	private String name;
 	private String gender;
-	private int birthday;
 	private String email;
+	private int birthday;
+	private String phone;
 	
 	public String getcId() {
 		return cid;
@@ -33,17 +34,23 @@ public class C_LoginDTO {
 	public void setbirthday(int birthday) {
 		this.birthday =birthday;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getgender() {
 		return gender;
 	}
 	public void setgender(String gender) {
 		this.gender = gender;
 	}
-	public String getEmail() {
-		return email;
+	public String getphone() {
+		return phone;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setphone(String phone) {
+		this.phone = phone;
 	}
 }
 

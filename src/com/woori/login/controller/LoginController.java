@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mvc.service.MemberService;
 import com.woori.login.service.A_LoginService;
 import com.woori.login.service.C_LoginService;
 import com.woori.login.service.S_LoginService;
 
 
-@WebServlet({"/clogin","/slogin","/adminlogin"})
+@WebServlet({"/clogin","/slogin","/adminlogin","/logout","/cJoin", "/sJoin"})
 
 public class LoginController extends HttpServlet {
 
@@ -39,7 +40,9 @@ public class LoginController extends HttpServlet {
 		C_LoginService Cservice = new C_LoginService(req,resp);
 		
 		
+		
 		RequestDispatcher dis = null;
+		
 		
 		switch(sub) {
 		case"/clogin":
@@ -101,6 +104,52 @@ public class LoginController extends HttpServlet {
 			dis.forward(req, resp);
 			
 			break;
+		
+		case "/logout":
+			req.getSession().removeAttribute("cid");
+			resp.sendRedirect("C_Login.jsp");
+			
+			req.getSession().removeAttribute("sid");
+			resp.sendRedirect("C_Login.jsp");
+			
+			req.getSession().removeAttribute("aid");
+			resp.sendRedirect("admin_Login.jsp");
+			
+			
+			break;
+			
+		case "/cjoin":
+			System.out.println("회원가입 요청");
+			
+			msg="회원가입에 실패했습니다.";
+			page="C_regist.jsp";
+			
+			if(service.cjoin()) {//성공
+				msg="회원가입을 축하드립니다.";
+				page="index.jsp";
+			}
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page);
+			dis.forward(req, resp);
+			break;
+		
+		case "/sjoin":
+			System.out.println("회원가입 요청");
+			
+			msg="회원가입에 실패했습니다.";
+			page="S_regist.jsp";
+			
+			if(service.sjoin()) {//성공
+				msg="회원가입을 축하드립니다.";
+				page="index.jsp";
+			}
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page);
+			dis.forward(req, resp);
+			break;
+			
+			
+			
 	}
 
 	}

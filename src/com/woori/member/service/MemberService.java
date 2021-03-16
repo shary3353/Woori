@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.woori.login.dao.A_LoginDAO;
+import com.woori.login.dao.C_LoginDAO;
+import com.woori.login.dao.S_LoginDAO;
 import com.woori.member.dao.ListDAO;
 import com.woori.member.dao.MemberDAO;
 import com.woori.member.dto.BlackListDTO;
@@ -22,11 +25,74 @@ import com.woori.member.dto.SellerListDTO;
 public class MemberService {
 	HttpServletRequest req = null;
 	HttpServletResponse resp = null;
+	RequestDispatcher dis = null;
+	String page="";
+	String msg="";
 	
 	public MemberService(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
 	}
+	
+	public void login() throws ServletException, IOException{
+		A_LoginDAO dao = new A_LoginDAO();
+		
+		String id =(String) req.getSession().getAttribute("adminId");
+		String pw = req.getParameter("adminPw");
+		System.out.println(id+"/"+pw);
+		
+		page = "index.jsp";
+		msg = "아이디 비밀번호를 다시 확인해 주세요!";
+		
+		if(dao.login(id,pw)) {
+			page="/list";
+			msg = id+" 님 반갑 습니다.";
+			req.getSession().setAttribute("loginId", id);
+		}
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+		
+	}
+	
+	public void C_LoginService() throws ServletException, IOException {
+		C_LoginDAO dao = new C_LoginDAO();
+		String cid =req.getParameter("cId");
+		String pw = req.getParameter("Pw");
+		System.out.println(cid+"/"+pw);
+		page = "index.jsp";
+		msg = "아이디 비밀번호를 다시 확인해 주세요!";
+		
+		if(dao.clogin(cid,pw)) {
+			page="/clist";
+			msg = cid+" 님 반갑 습니다.";
+			req.getSession().setAttribute("logincId", cid);
+		}
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+	public void S_LoginService() throws ServletException, IOException {
+		S_LoginDAO dao = new S_LoginDAO();
+		String sid =req.getParameter("sId");
+		String pw = req.getParameter("pw");
+		System.out.println(sid+"/"+pw);
+		page = "index.jsp";
+		msg = "아이디 비밀번호를 다시 확인해 주세요!";
+		
+		if(dao.slogin(sid,pw)) {
+			page="/slist";
+			msg = sid+" 님 반갑 습니다.";
+			req.getSession().setAttribute("loginsId", sid);
+		}
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+		
+	}
+	
+	
+	
 
 	public void cList() throws ServletException, IOException {
 		int group = 1;
@@ -43,7 +109,7 @@ public class MemberService {
 		req.setAttribute("currPage", group);
 		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
 		dis.forward(req, resp);
-	}
+	 }
 
 	public void sList() throws ServletException, IOException {
 		int group = 1;

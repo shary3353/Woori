@@ -40,6 +40,90 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	//회원가입 
+	
+	
+	
+	//관리자 로그인,구매자 판매자 로그인
+	public boolean login(String id, String pw) {
+		boolean success = false;
+		String sql ="SELECT id FROM member WHERE id=? AND pw=?";
+		try {
+			ps= conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pw);
+			rs = ps.executeQuery();
+			success = rs.next();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+			
+				rs.close();
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return success;
+	}
+	public boolean clogin(String cid, String pw) {
+		
+		boolean success = false;
+		
+		String sql ="SELECT id FROM member WHERE id= ? AND pw=?";
+		
+		try {
+			ps= conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			ps.setString(2, pw);
+			rs = ps.executeQuery();
+			success = rs.next();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+				rs.close();
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return success;
+	}
+	public boolean slogin(String sid, String pw) {
+		
+		boolean success = false;
+		
+		String sql ="SELECT id FROM member WHERE id=? AND pw=?";
+		
+		try {
+			ps= conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			ps.setString(2, pw);
+			rs = ps.executeQuery();
+			success = rs.next();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+				rs.close();
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return success;
+	}
+
 	
 	//판매자메인 - 판매자 회원정보 상세보기, 수정보기 요청
 	public SellerDTO sPfpDetail(String sid) {

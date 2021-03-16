@@ -2,12 +2,16 @@ package com.woori.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.woori.login.service.A_LoginService;
+import com.woori.login.service.C_LoginService;
+import com.woori.login.service.S_LoginService;
 import com.woori.member.service.MemberService;
 /*처리 : (회원가입, 로그인, 회원수정, 회원상세보기, 회원리스트)
  	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
@@ -73,6 +77,14 @@ public class MemberController extends HttpServlet {
             	break;
 			case "/logout":
 				System.out.println("Request Logout");
+				req.getSession().removeAttribute("cid");
+				resp.sendRedirect("C_Login.jsp");
+				
+				req.getSession().removeAttribute("sid");
+				resp.sendRedirect("C_Login.jsp");
+				
+				req.getSession().removeAttribute("aid");
+				resp.sendRedirect("admin_Login.jsp");
 				break;
 			
 		}
@@ -83,21 +95,83 @@ public class MemberController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//join, login
+		req.setCharacterEncoding("UTF-8");
+		System.out.println("요청 확인");
+		String uri = req.getRequestURI();
+		String ctx = req.getContextPath();
+		
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("post request url : "+sub);
 		
 		MemberService service = new MemberService(req, resp);
 		
+		A_LoginService Aservice = new A_LoginService(req,resp);
+		S_LoginService Sservice = new S_LoginService(req,resp);
+		C_LoginService Cservice = new C_LoginService(req,resp);
+		
+		RequestDispatcher dis = null;
+		
 		switch(sub) {
+		
 		case "/cLogin":
 			System.out.println("Request Customer Login");
+			boolean success = Cservice.C_LoginService();
+			System.out.println("로그인 결과 : "+success);
+			
+			String page ="C_login.jsp";
+			String msg ="아이디와 비밀번호를 확인해 주세요.";
+			
+			if (success) {
+				String cId = req.getParameter("cid");
+				page = "C_main";
+				msg = cId+"님, 반갑습니다.";
+				req.getSession().setAttribute("cId",cId);
+			}
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page);
+			dis.forward(req, resp);
 			break;
+			
+			
+		
 		case "/sLogin":
 			System.out.println("Request Seller Login");
+			boolean Ssuccess = Sservice.S_LoginService();
+			System.out.println("로그인 결과 : "+Ssuccess);
+			
+			String spage ="S_LoginService.jsp";
+			String smsg ="아이디와 비밀번호를 확인해 주세요.";
+			
+			if (Ssuccess) {
+				String sId = req.getParameter("sid");
+				spage = "S_main";
+				smsg = sId+"님, 반갑습니다.";
+				req.getSession().setAttribute("sId",sId);
+			}
+			req.setAttribute("msg", smsg);
+			dis = req.getRequestDispatcher(spage);
+			dis.forward(req, resp);
 			break;
+		
 		case "/adminLogin":
 			System.out.println("Request Admin Login");
+			boolean asuccess = Aservice.login();
+			System.out.println("로그인 결과 : "+asuccess);
+			
+			String apage ="admin_Login.jsp";
+			String amsg ="아이디와 비밀번호를 확인해 주세요.";
+			
+			if (asuccess) {
+				String aId = req.getParameter("aid");
+				page = "admin_main";
+				msg = aId+"님, 반갑습니다.";
+				req.getSession().setAttribute("aId",aId);
+			}
+			req.setAttribute("msg", amsg);
+			dis = req.getRequestDispatcher(apage);
+			dis.forward(req, resp);
 			break;
+			
 		case "/cJoin":
 			System.out.println("Request Customer Join");
 			break;
