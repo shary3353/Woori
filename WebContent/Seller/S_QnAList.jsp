@@ -97,7 +97,7 @@
 					<a href="./sQAList?page=${currPage-1}">이전</a>
 				</c:if>	
             </span>
-            <span class="Page_Number">1</span>
+            <span class="Page_Number">${currPage}</span>
             <span class="Page_Content">
            		<c:if test="${currPage == maxPage}">다음</c:if>
 				<c:if test="${currPage < maxPage}">
