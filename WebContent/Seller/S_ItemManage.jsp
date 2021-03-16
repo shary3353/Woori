@@ -40,6 +40,23 @@
             width: 100px;
             text-align: center;
         }
+                #List_Paging{
+            margin: 80px;
+            text-align: center;
+        }
+        .Page_Content{
+            padding: 5px 5px;
+            background-color: #F6F6F6 ;
+        }
+        .Page_Content a{
+        	color: black; text-decoration: none;
+            padding: 5px 5px;
+            background-color: #F6F6F6 ;
+        }
+        .Page_Number{
+            padding: 5px 10px;
+            background-color: #c0e1eb;
+        }
     </style>
 </head>
 <body>
@@ -87,6 +104,28 @@
             </tr>
             </c:forEach>
         </table>
+        
+        <div id="List_Paging"> <!--페이징부분-->
+            <span class="Page_Content">
+            	<a href="./sItemList?page=1">처음</a>
+            </span>
+            <span class="Page_Content">
+            	<c:if test="${currPage == 1}">이전</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="./sItemList?page=${currPage-1}">이전</a>
+				</c:if>	
+            </span>
+            <span class="Page_Number">1</span>
+            <span class="Page_Content">
+           		<c:if test="${currPage == maxPage}">다음</c:if>
+				<c:if test="${currPage < maxPage}">
+					<a href="./sItemList?page=${currPage+1}">다음</a>	
+				</c:if>
+            </span>
+            <span class="Page_Content">
+            	<a href="./sItemList?page=${maxPage}">마지막</a>
+            </span>
+        </div>
     </div>  
 </body>
 </html>

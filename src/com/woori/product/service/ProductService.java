@@ -2,6 +2,7 @@ package com.woori.product.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,12 +28,21 @@ public class ProductService {
 		String sid = (String)req.getSession().getAttribute("loginId");
 		System.out.println("판매자"+ sid +"의 물품 리스트입니다."); //로그인한 아이디 확인& 판매자 확인
 		
-		ProductDAO dao = new ProductDAO();
-		ArrayList<ProductDTO> list = dao.sItemList(sid); //ArrayList(여러개의 dto)
-		System.out.println(list); //리스트 확인
-		System.out.println("물품리스트 수:" + list.size()); //리스트 사이즈 확인
+		String pageParam = req.getParameter("page");
+		System.out.println("page : "+pageParam);
 		
-		req.setAttribute("list", list);
+		int group=1;
+		if(pageParam != null) {
+			group = Integer.parseInt(pageParam);
+		}
+		
+		ProductDAO dao = new ProductDAO();
+		HashMap<String, Object> map = dao.sItemList(sid, group); //ArrayList(여러개의 dto)
+		
+		req.setAttribute("maxPage", map.get("maxPage"));
+		req.setAttribute("list", map.get("list"));
+		req.setAttribute("currPage", group);
+		
 		dis = req.getRequestDispatcher("S_ItemManage.jsp"); //S_ItemManage.jsp로 이동
 		dis.forward(req, resp);//값보냄
 	}

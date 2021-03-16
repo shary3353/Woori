@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -38,15 +39,27 @@ public class ProductDAO {
 		}
 	}
 
-	public ArrayList<ProductDTO> sItemList(String sid) { //판매자 등록물품리스트 - 판매중인 상품만 :판매-1
+	public HashMap<String, Object> sItemList(String sid, int page) { //판매자 등록물품리스트 - 판매중인 상품만 :판매-1
+		
+		//페이징처리
+		int pagePerCnt = 10;//한페이지 개수
+		int end = page *pagePerCnt;//페이지 끝
+		int start = end-(pagePerCnt-1);//페이지 시작
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//
 		ArrayList<ProductDTO> list =new ArrayList<ProductDTO>();
-		String sql = "SELECT p.p_idx, c.category, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName" + 
-				" FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx"
-				+ " AND p.sid=? AND p.is_sold=1 ORDER BY p.p_idx DESC";
+		
+		String sql = "SELECT sid, p_idx, category, p_name, p_content, p_price, oriFileName, newFileName\r\n" + 
+				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY p.p_idx DESC) AS rnum, p.sid, p.p_idx, c.category, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName " + 
+					"		FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx AND p.sid=? AND p.is_sold=1)" + 
+				"    WHERE rnum BETWEEN ? AND ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, sid);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
@@ -59,12 +72,35 @@ public class ProductDAO {
 				dto.setNewFileName(rs.getString("newFileName"));
 				list.add(dto);
 			}
+			System.out.println("물품리스트 수:" + list.size()); //리스트 사이즈 확인
+			int maxPage = getMaxPageSellerProduct(sid ,pagePerCnt);
+			map.put("list",list);
+			map.put("maxPage", maxPage);
+			System.out.println("max page : "+maxPage);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			resClose();
 		}
-		return list;
+		return map;
+	}
+	private int getMaxPageSellerProduct(String sid, int pagePerCnt) {//판매자 물품리스트 최대페이지
+		String sql = "SELECT COUNT (p_idx) FROM (SELECT p.SID, p.p_idx, c.category, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName \r\n" + 
+				"		FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx "
+					+ "AND p.sid=? AND p.is_sold=1)";
+		int max=0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int)Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
 	}
 
 	public ProductDTO sItemDetail(int p_idx) {//판매자 물품상세보기
