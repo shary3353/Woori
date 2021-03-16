@@ -40,7 +40,7 @@
             width: 100px;
             text-align: center;
         }
-                #List_Paging{
+        #List_Paging{
             margin: 80px;
             text-align: center;
         }
@@ -50,8 +50,6 @@
         }
         .Page_Content a{
         	color: black; text-decoration: none;
-            padding: 5px 5px;
-            background-color: #F6F6F6 ;
         }
         .Page_Number{
             padding: 5px 10px;

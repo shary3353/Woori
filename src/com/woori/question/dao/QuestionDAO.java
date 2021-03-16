@@ -47,14 +47,26 @@ public class QuestionDAO {
 		}
 	}
 
-	public ArrayList<QuestionDTO> sQAList(String sid) { // 판매자 문의내역 리스트
+	public HashMap<String, Object> sQAList(String sid, int page) { // 판매자 문의내역 리스트
+		
+		//페이징
+		int pagePerCnt = 10;//한페이당 수
+		int end = page * pagePerCnt;//페이지의 끝
+		int start = end-(pagePerCnt-1);//페이지의 시작
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//
 		ArrayList<QuestionDTO> list = new ArrayList<QuestionDTO>();
-		String sql = "SELECT q.q_idx, qc.category, q.subject, q.content, q.cid, q.q_reg_date, q.s_answer "
-				+ "FROM question q, q_categories qc WHERE q.qc_idx = qc.qc_idx AND sid = ? ORDER BY q.q_idx DESC";
+		
+		String sql = "SELECT q_idx, category, subject, content, cid, q_reg_date, s_answer " + 
+				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY q.q_idx DESC) AS rnum, q.q_idx, qc.category, q.subject, q.content, q.cid, q.q_reg_date, q.s_answer " + 
+				"            FROM question q, q_categories qc WHERE q.qc_idx = qc.qc_idx AND sid = ?) " + 
+				"    WHERE rnum BETWEEN ? AND ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, sid);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				QuestionDTO dto = new QuestionDTO();
@@ -67,12 +79,34 @@ public class QuestionDAO {
 				dto.setS_answer(rs.getString("s_answer"));
 				list.add(dto);
 			}
+			System.out.println("문의리스트 수:" + list.size()); //리스트 사이즈 확인
+			int maxPage = getMaxPageSellerQnAList(sid, pagePerCnt);
+			map.put("list", list);
+			map.put("maxPage", maxPage);
+			System.out.println("max page : "+maxPage);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			resClose();
 		}
-		return list;
+		return map;
+	}
+	private int getMaxPageSellerQnAList(String sid, int pagePerCnt) {//판매자 문의리스트 최대페이지
+		String sql="SELECT COUNT(q_idx) FROM (SELECT ROW_NUMBER() OVER(ORDER BY q.q_idx DESC) AS rnum, q.q_idx, qc.category, q.subject, q.content, q.cid, q.q_reg_date, q.s_answer \r\n" + 
+				"    FROM question q, q_categories qc WHERE q.qc_idx = qc.qc_idx AND sid = ?)";		
+		int max = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return max;
 	}
 
 	public HashMap<String, Object> cQuestionList(int group, String cid) {

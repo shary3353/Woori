@@ -30,6 +30,9 @@
             padding: 5px 5px;
             background-color: #F6F6F6 ;
         }
+        .Page_Content a{
+        	color: black; text-decoration: none;
+        }
         .Page_Number{
             padding: 5px 10px;
             background-color: #c0e1eb;
@@ -85,11 +88,25 @@
         </table>
 
         <div id="List_Paging"> <!--페이징부분-->
-            <span class="Page_Content">처음</span>
-            <span class="Page_Content">이전</span>
+            <span class="Page_Content">
+            	<a href="./sQAList?page=1">처음</a>
+            </span>
+            <span class="Page_Content">
+            	<c:if test="${currPage == 1}">이전</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="./sQAList?page=${currPage-1}">이전</a>
+				</c:if>	
+            </span>
             <span class="Page_Number">1</span>
-            <span class="Page_Content">다음</span>
-            <span class="Page_Content">마지막</span>
+            <span class="Page_Content">
+           		<c:if test="${currPage == maxPage}">다음</c:if>
+				<c:if test="${currPage < maxPage}">
+					<a href="./sQAList?page=${currPage+1}">다음</a>	
+				</c:if>
+            </span>
+            <span class="Page_Content">
+            	<a href="./sQAList?page=${maxPage}">마지막</a>
+            </span>
         </div>
     </div>
 </body>
