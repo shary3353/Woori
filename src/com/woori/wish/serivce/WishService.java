@@ -54,4 +54,15 @@ public class WishService {
 		resp.sendRedirect("wishList");
 	}
 
+	public void addWishList() {
+		req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String cid = (String) req.getSession().getAttribute("loginId");
+		String p_idx = req.getParameter("p_idx");
+		System.out.println("Add Wish List p_idx : " + p_idx);
+		WishDAO dao = new WishDAO();
+		dao.addWishList(p_idx, cid);
+		
+		// resp.sendRedirect()추가하기 
+	}
+
 }
