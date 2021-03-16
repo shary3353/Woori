@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -39,15 +40,25 @@ public class ReportDAO {
 		}
 	}
 
-	public ArrayList<ReportDTO> sReportList(String sid) { //판매자 신고내역 리스트 
+	public HashMap<String, Object> sReportList(String sid, int page) { //판매자 신고내역 리스트 
+		
+		//페이징
+		int pagePerCnt = 10;//페이지당 개수
+		int end = page * pagePerCnt;//페이지의 끝 
+		int start = end-(pagePerCnt-1);//페이지의 시작
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//
 		ArrayList<ReportDTO> list = new ArrayList<ReportDTO>();
-		String sql = "SELECT r.r_idx, rs.categories, r.subject, r.target_id, r.r_date, r.status" + 
-				"    FROM report r, report_categories rs\r\n" + 
-				"    WHERE r.rc_code=rs.rc_idx AND r.reporter_id=? ORDER BY r.r_idx DESC";
+		String sql = "SELECT r_idx, categories,subject, reporter_id, target_id, r_date, status " + 
+				"    FROM (SELECT ROW_NUMBER() OVER (ORDER BY r.r_idx DESC) AS rnum, r.r_idx, rs.categories,r.subject, r.reporter_id,r.target_id, r.r_date, r.status " + 
+				"            FROM report r, report_categories rs WHERE r.rc_code=rs.rc_idx AND r.reporter_id=?) "
+				+ "WHERE rnum BETWEEN ? AND ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, sid);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ReportDTO dto = new ReportDTO();
@@ -59,12 +70,35 @@ public class ReportDAO {
 				dto.setStatus(rs.getInt("status"));//신고상태 0-처리중 1-처리완료
 				list.add(dto);
 			}
+			System.out.println("신고리스트 수:" + list.size()); //리스트 사이즈 확인	
+			int maxPage = getMaxPageSellerReportList(sid, pagePerCnt);//maxpage
+			map.put("list", list);
+			map.put("maxPage", maxPage);
+			System.out.println("max page : "+maxPage);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		return list;
+		return map;
+	}
+	private int getMaxPageSellerReportList(String sid, int pagePerCnt) { //판매자 신고리스트 최대페이지
+		String sql="SELECT COUNT(r_idx) FROM (SELECT r.r_idx, rs.categories,r.subject, r.reporter_id,r.target_id, r.r_date, r.status " + 
+				"    FROM report r, report_categories rs WHERE r.rc_code=rs.rc_idx AND r.reporter_id=?)";
+		
+		int max = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return max;
 	}
 
 	public long report(ReportDTO dto) {

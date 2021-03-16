@@ -2,6 +2,7 @@ package com.woori.report.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,12 +31,21 @@ public class ReportService {
 		String sid = (String)req.getSession().getAttribute("loginId");
 		System.out.println("판매자"+ sid +"의 신고 내역입니다."); //로그인한 아이디 확인& 판매자 확인
 		
-		ReportDAO dao = new ReportDAO();
-		ArrayList<ReportDTO> list = dao.sReportList(sid);
-		System.out.println(list); //리스트 확인
-		System.out.println("신고리스트 수:" + list.size()); //리스트 사이즈 확인
+		String pageParam = req.getParameter("page");
+		System.out.println("page : "+pageParam);
+				
+		int group = 1;
+		if(pageParam != null) {
+			group = Integer.parseInt(pageParam);
+		}
 		
-		req.setAttribute("list", list);
+		ReportDAO dao = new ReportDAO();
+		HashMap<String, Object> map = dao.sReportList(sid, group);
+		
+		req.setAttribute("maxPage", map.get("maxPage"));
+		req.setAttribute("list", map.get("list"));
+		req.setAttribute("currPage", group);
+		
 		dis = req.getRequestDispatcher("S_Reportlist.jsp"); //S_Reportlist.jsp로 이동
 		dis.forward(req, resp);//값보냄
 	}
