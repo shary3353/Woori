@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.woori.login.dao.A_LoginDAO;
-import com.woori.login.dao.C_LoginDAO;
-import com.woori.login.dao.S_LoginDAO;
+
 import com.woori.member.dao.ListDAO;
 import com.woori.member.dao.MemberDAO;
 import com.woori.member.dto.BlackListDTO;
@@ -35,7 +33,7 @@ public class MemberService {
 	}
 	
 	public void login() throws ServletException, IOException{
-		A_LoginDAO dao = new A_LoginDAO();
+		MemberDAO dao = new MemberDAO();
 		
 		String id =(String) req.getSession().getAttribute("adminId");
 		String pw = req.getParameter("adminPw");
@@ -56,7 +54,7 @@ public class MemberService {
 	}
 	
 	public void C_LoginService() throws ServletException, IOException {
-		C_LoginDAO dao = new C_LoginDAO();
+		MemberDAO dao = new MemberDAO();
 		String cid =req.getParameter("cId");
 		String pw = req.getParameter("Pw");
 		System.out.println(cid+"/"+pw);
@@ -73,7 +71,7 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 	public void S_LoginService() throws ServletException, IOException {
-		S_LoginDAO dao = new S_LoginDAO();
+		MemberDAO dao = new MemberDAO();
 		String sid =req.getParameter("sId");
 		String pw = req.getParameter("pw");
 		System.out.println(sid+"/"+pw);

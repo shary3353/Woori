@@ -1,6 +1,6 @@
 package com.woori.member.controller;
 
-import java.io.IOException;
+import java.io.IOException ;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.woori.login.service.A_LoginService;
-import com.woori.login.service.C_LoginService;
-import com.woori.login.service.S_LoginService;
+
 import com.woori.member.service.MemberService;
 /*처리 : (회원가입, 로그인, 회원수정, 회원상세보기, 회원리스트)
  	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
@@ -96,7 +94,7 @@ public class MemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//join, login
 		req.setCharacterEncoding("UTF-8");
-		System.out.println("요청 확인");
+		
 		String uri = req.getRequestURI();
 		String ctx = req.getContextPath();
 		
@@ -105,9 +103,7 @@ public class MemberController extends HttpServlet {
 		
 		MemberService service = new MemberService(req, resp);
 		
-		A_LoginService Aservice = new A_LoginService(req,resp);
-		S_LoginService Sservice = new S_LoginService(req,resp);
-		C_LoginService Cservice = new C_LoginService(req,resp);
+	
 		
 		RequestDispatcher dis = null;
 		
@@ -115,61 +111,17 @@ public class MemberController extends HttpServlet {
 		
 		case "/cLogin":
 			System.out.println("Request Customer Login");
-			boolean success = Cservice.C_LoginService();
-			System.out.println("로그인 결과 : "+success);
-			
-			String page ="C_login.jsp";
-			String msg ="아이디와 비밀번호를 확인해 주세요.";
-			
-			if (success) {
-				String cId = req.getParameter("cid");
-				page = "C_main";
-				msg = cId+"님, 반갑습니다.";
-				req.getSession().setAttribute("cId",cId);
-			}
-			req.setAttribute("msg", msg);
-			dis = req.getRequestDispatcher(page);
-			dis.forward(req, resp);
+			service.login();
 			break;
-			
-			
 		
 		case "/sLogin":
 			System.out.println("Request Seller Login");
-			boolean Ssuccess = Sservice.S_LoginService();
-			System.out.println("로그인 결과 : "+Ssuccess);
-			
-			String spage ="S_LoginService.jsp";
-			String smsg ="아이디와 비밀번호를 확인해 주세요.";
-			
-			if (Ssuccess) {
-				String sId = req.getParameter("sid");
-				spage = "S_main";
-				smsg = sId+"님, 반갑습니다.";
-				req.getSession().setAttribute("sId",sId);
-			}
-			req.setAttribute("msg", smsg);
-			dis = req.getRequestDispatcher(spage);
-			dis.forward(req, resp);
+			service.login();
 			break;
-		
+			
 		case "/adminLogin":
 			System.out.println("Request Admin Login");
-			boolean asuccess = Aservice.login();
-			System.out.println("로그인 결과 : "+asuccess);
-			
-			String apage ="admin_Login.jsp";
-			String amsg ="아이디와 비밀번호를 확인해 주세요.";
-			
-			if (asuccess) {
-				String aId = req.getParameter("aid");
-				page = "admin_main";
-				msg = aId+"님, 반갑습니다.";
-				req.getSession().setAttribute("aId",aId);
-			}
-			req.setAttribute("msg", amsg);
-			dis = req.getRequestDispatcher(apage);
-			dis.forward(req, resp);
+			service.login();
 			break;
 			
 		case "/cJoin":
@@ -186,12 +138,12 @@ public class MemberController extends HttpServlet {
 			System.out.println("Requset Customer UpdateInfo");
 			service.cUpdateInfo();
 			break;
-
+			
 		}
 		
 		dual(req,resp);
 	}
-
+	
 	private void dual(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		
 		req.setCharacterEncoding("UTF-8");
@@ -210,7 +162,7 @@ public class MemberController extends HttpServlet {
 			System.out.println("Request  seller profile UpdateForm");
 			service.sPfpUpdateForm();
 			break;
-		
+			
 		case "/Seller/sPfpUpdate": //판매자 회원정보 수정 요청
 			System.out.println("Request  seller profile Update");
 			service.sPfpUpdate();
@@ -223,3 +175,6 @@ public class MemberController extends HttpServlet {
 	}
 	
 }
+			
+			
+		
