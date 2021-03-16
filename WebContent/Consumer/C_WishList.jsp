@@ -141,7 +141,7 @@ form {
 									</tr>
 								</table>
 							</td>
-							<td>${list.p_price}</td>
+							<td>${list.p_price}원</td>
 							<td>${list.sid}</td>
 							<td><a href="#" class="reserBtn">예약하기</a></td>
 							<td><input class="delBtn" type="button" value="X"
@@ -168,7 +168,7 @@ form {
 				<c:if test="${currPage == maxPage}">
 					<a href="#" class="pagingBtnDisable">다음</a>
 				</c:if>
-				<c:if test="${currPage <= 1}">
+				<c:if test="${currPage < maxPage}">
 					<a href="wishPaging?page=${currPage+1}" class="pagingBtn">다음</a>
 				</c:if>
 				<c:if test="${currPage == maxPage}">

@@ -73,7 +73,7 @@ public class MemberController extends HttpServlet {
             	break;
             case "/blackUpdate":
             	System.out.println("Request BlackList Update");
-            	service.blackUpdate();
+            	service.blackCancel();
             	break;
 			case "/logout":
 				System.out.println("Request Logout");

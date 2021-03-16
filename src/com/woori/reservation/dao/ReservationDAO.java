@@ -46,18 +46,28 @@ public class ReservationDAO {
 		}
 	}
 
-	public ArrayList<ReservationDTO> sReservationList(String sid) {
+	public HashMap<String, Object> sReservationList(String sid, int page) { //판매자 예약내역 리스트
+		
+		//페이징
+		int pagePerCnt = 10;//페이지당 개수
+		int end = page * pagePerCnt;//페이지의 끝
+		int start = end-(pagePerCnt-1);//페이지의 시작
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//
 		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
-		String sql = "SELECT r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid, th.orifilename, th.newfilename"
-				+ " FROM reservation r, reservation_status rs, product p, seller s, thumbfile th"
-				+ " WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND p.p_idx=th.p_idx(+)"
-				+ " AND s.sid = ?";
+		String sql = "SELECT r_idx, visit_date, reg_date, cid, p_idx, p_name, rs_idx, status, sid, orifilename, newfilename " + 
+				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY r.r_idx DESC) AS rnum, r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid, th.orifilename, th.newfilename " + 
+				"        FROM reservation r, reservation_status rs, product p, seller s, thumbfile th " + 
+				"        WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND p.p_idx=th.p_idx(+) " + 
+				"        AND s.sid = ?) " + 
+				"    WHERE rnum BETWEEN ? AND ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, sid);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
-			
 			while (rs.next()) {
 				ReservationDTO dto = new ReservationDTO();
 				dto.setR_idx(rs.getInt("r_idx"));// 문의번호
@@ -71,12 +81,37 @@ public class ReservationDAO {
 				dto.setNewFileName(rs.getString("newfilename"));//새파일
 				list.add(dto);
 			}
+			System.out.println("예약리스트 수:" + list.size()); //리스트 사이즈 확인	
+			int maxPage = getMaxPageSellerReservationList(sid, pagePerCnt);
+			map.put("list", list);
+			map.put("maxPage", maxPage);
+			System.out.println("max page : "+maxPage);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			resClose();
 		}
-		return list;
+		return map;
+	}
+
+	private int getMaxPageSellerReservationList(String sid, int pagePerCnt) { //판매자 예약리스트 최대페이지
+		String sql="SELECT COUNT (r_idx) FROM (SELECT r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid, th.orifilename, th.newfilename " + 
+				"    FROM reservation r, reservation_status rs, product p, seller s, thumbfile th " + 
+				"    WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND p.p_idx=th.p_idx(+) " + 
+				"    AND s.sid = ?)";		
+		int max = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return max;
 	}
 
 	public void updateResevationStatus(int r_idx, int rs_idx) { // 판매자 예약현황 변경
@@ -104,17 +139,17 @@ public class ReservationDAO {
 		System.out.println(start + " ~ " + end + "까지의 리스트");
 		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
 
-		String sql = "SELECT rnum, r.r_idx, r.p_idx, r.p_name, r.sid, to_char(r.reg_date,'yyyy-mm-dd') reg_date,"
-				+ " to_char(r.visit_date, 'yyyy-mm-dd') visit_date, rs.status "
-				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r.r_idx, r.p_idx, r.reg_date, r.visit_date, r.cid, r.rs_idx, p.p_name, p.sid "
-				+ "FROM reservation r, product p WHERE r.cid='test1' AND r.p_idx = p.p_idx) r, reservation_status rs "
+		String sql = "SELECT rnum, r.r_idx, r.p_idx, r.p_name, r.sid, to_char(r.reg_date,'yyyy-mm-dd') reg_date,to_char(r.visit_date, 'yyyy-mm-dd') visit_date, rs.status, r.newFileName "
+				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r.r_idx, r.p_idx, r.reg_date, r.visit_date, r.cid, r.rs_idx, p.p_name, p.sid, p.newfilename "
+				+ "FROM reservation r, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p WHERE r.cid=? AND r.p_idx = p.p_idx) r, reservation_status rs "
 				+ "WHERE r.cid=? AND rs.rs_idx = r.rs_idx AND rnum BETWEEN ? AND ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
-			ps.setInt(2, start);
-			ps.setInt(3, end);
+			ps.setString(2, cid);
+			ps.setInt(3, start);
+			ps.setInt(4, end);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ReservationDTO dto = new ReservationDTO();
@@ -125,6 +160,7 @@ public class ReservationDAO {
 				dto.setReg_date(rs.getString(6));
 				dto.setVisit_date(rs.getString(7));
 				dto.setStatus(rs.getString(8));
+				dto.setNewFileName(rs.getString(9));
 				list.add(dto);
 			}
 			System.out.println("위시리스트 데이터 수 : " + list.size());
@@ -155,6 +191,33 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 		return max;
+	}
+
+	public ArrayList<ReservationDTO> mainReservationList(String cid) {
+		String sql = "SELECT r.rnum, p.p_name,  p.p_price, p.newfilename, to_char(r.visit_date, 'yyyy-mm-dd') "
+				+ "FROM (SELECT p.p_idx, p.p_name, p.p_price, p.sid, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p"
+				+ ",(SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, cid, r_idx, visit_date, p_idx FROM reservation WHERE cid=?) r "
+				+ "WHERE r.p_idx = p.p_idx AND rnum BETWEEN 1 AND 3";
+		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ReservationDTO dto = new ReservationDTO();
+				dto.setP_name(rs.getString(2));
+				dto.setP_price(rs.getString(3));
+				dto.setNewFileName(rs.getString(4));
+				dto.setVisit_date(rs.getString(5));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		
+		return list;
 	}
 
 }

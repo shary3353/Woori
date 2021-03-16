@@ -12,6 +12,7 @@ public class ReservationDTO {
 	private int p_idx;
 	private String p_name;
 	private String sid;
+	private String p_price;
 	/*예약상황*/
 	private int rs_idx;
 	private String status;
@@ -22,6 +23,12 @@ public class ReservationDTO {
 	
 	
 	
+	public String getP_price() {
+		return p_price;
+	}
+	public void setP_price(String p_price) {
+		this.p_price = p_price;
+	}
 	public String getOriFileName() {
 		return oriFileName;
 	}

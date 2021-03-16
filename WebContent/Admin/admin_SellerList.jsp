@@ -34,24 +34,24 @@
                         <th>블랙리스트 사유</th>
                         <th>블랙리스트 등록</th>
                     </tr>
-                    <c:forEach items="${sList }" var="seller">
+                    <c:forEach items="${sList }" var="seller" varStatus="status">
 	                    <tr>
 	                        <td>${seller.sid }</td>
 	                        <td>${seller.cntReport }</td>
-	                        <td>${seller.stack}</td>
+	                        <td id="stack${status.count }">${seller.stack}</td>
 	                        <c:if test="${seller.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td>true</td>
 	                        </c:if>
 	                        <c:if test="${seller.isBlack == 0}">	<!-- 블랙리스트 false -->
-	                        	<td>false</td>
+	                        	<td id="false${status.count }">false</td>
 	                        </c:if>
 	                        <td>${seller.reg_date}</td>
 	                        <c:if test="${seller.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td colspan="2">이미등록된회원입니다.</td>
 	                        </c:if>
 	                        <c:if test="${seller.isBlack == 0}">	<!-- 블랙리스트 false -->
-	                        	<td id="inputReason"><input type="text" id="bReason" placeholder="블락사유를 적어주세요."></td>
-		                        <td id="blackBtn"><button style="color:red;" value="${seller.sid }" id="bRegistBtn">등록</button></td>
+	                        	<td id="inputReason${status.count }"><input type="text" id="bReason${status.count }" placeholder="블락사유를 적어주세요."></td>
+		                        <td id="blackBtn${status.count }"><button style="color:red;" value="${seller.sid }" id="bRegistBtn${status.count }">등록</button></td>
 	                        </c:if>
 	                    </tr>
                     </c:forEach>
@@ -80,31 +80,34 @@
     </div>  <!--Wrapper 닫음-->
 </body>
 <script type="text/javascript">
- 	$('#bRegistBtn').click(function(){
-		var sid = $(this).val();
-		var bReason = $('#bReason').val();
-		console.log(sid+' / '+bReason);
-		
-		$.ajax({
-			type:"GET"
-			,url:"sBlackRegist"
-			,data:{"id":sid, "bReason":bReason}
-			,dataType:"JSON"
-			,success:function(obj){
-				console.log(obj);
-				if(obj.addBlack){
-					$('#inputReason').attr('colspan', '2');
-					$('#inputReason').html('이미등록된회원입니다.');
-					$('td').remove('#blackBtn');
-				}else{
-					alert('블랙리스트 등록에 실패하였습니다.');
-				}
+	$("body").on("click", "[id^=bRegistBtn]", function(event) {
+	var sid = $('#'+this.id).val();
+	var number = this.id.slice(-1);
+	var bReason = $('#bReason'+number).val();
+	console.log(sid+' / '+bReason);
+	
+	$.ajax({
+		type:"GET"
+		,url:"sBlackRegist"
+		,data:{"id":sid, "bReason":bReason}
+		,dataType:"JSON"
+		,success:function(obj){
+			console.log(obj);
+			if(obj.addBlack){
+				$('td').remove('#blackBtn'+number);
+				$('#inputReason'+number).attr('colspan', '2');
+				$('#inputReason'+number).html('이미등록된회원입니다.');
+				$('#stack'+number).html(obj.newStack);
+				$('#false'+number).html('true');
+			}else{
+				alert('블랙리스트 등록에 실패하였습니다.');
 			}
-			,error:function(e){
-				console.log(e);
-			}
-		});
-	}); 
+		}
+		,error:function(e){
+			console.log(e);
+		}
+	});
+}); 
 	
 	
 </script>

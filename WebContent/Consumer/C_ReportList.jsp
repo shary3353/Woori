@@ -9,38 +9,6 @@
 <title>신고내역</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-#wrapper {
-	overflow: hidden;
-}
-
-#naviBox {
-	float: left;
-}
-
-div.C_MyPageNavi {
-	width: 150px;
-	height: 100px;
-	line-height: 100px;
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: right;
-	font-weight: 600;
-	font-size: 18px;
-	background-color: rgb(202, 202, 202);
-}
-
-div.C_MyPageNavi:hover {
-	background-color: rgb(138, 138, 138);
-}
-
-div.C_MyPageNavi>a {
-	text-decoration: none;
-	color: black;
-}
-
-#memReprotList {
-	background-color: rgb(138, 138, 138);
-}
-
 table, td, th {
 	border: 1px solid lightgray;
 	border-collapse: collapse;
@@ -102,78 +70,111 @@ form {
 	width: 450px;
 	text-align: left;
 }
+
+.headDESC {
+	font-size: 25px;
+	font-weight: 600;
+	text-align: left;
+	color: mediumslateblue;
+	margin-left: 20px;
+	margin-top: 30px;
+}
+
+.pagingBtn {
+	text-decoration: none;
+	color: black;
+	font-weight: 600;
+	background-color: lightgray;
+	margin: 1px 2px;
+	margin-top: 0px;
+	padding: 3px;
+	border: 1px white;
+	width: 50px;
+}
+
+.pagingBtnDisable {
+	text-decoration: none;
+	color: gray;
+	font-weight: 600;
+	background-color: lightgray;
+	margin: 1px 2px;
+	margin-top: 0px;
+	padding: 3px;
+	border: 1px white;
+	width: 50px;
+}
+
+.pagingBtnDisable:hover {
+	cursor: default;
+	text-decoration: none;
+}
+
+.pagingBtn:hover {
+	background-color: steelblue;
+}
 </style>
 </head>
 
 <body>
 	<div style="min-width: 1920px">
 		<jsp:include page="../Include/navi.html"></jsp:include>
-		<div id="wrapper">
-			<div id="naviBox">
-				<div id="mainMyPage " class="C_MyPageNavi ">
-					<a href="# " style="text-decoration: none; color: black">마이페이지&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">회원정보&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">위시리스트&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">문의내역&nbsp;</a>
-				</div>
-				<div class="C_MyPageNavi ">
-					<a href="# ">예약내역&nbsp;</a>
-				</div>
-				<div id="memReprotList" class="C_MyPageNavi ">
-					<a href="# ">신고내역&nbsp;</a>
-				</div>
-			</div>
-			<div id="reportBox">
-				<form action="" method="GET">
-					<span><p
-							style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue; margin-left: 20px; margin-top: 30px;">신고
-							내역</p></span>
-					<table>
+		<jsp:include page="../Include/SideBar.html"></jsp:include>
+		<div id="reportBox">
+			<form action="" method="GET">
+				<p class="headDESC">신고 내역</p>
+				<table>
+					<tr>
+						<th>No</th>
+						<th>신고 분류</th>
+						<th>신고 제목</th>
+						<th>신고대상자</th>
+						<th>신고 날짜</th>
+						<th>신고 처리 상황</th>
+					</tr>
+					<c:forEach items="${list}" var="list">
 						<tr>
-							<th>No</th>
-							<th>신고 분류</th>
-							<th>신고 제목</th>
-							<th>신고대상자</th>
-							<th>신고 날짜</th>
-							<th>신고 처리 상황</th>
+							<td style="width: auto;">${list.r_idx}</td>
+							<td>${list.category}</td>
+							<td class="reportSubject"><a href="cReportDetail?r_idx=${list.r_idx}">${list.subject}</a></td>
+							<td>${list.target_id}</td>
+							<td>${list.r_date}</td>
+							<c:if test="${list.status==0}">
+								<td style="color: tomato; font-weight: 600;">처리중</td>
+							</c:if>
+							<c:if test="${list.status==1}">
+								<td style="color: #01DF74; font-weight: 600;">처리완료</td>
+							</c:if>
 						</tr>
-						<tr>
-							<td style="width: auto;">3</td>
-							<td>상품 관련</td>
-							<td class="reportSubject">신고 제목 가져오기</td>
-							<td>신고대상자 가져오기</td>
-							<td>2021.01.23</td>
-							<td style="color: tomato;">처리중</td>
-						</tr>
-						<tr>
-							<td style="width: auto;">2</td>
-							<td>예약 관련</td>
-							<td class="reportSubject">신고 제목 가져오기</td>
-							<td>신고대상자 가져오기</td>
-							<td>2021.01.23</td>
-							<td style="color: 93c47d;">처리완료</td>
-						</tr>
-						<tr>
-							<td style="width: auto;">1</td>
-							<td>상품 관련</td>
-							<td class="reportSubject">신고 제목 가져오기</td>
-							<td>신고대상자 가져오기</td>
-							<td>2021.01.23</td>
-							<td style="color: #93c47d;">처리 완료</td>
-						</tr>
-					</table>
-				</form>
-				<span> <a href="#" class="pagingBtn">처음</a> <a href="#"
-					class="pagingBtn">이전</a> <a href="#" class="pagingBtn"
-					style="background-color: skyblue; color: white;">&nbsp;1&nbsp;</a>
-					<a href="#" class="pagingBtn">다음</a> <a href="#" class="pagingBtn">마지막</a>
-				</span>
+					</c:forEach>
+				</table>
+			</form>
+			<div>
+				<c:if test="${currPage == 1}">
+					<a href="#" class="pagingBtnDisable">처음</a>
+				</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="cReportList?page=1" class="pagingBtn">처음</a>
+				</c:if>
+				<c:if test="${currPage == 1}">
+					<a href="#" class="pagingBtnDisable">이전</a>
+				</c:if>
+				<c:if test="${currPage > 1}">
+					<a href="cReportList?page=${currPage-1}" class="pagingBtn">이전</a>
+				</c:if>
+				<a href="#" class="pagingBtnDisable"
+					style="background-color: skyblue; color: white;">&nbsp;${currPage}&nbsp;</a>
+				<c:if test="${currPage == maxPage}">
+					<a href="#" class="pagingBtnDisable">다음</a>
+				</c:if>
+				<c:if test="${currPage < maxPage}">
+					<a href="cReportList?page=${currPage+1}" class="pagingBtn">다음</a>
+				</c:if>
+				<c:if test="${currPage == maxPage}">
+					<a href="#" class="pagingBtnDisable">마지막</a>
+				</c:if>
+				<c:if test="${currPage < maxPage}">
+					<a href="cReportList?page=${maxPage}" class="pagingBtn">마지막</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

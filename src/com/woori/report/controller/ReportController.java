@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.report.service.ReportService;
 /*
-요청 : 판매자 신고내역 리스트
+요청 : 판매자 - 신고내역 리스트, 신고상세보기, 신고하기폼 보여주기, 신고하기
+고객센터 - 신고, 신고상세보기
+고객 - 
 */
-@WebServlet({"/Seller/sReportList" , "/ServiceCenter/Report", "/ServiceCenter/ReportDetail"})
+@WebServlet({"/Seller/sReportList" ,"/Seller/sReportDetail","/Seller/sReprtForm", "/Seller/sReport"
+	, "/ServiceCenter/Report", "/ServiceCenter/ReportDetail"
+	, "/Consumer/cReportList", "/Consumer/cReportDetail"})
 public class ReportController extends HttpServlet {
 
 	@Override
@@ -47,6 +51,18 @@ public class ReportController extends HttpServlet {
 			System.out.println("판매자 신고내역 리스트 요청");
 			service.sReportList();
 			break;
+		case "/Seller/sReportDetail":
+			System.out.println("판매자 신고 상세보기 요청");
+			service.sReportDetail();
+			break;
+		case "/Seller/sReprtForm":
+			System.out.println("판매자 신고하기 폼 보여주기");
+			service.sReportForm();
+			break;
+		case "/Seller/sReport":
+			System.out.println("판매자 신고하기");
+			service.sReport();
+			break;
 			
 		case  "/ServiceCenter/Report":
 			System.out.println("Request report");
@@ -56,6 +72,14 @@ public class ReportController extends HttpServlet {
 		case "/ServiceCenter/ReportDetail":
 			System.out.println("Request report Detail");
 			service.detail();
+			break;
+		case "/Consumer/cReportList":
+			System.out.println("Request Customer ReportList");
+			service.cReportList();
+			break;
+		case "/Consumer/cReportDetail":
+			System.out.println("Request Customer Report Detail");
+			service.cReportDetail();
 			break;
 		}
 		

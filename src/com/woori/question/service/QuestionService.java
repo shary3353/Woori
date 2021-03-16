@@ -33,12 +33,21 @@ public class QuestionService {
 		String sid = (String)req.getSession().getAttribute("loginId");
 		System.out.println("판매자"+ sid +"의 문의 내역입니다."); //로그인한 아이디 확인& 판매자 확인
 		
-		QuestionDAO dao = new QuestionDAO();
-		ArrayList<QuestionDTO> list = dao.sQAList(sid);
-		System.out.println(list); //리스트 확인
-		System.out.println("문의리스트 수:" + list.size()); //리스트 사이즈 확인
+		String pageParam = req.getParameter("page");
+		System.out.println("page : "+pageParam);
 		
-		req.setAttribute("list", list);
+		int group = 1;
+		if(pageParam != null) {
+			group = Integer.parseInt(pageParam);
+		}
+		
+		QuestionDAO dao = new QuestionDAO();
+		HashMap<String, Object> map = dao.sQAList(sid, group);
+		
+		req.setAttribute("maxPage", map.get("maxPage"));
+		req.setAttribute("list", map.get("list"));
+		req.setAttribute("currPage", group);
+		
 		dis = req.getRequestDispatcher("S_QnAList.jsp"); //S_QnAList.jsp로 이동
 		dis.forward(req, resp);//값보냄
 	}
