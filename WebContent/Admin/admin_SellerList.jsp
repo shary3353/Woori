@@ -38,7 +38,7 @@
 	                    <tr>
 	                        <td>${seller.sid }</td>
 	                        <td>${seller.cntReport }</td>
-	                        <td>${seller.stack}</td>
+	                        <td id="stack${status.count }">${seller.stack}</td>
 	                        <c:if test="${seller.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td>true</td>
 	                        </c:if>
@@ -97,6 +97,7 @@
 				$('td').remove('#blackBtn'+number);
 				$('#inputReason'+number).attr('colspan', '2');
 				$('#inputReason'+number).html('이미등록된회원입니다.');
+				$('#stack'+number).html(obj.newStack)
 			}else{
 				alert('블랙리스트 등록에 실패하였습니다.');
 			}

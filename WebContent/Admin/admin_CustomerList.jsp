@@ -37,7 +37,7 @@
 	                    <tr>
 	                        <td>${customer.cid }</td>
 	                        <td>${customer.cntReport }</td>
-	                        <td>${customer.stack }</td>
+	                        <td id="stack${status.count }">${customer.stack }</td>
 	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td>true</td>
 	                        </c:if>
@@ -91,11 +91,11 @@
 			,data:{"id":cid, "bReason":bReason}
 			,dataType:"JSON"
 			,success:function(obj){
-				console.log(obj);
 				if(obj.addBlack){
 					$('td').remove('#blackBtn'+number);
 					$('#inputReason'+number).attr('colspan', '2');
 					$('#inputReason'+number).html('이미등록된회원입니다.');
+					$('#stack'+number).html(obj.newStack)
 				}else{
 					alert('블랙리스트 등록에 실패하였습니다.');
 				}

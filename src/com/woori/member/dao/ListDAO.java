@@ -85,7 +85,7 @@ public class ListDAO {
 		HashMap<String, Object> map = new HashMap<>();
 		ArrayList<SellerListDTO> sList = new ArrayList<SellerListDTO>();
 		//String sql = "SELECT a.sid, count(c.target_id) AS cntReport, count(b.sid) AS cntBlack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id GROUP BY a.sid, b.isblack, a.reg_date ORDER BY a.reg_date";
-		String sql = "SELECT * FROM ( SELECT ROW_NUMBER() OVER(ORDER BY a.reg_date) AS rnum, a.sid, count(c.target_id) AS cntReport, b.stack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id GROUP BY a.sid, b.isblack, a.reg_date, b.stack ) WHERE rnum between ? and ?";
+		String sql = "SELECT * FROM ( SELECT ROW_NUMBER() OVER(ORDER BY a.reg_date) AS rnum, a.sid, count(c.target_id) AS cntReport, b.stack, b.isblack, to_char(a.reg_date, 'YYYY-MM-DD') AS reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id GROUP BY a.sid, b.isblack, a.reg_date, b.stack ) WHERE rnum between ? and ?";
 		int start = 0;
 		int end = 0;
 		
@@ -166,7 +166,7 @@ public class ListDAO {
 		end = pagePerCnt*group;
 		start = end-(pagePerCnt-1);
 		
-		String sql = "SELECT r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM(SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM report) WHERE rnum BETWEEN ? AND ?";
+		String sql = "SELECT r_idx, rc_code, subject, reporter_id, target_id, to_char(r_date, 'YYYY-MM-DD') AS r_date, status FROM(SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r_idx, rc_code, subject, reporter_id, target_id, r_date, status FROM report) WHERE rnum BETWEEN ? AND ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, start);
