@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.woori.report.dto.ReportDTO;
+import com.woori.reservation.dto.ReservationDTO;
 
 public class ReportDAO {
 	
@@ -149,6 +150,64 @@ public class ReportDAO {
 		}finally {
 			resClose();
 		}return dto;
+	}
+
+	public HashMap<String, Object> cReportList(int group, String cid) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int pagePerCnt = 10;
+		int end = group * pagePerCnt;
+		int start = end - (pagePerCnt - 1);
+		System.out.println(start + " ~ " + end + "까지의 리스트");
+		ArrayList<ReportDTO> list = new ArrayList<ReportDTO>();
+
+		String sql = "SELECT r.rnum, r.r_idx, r.subject, r.target_id, r.r_date, rc.categories, r.status "
+				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r_idx, rc_code, subject, target_id, to_char(r_date, 'yyyy-mm-dd') r_date, status FROM report WHERE reporter_id = ?) r,report_categories rc "
+				+ "WHERE r.rc_code=rc.rc_idx AND r.rnum BETWEEN ? AND ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ReportDTO dto = new ReportDTO();
+				dto.setR_idx(rs.getInt(2));
+				dto.setSubject(rs.getString(3));
+				dto.setTarget_id(rs.getString(4));
+				dto.setR_date(rs.getString(5));
+				dto.setCategory(rs.getString(6));
+				dto.setStatus(rs.getInt(7));
+				list.add(dto);
+			}
+			System.out.println("신고내역 데이터 수 : " + list.size());
+			int maxPage = getMaxPage(pagePerCnt, cid);
+			map.put("list", list);
+			map.put("maxPage", maxPage);
+			System.out.println("max page : " + maxPage);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return map;
+	}
+
+	private int getMaxPage(int pagePerCnt, String cid) {
+		String sql = "SELECT COUNT(r_idx) FROM report WHERE reporter_id=?";
+		int max = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt / (double) pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
 	}
 
 }

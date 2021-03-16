@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.report.dao.ReportDAO;
 import com.woori.report.dto.ReportDTO;
+import com.woori.reservation.dao.ReservationDAO;
 import com.woori.reservation.dto.ReservationDTO;
 
 public class ReportService {
@@ -89,6 +90,26 @@ public class ReportService {
 		dis = req.getRequestDispatcher("ReportDetail.jsp");
 		dis.forward(req, resp);
 		
+	}
+	public void cReportList() throws ServletException, IOException {
+		req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String cid = (String) req.getSession().getAttribute("loginId");
+		System.out.println(cid + " 의 신고내역 불러오기");
+		String pageParam = req.getParameter("page");
+		System.out.println("이동하고 싶은 page : " + pageParam);
+		int group = 1;
+		if (pageParam != null) {
+			group = Integer.parseInt(pageParam);
+		}
+		ReportDAO dao = new ReportDAO();
+		HashMap<String, Object> map = dao.cReportList(group, cid);
+
+		req.setAttribute("maxPage", map.get("maxPage"));
+		req.setAttribute("list", map.get("list"));
+		req.setAttribute("currPage", group);
+
+		RequestDispatcher dis = req.getRequestDispatcher("./C_ReportList.jsp");
+		dis.forward(req, resp);
 	}
 	
 
