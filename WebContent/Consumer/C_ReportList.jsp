@@ -135,14 +135,14 @@ form {
 						<tr>
 							<td style="width: auto;">${list.r_idx}</td>
 							<td>${list.category}</td>
-							<td class="reportSubject">${list.subject}</td>
+							<td class="reportSubject"><a href="cReportDetail?r_idx=${list.r_idx}">${list.subject}</a></td>
 							<td>${list.target_id}</td>
 							<td>${list.r_date}</td>
 							<c:if test="${list.status==0}">
-								<td style="color: tomato;">처리중</td>
+								<td style="color: tomato; font-weight: 600;">처리중</td>
 							</c:if>
 							<c:if test="${list.status==1}">
-								<td style="color: #01DF74;">처리완료</td>
+								<td style="color: #01DF74; font-weight: 600;">처리완료</td>
 							</c:if>
 						</tr>
 					</c:forEach>

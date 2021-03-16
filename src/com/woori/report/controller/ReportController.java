@@ -15,7 +15,8 @@ import com.woori.report.service.ReportService;
 고객센터 - 신고, 신고상세보기
 */
 @WebServlet({"/Seller/sReportList" ,"/Seller/sReportDetail"
-	, "/ServiceCenter/Report", "/ServiceCenter/ReportDetail", "/Consumer/cReportList"})
+	, "/ServiceCenter/Report", "/ServiceCenter/ReportDetail"
+	, "/Consumer/cReportList", "/Consumer/cReportDetail"})
 public class ReportController extends HttpServlet {
 
 	@Override
@@ -66,6 +67,10 @@ public class ReportController extends HttpServlet {
 		case "/Consumer/cReportList":
 			System.out.println("Request Customer ReportList");
 			service.cReportList();
+			break;
+		case "/Consumer/cReportDetail":
+			System.out.println("Request Customer Report Detail");
+			service.cReportDetail();
 			break;
 		}
 		

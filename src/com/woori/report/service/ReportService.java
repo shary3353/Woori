@@ -122,4 +122,16 @@ public class ReportService {
 		dis.forward(req, resp);
 	}
 
+	public void cReportDetail() throws ServletException, IOException {
+		String r_idx = req.getParameter("r_idx");
+		System.out.println(r_idx +"번 신고 상세보기");
+		ReportDAO dao = new ReportDAO();
+		ReportDTO dto = dao.detail(r_idx);
+		
+		req.setAttribute("dto", dto);
+		dis = req.getRequestDispatcher("../ServiceCenter/ReportDetail.jsp");
+		dis.forward(req, resp);
+		
+	}
+
 }
