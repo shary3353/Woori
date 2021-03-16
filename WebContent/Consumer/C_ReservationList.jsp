@@ -127,7 +127,7 @@ form {
 								<table class="p_PhoNDesc">
 									<tr>
 										<td class="p_PhoNDesc" rowspan="3" style="width: 550px;"><img
-											src="../img/no-image.png" alt="상품사진"
+											src="../Uploaded_Img/${list.newFileName}" alt="${list.newFileName}"
 											style="width: 125px; height: 125px;" /></td>
 									</tr>
 									<tr>

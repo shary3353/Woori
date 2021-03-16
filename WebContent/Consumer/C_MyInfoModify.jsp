@@ -19,9 +19,9 @@
 
 #myInfo {
 	width: auto;
-	height: 500px;
-	float: left;
-	margin: 5px 150px;
+	margin-top: 25px;
+	margin-left: 32%;
+	position:absolute;
 	text-align: center;
 }
 

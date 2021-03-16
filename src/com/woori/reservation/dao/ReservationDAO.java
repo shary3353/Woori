@@ -104,17 +104,17 @@ public class ReservationDAO {
 		System.out.println(start + " ~ " + end + "까지의 리스트");
 		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
 
-		String sql = "SELECT rnum, r.r_idx, r.p_idx, r.p_name, r.sid, to_char(r.reg_date,'yyyy-mm-dd') reg_date,"
-				+ " to_char(r.visit_date, 'yyyy-mm-dd') visit_date, rs.status "
-				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r.r_idx, r.p_idx, r.reg_date, r.visit_date, r.cid, r.rs_idx, p.p_name, p.sid "
-				+ "FROM reservation r, product p WHERE r.cid='test1' AND r.p_idx = p.p_idx) r, reservation_status rs "
+		String sql = "SELECT rnum, r.r_idx, r.p_idx, r.p_name, r.sid, to_char(r.reg_date,'yyyy-mm-dd') reg_date,to_char(r.visit_date, 'yyyy-mm-dd') visit_date, rs.status, r.newFileName "
+				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r.r_idx, r.p_idx, r.reg_date, r.visit_date, r.cid, r.rs_idx, p.p_name, p.sid, p.newfilename "
+				+ "FROM reservation r, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p WHERE r.cid=? AND r.p_idx = p.p_idx) r, reservation_status rs "
 				+ "WHERE r.cid=? AND rs.rs_idx = r.rs_idx AND rnum BETWEEN ? AND ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
-			ps.setInt(2, start);
-			ps.setInt(3, end);
+			ps.setString(2, cid);
+			ps.setInt(3, start);
+			ps.setInt(4, end);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ReservationDTO dto = new ReservationDTO();
@@ -125,6 +125,7 @@ public class ReservationDAO {
 				dto.setReg_date(rs.getString(6));
 				dto.setVisit_date(rs.getString(7));
 				dto.setStatus(rs.getString(8));
+				dto.setNewFileName(rs.getString(9));
 				list.add(dto);
 			}
 			System.out.println("위시리스트 데이터 수 : " + list.size());

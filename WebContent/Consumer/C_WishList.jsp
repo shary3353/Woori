@@ -141,7 +141,7 @@ form {
 									</tr>
 								</table>
 							</td>
-							<td>${list.p_price}</td>
+							<td>${list.p_price}원</td>
 							<td>${list.sid}</td>
 							<td><a href="#" class="reserBtn">예약하기</a></td>
 							<td><input class="delBtn" type="button" value="X"

@@ -18,16 +18,15 @@
 }
 
 #myInfo {
-	width: 1000px;
-	height: 500px;
-	float: left;
-	margin: 50px 150px;
 	text-align: center;
 }
 
 #infoBox {
+	margin-top: 75px;
+	margin-left: 35%;
+	position:absolute;
 	width: 550px;
-	margin: 50px 50px;
+	
 }
 
 
