@@ -109,15 +109,15 @@
             </tr>
             <tr>
                 <th>신고자</th>
-                <td>${dto.Reporter_ID }</td>
+                <td>${dto.reporter_id }</td>
             </tr>
             <tr>
                 <th>신고대상자</th>
-                <td>${dto.Target_ID}</td>
+                <td>${dto.target_id}</td>
             </tr>
             <tr>
                 <th>신고 카테고리</th>
-                <td>${dto.Category }</td>
+                <td>${dto.category }</td>
             </tr>
             <tr>
                 <th>처리상태</th>
@@ -132,7 +132,7 @@
             </tr>
         </table>
     </div>
-    <div id="button"><button >내 신고내역 목록 가기</button></div>
+    <div id="button"><button onclick="location.href='../Consumer/C_ReportList.jsp'">내 신고내역 목록 가기</button></div>
     </div>
 </body>
 </html>

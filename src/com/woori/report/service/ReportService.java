@@ -70,13 +70,13 @@ public class ReportService {
 
 	public void detail() throws ServletException, IOException {
 		String idx = req.getParameter("idx");
-		
+		System.out.println("idx : " + idx);
 		ReportDAO dao = new ReportDAO();
 		ReportDTO dto = new ReportDTO();
 		dto = dao.detail(idx);
 		
 		req.setAttribute("dto", dto);
-		dis = req.getRequestDispatcher("ServiceCenter/ReportDetail.jsp");
+		dis = req.getRequestDispatcher("ReportDetail.jsp");
 		dis.forward(req, resp);
 		
 	}
