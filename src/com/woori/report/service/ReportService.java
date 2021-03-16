@@ -90,6 +90,18 @@ public class ReportService {
 		dis.forward(req, resp);
 		
 	}
+
+	public void sReportDetail() throws ServletException, IOException {
+		String idx = req.getParameter("idx");
+		System.out.println("idx : " + idx);
+		ReportDAO dao = new ReportDAO();
+		ReportDTO dto = new ReportDTO();
+		dto = dao.detail(idx);
+		
+		req.setAttribute("dto", dto);
+		dis = req.getRequestDispatcher("S_ReportDetail.jsp");
+		dis.forward(req, resp);
+	}
 	
 
 }

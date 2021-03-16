@@ -127,7 +127,7 @@ public class ReportDAO {
 		}return r_idx;
 	}
 
-	public ReportDTO detail(String idx) {
+	public ReportDTO detail(String idx) { //고객센터 신고상세보기, 판매자 신고상세보기에서 둘다 사용 중 - 변경 시 알릴 것.
 		
 		String sql = "SELECT subject, reporter_id, target_id, rs.categories AS categories, status, content FROM\r\n" + 
 				"Report r, report_categories rs WHERE r.rc_code = rs.rc_idx AND r_idx = ?";

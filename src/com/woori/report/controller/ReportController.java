@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.report.service.ReportService;
 /*
-요청 : 판매자 신고내역 리스트
+요청 : 판매자 - 신고내역 리스트, 신고상세보기
+고객센터 - 신고, 신고상세보기
 */
-@WebServlet({"/Seller/sReportList" , "/ServiceCenter/Report", "/ServiceCenter/ReportDetail"})
+@WebServlet({"/Seller/sReportList" ,"/Seller/sReportDetail"
+	, "/ServiceCenter/Report", "/ServiceCenter/ReportDetail"})
 public class ReportController extends HttpServlet {
 
 	@Override
@@ -46,6 +48,10 @@ public class ReportController extends HttpServlet {
 		case "/Seller/sReportList":
 			System.out.println("판매자 신고내역 리스트 요청");
 			service.sReportList();
+			break;
+		case "/Seller/sReportDetail":
+			System.out.println("판매자 신고 상세보기 요청");
+			service.sReportDetail();
 			break;
 			
 		case  "/ServiceCenter/Report":
