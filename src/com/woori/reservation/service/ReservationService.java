@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.reservation.dao.ReservationDAO;
 import com.woori.reservation.dto.ReservationDTO;
+import com.woori.wish.dao.WishDAO;
+import com.woori.wish.dto.WishDTO;
 
 public class ReservationService {
 
@@ -74,6 +76,21 @@ public class ReservationService {
 		req.setAttribute("currPage", group);
 
 		RequestDispatcher dis = req.getRequestDispatcher("./C_ReservationList.jsp");
+		dis.forward(req, resp);
+	}
+
+	public void cMyPageMain() throws ServletException, IOException {
+		req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String cid = (String) req.getSession().getAttribute("loginId");
+		ReservationDAO dao = new ReservationDAO();
+		ArrayList<ReservationDTO> rList = dao.mainReservationList(cid);
+		
+		WishDAO wdao = new WishDAO();
+		ArrayList<WishDTO> wList = wdao.mainWishList(cid);
+		
+		req.setAttribute("rList", rList);
+		req.setAttribute("wList", wList);
+		RequestDispatcher dis = req.getRequestDispatcher("./C_MyPageMain.jsp");
 		dis.forward(req, resp);
 	}
 

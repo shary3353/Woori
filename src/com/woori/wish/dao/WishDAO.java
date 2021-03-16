@@ -126,4 +126,30 @@ public class WishDAO {
 		return success;
 	}
 
+	public ArrayList<WishDTO> mainWishList(String cid) {
+		String sql = "SELECT w.rnum, p.p_name, p.p_price, p.newfilename " + 
+				"	FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,cid FROM wishlist) w, (SELECT p.p_idx, p.p_name, p.p_price, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p\r\n" + 
+				"	WHERE w.cid=? and w.p_idx = p.p_idx and rnum BETWEEN 1 AND 3";
+		ArrayList<WishDTO> list = new ArrayList<WishDTO>();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				WishDTO dto = new WishDTO();
+				dto.setP_name(rs.getString(2));
+				dto.setP_price(rs.getInt(3));
+				dto.setNewFileName(rs.getString(4));
+				list.add(dto);
+			}
+			System.out.println(list.size());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		
+		return list;
+	}
+
 }

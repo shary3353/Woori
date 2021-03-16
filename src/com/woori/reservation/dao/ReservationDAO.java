@@ -158,4 +158,31 @@ public class ReservationDAO {
 		return max;
 	}
 
+	public ArrayList<ReservationDTO> mainReservationList(String cid) {
+		String sql = "SELECT r.rnum, p.p_name,  p.p_price, p.newfilename, to_char(r.visit_date, 'yyyy-mm-dd') "
+				+ "FROM (SELECT p.p_idx, p.p_name, p.p_price, p.sid, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p"
+				+ ",(SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, cid, r_idx, visit_date, p_idx FROM reservation WHERE cid=?) r "
+				+ "WHERE r.p_idx = p.p_idx AND rnum BETWEEN 1 AND 3";
+		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ReservationDTO dto = new ReservationDTO();
+				dto.setP_name(rs.getString(2));
+				dto.setP_price(rs.getString(3));
+				dto.setNewFileName(rs.getString(4));
+				dto.setVisit_date(rs.getString(5));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		
+		return list;
+	}
+
 }

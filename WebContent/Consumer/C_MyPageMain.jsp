@@ -16,7 +16,7 @@
 }
 
 .reservationBox {
-	display: inline-block;
+	
 }
 
 .reservationInnerBox {
@@ -25,13 +25,12 @@
 	height: 200px;
 	border: 5px solid lightgray;
 	border-radius: 25px;
-	margin: 0px 50px;
+	margin: 10px 50px;
 	margin-bottom: 50px;
 }
 
 .wishListBox {
-	position: relative;
-	display: inline-block;
+	
 }
 
 .wishListInnerBox {
@@ -61,6 +60,7 @@ td {
 .more {
 	text-align: right;
 }
+
 .moreBtn {
 	text-decoration: none;
 }
@@ -73,97 +73,53 @@ td {
 	<div class="wrapper">
 		<div class="reservationBox">
 			<div class="more">
-				<p style="font-size: 25px; font-weight: 600; text-align: left; color:mediumslateblue">예약 내역</p>
-				<a href="#" class="moreBtn"><img src="../img/plus_Btn.png" style="width: 25px; height: 25px"/></a>
-			</div>
-			<div class="reservationInnerBox">
-				<table>
-					<tr>
-						<th rowspan="3"><img src="../img/no-image.png" alt="상품사진"
-							class="pImg" /></th>
-						<td>상품제목</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-					</tr>
-					<tr>
-						<td>방문예정일</td>
-					</tr>
-				</table>
-			</div>
-			<div class="reservationInnerBox">
-				<table>
-					<tr>
-						<th rowspan="3"><img src="../img/no-image.png" alt="상품사진"
-							class="pImg" /></th>
-						<td>상품제목</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-					</tr>
-					<tr>
-						<td>방문예정일</td>
-					</tr>
-				</table>
-			</div>
-			<div class="reservationInnerBox">
-				<table>
-					<tr>
-						<th rowspan="3"><img src="../img/no-image.png" alt="상품사진"
-							class="pImg" /></th>
-						<td>상품제목</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-					</tr>
-					<tr>
-						<td>방문예정일</td>
-					</tr>
-				</table>
-			</div>
-		</div>
+				<p
+					style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue">
+					예약 내역 <a href="cReservationList?page=1" class="moreBtn"><img
+						src="../img/plus_Btn.png" style="width: 25px; height: 25px" /></a>
+				</p>
 
+			</div>
+			<c:forEach items="${rList}" var="rList">
+				<div class="reservationInnerBox">
+					<table>
+						<tr>
+							<th rowspan="3"><img src="photo/${rList.newFileName}"
+								alt="${rList.newFileName}" class="pImg" /></th>
+							<td>${rList.p_name}</td>
+						</tr>
+						<tr>
+							<td>${rList.p_price}원</td>
+						</tr>
+						<tr>
+							<td>방문 예정일  ${rList.visit_date}</td>
+						</tr>
+					</table>
+				</div>
+			</c:forEach>
+		</div>
 		<div class="wishListBox">
 			<div class="more">
-				<p style="font-size: 25px; font-weight: 600; text-align: left; color:mediumslateblue">위시리스트</p>
-				<a href="wishPaging?page=1" class="moreBtn"><img src="../img/plus_Btn.png" style="width: 25px; height: 25px"/></a>
+				<p
+					style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue">
+					위시리스트 <a href="wishPaging?page=1" class="moreBtn"><img
+						src="../img/plus_Btn.png" style="width: 25px; height: 25px" /></a>
+				</p>
 			</div>
-			<div class="wishListInnerBox">
-				<table>
-					<tr>
-						<th rowspan="3"><img src="../img/no-image.png" alt="상품사진"
-							class="pImg" /></th>
-						<td>상품제목</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-					</tr>
-				</table>
-			</div>
-			<div class="wishListInnerBox">
-				<table>
-					<tr>
-						<th rowspan="3"><img src="../img/no-image.png" alt="상품사진"
-							class="pImg" /></th>
-						<td>상품제목</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-					</tr>
-				</table>
-			</div>
-			<div class="wishListInnerBox">
-				<table>
-					<tr>
-						<th rowspan="3"><img src="../img/no-image.png" alt="상품사진"
-							class="pImg" /></th>
-						<td>상품제목</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-					</tr>
-				</table>
-			</div>
+			<c:forEach items="${wList}" var="wList">
+				<div class="wishListInnerBox">
+					<table>
+						<tr>
+							<th rowspan="3"><img src="photo/${wList.newFileName}"
+								alt="${wList.newFileName}" class="pImg" /></th>
+							<td>${wList.p_name}</td>
+						</tr>
+						<tr>
+							<td>${wList.p_price}원</td>
+						</tr>
+					</table>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </body>
