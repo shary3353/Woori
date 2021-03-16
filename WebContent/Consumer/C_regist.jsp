@@ -6,6 +6,26 @@
     <meta charset="UTF-8">
     <title>구매자회원가입</title>
     <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+    
+    <script>
+	 function check_pw(){
+		 var pw = document.getElementById('pw').value;
+		 
+		 if(document.getElementById('pw').value!=''&&document.getElementById('PwChk').value!=''){
+			 if(document.getElementById('pw').value == document.getElementById('PwChk').value){
+				 document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
+				 document.getElemnetById('check').style.color='green';
+			 }else{
+				 document.getElementById('check'.innerHTML)='비밀번호가 일치하지 않습니다.';
+				 document.getElemnetById('check').style.color='red';
+			 }
+		 }
+	 }
+	
+    
+    </script>
+   
+
     <style>
         body{
             position: relative;
@@ -56,13 +76,15 @@
         margin-left: auto;
         margin-right: auto;
     }
-
+  
     </style>
 
+	
   
 </head>
 
 <body style="padding-top: 200;">
+
     <div style="text-align: center;">
         <img src="../img/Consumer_regist.PNG" alt="logo" class="logo">
     </div>
@@ -88,13 +110,14 @@
             <tr>
                 <th>비밀번호 </th>
                 <td>
-                    <input type="password" name="pw" value="" placeholder="비밀번호를 입력해주세요." />
+                    <input type="password" name="pw"  value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw" />
                 </td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
                 <td>
-                    <input type="password" name="PwChk" value="" placeholder="비밀번호를 입력해주세요." />
+                    <input type="password" name="PwChk" value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw"/>
+                    <font id="chkNotice" size="5"></font>
                 </td>
             </tr>
             <tr>
@@ -102,7 +125,7 @@
                 <td>
                     <form name="birthday" action="값을 보낼 주소" method="post">
                         <input type='date' name='userBirthday' />
-                    </form>
+          </form>
                 </td>
             </tr>
             <tr>
@@ -138,6 +161,9 @@
         </table>
     </form>
 </body>
+  
+
+
 
 
 </html>
