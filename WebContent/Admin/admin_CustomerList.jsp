@@ -42,7 +42,7 @@
 	                        	<td>true</td>
 	                        </c:if>
 	                        <c:if test="${customer.isBlack == 0}">	<!-- 블랙리스트 false -->
-	                        	<td>false</td>
+	                        	<td id="false${status.count }">false</td>
 	                        </c:if>
 	                        <td>${customer.reg_date }</td>
 	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
@@ -95,7 +95,8 @@
 					$('td').remove('#blackBtn'+number);
 					$('#inputReason'+number).attr('colspan', '2');
 					$('#inputReason'+number).html('이미등록된회원입니다.');
-					$('#stack'+number).html(obj.newStack)
+					$('#stack'+number).html(obj.newStack);
+					$('#false'+number).html('true');
 				}else{
 					alert('블랙리스트 등록에 실패하였습니다.');
 				}
