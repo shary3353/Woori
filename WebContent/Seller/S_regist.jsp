@@ -72,6 +72,7 @@
             <br/>
         <form>
             <table>
+            	<tr>
                 <th>아이디</th>
                 <td>
                     <input type="text" name="PurchaserId" value="" placeholder="아이디를 입력해주세요." />
