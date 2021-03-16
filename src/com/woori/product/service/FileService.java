@@ -18,7 +18,7 @@ public class FileService {
 	}
 
 	public ProductDTO regist() { //물품파일 등록하기
-		String savePath = "D:/MVC/Woori/WebContent/img/";//1. 저장할 폴더 지정
+		String savePath = "D:/MVC/Woori/WebContent/Uploaded_Img/";//1. 저장할 폴더 지정
 		int maxSize = 10*1024*1024;//2. 사이즈 지정
 		ProductDTO dto = null; //초기값- null
 		
@@ -61,7 +61,7 @@ public class FileService {
 	}
 
 	public void delete(String delFileName) { //파일삭제
-		File file = new File("D:/MVC/Woori/WebContent/img/"+delFileName);
+		File file = new File("D:/MVC/Woori/WebContent/Uploaded_Img/"+delFileName);
 		if(file.exists()) {//이 파일이 존재 하는지?
 			boolean success = file.delete();
 			System.out.println("기존 사진 파일 삭제 성공 여부 : "+success);

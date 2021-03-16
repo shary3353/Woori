@@ -60,7 +60,7 @@
 					</c:if>
                     <!-- <img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"/> -->
                     <!--	server.xml에 추가 할 것 
-			      			<Context docBase="D:\MVC\Woori\WebContent\img" path="/Woori/Seller/photo"/>
+			      			<Context docBase="D:\MVC\Woori\WebContent\Uploaded_Img" path="/Woori/Seller/photo"/>
 			         -->
                 </td>
                 <td class="column-name" >물품명</td>
