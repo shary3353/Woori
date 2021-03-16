@@ -74,7 +74,7 @@
             <tr>
                 <td>${reportlist.r_idx}</td>
                 <td>${reportlist.category}</td>
-                <td><a href="#신고상세보기">${reportlist.subject}</a></td>
+                <td><a href="./sReportDetail?idx=${reportlist.r_idx}">${reportlist.subject}</a></td>
                 <td>${reportlist.target_id}</td>
                 <td>${reportlist.r_date}</td>
                 <td id="chkAnswer">

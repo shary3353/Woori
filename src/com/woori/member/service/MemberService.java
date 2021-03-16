@@ -186,11 +186,25 @@ public class MemberService {
   		String reason = req.getParameter("bReason");
   		System.out.println(sid+" / "+reason);
   		
+  		//1. s_blacklist 에 해당 sid가 있는지 확인
   		MemberDAO dao = new MemberDAO();
-  		boolean success = dao.sBlackRegist(sid, admin_id, reason);
+  		boolean  success = false;
+  		int stack = 1;
+  		if(dao.checkSID(sid)) {
+  			//1-1. 해당 sid가 블랙리스트에 존재하면(true) update blacklist isblack=1, stack+1, reason, admin_id
+  			dao = new MemberDAO();
+  			success = dao.sBlackUpdate(sid, admin_id, reason);
+  			dao = new MemberDAO();
+  			stack = dao.getSellerNewStack(sid);
+  		}else {								
+  			//1-2. 해당 sid가 블랙리스트에 없으면(false) insert into blacklist
+  			dao = new MemberDAO();
+  			success = dao.sBlackRegist(sid, admin_id, reason);
+  		}
   		if(success) {	//작성 성공 시
   			System.out.println("해당 판매자를 블랙리스트에 등록하였습니다.");
   			map.put("addBlack", success);
+  			map.put("newStack", stack);
   			Gson gson = new Gson();
   			String json = gson.toJson(map);
   			System.out.println(json);
@@ -206,11 +220,25 @@ public class MemberService {
   		String reason = req.getParameter("bReason");
   		System.out.println(cid+" / "+reason);
   		
+  		//1. c_blacklist 에 해당 cid가 있는지 확인
   		MemberDAO dao = new MemberDAO();
-  		boolean success = dao.cBlackRegist(cid, admin_id, reason);
+  		boolean  success = false;
+  		int stack = 1;
+  		if(dao.checkCID(cid)) {
+  			//1-1. 해당 cid가 블랙리스트에 존재하면(true) update blacklist isblack=1, stack+1, reason, admin_id
+  			dao = new MemberDAO();
+  			success = dao.cBlackUpdate(cid, admin_id, reason);
+  			dao = new MemberDAO();
+  			stack = dao.getCustomerNewStack(cid);
+  		}else {								
+  			//1-2. 해당 cid가 블랙리스트에 없으면(false) insert into blacklist
+  			dao = new MemberDAO();
+  			success = dao.cBlackRegist(cid, admin_id, reason);
+  		}
   		if(success) {	//작성 성공 시
   			System.out.println("해당 구매자를 블랙리스트에 등록하였습니다.");
   			map.put("addBlack", success);
+  			map.put("newStack", stack);
   			Gson gson = new Gson();
   			String json = gson.toJson(map);
   			System.out.println(json);
@@ -218,19 +246,19 @@ public class MemberService {
   		}
   	}
   	
-	public void blackUpdate() throws ServletException, IOException{
+	public void blackCancel() throws ServletException, IOException{
 		req.setCharacterEncoding("utf-8");
 		String id = req.getParameter("id");
-		System.out.println("블랙리스트 업데이트 할 아이디 : "+id);
+		System.out.println("블랙리스트 취소 할 아이디 : "+id);
 		if(id.indexOf("-")>0) {	//-를 포함할 경우 판매자
 			MemberDAO dao = new MemberDAO();
-			if(dao.sBlackUpdate(id)) {
-				System.out.println(id+"의 블랙리스트 수정완료");
+			if(dao.sBlackCancel(id)) {
+				System.out.println(id+"의 블랙리스트 취소완료");
 			}
 		}else {							//그렇지 않을 경우 구매자
 			MemberDAO dao = new MemberDAO();
-			if(dao.cBlackUpdate(id)) {
-				System.out.println(id+"의 블랙리스트 수정완료");
+			if(dao.cBlackCancel(id)) {
+				System.out.println(id+"의 블랙리스트 취소완료");
 			}
 		}
 		resp.sendRedirect("./bList");

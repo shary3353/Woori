@@ -173,11 +173,31 @@ public class MemberDAO {
 		return success;
 	}
 	
+	public boolean sBlackUpdate(String sid, String admin_id, String reason) {
+		boolean success = false;
+		String sql = "UPDATE s_blacklist SET admin_id=?, reason=?, stack=stack+1, isblack=1 WHERE sid=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, admin_id);
+			ps.setString(2, reason);
+			ps.setString(3, sid);
+			if(ps.executeUpdate() > 0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+	
 	
 	public boolean cBlackRegist(String cid, String admin_id, String reason) {
 		boolean success  = false;
 		String sql = "INSERT INTO c_blacklist (b_idx, cid, admin_id, reason) values (c_blacklist_seq.nextval, ?,?,?)";
-		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
@@ -193,10 +213,31 @@ public class MemberDAO {
 		}
 		return success;
 	}
+	
+	public boolean cBlackUpdate(String cid, String admin_id, String reason) {
+		boolean success = false;
+		String sql = "UPDATE c_blacklist SET admin_id=?, reason=?, stack=stack+1, isblack=1 WHERE cid=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, admin_id);
+			ps.setString(2, reason);
+			ps.setString(3, cid);
+			if(ps.executeUpdate() > 0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
 
-	public boolean sBlackUpdate(String id) {
+	public boolean sBlackCancel(String id) {
 		boolean success  = false;
-		String sql = "UPDATE s_blacklist SET isblack=0 , stack = stack+1 WHERE sid=?";
+		String sql = "UPDATE s_blacklist SET isblack=0 WHERE sid=?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -212,9 +253,9 @@ public class MemberDAO {
 		return success;
 	}
 
-	public boolean cBlackUpdate(String id) {
+	public boolean cBlackCancel(String id) {
 		boolean success  = false;
-		String sql = "UPDATE c_blacklist SET isblack=0 , stack = stack+1 WHERE cid=?";
+		String sql = "UPDATE c_blacklist SET isblack=0 WHERE cid=?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -229,5 +270,88 @@ public class MemberDAO {
 		}
 		return success;
 	}
+
+	public boolean checkCID(String cid) {
+		boolean check = false;
+		String sql = "SELECT cid FROM c_blacklist WHERE cid=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			if(rs.next())
+				if(rs.getString("cid") != null) {	//있음
+					System.out.println("cid:"+rs.getString("cid"));
+					check = true;
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return check;
+	}
+	
+	public boolean checkSID(String sid) {
+		boolean check = false;
+		String sql = "SELECT sid FROM s_blacklist WHERE sid=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next())
+				if(rs.getString("cid") != null) {	//있음
+					System.out.println("sid:"+rs.getString("sid"));
+					check = true;
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return check;
+	}
+
+	public int getSellerNewStack(String sid) {
+		int newStack = 0;
+		String sql = "SELECT stack FROM s_blacklist WHERE sid=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				newStack = rs.getInt("stack");
+				System.out.println("newStack : "+newStack);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newStack;
+	}
+	
+	public int getCustomerNewStack(String cid) {
+		int newStack = 0;
+		String sql = "SELECT stack FROM c_blacklist WHERE cid=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				newStack = rs.getInt("stack");
+				System.out.println("newStack : "+newStack);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newStack;
+	}
+
 
 }
