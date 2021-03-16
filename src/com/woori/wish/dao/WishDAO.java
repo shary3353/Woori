@@ -153,7 +153,7 @@ public class WishDAO {
 	}
 
 	public void addWishList(String p_idx, String cid) {
-		String sql = "INSERT INTO wishlist(cid, idx) VALUES(?,?)";
+		String sql = "INSERT INTO wishlist(wish_idx, cid, p_idx) VALUES(wishlist_seq.nextval,?,?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
@@ -165,7 +165,5 @@ public class WishDAO {
 			resClose();
 		}
 	}
-	
-	
 
 }
