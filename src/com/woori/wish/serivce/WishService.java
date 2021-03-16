@@ -34,7 +34,8 @@ public class WishService {
 		}
 		WishDAO dao = new WishDAO();
 		HashMap<String, Object> map = dao.pagingList(group, cid);
-
+		
+		
 		req.setAttribute("maxPage", map.get("maxPage"));
 		req.setAttribute("list", map.get("list"));
 		req.setAttribute("currPage", group);

@@ -132,8 +132,9 @@ form {
 								<table class="p_PhoNDesc">
 									<tr>
 										<td class="p_PhoNDesc" rowspan="3" style="width: 650px;"><img
-											src="../img/no-image.png" alt="상품사진"
-											style="width: 125px; height: 125px;" /></td>
+											src="${list.photoPath}" alt="${list.photoPath}"
+											style="width: 125px; height: 125px;" />
+										</td>
 									</tr>
 									<tr>
 										<td class="p_PhoNDesc">${list.p_name}</td>
@@ -180,6 +181,7 @@ form {
 		</div>
 	</div>
 </body>
-<script></script>
+<script>
+</script>
 
 </html>

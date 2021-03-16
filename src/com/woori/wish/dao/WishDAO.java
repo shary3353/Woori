@@ -53,9 +53,9 @@ public class WishDAO {
 		int start = end - (pagePerCnt - 1);
 		System.out.println(start + " ~ " + end + "까지의 리스트");
 		ArrayList<WishDTO> list = new ArrayList<WishDTO>();
-		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.fileidx, w.w_date "
-				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist) w, product p	"
-				+ "WHERE w.cid=? and w.p_idx = p.p_idx(+) and rnum BETWEEN ? AND ?";
+		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.newfilename\r\n" + 
+				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist) w, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p\r\n" + 
+				"    WHERE w.cid=? and w.p_idx = p.p_idx(+) and rnum BETWEEN ? AND ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
@@ -69,11 +69,12 @@ public class WishDAO {
 				dto.setP_name(rs.getString(3));
 				dto.setSid(rs.getString(4));
 				dto.setP_price(rs.getInt(5));
-				dto.setFileIdx(6);
+				dto.setNewFileName(rs.getString(6));
+				dto.setPhotoPath("photo/"+dto.getNewFileName());
 				list.add(dto);
+				System.out.println(dto.getNewFileName());
 			}
 			System.out.println("위시리스트 데이터 수 : " + list.size());
-
 			int maxPage = getMaxPage(pagePerCnt, cid);
 			map.put("list", list);
 			map.put("maxPage", maxPage);

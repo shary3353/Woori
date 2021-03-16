@@ -13,7 +13,14 @@ public class WishDTO {
 	private int fileIdx;
 	private String oriFileName;
 	private String newFileName;
+	private String photoPath;
 	
+	public String getPhotoPath() {
+		return photoPath;
+	}
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
 	public String getSid() {
 		return sid;
 	}
