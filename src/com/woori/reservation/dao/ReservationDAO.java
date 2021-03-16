@@ -46,18 +46,28 @@ public class ReservationDAO {
 		}
 	}
 
-	public ArrayList<ReservationDTO> sReservationList(String sid) {
+	public HashMap<String, Object> sReservationList(String sid, int page) { //판매자 예약내역 리스트
+		
+		//페이징
+		int pagePerCnt = 10;//페이지당 개수
+		int end = page * pagePerCnt;//페이지의 끝
+		int start = end-(pagePerCnt-1);//페이지의 시작
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//
 		ArrayList<ReservationDTO> list = new ArrayList<ReservationDTO>();
-		String sql = "SELECT r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid, th.orifilename, th.newfilename"
-				+ " FROM reservation r, reservation_status rs, product p, seller s, thumbfile th"
-				+ " WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND p.p_idx=th.p_idx(+)"
-				+ " AND s.sid = ?";
+		String sql = "SELECT r_idx, visit_date, reg_date, cid, p_idx, p_name, rs_idx, status, sid, orifilename, newfilename " + 
+				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY r.r_idx DESC) AS rnum, r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid, th.orifilename, th.newfilename " + 
+				"        FROM reservation r, reservation_status rs, product p, seller s, thumbfile th " + 
+				"        WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND p.p_idx=th.p_idx(+) " + 
+				"        AND s.sid = ?) " + 
+				"    WHERE rnum BETWEEN ? AND ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, sid);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
-			
 			while (rs.next()) {
 				ReservationDTO dto = new ReservationDTO();
 				dto.setR_idx(rs.getInt("r_idx"));// 문의번호
@@ -71,12 +81,37 @@ public class ReservationDAO {
 				dto.setNewFileName(rs.getString("newfilename"));//새파일
 				list.add(dto);
 			}
+			System.out.println("예약리스트 수:" + list.size()); //리스트 사이즈 확인	
+			int maxPage = getMaxPageSellerReservationList(sid, pagePerCnt);
+			map.put("list", list);
+			map.put("maxPage", maxPage);
+			System.out.println("max page : "+maxPage);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			resClose();
 		}
-		return list;
+		return map;
+	}
+
+	private int getMaxPageSellerReservationList(String sid, int pagePerCnt) { //판매자 예약리스트 최대페이지
+		String sql="SELECT COUNT (r_idx) FROM (SELECT r.r_idx, r.visit_date, r.reg_date, r.cid, p.p_idx, p.p_name, r.rs_idx, rs.status, s.sid, th.orifilename, th.newfilename " + 
+				"    FROM reservation r, reservation_status rs, product p, seller s, thumbfile th " + 
+				"    WHERE r.rs_idx=rs.rs_idx AND p.sid=s.sid AND r.p_idx=p.p_idx AND p.p_idx=th.p_idx(+) " + 
+				"    AND s.sid = ?)";		
+		int max = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				int cnt = rs.getInt(1);
+				max = (int) Math.ceil(cnt/(double)pagePerCnt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return max;
 	}
 
 	public void updateResevationStatus(int r_idx, int rs_idx) { // 판매자 예약현황 변경
