@@ -168,7 +168,7 @@ form {
 				<c:if test="${currPage == maxPage}">
 					<a href="#" class="pagingBtnDisable">다음</a>
 				</c:if>
-				<c:if test="${currPage <= 1}">
+				<c:if test="${currPage < maxPage}">
 					<a href="wishPaging?page=${currPage+1}" class="pagingBtn">다음</a>
 				</c:if>
 				<c:if test="${currPage == maxPage}">
