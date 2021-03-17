@@ -34,16 +34,15 @@
 		color: #283744;
 		display: inline-block;
 	}
-    .searchList{
-        display: inline-block;
-        margin-left: 60px;
-    }
     .searchList table{
         border: 1px solid lightgray;
         border-collapse: collapse;
         width: 250px;
         height: 400px;
         margin-bottom: 70px;
+        float: left;
+        display: inline-block;
+        margin-left: 60px;
     }
     .searchList table .listItemLike{
         font-family: Arial, sans-serif;
@@ -75,11 +74,6 @@
         font-weight: 700;
     }
 
-
-
-
-
-
 </style>
 </head>
 <body>
@@ -89,126 +83,29 @@
         <div id="searchBox">
 
             <div class="searchtitle">
-                <span>...에 대한 검색 상품입니다.</span>
+                <span>"${msg}" </span>
             </div>
-
             <div class="searchList">
+            
+			<c:forEach items="${search}" var="search">
                 <table>
 					<tr>
-						<td class="listItemLike">❤️50</td>
+						<td class="listItemLike">❤️${search.likes}</td>
 					</tr>
 					<tr>
-						<td class="listItemImg"><img src="../img/no-image.png" width="200" height="300"/></td>
+						<td class="listItemImg">
+							<img src="Uploaded_Img/${dto.newFileName}" alt="${dto.oriFileName}" width="200px"  height="300px"/>
+						</td>
 					</tr>
 					<tr>
-						<td class="listItemName">임시 검색상품 이름</td>
+						<td class="listItemName">${search.p_name}</td>
 					</tr>
                     <tr>
-                        <td class="listItemPrice">1.000.000 원</td>
+                        <td class="listItemPrice">${search.p_price} 원</td>
                     </tr>
 				</table>
-            </div>
-
-            <div class="searchList">
-                <table>
-					<tr>
-						<td class="listItemLike">❤️50</td>
-					</tr>
-					<tr>
-						<td class="listItemImg"><img src="../img/no-image.png" width="200" height="300"/></td>
-					</tr>
-					<tr>
-						<td class="listItemName">임시 검색상품 이름</td>
-					</tr>
-                    <tr>
-                        <td class="listItemPrice">1.000.000 원</td>
-                    </tr>
-				</table>
-            </div>
-
-            <div class="searchList">
-                <table>
-					<tr>
-						<td class="listItemLike">❤️50</td>
-					</tr>
-					<tr>
-						<td class="listItemImg"><img src="../img/no-image.png" width="200" height="300"/></td>
-					</tr>
-					<tr>
-						<td class="listItemName">임시 검색상품 이름</td>
-					</tr>
-                    <tr>
-                        <td class="listItemPrice">1.000.000 원</td>
-                    </tr>
-				</table>
-            </div>
-
-            <div class="searchList">
-                <table>
-					<tr>
-						<td class="listItemLike">❤️50</td>
-					</tr>
-					<tr>
-						<td class="listItemImg"><img src="../img/no-image.png" width="200" height="300"/></td>
-					</tr>
-					<tr>
-						<td class="listItemName">임시 검색상품 이름</td>
-					</tr>
-                    <tr>
-                        <td class="listItemPrice">1.000.000 원</td>
-                    </tr>
-				</table>
-            </div>
-
-            <div class="searchList">
-                <table>
-					<tr>
-						<td class="listItemLike">❤️50</td>
-					</tr>
-					<tr>
-						<td class="listItemImg"><img src="../img/no-image.png" width="200" height="300"/></td>
-					</tr>
-					<tr>
-						<td class="listItemName">임시 검색상품 이름</td>
-					</tr>
-                    <tr>
-                        <td class="listItemPrice">1.000.000 원</td>
-                    </tr>
-				</table>
-            </div>
-
-            <div class="searchList">
-                <table>
-					<tr>
-						<td class="listItemLike">❤️50</td>
-					</tr>
-					<tr>
-						<td class="listItemImg"><img src="../img/no-image.png" width="200" height="300"/></td>
-					</tr>
-					<tr>
-						<td class="listItemName">임시 검색상품 이름</td>
-					</tr>
-                    <tr>
-                        <td class="listItemPrice">1.000.000 원</td>
-                    </tr>
-				</table>
-            </div>
-
-            <div class="searchList">
-                <table>
-					<tr>
-						<td class="listItemLike">❤️50</td>
-					</tr>
-					<tr>
-						<td class="listItemImg"><img src="../img/no-image.png" width="200" height="300"/></td>
-					</tr>
-					<tr>
-						<td class="listItemName">임시 검색상품 이름</td>
-					</tr>
-                    <tr>
-                        <td class="listItemPrice">1.000.000 원</td>
-                    </tr>
-				</table>
+            </c:forEach>
+            
             </div>
         </div>
     </div>

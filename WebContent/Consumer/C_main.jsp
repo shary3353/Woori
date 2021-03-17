@@ -113,7 +113,7 @@
 
 <body>
 	<div id="wrap">
-		<jsp:include page="../Include/navi.html"></jsp:include>
+		<jsp:include page="../Include/navi.jsp"></jsp:include>
     	<!--  메인페이지 시작 -->
 		<!-- 메인컨텐츠 박스 -->
 		<div id="mainBox">

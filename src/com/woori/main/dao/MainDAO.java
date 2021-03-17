@@ -150,6 +150,33 @@ public class MainDAO {
 		return success;
 	}
 
+
+	public ArrayList<ProductDTO> Creservation(String searchname) {
+		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
+		String sql="SELECT p.p_idx,p.p_name,p.likes,p.p_price,t.orifilename,t.newfilename \r\n" + 
+				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_name LIKE ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, searchname);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setP_idx(rs.getInt("p_idx"));
+				dto.setP_name(rs.getString("p_name"));
+				dto.setLikes(rs.getInt("likes"));
+				dto.setP_price(rs.getInt("p_price"));
+				dto.setOriFileName(rs.getString("orifilename"));
+				dto.setNewFileName(rs.getString("newfilename"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return list;
+	}
+
 	
 	
 }

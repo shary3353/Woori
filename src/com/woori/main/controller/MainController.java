@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.main.service.MainService;
 
-@WebServlet({"/C_main","/C_itemDetail","/C_ItemReservation","/C_Reservation", "/AdminMain"})
+@WebServlet({"/C_main","/C_itemDetail","/C_ItemReservation","/C_Reservation", "/AdminMain","/C_SearchList"})
 public class MainController extends HttpServlet {
 
 	@Override
@@ -31,22 +31,27 @@ public class MainController extends HttpServlet {
 		MainService service = new MainService(req, resp);
 		switch (sub) {
 		case "/C_main":
-				System.out.println("Consumer Mainpage");
-				service.Cmain();
+			System.out.println("Consumer Mainpage");
+			service.Cmain();
 			break;
 			
 		case "/C_itemDetail":
-				System.out.println("물품 상세정보 페이지");
-				service.Citemdetail();
+			System.out.println("물품 상세정보 페이지");
+			service.Citemdetail();
 			break;
 		case "/C_ItemReservation":
 			System.out.println("물품 예약 상세보기 페이지");
 			service.CitemReservation();
-		break;
+			break;
 
 		case "/C_Reservation":
 			System.out.println("물품 예약 페이지");
 			service.CReservation();
+			break;	
+		case "/C_SearchList":
+			System.out.println("물품 검색");
+			service.Csearch();
+			break;	
 
 		case "/AdminMain":
 			System.out.println("관리자 메인 페이지");

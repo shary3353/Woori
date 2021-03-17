@@ -1,6 +1,7 @@
 package com.woori.main.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -105,7 +106,30 @@ public class MainService {
 			RequestDispatcher dis = req.getRequestDispatcher("admin_Login.jsp");
 			dis.forward(req, resp);
 		}
+		
+	}
 
+	public void Csearch() throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		String searchname = "%"+req.getParameter("searchname")+"%";
+		if(searchname.equals("%%")) {
+			searchname = null;
+		}
+		String searchtitle = req.getParameter("searchname");
+		System.out.println(searchname);
+		MainDAO dao = new MainDAO();
+		ArrayList<ProductDTO> list = dao.Creservation(searchname);
+		System.out.println(list);
+		System.out.println("리스트 크기 : " + list.size());
+		String msg = "현재 존재하는 게시글이 없습니다.";
+		if(list != null && list.size()>0) {
+			req.setAttribute("search", list);	
+			msg = searchtitle;
+		}
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
+		dis.forward(req, resp);
+		
 	}
 
 }
