@@ -102,7 +102,7 @@ public class ReportDAO {
 		return max;
 	}
 
-	public long report(ReportDTO dto) {
+	public long report(ReportDTO dto) { //고객센터 신고하기, 판매자 신고하기에서 둘다 사용 중 - 변경 시 알릴 것.
 
 		String sql = "INSERT INTO report (R_IDX, CONTENT,RC_code,Reporter_ID,Target_ID,"
 				+"SUBJECT)VALUES(Report_seq.NEXTVAL, ?, ?, ?, ?, ?)";

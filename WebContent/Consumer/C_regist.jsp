@@ -79,7 +79,7 @@
             <tr>
                 <th>아이디</th>
                 <td>
-                    <input type="text" name="PurchaserId" value="" placeholder="아이디를 입력해주세요." />
+                    <input type="text" name="cId" value="" placeholder="아이디를 입력해주세요." />
                     <input type="button" value="중복확인" onclick="idCheck()" />
                 </td>
             </tr>
@@ -88,7 +88,7 @@
             <tr>
                 <th>비밀번호 </th>
                 <td>
-                    <input type="password" name="PurchaerPw" value="" placeholder="비밀번호를 입력해주세요." />
+                    <input type="password" name="pw" value="" placeholder="비밀번호를 입력해주세요." />
                 </td>
             </tr>
             <tr>
@@ -100,7 +100,7 @@
             <tr>
                 <th>생년월일</th>
                 <td>
-                    <form name="birth" action="값을 보낼 주소" method="post">
+                    <form name="birthday" action="값을 보낼 주소" method="post">
                         <input type='date' name='userBirthday' />
                     </form>
                 </td>
@@ -121,7 +121,7 @@
             <tr>
                 <th>전화번호</th>
                 <td>
-                    <input type="number" name="phoneNumber" placeholder="전화번호를 입력해주세요." />
+                    <input type="number" name="phone" placeholder="전화번호를 입력해주세요." />
                 </td>
             </tr>
             <br />

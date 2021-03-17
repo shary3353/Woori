@@ -1,12 +1,14 @@
 package com.woori.member.controller;
 
-import java.io.IOException;
+import java.io.IOException ;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import com.woori.member.service.MemberService;
 /*처리 : (회원가입, 로그인, 회원수정, 회원상세보기, 회원리스트)
@@ -45,6 +47,14 @@ public class MemberController extends HttpServlet {
                 break;
 			case "/logout":
 				System.out.println("Request Logout");
+				req.getSession().removeAttribute("cid");
+				resp.sendRedirect("C_Login.jsp");
+				
+				req.getSession().removeAttribute("sid");
+				resp.sendRedirect("C_Login.jsp");
+				
+				req.getSession().removeAttribute("aid");
+				resp.sendRedirect("admin_Login.jsp");
 				break;
 			
 		}
@@ -55,21 +65,37 @@ public class MemberController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//join, login
+		req.setCharacterEncoding("UTF-8");
+		
+		String uri = req.getRequestURI();
+		String ctx = req.getContextPath();
+		
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("post request url : "+sub);
 		
 		MemberService service = new MemberService(req, resp);
 		
+	
+		
+		RequestDispatcher dis = null;
+		
 		switch(sub) {
+		
 		case "/cLogin":
 			System.out.println("Request Customer Login");
+			service.login();
 			break;
+		
 		case "/sLogin":
 			System.out.println("Request Seller Login");
+			service.login();
 			break;
+			
 		case "/adminLogin":
 			System.out.println("Request Admin Login");
+			service.login();
 			break;
+			
 		case "/cJoin":
 			System.out.println("Request Customer Join");
 			break;
@@ -84,12 +110,12 @@ public class MemberController extends HttpServlet {
 			System.out.println("Requset Customer UpdateInfo");
 			service.cUpdateInfo();
 			break;
-
+			
 		}
 		
 		dual(req,resp);
 	}
-
+	
 	private void dual(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		
 		req.setCharacterEncoding("UTF-8");
@@ -108,7 +134,7 @@ public class MemberController extends HttpServlet {
 			System.out.println("Request  seller profile UpdateForm");
 			service.sPfpUpdateForm();
 			break;
-		
+			
 		case "/Seller/sPfpUpdate": //판매자 회원정보 수정 요청
 			System.out.println("Request  seller profile Update");
 			service.sPfpUpdate();
@@ -121,3 +147,6 @@ public class MemberController extends HttpServlet {
 	}
 	
 }
+			
+			
+		

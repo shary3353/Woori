@@ -51,7 +51,7 @@ public class WishService {
 		WishDAO dao = new WishDAO();
 		int success = dao.delWishList(wish_idx);
 
-		resp.sendRedirect("wishList");
+		resp.sendRedirect("wishPaging");
 	}
 
 	public void addWishList() {

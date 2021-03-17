@@ -136,4 +136,39 @@ public class ReportService {
 		
 	}
 
+	public void sReportForm() throws ServletException, IOException { //판매자 신고하기 폼 보여주기
+		String target_id = req.getParameter("target_id");
+		System.out.println("신고대상자 id :" +target_id);
+		req.setAttribute("target_id", target_id);
+		dis = req.getRequestDispatcher("./S_Report.jsp");
+		dis.forward(req, resp);
+	}
+
+	public void sReport() throws ServletException, IOException {//판매자가 신고하기
+		String subejct = req.getParameter("subject");
+		String reporter_id = req.getParameter("reporter_id");
+		String target_id = req.getParameter("target_id");
+		String category = req.getParameter("category");
+		String content = req.getParameter("content");
+		System.out.println("신고내용: "+subejct + "/" + reporter_id + "/" + target_id + "/" + category + "/" + content);
+		
+		ReportDTO dto = new ReportDTO();
+		dto.setSubject(subejct);
+		dto.setReporter_id(reporter_id);
+		dto.setTarget_id(target_id);
+		dto.setCategory(category);
+		dto.setContent(content);
+		
+		ReportDAO dao = new ReportDAO();
+		long r_idx = dao.report(dto);
+		
+		String page = "sReportForm?target_id"+target_id;
+		if (r_idx > 0) {
+			page = "sReportDetail?idx="+r_idx;
+		}
+
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+
 }
