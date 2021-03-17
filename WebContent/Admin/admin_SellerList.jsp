@@ -60,7 +60,7 @@
 
             <div id="Admin_Searching">   <!--판매자리스트 검색 부분-->
 				<form>
-                    <input type="text" name="sSearch" id="searchingSellerInput" placeholder="ID검색란"><button type="submit" formaction="sSearch">검색</button>
+                    <input type="text" name="sSearch" id="searchingSellerInput" placeholder="ID검색란"><button type="submit" formaction="sSearch" id="searchBtn">검색</button>
                 </form>
             </div>  <!--판매자리스트 검색 닫음-->
 
@@ -109,7 +109,6 @@
 		}
 	});
 }); 
-	
 	
 </script>
 </html>

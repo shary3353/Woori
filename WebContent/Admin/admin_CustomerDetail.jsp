@@ -58,13 +58,41 @@
                 </table>
             </div>  <!--리스트 닫음-->
 
-            <div id="Admin_Customer_ReportList_Paging"> <!--구매자 신고리스트 페이징부분-->
+            <!-- <div id="Admin_Customer_ReportList_Paging"> 구매자 신고리스트 페이징부분
                 <span class="Page_Content">처음</span>
                 <span class="Page_Content">이전</span>
                 <span class="Page_Number">1</span>
                 <span class="Page_Content">다음</span>
                 <span class="Page_Content">마지막</span>
-            </div>  <!--페이징 닫음-->
+            </div>  페이징 닫음 -->
+            <div>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == 1}">
+					<a href="#" class="pagingBtnDisable">처음</a>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] > 1}">
+					<a href="cReservationList?page=1" class="pagingBtn">처음</a>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == 1}">
+					<a href="#" class="pagingBtnDisable">이전</a>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] > 1}">
+					<a href="cReservationList?page=${Admin_CDetailData['Admin_selectedCRListCurrPage']-1}" class="pagingBtn">이전</a>
+				</c:if>
+				<a href="#" class="pagingBtnDisable"
+					style="background-color: skyblue; color: white;">&nbsp;${Admin_CDetailData['Admin_selectedCRListCurrPage']}&nbsp;</a>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == maxPage}">
+					<a href="#" class="pagingBtnDisable">다음</a>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] <= 1}">
+					<a href="cReservationList?page=${Admin_CDetailData['Admin_selectedCRListCurrPage']+1}" class="pagingBtn">다음</a>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == Admin_CDetailData['Admin_maxRPage']}">
+					<a href="#" class="pagingBtnDisable">마지막</a>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] < Admin_CDetailData['Admin_maxRPage']}">
+					<a href="cReservationList?page=${Admin_CDetailData['Admin_maxRPage']}" class="pagingBtn">마지막</a>
+				</c:if>
+		</div>
 
         </div>  <!--구매자 상세보기 컨텐츠 닫음-->
 
