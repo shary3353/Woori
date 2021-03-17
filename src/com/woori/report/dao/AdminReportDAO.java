@@ -240,7 +240,7 @@ public class AdminReportDAO {
 	public ArrayList<ReportDTO> getRList(String id, int group) {
 		ArrayList<ReportDTO> rList = new ArrayList<>();
 		//String sql = "SELECT a.subject, a.content, a.reporter_id, a.target_id, b.categories, to_char(a.r_date, 'YYYY-MM-DD') AS r_date, a.status FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE target_id=?";
-		String sql = "SELECT rnum, subject, content, reporter_id, target_id, categories, to_char(r_date, 'YYYY-MM-DD') AS r_date, status FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.r_date) AS rnum, a.subject, a.content, a.reporter_id, a.target_id, b.categories, a.r_date, a.status FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE a.target_id = ?)WHERE rnum BETWEEN ? AND ?";
+		String sql = "SELECT rnum, subject, content, reporter_id, target_id, categories, to_char(r_date, 'YYYY-MM-DD') AS r_date, status, r_idx FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.r_date) AS rnum, a.subject, a.content, a.reporter_id, a.target_id, b.categories, a.r_date, a.status, a.r_idx FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE a.target_id = ?)WHERE rnum BETWEEN ? AND ?";
 		int start = 0;
 		int end = 0;
 
@@ -262,6 +262,7 @@ public class AdminReportDAO {
 				dto.setCategory(rs.getString("categories"));
 				dto.setR_date(rs.getString("r_date"));
 				dto.setStatus(rs.getInt("status"));
+				dto.setR_idx(rs.getInt("r_idx"));
 				rList.add(dto);
 			}
 		} catch (SQLException e) {
@@ -293,4 +294,42 @@ public class AdminReportDAO {
 		return max;
 	}
 
+	public ReportDTO getReport(int r_idx) {
+		ReportDTO dto = null;
+		String sql = "SELECT a.subject, a.reporter_id, a.target_id, b.categories, a.content, a.status FROM report a, report_categories b WHERE a.rc_code = b.rc_idx AND a.r_idx = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, r_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto = new ReportDTO();
+				dto.setSubject(rs.getString("subject"));
+				dto.setReporter_id(rs.getString("reporter_id"));
+				dto.setTarget_id(rs.getString("target_id"));
+				dto.setCategory(rs.getString("categories"));
+				dto.setContent(rs.getString("content"));
+				dto.setStatus(rs.getInt("status"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

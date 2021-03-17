@@ -1,6 +1,7 @@
 package com.woori.report.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.woori.report.dao.AdminReportDAO;
+import com.woori.report.dto.ReportDTO;
 
 public class AdminReportService {
 	HttpServletRequest req = null;
@@ -91,4 +93,29 @@ public class AdminReportService {
 	}
 
 
+	public void rDetail() throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		int r_idx = Integer.parseInt(req.getParameter("r_idx"));
+		System.out.println("요청받은 신고 번호 : "+r_idx);
+		AdminReportDAO dao = new AdminReportDAO();
+		ReportDTO selectedReport = dao.getReport(r_idx);
+		if(selectedReport != null) {
+			req.setAttribute("selectedReport", selectedReport);
+		}
+		RequestDispatcher dis = req.getRequestDispatcher("admin_ReportDetail.jsp");
+        dis.forward(req, resp);
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
