@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+
 import com.woori.black.dao.BlackDAO;
 import com.woori.member.dao.ListDAO;
 import com.woori.member.dao.MemberDAO;
@@ -28,10 +29,80 @@ public class MemberService {
 	RequestDispatcher dis = null;
 	String page = "";
 	String msg = "";
+	MemberDAO dao = null;
 
 	public MemberService(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
+	}
+	
+	//구매자 회원가입
+	public void cjoin() throws ServletException, IOException {
+		String name = req.getParameter("Cunsumername");
+		String cid = req.getParameter("cid");
+		String pw = req.getParameter("Pw");
+		String Birthday = req.getParameter("Birthday");
+		String gender = req.getParameter("gender");
+		String email = req.getParameter("email");
+		String Phone = req.getParameter("Phone");
+		System.out.println(cid+"/"+pw+"/"+name+"/"+Birthday+"/"+gender+"/"+email+"/"+Phone);
+		
+		CustomerDTO dto = new CustomerDTO();
+		
+		dto.setCid(cid);
+		dto.setPw(pw);
+		dto.setName(name);
+		dto.setBirthday(Birthday);
+		dto.setGender(gender);
+		dto.setEmail(email);
+		dto.setPhone(Phone);
+		//실패했을 때
+		msg="회원가입 실패";
+		page="C_regist.jsp";
+		//성공했을때
+		if(dao.cjoin(dto)>0) {
+			msg="회원가입 성공";
+			page="C_login.jsp";
+		}
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+	//판매자 회원가입
+	public void sjoin() throws ServletException, IOException {
+		String sid = req.getParameter("sid");
+		String pw = req.getParameter("Pw");
+		String name = req.getParameter("Sellername");
+		String gender = req.getParameter("gender");
+		String Store_call = req.getParameter("number");
+		String Birthday = req.getParameter("Birthday");
+		String email = req.getParameter("email");
+		String reg_date = req.getParameter("date");
+		String Phone = req.getParameter("Phone");
+		System.out.println(sid+"/"+pw+"/"+name+"/"+gender+"/"+Store_call+"/"+Birthday+"/"+email+"/"+reg_date+"/"+Phone);
+		
+		SellerDTO dto = new SellerDTO();
+		
+		dto.setSid(sid);
+		dto.setPw(pw);
+		dto.setName(name);
+		dto.setGender(gender);
+		dto.setStore_call(Store_call);
+		dto.setBirthday(Birthday);
+		dto.setEmail(email);
+		dto.setReg_date(reg_date);
+		dto.setPhone(Phone);
+		//실패했을 때
+		msg="회원가입 실패";
+		page="S_regist.jsp";
+		//성공했을때
+		if(dao.sjoin(dto)>0) {
+			msg="회원가입 성공";
+			page="C_login.jsp";
+		}
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
 	}
 
 	public void overlay() throws IOException {// 중복체크
@@ -66,13 +137,13 @@ public class MemberService {
 		String pw = req.getParameter("adminPw");
 		System.out.println(id + "/" + pw);
 
-		page = "index.jsp";
+		page = "admin_Login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 
 		if (dao.login(id, pw)) {
-			page = "/list";
+			page = "/Admin/cList";
 			msg = id + " 님 반갑 습니다.";
-			req.getSession().setAttribute("loginId", id);
+			req.getSession().setAttribute("adminId", id);
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
@@ -85,7 +156,7 @@ public class MemberService {
 		String cid = req.getParameter("cId");
 		String pw = req.getParameter("Pw");
 		System.out.println(cid + "/" + pw);
-		page = "index.jsp";
+		page = "C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 
 		if (dao.clogin(cid, pw)) {
@@ -103,7 +174,7 @@ public class MemberService {
 		String sid = req.getParameter("sId");
 		String pw = req.getParameter("pw");
 		System.out.println(sid + "/" + pw);
-		page = "index.jsp";
+		page = "C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 
 		if (dao.slogin(sid, pw)) {

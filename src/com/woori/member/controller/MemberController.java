@@ -107,6 +107,7 @@ public class MemberController extends HttpServlet {
 			
 		case "/cJoin":
 			System.out.println("Request Customer Join");
+			service.cjoin();
 			break;
 		case "/sJoin":
 			System.out.println("Request Seller Join");

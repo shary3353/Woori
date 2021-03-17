@@ -76,7 +76,7 @@
             <tr>
                 <th>이름</th>
                 <td>
-                    <input type="text" name="consumername" value="" placeholder="이름을 입력해주세요." />
+                    <input type="text" name="cunsumername" value="" placeholder="이름을 입력해주세요." />
                 </td>
 
             </tr>
@@ -144,6 +144,7 @@
     </form>
 </body>
  <script>
+	var PwChk = false;
 	
  	function check_pw(){//비밀번호 일치
 		 var pw = document.getElementById('pw').value;
@@ -161,7 +162,7 @@
 	
 	 var overChk = false;//중복체크 여부
 		
-		$("#overlay").click(function(){
+		$("#button").click(function(){
 			
 			$.ajax({
 				type:'get'
@@ -188,7 +189,7 @@
 			});
 		});
 		
-		$('button').click(function(){
+		$('submit').click(function(){
 			
 			var $id = $("#CId");
 			var $pw = $("#Pw");
