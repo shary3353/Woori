@@ -302,7 +302,7 @@ public class BlackDAO {
 			ps.setString(1, sid);
 			rs = ps.executeQuery();
 			if(rs.next())
-				if(rs.getString("cid") != null) {	//있음
+				if(rs.getString("sid") != null) {	//있음
 					System.out.println("sid:"+rs.getString("sid"));
 					check = true;
 				}

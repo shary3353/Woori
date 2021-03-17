@@ -85,8 +85,12 @@
                     	<img src="../img/no-image.png" width="100px" height="100px">
                     </c:if>
 					<c:if test="${not empty rlist.newFileName}">
+						<!-- 
 						<img src ="photo/${rlist.newFileName}" alt="${rlist.oriFileName}"
 						 style="width:100px;"/>
+						-->
+						<img src ="../Uploaded_Img/${rlist.newFileName}" alt="${rlist.oriFileName}"
+						style="width:100px;"/>
 	                </c:if>
 	            </a>
 	            </td>

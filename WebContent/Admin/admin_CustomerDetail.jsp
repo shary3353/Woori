@@ -58,13 +58,35 @@
                 </table>
             </div>  <!--리스트 닫음-->
 
-            <div id="Admin_Customer_ReportList_Paging"> <!--구매자 신고리스트 페이징부분-->
-                <span class="Page_Content">처음</span>
-                <span class="Page_Content">이전</span>
-                <span class="Page_Number">1</span>
-                <span class="Page_Content">다음</span>
-                <span class="Page_Content">마지막</span>
-            </div>  <!--페이징 닫음-->
+            <div id="Admin_Customer_ReportList_Paging"> <!-- 구매자 신고리스트 페이징부분 -->
+                <c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == 1}">
+                	<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=1">처음</a></span>
+                </c:if>
+                <c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] > 1}">
+                	<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=1">처음</a></span>
+                </c:if>
+                <c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == 1}">
+					<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=1">이전</a></span>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] > 1}">
+					<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=${Admin_CDetailData['Admin_selectedCRListCurrPage'] - 1}">이전</a></span>
+				</c:if>
+				
+				<span class="Page_Number">${Admin_CDetailData['Admin_selectedCRListCurrPage']}</span>
+				
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == Admin_CDetailData['Admin_maxRPage']}">
+					<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=${Admin_CDetailData['Admin_maxRPage']}">다음</a></span>
+				</c:if>
+				<c:if test="${Admin_CCDetailData['Admin_selectedCRListCurrPage'] < Admin_CDetailData['Admin_maxRPage']}">
+					<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=${Admin_CDetailData['Admin_selectedCRListCurrPage'] + 1}">다음</a></span>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] == Admin_CDetailData['Admin_maxRPage']}">
+					<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=${Admin_CDetailData['Admin_maxRPage']}">마지막</a></span>
+				</c:if>
+				<c:if test="${Admin_CDetailData['Admin_selectedCRListCurrPage'] < Admin_CDetailData['Admin_maxRPage']}">
+					<span class="Page_Content"><a href="cDetail?id=${Admin_CDetailData['Admin_selectedCData'].cid }&page=${Admin_CDetailData['Admin_maxRPage']}">마지막</a></span>
+				</c:if>
+            </div>  <!--페이징 닫음 -->
 
         </div>  <!--구매자 상세보기 컨텐츠 닫음-->
 

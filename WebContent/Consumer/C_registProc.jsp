@@ -54,6 +54,6 @@
 		location.href="C_regist.jsp";
 	<%}else{%>// 로그인 페이지로 이동
 		alert('회원가입 완료');
-		location.href="index.jsp";
+		location.href="C_Login.jsp";
 	<%}%>
 </script>

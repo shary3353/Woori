@@ -204,15 +204,17 @@ public class QuestionService {
 		System.out.println(sId + "/" + cId + "/" + category + "/" + subject + "/" + content + "/" + pass);
 		QuestionDAO dao = new QuestionDAO();
 		long q_idx = 0;
-		if (sId != null && cId != null && category != null && subject != null && content != null && pass != null) {
-
-			q_idx = dao.qWrite(sId, cId, Integer.parseInt(category), subject, content, Integer.parseInt(pass));
+		if(sId != null && sId.isEmpty() && cId != null && cId.isEmpty() && 
+				category != null && category.isEmpty() && subject != null && subject.isEmpty() &&
+				content != null && content.isEmpty() && pass != null && pass.isEmpty()) {
+			System.out.println("성공");
+			 q_idx = dao.qWrite(sId,cId,Integer.parseInt(category),subject,content,Integer.parseInt(pass));
 		}
 		String msg = "문의 등록의 실패하였습니다.";
 		String page = "Q_write.jsp";
-		if (q_idx > 0) {
-			msg = "문의가 성공적으로 완료되었습니다	.";
-			page = "Q_detail?q_idx=" + q_idx;
+		if(q_idx>0) {
+			 msg = "문의가 성공적으로 완료되었습니다	.";
+			 page = "qDetail?q_idx="+q_idx;
 
 		}
 

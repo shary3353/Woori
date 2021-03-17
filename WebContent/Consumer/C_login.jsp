@@ -147,7 +147,7 @@
             <!--컨테이너 바디-->
             <div class="tab_content" id="Pur_tab">
                 <!--구매자 로그인 탭열기-->
-                <form action="/C_main" method="POST">
+                <form action="C_main.jsp" method="POST">
                     <div>
                         <table>
                             <tr>
@@ -179,12 +179,14 @@
 
 
                     <div style="text-align: center;">
-                        <button type="submit" class="btn"
+                        <button type="submit" class="btn" value="login"
                             style="border-radius: 10px; background-color: rgb(81, 167, 201);"><b>로그인</b></button>
                     </div>
+                    
                     <div style="text-align: center;">
-                        <button type="submit" class="btn"
+                        <button type="button" class="btn" onclick="location.href='C_regist.jsp'" value="회원가입"
                             style="border-radius: 10px; border:2px solid rgb(81, 167, 201); background-color:rgb(240, 239, 236); color:rgb(81, 167, 201);"><b>회원가입</b></button>
+                        
                     </div>
             </div>
             <!--구매자 로그인 탭 닫음-->
@@ -195,7 +197,7 @@
         <br /><!--하단 문구-->
         <p class="row-text-top">아이디/비밀번호를 잊어버리셨나요? 관리자 이외에는 로그인 할 수 없습니다.</p>
         <p class="row-text-row" style="color: rgb(196, 196, 196); font-weight: bold;">고객센터| 1588-1588 </p>
-        <p><a href="#" style="font-size: small; color: rgb(196, 196, 196);">메인페이지로></a></p>
+        <p><a href="C_main.jsp" style="font-size: small; color: rgb(196, 196, 196);">메인페이지로></a></p>
     </div>
     <!--컨테이너 닫음-->
 </body>
@@ -207,7 +209,7 @@
 	var content ="안녕하세요"+loginId+"님,<a href='logout'>[로그아웃]</a>";
 	document.getElementById("login").innerHTML = content;
 	}else{
-		location.href="index.jsp";
+		location.href="C_login.jsp";
 	}
 
 

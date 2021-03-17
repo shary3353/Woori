@@ -71,12 +71,12 @@
         <img src="../img/Consumer_regist.PNG" alt="logo" class="logo">
     </div>
 
-    <form>
+    <form action="C_login.jsp">
         <table>
             <tr>
                 <th>이름</th>
                 <td>
-                    <input type="text" name="consumername" value="" placeholder="이름을 입력해주세요." />
+                    <input type="text" name="cunsumername" value="" placeholder="이름을 입력해주세요." />
                 </td>
 
             </tr>
@@ -144,6 +144,7 @@
     </form>
 </body>
  <script>
+	var PwChk = false;
 	
  	function check_pw(){//비밀번호 일치
 		 var pw = document.getElementById('pw').value;
@@ -161,7 +162,7 @@
 	
 	 var overChk = false;//중복체크 여부
 		
-		$("#overlay").click(function(){
+		$("#button").click(function(){
 			
 			$.ajax({
 				type:'get'
@@ -188,7 +189,7 @@
 			});
 		});
 		
-		$('button').click(function(){
+		$('submit').click(function(){
 			
 			var $id = $("#CId");
 			var $pw = $("#Pw");
@@ -234,7 +235,7 @@
 							console.log(data);
 							if(data.success == true){
 								alert('회원가입을 축하드립니다.');
-								location.href="index.jsp";
+								location.href="C_login.jsp";
 							}else{
 								alert('잠시 후 다시 시도해 주세요.');
 							}
