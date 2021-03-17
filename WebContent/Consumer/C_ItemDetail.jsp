@@ -78,6 +78,7 @@
 		<jsp:include page="../Include/navi.jsp"></jsp:include>
     	<div id="detail">
     	<!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
+    	<!-- 좋아요 , 물품 상세보기 , 물품예약하기 세션처리해서 id값 넣어야함 -->
             <table>
                 <tr>
                     <td rowspan="6" id="detailImg"><img src="img/${dto.newFileName}"  alt="${dto.oriFileName} width="400px" height="600px"/></td>
