@@ -71,7 +71,7 @@
         <img src="../img/Consumer_regist.PNG" alt="logo" class="logo">
     </div>
 
-    <form>
+    <form action="C_login.jsp">
         <table>
             <tr>
                 <th>이름</th>
@@ -234,7 +234,7 @@
 							console.log(data);
 							if(data.success == true){
 								alert('회원가입을 축하드립니다.');
-								location.href="index.jsp";
+								location.href="C_login.jsp";
 							}else{
 								alert('잠시 후 다시 시도해 주세요.');
 							}
