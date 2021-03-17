@@ -35,7 +35,7 @@ public class BlackService {
 		req.setAttribute("bList", map.get("bList"));
 		req.setAttribute("maxBlackPage", map.get("maxBlackPage"));
 		req.setAttribute("currPage", group);
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_BlackList.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher("admin_BlackList.jsp");
 		dis.forward(req, resp);
 	}
 	
@@ -56,7 +56,7 @@ public class BlackService {
             req.setAttribute("bList", searchedB);
         }
         
-        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_BlackList.jsp");
+        RequestDispatcher dis = req.getRequestDispatcher("admin_BlackList.jsp");
         dis.forward(req, resp);
     }
 	

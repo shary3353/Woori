@@ -68,4 +68,9 @@ public class MainService {
 		dis.forward(req, resp);
 	}
 
+	public void AdminMain() {
+		
+		
+	}
+
 }

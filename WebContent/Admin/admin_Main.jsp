@@ -20,10 +20,10 @@
                 <h3>관리자 <span>'test'</span>님 반갑습니다.</h3>
             </div>
             <div id="Admin_Menu">  <!-- 메인메뉴 -->
-                <div id="seller" class="Menu_Btn" onclick="" style="background-color: #3498DB;">판매회원 관리</div>
-                <div id="customer" class="Menu_Btn" onclick="" style="background-color: #1ABC9C;">구매회원 관리</div>
-                <div id="blacklist" class="Menu_Btn" onclick="" style="background-color: #EE8888;">블랙리스트 관리</div>
-                <div id="record" class="Menu_Btn" onclick="" style="background-color: #9B59B6;">신고 관리</div>
+                <div id="seller" class="Menu_Btn" onclick="${pageContext.request.contextPath}/Admin/cList" style="background-color: #3498DB;">판매회원 관리</div>
+                <div id="customer" class="Menu_Btn" onclick="${pageContext.request.contextPath}/Admin/sList" style="background-color: #1ABC9C;">구매회원 관리</div>
+                <div id="blacklist" class="Menu_Btn" onclick="${pageContext.request.contextPath}/Admin/bList" style="background-color: #EE8888;">블랙리스트 관리</div>
+                <div id="record" class="Menu_Btn" onclick="${pageContext.request.contextPath}/Admin/rList" style="background-color: #9B59B6;">신고 관리</div>
             </div>
         </div>
 

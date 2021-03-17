@@ -103,7 +103,7 @@ public class MemberService {
 		req.setAttribute("cList", map.get("cList"));
 		req.setAttribute("maxCustomerPage", map.get("maxCustomerPage"));
 		req.setAttribute("currPage", group);
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
 		dis.forward(req, resp);
 	 }
 
@@ -121,7 +121,7 @@ public class MemberService {
 		req.setAttribute("sList", map.get("sList"));
 		req.setAttribute("currPage", group);
 		req.setAttribute("maxSellerPage", map.get("maxPage"));
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
 		dis.forward(req, resp);
 	}
 
@@ -134,7 +134,7 @@ public class MemberService {
         ArrayList<CustomerListDTO> searchedC = dao.cSearch(inputC);
         
         req.setAttribute("cList", searchedC);
-        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
+        RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
         dis.forward(req, resp);
     }
 
@@ -147,7 +147,7 @@ public class MemberService {
         ArrayList<SellerListDTO> searchedS = dao.sSearch(inputS);
         
         req.setAttribute("sList", searchedS);
-        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
+        RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
         dis.forward(req, resp);
     }
 
