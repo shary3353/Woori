@@ -18,9 +18,10 @@ public class FileService {
 	}
 
 	public ProductDTO regist() { //물품파일 등록하기
-		String savePath = "D:/MVC/Woori/WebContent/Uploaded_Img/";//1. 저장할 폴더 지정
-		//String savePath = req.getSession().getServletContext().getRealPath("Uploaded_Img");
+		//String savePath = "D:/MVC/Woori/WebContent/Uploaded_Img/";//1. 저장할 폴더 지정
+		String savePath = req.getSession().getServletContext().getRealPath("Uploaded_Img");
 		//D:\MVC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Woori\Uploaded_Img
+		String fullpath = savePath +"\\";
 		System.out.println("사진파일저장경로 :" +savePath);
 		int maxSize = 10*1024*1024;//2. 사이즈 지정
 		ProductDTO dto = null; //초기값- null
@@ -51,8 +52,12 @@ public class FileService {
 				String ext = oriFileName.substring(oriFileName.lastIndexOf(".")); //확장자
 				String newFileName = System.currentTimeMillis()+ext;//새파일명 만들기(원본파일의 확장자 추가)
 				//파일 이름 변경
+				/*
 				File oriFile = new File(savePath+oriFileName); //pathname에 해당되는 파일의 File 객체를 생성
 				File newFile = new File(savePath+newFileName); //
+				*/
+				File oriFile = new File(fullpath+oriFileName); //pathname에 해당되는 파일의 File 객체를 생성
+				File newFile = new File(fullpath+newFileName); //
 				oriFile.renameTo(newFile); //원래 파일 이름 변경 -- 새이름
 				dto.setOriFileName(oriFileName); //dto에 파일 이름 넣어줌.
 				dto.setNewFileName(newFileName);				
@@ -64,7 +69,11 @@ public class FileService {
 	}
 
 	public void delete(String delFileName) { //파일삭제
-		File file = new File("D:/MVC/Woori/WebContent/Uploaded_Img/"+delFileName);
+		//String savePath = "D:/MVC/Woori/WebContent/Uploaded_Img/";=
+		String savePath = req.getSession().getServletContext().getRealPath("Uploaded_Img");
+		//D:\MVC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Woori\Uploaded_Img
+		String fullpath = savePath +"\\";
+		File file = new File(fullpath+delFileName);
 		if(file.exists()) {//이 파일이 존재 하는지?
 			boolean success = file.delete();
 			System.out.println("기존 사진 파일 삭제 성공 여부 : "+success);

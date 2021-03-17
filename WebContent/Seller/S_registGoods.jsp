@@ -77,8 +77,8 @@
             </tr>
             <tr>
                 <td class="column-name" >판매자</td>
-                <td><%= session.getAttribute("loginId")%>
-                <input type="hidden" value ="<%= session.getAttribute("loginId")%>" name="sid"/>
+                <td><%= session.getAttribute("loginID")%>
+                <input type="hidden" value ="<%= session.getAttribute("loginID")%>" name="sid"/>
                 </td>
             </tr>
             <tr>

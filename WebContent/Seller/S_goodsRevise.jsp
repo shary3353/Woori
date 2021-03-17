@@ -80,7 +80,7 @@
 	            </tr>
 	            <tr>
 	                <td class="column-name" >판매자</td>
-	                <td>${sessionScope.loginId}</td>
+	                <td>${sessionScope.loginID}</td>
 	            </tr>
 	            <tr>
 	                <td class="column-name" >상품설명</td>

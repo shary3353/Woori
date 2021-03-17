@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+//사진파일경로가지고오기
+String savePath = request.getSession().getServletContext().getRealPath("Uploaded_Img");
+String fullpath = savePath +"\\";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,8 +93,16 @@
                     	<img src="../img/no-image.png" width="100px" height="100px">
                     </c:if>
 					<c:if test="${not empty item.newFileName}">
+						<!--  
 						<img src ="photo/${item.newFileName}" alt="${item.oriFileName}"
 						style="width:100px;"/>
+						-->
+						<img src ="../Uploaded_Img/${item.newFileName}" alt="${item.oriFileName}"
+						style="width:100px;"/>
+						<!--  
+						<img src ="<%=fullpath%>${item.newFileName}" alt="${item.oriFileName}"
+						style="width:100px;"/>
+						 -->
 					</c:if>
                     <!-- <img src ="photo/${dto.newFileName}" alt="${dto.oriFileName}"/> -->
                     <!--	server.xml에 추가 할 것 
