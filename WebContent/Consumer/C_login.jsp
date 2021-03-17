@@ -199,6 +199,20 @@
     </div>
     <!--컨테이너 닫음-->
 </body>
+<script>
+	var loginId = "${sessionScope.loginId}";
+	
+	if(loginId !=""){
+	
+	var content ="안녕하세요"+loginId+"님,<a href='logout'>[로그아웃]</a>";
+	document.getElementById("login").innerHTML = content;
+	}else{
+		location.href="index.jsp";
+	}
+
+
+
+</script>
 
 
 </html>
