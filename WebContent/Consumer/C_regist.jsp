@@ -44,6 +44,7 @@
        
 
         }
+        
     input[type=text], input[type=password],input[type=date],input[type=email],input[type=number] {
     padding: 5px 10px; /* 상하 우좌 */
     margin: 3px 0; /* 상하 우좌 */
@@ -83,8 +84,8 @@
             <tr>
                 <th>아이디</th>
                 <td>
-                    <input type="text" name="cId" value="" placeholder="아이디를 입력해주세요." />
-                    <input type="button" id="overlay" value="중복확인" onclick="idCheck()" />
+                    <input type="text" id="cid" name="cId" value="" placeholder="아이디를 입력해주세요." />
+                    <input type="button" id="overlay" value="중복확인" />
                 </td>
             </tr>
 
@@ -92,20 +93,20 @@
             <tr>
                 <th>비밀번호 </th>
                 <td>
-                    <input type="password" name="pw"  value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw" />
+                    <input type="password" id="Pw" name="pw"  value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw" />
                 </td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
                 <td>
                     <input type="password" name="PwChk" value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw"/>
-                    <font id="chkNotice" size="5"></font>
+                   
                 </td>
             </tr>
             <tr>
                 <th>생년월일</th>
                 <td>
-                    <form name="birthday" action="값을 보낼 주소" method="post">
+                    <form name="birthday" id="birth" action="값을 보낼 주소" method="post">
                         <input type='date' name='userBirthday' />
           </form>
                 </td>
@@ -120,13 +121,13 @@
             <tr>
                 <th>이메일</th>
                 <td>
-                    <input type="email" name="email" placeholder="이메일을 입력해주세요." />
+                    <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." />
                 </td>
             </tr>
             <tr>
                 <th>전화번호</th>
                 <td>
-                    <input type="number" name="phone" placeholder="전화번호를 입력해주세요." />
+                    <input type="number" id="phone" name="phone" placeholder="전화번호를 입력해주세요." />
                 </td>
             </tr>
             <br />
@@ -134,7 +135,9 @@
            
            
            <td colspan="2" align="center">
-                <input type="submit" style="border: rgb(94, 198, 240);  " value="회원가입완료">
+               <input type="submit" id="button" style="border: rgb(94, 198, 240);  " value="회원가입완료"></td>
+           		
+                
        
 
 
@@ -162,23 +165,23 @@
 	
 	 var overChk = false;//중복체크 여부
 		
-		$("#button").click(function(){
+		$("#overlay").click(function(){
 			
 			$.ajax({
 				type:'get'
 				,url:'overlay'
-				,data:{"id":$("#CId").val()}
+				,data:{"cid":$("#cid").val()}
 				,dataType:'JSON'
 				,success:function(obj){
 					console.log(obj);
 					if(obj.use){
 						alert('사용할 수 있는 아이디 입니다.');
 						
-						$("#CId").css({backgroundColor:'yellowgreen'});
+						$("#cid").css({backgroundColor:'yellowgreen'});
 						overChk=true; //사용할 수 있는 아이디로 판정 받는다면
 					}else{
 						alert('이미 사용중인 아이디 입니다.');
-						$("#CId").val('');
+						$("#cid").val('');
 					}
 						
 				}
@@ -189,14 +192,15 @@
 			});
 		});
 		
-		$('submit').click(function(){
+		$('#button').click(function(){//submit
 			
-			var $id = $("#CId");
+			var $id = $("#cid");
 			var $pw = $("#Pw");
-			var $name = $("#consumername");
-			var $age = $("#age");
+			var $name = $("#cunsumername");
+			var $birth = $("#birth");
 			var $gender = $("input[name='gender']:checked");
 			var $email = $("#email");
+			var $phone = $("#phone");
 			
 			if(overChk){
 				if($id.val()==''){
@@ -208,23 +212,28 @@
 				}else if($name.val()==''){
 					alert('이름을 입력해 주세요!');
 					$name.focus();
-				}else if($age.val()==''){
-					alert('나이를 입력해 주세요!');
-					$age.focus();
+				}else if($birth.val()==''){
+					alert('생년월일을 입력해 주세요!');
+					$birth.focus();
 				}else if($gender.val()==null){ 
 					alert('성별을 체크해 주세요!');
 					$gender.focus();
 				}else if($email.val()==''){
 					alert('이메일을 입력해 주세요!');
 					$email.focus();
+				}else if($phone.val()==''){
+					alert('핸드폰 번호를 입력해 주세요!')	;
+					$phone.focus();
+				
 				}else{
 					var params = {};
 					params.id = $id.val();
 					params.pw = $pw.val();
 					params.name = $name.val();
-					params.age = $age.val();
+					params.birth = $birth.val();
 					params.gender = $gender.val();
 					params.email = $email.val();
+					params.phone = $phone.val();
 					
 					$ajax({
 						type:'POST'
