@@ -215,7 +215,7 @@ public class MemberDAO {
 		return dto;
 	}
 
-	public void sPfpUpdate(SellerDTO dto) { //판매자 회원정보 수정
+	public int sPfpUpdate(SellerDTO dto) { //판매자 회원정보 수정
 		String sql = "UPDATE seller SET pw=?, name=?, email=?, phone=?, store_call=? WHERE sid=?";
 		
 		int success = 0;
@@ -234,6 +234,7 @@ public class MemberDAO {
 		} finally {
 			resClose();
 		}
+		return success;
 	}
 
 	public CustomerDTO cDetail(String cid) {

@@ -310,10 +310,19 @@ public class MemberService {
 		dto.setEmail(email);
 		dto.setPhone(phone);
 		dto.setStore_call(storeCall);
-
+		
+		boolean success = false;
 		MemberDAO dao = new MemberDAO();
-		dao.sPfpUpdate(dto);
-		resp.sendRedirect("sPfpDetail?sid=" + dto.getSid());
+		if(dao.sPfpUpdate(dto)>0) {
+			success = true;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("update", success);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+			resp.getWriter().print(json);
+			//resp.sendRedirect("sPfpDetail?sid=" + dto.getSid());
+		};
 	}
 
 	public void cDetail() throws ServletException, IOException {
