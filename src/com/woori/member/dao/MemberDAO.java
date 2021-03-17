@@ -253,6 +253,11 @@ public class MemberDAO {
 		return success;
 	}
 
+	public CustomerDTO getCustomer(String cid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

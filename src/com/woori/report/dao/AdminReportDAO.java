@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.woori.report.dto.ReportDTO;
 import com.woori.report.dto.ReportListDTO;
 
 public class AdminReportDAO {
@@ -230,6 +231,11 @@ public class AdminReportDAO {
 			resClose();
 		}
 		return success;
+	}
+
+	public ArrayList<ReportDTO> customerRList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

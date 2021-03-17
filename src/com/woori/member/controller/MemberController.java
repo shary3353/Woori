@@ -17,7 +17,7 @@ import com.woori.member.service.MemberService;
  */
 
 @WebServlet({"/Admin/cLogin", "/Admin/sLogin", "/adminLogin", "/overlay" ,"/logout", "/cJoin", "/sJoin", "/Admin/cList", "/Admin/sList"
-	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/Admin/cSearch", "/Admin/sSearch"
+	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/Admin/cSearch", "/Admin/sSearch", "/Admin/sDetail", "/Admin/cDetail"
 	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"})
 public class MemberController extends HttpServlet {
 
@@ -45,6 +45,14 @@ public class MemberController extends HttpServlet {
             case "/Admin/sSearch":
                 System.out.println("Request Seller Search");
                 service.sSearch();
+                break;
+            case "/Admin/cDetail":
+                System.out.println("Request Customer Detail");
+                service.AdminCustomerDetail();
+                break;
+            case "/Admin/sDetail":
+                System.out.println("Request Seller Detail");
+                service.AdminSellerDetail();
                 break;
 			case "/logout":
 				System.out.println("Request Logout");

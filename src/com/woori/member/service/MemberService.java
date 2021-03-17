@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-
+import com.woori.black.dao.BlackDAO;
 import com.woori.member.dao.ListDAO;
 import com.woori.member.dao.MemberDAO;
 import com.woori.member.dto.CustomerDTO;
 import com.woori.member.dto.CustomerListDTO;
 import com.woori.member.dto.SellerDTO;
 import com.woori.member.dto.SellerListDTO;
+import com.woori.report.dao.AdminReportDAO;
+import com.woori.report.dto.ReportDTO;
 
 public class MemberService {
 	HttpServletRequest req = null;
@@ -301,6 +303,32 @@ public class MemberService {
 		}
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
+	}
+
+	public void AdminCustomerDetail() throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		//1. 상세보기할 cid 받기 
+		String cid = req.getParameter("id");
+		//2. Consumer 테이블에서 C 정보 받아오기
+		MemberDAO mDao = new MemberDAO();
+		CustomerDTO dto = mDao.getCustomer(cid);
+		//3. C_BLACKLIST 테이블에서 isblack 받아오기
+		BlackDAO bDao = new BlackDAO();
+		int isBlack = bDao.getCBlack(cid);
+		//4. REPORT 테이블에서 해당 cid가 target_id인 신고정보 받아오기
+		AdminReportDAO rDao = new AdminReportDAO();
+		ArrayList<ReportDTO> selectedCustomerRList = rDao.getCustomerRList();
+		//5. admin_CustomerDetail.jsp 로 포워딩
+		
+	}
+
+	public void AdminSellerDetail() throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		//1. 상세보기할 sid 받기 
+		//2. Seller 테이블에서 C 정보 받아오기
+		//3. S_BLACKLIST 테이블에서 isblack 받아오기
+		//4. REPORT 테이블에서 해당 sid가 target_id인 신고정보 받아오기
+		//5. admin_SellerDetail.jsp 로 포워딩
 	}
 
 

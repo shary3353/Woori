@@ -353,5 +353,10 @@ public class BlackDAO {
 		return newStack;
 	}
 
+	public int getCBlack(String cid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }

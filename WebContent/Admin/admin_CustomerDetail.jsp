@@ -5,7 +5,7 @@
 <head>
     <meta charset='utf-8'>
     <title>우리 양주</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}css/AdminStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/AdminStyle.css">
 </head>
 <body>
     <div id="Wrapper">
