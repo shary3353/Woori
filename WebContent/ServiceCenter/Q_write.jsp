@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,38 +102,41 @@
         </div>
         <div class="seMain">
             <div class="sideMenu">
-                <div class="Service">고객센터</div>
-                <div class="One"><a href="#">1:1 문의내역</a></div>
-                <div class="Question"><a href="#">자주묻는 질문</a></div>
-                <div class="Report"><a href="#">신고하기</a></div>
+                   <div class="Service"><a href=qList>고객센터</a></div>
+                    <div class="One"><a href="qWrite">1:1 문의하기</a></div>
+                    <div class="Question"><a href="Question.jsp">자주묻는 질문</a></div>
+                    <div class="Report"><a href="Report.jsp">신고하기</a></div>
             </div> 
         </div>
         <div>
         </div>
         <div id="form">
-        <form action="q_Write" method="post">
+        <form action="qWrite" method="post">
             <h3>1:1문의 작성</h3>
             <table id="table">
                 <tr>
                     <td class="column1">작성자</td>
-                    <td class="column2"><input type="text" name="userName" value="${sessionScope.loginId}" readonly/></td>
+                    <td class="column2"><input type="text" name="cId" value="${sessionScope.loginId}" readonly/></td>
                     <td>
                         카테고리
                         <select name="category" value="문의/카테고리">
-                            <option value="상품관련" selected="selected">상품관련</option>
-                            <option value="예약관련">예약관련</option>
-                            <option value="매장관련" >매장관련</option>
-                            <option value="교환/반품/반납">교환/반품/반납</option>
+                            <option value="100" selected="selected">상품관련</option>
+                            <option value="200">예약관련</option>
+                            <option value="300" >매장관련</option>
+                            <option value="400">교환/반품/반납</option>
                         </select>
                     </td>
                     <td class="column1" >문의상품</td>
-                    <td class="culumn1"  name="productName">Ballantine’s</td>
+                    <td class="culumn1"  name="productName">
+                    <td>
+                    <%=request.getParameter("p_name") %>
+                    </td>
                 </tr>
                 <tr>
                     <td class="column1">제목</td>
                     <td colspan="2"><input type="text" placeholder="제목을 입력해주세요" style="width: 380px" maxlength='30' name="subject"></td>
                     <td class="column1">판매자 </td>
-                    <td name="sellerId">123-456-78910</td>
+                    <td name="sId" ><%= request.getParameter("sId") %></td>
                 </tr>
                 <tr>
                     <td class="column1">내용</td>

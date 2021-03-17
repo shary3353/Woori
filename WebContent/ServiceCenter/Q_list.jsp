@@ -102,10 +102,10 @@
             </div>
             <div class="seMain">
                 <div class="sideMenu">
-                    <div class="Service">고객센터</div>
-                    <div class="One"><a href="#">1:1 문의내역</a></div>
-                    <div class="Question"><a href="#">자주묻는 질문</a></div>
-                    <div class="Report"><a href="#">신고하기</a></div>
+                    <div class="Service"><a href=qList>고객센터</a></div>
+                    <div class="One"><a href="qWrite">1:1 문의하기</a></div>
+                    <div class="Question"><a href="Question.jsp">자주묻는 질문</a></div>
+                    <div class="Report"><a href="Report.jsp">신고하기</a></div>
                 </div> 
             </div>
            <div id="list_div">
@@ -134,25 +134,25 @@
                         <span class="Page_Content">
                         <c:if test="${currnPage == 1}">처음</c:if>
                         <c:if test="${currPage > 1 }">
-                        <a href="./q_list?page=${1 }">처음</a>
+                        <a href="./qList?page=${1 }">처음</a>
                         </c:if>
                         </span>
                         <span class="Page_Content">
                        		<c:if test="${currPage == 1 }">이전</c:if>
                         	<c:if test="${currPage > 1}">
-                        	<a href="./q_list?page=${currPage-1 }">이전</a>
+                        	<a href="./qList?page=${currPage-1 }">이전</a>
                         	</c:if>
                         </span>
                         <span id="Page_Number"><a>${currPage}</a></span>
                         <span class="Page_Content">
                         <c:if test="${currPage == maxPage }">다음</c:if>
                         <c:if test="${currPage < maxPage }">
-                        <a href="./q_list?page=${currPage + 1}">다음</a>
+                        <a href="./qList?page=${currPage + 1}">다음</a>
                         </c:if>
                         </span>
                         <span class="Page_Content">
 						<c:if test="${currPage < maxPage }">
-                        <a href="./q_list?page=${maxPage}">마지막</a>
+                        <a href="./qList?page=${maxPage}">마지막</a>
 						</c:if>                        
                         </span>
                     </div>
