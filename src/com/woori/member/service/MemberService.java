@@ -310,18 +310,22 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<>();
 		//1. 상세보기할 cid 받기 
 		String cid = req.getParameter("id");
+		
 		//2. Consumer 테이블에서 C 정보 받아오기
 		MemberDAO mDao = new MemberDAO();
 		CustomerDTO dto = mDao.getCustomer(cid);
 		map.put("Admin_selectedCData", dto);
+		
 		//3. C_BLACKLIST 테이블에서 isblack 받아오기
 		BlackDAO bDao = new BlackDAO();
 		int isBlack = bDao.getCBlack(cid);
 		map.put("Admin_selectedCIsBlack", isBlack);
+		
 		//4. REPORT 테이블에서 해당 cid가 target_id인 신고정보 받아오기
 		AdminReportDAO rDao = new AdminReportDAO();
 		ArrayList<ReportDTO> selectedCustomerRList = rDao.getRList(cid);
 		map.put("Admin_selectedCRList", selectedCustomerRList);
+		
 		//5. admin_CustomerDetail.jsp 로 포워딩
 		req.setAttribute("Admin_CDetailData", map);
 		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerDetail.jsp");
@@ -333,18 +337,22 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<>();
 		//1. 상세보기할 sid 받기 
 		String sid = req.getParameter("id");
+		
 		//2. Seller 테이블에서 C 정보 받아오기
 		MemberDAO mDao = new MemberDAO();
 		SellerDTO dto = mDao.getSeller(sid);
 		map.put("Admin_selectedSData", dto);
+		
 		//3. S_BLACKLIST 테이블에서 isblack 받아오기
 		BlackDAO bDao = new BlackDAO();
 		int isBlack = bDao.getSBlack(sid);
 		map.put("Admin_selectedSIsBlack", isBlack);
+		
 		//4. REPORT 테이블에서 해당 sid가 target_id인 신고정보 받아오기
 		AdminReportDAO rDao = new AdminReportDAO();
 		ArrayList<ReportDTO> selectedSellerRList = rDao.getRList(sid);
 		map.put("Admin_selectedSRList", selectedSellerRList);
+		
 		//5. admin_SellerDetail.jsp 로 포워딩
 		req.setAttribute("Admin_SDetailData", map);
 		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerDetail.jsp");

@@ -260,6 +260,7 @@ public class MemberDAO {
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
+			rs = ps.executeQuery();
 			if(rs.next()) {
 				dto.setCid(rs.getString("cid"));
 				dto.setBirthday(rs.getString("birthday"));
@@ -278,11 +279,12 @@ public class MemberDAO {
 	
 	public SellerDTO getSeller(String sid) {
 		SellerDTO dto = new SellerDTO();
-		String sql = "SELECT sid, email, to_char(birthday, 'YYYY-MM-DD') AS birthday, phone, gender, store_call, name, to_char(reg_date, 'YYYY-MM-DD') FROM seller WHERE sid=?";
+		String sql = "SELECT sid, email, to_char(birthday, 'YYYY-MM-DD') AS birthday, phone, gender, store_call, name, to_char(reg_date, 'YYYY-MM-DD') AS reg_date FROM seller WHERE sid=?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, sid);
+			rs = ps.executeQuery();
 			if(rs.next()) {
 				dto.setSid(rs.getString("sid"));
 				dto.setBirthday(rs.getString("birthday"));

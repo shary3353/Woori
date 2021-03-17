@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,19 +23,24 @@
                 <h1>판매회원정보 상세보기페이지</h1>
             </div>
             <div id="SellerDetailData">
-                <span class="dataname">아이디</span><span class="readdata">123-45-67890</span>
-                <span class="dataname">이메일</span><span class="readdata">test@naver.com</span><br>
-                <span class="dataname">생년월일</span><span class="readdata">1990.01.01</span>
-                <span class="dataname">개인번호</span><span class="readdata">010-1234-5678</span><br>
-                <span class="dataname">성별</span><span class="readdata">남</span>
-                <span class="dataname">매장번호</span><span class="readdata">02-1111-0000</span><br>
+                <span class="dataname">아이디</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].sid }</span>
+                <span class="dataname">생년월일</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].birthday }</span><br>
+                <span class="dataname">이름</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].name }</span>
+                <span class="dataname">이메일</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].email }</span><br>
+                <span class="dataname">성별</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].gender }</span>
+                <span class="dataname">가입날짜</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].reg_date }</span><br>
+                <span class="dataname">개인번호</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].phone }</span>
+                <span class="dataname">매장번호</span><span class="readdata">${Admin_SDetailData['Admin_selectedSData'].store_call }</span><br>
             </div>
 
             <div id="SellerBlacklistState">
                 <table id="BlacklistTable">
                     <tr>
-                        <td style="width: 315px;">블랙리스트여부</td>
-                        <td style="color: red; width: 315px;">FALSE</td>
+                        <td style="width:315px;">블랙리스트여부</td>
+                        <td style="color: red; width: 315px;">
+                        	<c:if test="${Admin_SDetailData['Admin_selectedSIsBlack']  == 0}">false</c:if>
+                        	<c:if test="${Admin_SDetailData['Admin_selectedSIsBlack'] == 1}">true</c:if>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -45,10 +51,12 @@
                         <th>신고자</th>
                         <th>신고제목</th>
                     </tr>
-                    <tr>
-                        <td>조길동</td>
-                        <td>판매자가 불친절해요.</td>
+                    <c:forEach items="${Admin_SDetailData['Admin_selectedSRList']}" var="report">
+                    	<tr>
+	                        <td>${report.reporter_id }</td>
+	                        <td>${report.subject }</td>
                     </tr>
+                    </c:forEach>
                 </table>
             </div>  <!--리스트 닫음-->
 

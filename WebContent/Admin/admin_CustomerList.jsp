@@ -35,7 +35,7 @@
                     </tr>
                     <c:forEach items="${cList }" var="customer" varStatus="status">
 	                    <tr>
-	                        <td>${customer.cid }</td>
+	                        <td><a href="cDetail?id=${customer.cid }">${customer.cid }</a></td>
 	                        <td>${customer.cntReport }</td>
 	                        <td id="stack${status.count }">${customer.stack }</td>
 	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
