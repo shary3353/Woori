@@ -1,6 +1,7 @@
 package com.woori.main.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +47,7 @@ public class MainDAO {
 	}
 	
 
-	public HashMap<String, Object> cmain(int i) {
+	public HashMap<String, Object> Cmain(int i) {
 		
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -78,7 +79,7 @@ public class MainDAO {
 	}
 
 
-	public ProductDTO  citemdetail(String pidx) {
+	public ProductDTO  Citemdetail(String pidx) {
 		ProductDTO dto = null;
 		String sql="SELECT p.p_idx,p.p_name,p.p_content,p.p_price,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_idx=?";
 		try {
@@ -104,7 +105,7 @@ public class MainDAO {
 	}
 
 
-	public ProductDTO citemreservation(String pidx) {
+	public ProductDTO Creservationdetail(String pidx) {
 		ProductDTO dto = null;
 		String sql="SELECT p.p_idx,p.p_name,p.p_price,p.sid,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_idx=?";
 		try {
@@ -126,6 +127,27 @@ public class MainDAO {
 			resClose();
 		}
 		return dto;
+	}
+
+
+	public boolean Creservation(String pidx, String cid, String visitdate) {
+		boolean success = false;
+		String sql="INSERT INTO reservation(r_idx,reg_date,visit_date,cid,p_idx,rs_idx)VALUES(reservation_seq.NEXTVAL,SYSDATE,?,?,?,0)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setDate(1,Date.valueOf(visitdate));
+			ps.setString(2, cid);
+			ps.setInt(3, Integer.parseInt(pidx));
+			if(ps.executeUpdate()>0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		System.out.println("예약추가 : " + success);
+		return success;
 	}
 
 	

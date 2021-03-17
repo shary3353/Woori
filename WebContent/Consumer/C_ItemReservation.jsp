@@ -57,6 +57,7 @@
         font-family: Arial, sans-serif;
         font-weight: 480;
     }
+    
     #ReservationCount{
         margin-left: 20px;
         width: 150px;
@@ -99,6 +100,8 @@
 	<div id="wrap">
 		<iframe src="Include/navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
     	<div id="reservation">
+    	
+    	<form action="C_Reservation" method="post">
             <table>
                 <tr>
                     <td rowspan="8" id="ReservationImg"><img src="img/${dto.newFileName}" alt="${dto.oriFileName} width="400px" height="600px"/></td>
@@ -107,11 +110,15 @@
                 <ol>
                 <tr>
                     <td><li class="ReservationName">상품명 : </li></td>
-                    <td class="ReservationContent">${dto.p_name}</td>
+                    <td class="ReservationContent">${dto.p_name}
+                    </td>
                 </tr>
                 <tr>
                     <td><li class="ReservationName">상품번호 : </li></td>
-                    <td class="ReservationContent">${dto.p_idx}</td>
+                    <td class="ReservationContent">
+                    <input type="text" name="p_idx" value="${dto.p_idx}" style="border:none;  font-size: 20px;  padding-top: 8px;"/>
+                    </td>
+                    
                 </tr>
 
                 <tr>
@@ -121,26 +128,37 @@
                 
                 <tr>
                     <td><li class="ReservationName">판매자 : </li></td>
-                    <td class="ReservationContent">${dto.sid}</td>
+                    <td class="ReservationContent">
+                    	<input type="text" name="sid"   value="${dto.sid}" readonly  style="border:none;  font-size: 20px;  padding-top: 8px;"/>
+                    </td>
                     <td><li class="ReservationName">구매자 : </li></td>
-                    <td class="ReservationContent">byebyebye</td>
+                    <td class="ReservationContent">
+                    	<!-- 로그인 세션처리 안해서 구매자 id 임시 지정 -->
+                    	<input type="text" name="cid"   value="test1" readonly  style="border:none;  font-size: 20px;  padding-top: 8px;"/>
+                    </td>
                 </tr>
                 <tr>
-                    <td><li class="ReservationName">수량선택 : </li></td>
-                    <td><input type="number" min="1" max"1000" step="1" id="ReservationCount"></td>
-
-                    <td><li class="ReservationName">예약날짜 : </li></td>
-                    <td><input type="date" id="ReservationDate"></td>
+                    <td><li class="ReservationName">방문날짜 : </li></td>
+                    <td><input type="date" name="visitdate" id="ReservationDate"/></td>
                 </tr>
                 </ol>
                 <tr>
-                    <td colspan="3"><button id="ReservationButton">예약하기</button></td>
+                    <td colspan="3">
+                    		<button id="ReservationButton">예약하기</button>
+                    </td>
                 </tr>
             </table>
+            </form>
+            
         </div>
 
     </div>
 </body>
 <script>
+	var msg = "${msg}";
+	
+	if(msg!=""){
+		alert(msg);
+	}	
 </script>
 </html>
