@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.woori.report.service.AdminReportService;
 import com.woori.report.service.ReportService;
 /*
 요청 : 판매자 - 신고내역 리스트, 신고상세보기
@@ -16,7 +17,8 @@ import com.woori.report.service.ReportService;
 */
 @WebServlet({"/Seller/sReportList" ,"/Seller/sReportDetail"
 	, "/ServiceCenter/Report", "/ServiceCenter/ReportDetail"
-	, "/Consumer/cReportList", "/Consumer/cReportDetail"})
+	, "/Consumer/cReportList", "/Consumer/cReportDetail"
+	, "/rList", "/rSearch", "/rStatusUpdate"})
 public class ReportController extends HttpServlet {
 
 	@Override
@@ -44,6 +46,7 @@ public class ReportController extends HttpServlet {
 		System.out.println("dual request url : "+sub);
 		
 		ReportService  service = new ReportService(req,resp);
+		AdminReportService adminService = new AdminReportService(req, resp);
 		
 		switch(sub) {
 		case "/Seller/sReportList":
@@ -72,6 +75,19 @@ public class ReportController extends HttpServlet {
 			System.out.println("Request Customer Report Detail");
 			service.cReportDetail();
 			break;
+		
+		case "/rList":
+			System.out.println("Request Seller List");
+			adminService.rList();
+			break;
+        case "/rSearch":
+            System.out.println("Request Report Search");
+            adminService.rSearch();
+            break;
+        case "/rStatusUpdate":
+            System.out.println("Request Report Search");
+            adminService.rStatusUpdate();
+            break;
 		}
 		
 	}
