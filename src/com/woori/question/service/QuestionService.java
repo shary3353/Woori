@@ -29,8 +29,15 @@ public class QuestionService {
 
 	public void sQAList() throws ServletException, IOException {//판매자 문의 내역 리스트
 		//로그인검사 추가예정
-		req.getSession().setAttribute("loginId","123-12-12345");//test용
-		String sid = (String)req.getSession().getAttribute("loginId");
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		System.out.println("판매자"+ sid +"의 문의 내역입니다."); //로그인한 아이디 확인& 판매자 확인
 		
 		String pageParam = req.getParameter("page");
@@ -109,6 +116,16 @@ public class QuestionService {
 	}
 
 	public void sAnswerDetail() throws ServletException, IOException { //판매자 문의내역 상세보기
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
 		System.out.println("상세보기할 문의 p_idx :"+q_idx);
 		
@@ -120,7 +137,16 @@ public class QuestionService {
 		
 	}
 	public void sAnswerForm() throws ServletException, IOException { //판매자 문의답변하기 폼
-		// TODO Auto-generated method stub
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
 		System.out.println("상세보기할 문의 p_idx :"+q_idx);
 		
@@ -132,6 +158,16 @@ public class QuestionService {
 	}
 
 	public void sAnswer() throws IOException { //판매자 문의답변하기
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
 		String s_answer = req.getParameter("s_answer");
 		System.out.println("문의번호/답변 : " +q_idx+"/"+s_answer);

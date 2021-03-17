@@ -26,9 +26,16 @@ public class ReportService {
 	}
 
 	public void sReportList() throws ServletException, IOException { // 판매자 신고내역 리스트
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginId", "123-12-12345");// test용
-		String sid = (String) req.getSession().getAttribute("loginId");
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		System.out.println("판매자" + sid + "의 신고 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
 
 		String pageParam = req.getParameter("page");
@@ -112,7 +119,17 @@ public class ReportService {
 		dis.forward(req, resp);
 	}
 
-	public void sReportDetail() throws ServletException, IOException {
+	public void sReportDetail() throws ServletException, IOException {//판매자 신고상세보기
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		String idx = req.getParameter("idx");
 		System.out.println("idx : " + idx);
 		ReportDAO dao = new ReportDAO();
@@ -137,6 +154,16 @@ public class ReportService {
 	}
 
 	public void sReportForm() throws ServletException, IOException { //판매자 신고하기 폼 보여주기
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		String target_id = req.getParameter("target_id");
 		System.out.println("신고대상자 id :" +target_id);
 		req.setAttribute("target_id", target_id);
@@ -145,6 +172,16 @@ public class ReportService {
 	}
 
 	public void sReport() throws ServletException, IOException {//판매자가 신고하기
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		String subejct = req.getParameter("subject");
 		String reporter_id = req.getParameter("reporter_id");
 		String target_id = req.getParameter("target_id");

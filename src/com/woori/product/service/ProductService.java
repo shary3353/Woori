@@ -24,8 +24,15 @@ public class ProductService {
 
 	public void sItemList() throws ServletException, IOException {//판매자 등록물품리스트 요청
 		//로그인검사 추가예정
-		req.getSession().setAttribute("loginId","123-12-12345");//test용
-		String sid = (String)req.getSession().getAttribute("loginId");
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*본 서비스 이용시 로그인 검사 후에 추가할 에정
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		System.out.println("판매자"+ sid +"의 물품 리스트입니다."); //로그인한 아이디 확인& 판매자 확인
 		
 		String pageParam = req.getParameter("page");
@@ -49,6 +56,15 @@ public class ProductService {
 
 	public void sItemDetail() throws ServletException, IOException {//판매자 등록뭎룸 상세보기
 		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		int p_idx = Integer.parseInt(req.getParameter("p_idx"));//물품번호
 		System.out.println("상세보기할 물품 번호 : " +p_idx);
 		
@@ -65,8 +81,16 @@ public class ProductService {
 	}
 
 	public void registItem() throws ServletException, IOException {// 판매자 물품 등록하기
-		String loginId = (String) req.getSession().getAttribute("loginId");//로그인 체크 추가예정
-		
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		// FileService 에 파일과 관련된 내용을 추가 예정
 		FileService upload = new FileService(req); //FileService 에 req 보내서 객체 생성.
 		ProductDTO dto = upload.regist();//파일 등록(받은 파라메터와 업로드 파일 정보 반환)
@@ -86,6 +110,16 @@ public class ProductService {
 	}
 
 	public void sUpdateItemForm() throws ServletException, IOException {//등록물품 수정하기 폼 보이기
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		int p_idx = Integer.parseInt(req.getParameter("p_idx"));
 		System.out.println("업데이트폼 p_idx = "+p_idx);
 		ProductDAO dao = new ProductDAO();
@@ -100,6 +134,16 @@ public class ProductService {
 	}
 
 	public void sUpdateItem() throws IOException { //물품상세보기 수정
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		FileService upload = new FileService(req);//파일처리객체생성
 		ProductDTO dto = upload.regist(); //수정할 정보 추출 + 파일 업로드 여부
 		//product
@@ -127,7 +171,17 @@ public class ProductService {
 		resp.sendRedirect("sItemDetail?p_idx="+dto.getP_idx());
 	}
 
-	public void sDeleteItem() throws IOException {
+	public void sDeleteItem() throws IOException { //판매자 상품 판매중지
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		int p_idx = Integer.parseInt(req.getParameter("p_idx"));
 		System.out.println("판매중지할 p_idx = "+p_idx);
 		ProductDAO dao = new ProductDAO();
