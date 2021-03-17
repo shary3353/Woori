@@ -1,6 +1,7 @@
 package com.woori.member.service;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +29,32 @@ public class MemberService {
 	public MemberService(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
+	}
+	
+	public void overlay() throws IOException {//중복체크
+		String cid = req.getParameter("icd");
+		boolean success = false;
+		System.out.println("Cid :"+cid);
+		MemberDAO dao = new MemberDAO();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		try {
+			success = dao.overlay(cid);
+			System.out.println("아이디 사용여부 :"+success);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			
+			dao.resClose();
+			map.put("use",success); 
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+			
+			resp.getWriter().print(json);
+		}
 	}
 	
 	public void login() throws ServletException, IOException{
@@ -86,10 +113,8 @@ public class MemberService {
 		dis.forward(req, resp);
 		
 	}
-	
-	
-	
 
+	
 	public void cList() throws ServletException, IOException {
 		int group = 1;
 		String page = req.getParameter("page");

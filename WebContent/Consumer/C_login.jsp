@@ -146,7 +146,7 @@
             <!--컨테이너 바디-->
             <div class="tab_content" id="Pur_tab">
                 <!--구매자 로그인 탭열기-->
-                <form action="#" method="">
+                <form action="#" method="POST">
                     <div>
                         <table>
                             <tr>
