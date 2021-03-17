@@ -128,15 +128,30 @@
                     </td>
                     <td class="column1" >문의상품</td>
                     <td class="culumn1"  name="productName">
-                    <td>
+                    
+                    <c:set var="p_name" value="<%=request.getParameter(\"p_name\") %>"></c:set>
+               		<c:if test="${p_name != null}">
                     <%=request.getParameter("p_name") %>
+               		</c:if>
+               		<c:if test="${p_name == null }">
+               			<input type="text" name=p_name>
+               		</c:if>
+                      
                     </td>
                 </tr>
                 <tr>
                     <td class="column1">제목</td>
                     <td colspan="2"><input type="text" placeholder="제목을 입력해주세요" style="width: 380px" maxlength='30' name="subject"></td>
                     <td class="column1">판매자 </td>
-                    <td name="sId" ><%= request.getParameter("sId") %></td>
+                    <td name="sId" >
+                    <c:set var ="sId" value="<%=request.getParameter(\"sId\") %>"></c:set>
+                    <c:if test="${sId != null }">
+                    <%=request.getParameter("sId") %>
+                    </c:if>
+                    <c:if test="${sId == null}">
+                    	<input type=text name="sId">
+                    </c:if>
+                    </td>
                 </tr>
                 <tr>
                     <td class="column1">내용</td>

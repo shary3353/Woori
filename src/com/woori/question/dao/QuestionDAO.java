@@ -105,7 +105,9 @@ public class QuestionDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}finally{
+			resClose();
+		}
 		return max;
 	}
 
@@ -161,6 +163,8 @@ public class QuestionDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			resClose();
 		}
 		return max;
 	}
@@ -243,6 +247,8 @@ public class QuestionDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			resClose();
 		}
 		return max;
 	}
