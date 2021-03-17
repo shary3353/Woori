@@ -74,7 +74,7 @@
 </head>
 <body>
 	<div id="wrap">
-		<jsp:include page="../Include/navi.html"></jsp:include>
+		<jsp:include page="../Include/navi.jsp"></jsp:include>
     	<div id="detail">
             <table>
                 <tr>
