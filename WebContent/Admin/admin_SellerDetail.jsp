@@ -60,43 +60,36 @@
                 </table>
             </div>  <!--리스트 닫음-->
 
-            <!-- <div id="Admin_Seller_ReportList_Paging"> 판매자 신고리스트 페이징부분
-                <span class="Page_Content">처음</span>
-                <span class="Page_Content">이전</span>
-                <span class="Page_Number">1</span>
-                <span class="Page_Content">다음</span>
-                <span class="Page_Content">마지막</span>
-            </div>  페이징 닫음 -->
-            
-            <div>
-				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] == 1}">
-					<a href="#" class="pagingBtnDisable">처음</a>
+            <div id="Admin_Seller_ReportList_Paging"> <!-- 판매자 신고리스트 페이징부분 -->
+            	<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] == 1}">
+                	<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=1">처음</a></span>
+                </c:if>
+                <c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] > 1}">
+                	<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=1">처음</a></span>
+                </c:if>
+                <c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] == 1}">
+					<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=1">이전</a></span>
 				</c:if>
 				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] > 1}">
-					<a href="cReservationList?page=1" class="pagingBtn">처음</a>
+					<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=${Admin_SDetailData['Admin_selectedSRListCurrPage'] - 1}">이전</a></span>
 				</c:if>
-				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] == 1}">
-					<a href="#" class="pagingBtnDisable">이전</a>
-				</c:if>
-				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] > 1}">
-					<a href="cReservationList?page=${Admin_SDetailData['Admin_selectedSRListCurrPage']-1}" class="pagingBtn">이전</a>
-				</c:if>
-				<a href="#" class="pagingBtnDisable"
-					style="background-color: skyblue; color: white;">&nbsp;${Admin_SDetailData['Admin_selectedSRListCurrPage']}&nbsp;</a>
-				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] == maxPage}">
-					<a href="#" class="pagingBtnDisable">다음</a>
-				</c:if>
-				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] <= 1}">
-					<a href="cReservationList?page=${Admin_SDetailData['Admin_selectedSRListCurrPage']+1}" class="pagingBtn">다음</a>
-				</c:if>
+				
+				<span class="Page_Number">${Admin_SDetailData['Admin_selectedSRListCurrPage']}</span>
+				
 				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] == Admin_SDetailData['Admin_maxRPage']}">
-					<a href="#" class="pagingBtnDisable">마지막</a>
+					<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=${Admin_SDetailData['Admin_maxRPage']}">다음</a></span>
 				</c:if>
 				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] < Admin_SDetailData['Admin_maxRPage']}">
-					<a href="cReservationList?page=${Admin_SDetailData['Admin_maxRPage']}" class="pagingBtn">마지막</a>
+					<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=${Admin_SDetailData['Admin_selectedSRListCurrPage'] + 1}">다음</a></span>
 				</c:if>
-		</div>
-
+				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] == Admin_SDetailData['Admin_maxRPage']}">
+					<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=${Admin_SDetailData['Admin_maxRPage']}">마지막</a></span>
+				</c:if>
+				<c:if test="${Admin_SDetailData['Admin_selectedSRListCurrPage'] < Admin_SDetailData['Admin_maxRPage']}">
+					<span class="Page_Content"><a href="sDetail?id=${Admin_SDetailData['Admin_selectedSData'].sid }&page=${Admin_SDetailData['Admin_maxRPage']}">마지막</a></span>
+				</c:if>
+                
+            </div>  <!--페이징 닫음 -->
         </div>  <!--판매자 상세보기 컨텐츠 닫음-->
 
         <div id="Admin_Footer"> <!--관리자 푸터-->

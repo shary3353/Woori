@@ -240,7 +240,7 @@ public class AdminReportDAO {
 	public ArrayList<ReportDTO> getRList(String id, int group) {
 		ArrayList<ReportDTO> rList = new ArrayList<>();
 		//String sql = "SELECT a.subject, a.content, a.reporter_id, a.target_id, b.categories, to_char(a.r_date, 'YYYY-MM-DD') AS r_date, a.status FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE target_id=?";
-		String sql = "SELECT rnum, subject, content, reporter_id, target_id, categories, to_char(r_date, 'YYYY-MM-DD') AS r_date FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.r_date) AS rnum, a.subject, a.content, a.reporter_id, a.target_id, b.categories, a.r_date FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE a.target_id = ?)WHERE rnum BETWEEN ? AND ?";
+		String sql = "SELECT rnum, subject, content, reporter_id, target_id, categories, to_char(r_date, 'YYYY-MM-DD') AS r_date, status FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.r_date) AS rnum, a.subject, a.content, a.reporter_id, a.target_id, b.categories, a.r_date, a.status FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE a.target_id = ?)WHERE rnum BETWEEN ? AND ?";
 		int start = 0;
 		int end = 0;
 
