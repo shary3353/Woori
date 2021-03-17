@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,11 +37,19 @@
                     </tr>
                     <c:forEach items="${rList }" var="report" varStatus="status">
                     	<tr>
+                    	<c:set var="reporter_id" value="${report.reporter_id }"></c:set>
+                    	<c:set var="target_id" value="${report.target_id }"></c:set>
                     		<td>${report.r_idx }</td>
                     		<td>${report.rc_code }</td>
-                    		<td>${report.subject }</td>
-                    		<td>${report.reporter_id }</td>
-                    		<td>${report.target_id }</td>
+                    		<td><a href="${pageContext.request.contextPath}/Admin/rDetail?r_idx=${report.r_idx }">${report.subject }</a></td>
+                    		<td>
+                    			<c:if test="${fn:indexOf(reporter_id, '-') == -1 }"><a href="cDetail?id=${report.reporter_id }">${report.reporter_id }</a></c:if>	<!-- 구매자 -->
+                    			<c:if test="${fn:indexOf(reporter_id, '-') > -1 }"><a href="sDetail?id=${report.reporter_id }">${report.reporter_id }</a></c:if>		<!-- 판매자 -->
+                    		</td>
+                    		<td>
+                    			<c:if test="${fn:indexOf(target_id, '-') == -1 }"><a href="cDetail?id=${report.target_id }">${report.target_id  }</a></c:if>	<!-- 구매자 -->
+                    			<c:if test="${fn:indexOf(target_id, '-') > -1 }"><a href="sDetail?id=${report.target_id  }">${report.target_id  }</a></c:if>		<!-- 판매자 -->
+                    		</td>
                     		<td>${report.r_date }</td>
                             <td>
 								<select name="reportstatus" id="reportStatus${status.count }">

@@ -54,7 +54,7 @@
                     <c:forEach items="${Admin_SDetailData['Admin_selectedSRList']}" var="report">
                     	<tr>
 	                        <td>${report.reporter_id }</td>
-	                        <td>${report.subject }</td>
+	                        <td><a href="${pageContext.request.contextPath}/Admin/rDetail?r_idx=${report.r_idx }">${report.subject }</a></td>
                     </tr>
                     </c:forEach>
                 </table>

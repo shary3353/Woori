@@ -7,74 +7,48 @@
 <head>
     <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/AdminStyle.css">
-    
     <title>ReportDetail</title>
-    <style>
-      #wrap{
-          
-          width: 1920px;
-          height: 600px;
-          display: table-cell;
-          vertical-align: middle;
-      }
-      #ReportDetail{
-          width: 70%;
-          margin-right: auto;
-          margin-left: auto;
-      }
-      table{
-          width: 100%;
-      }
-        table,th,td{           
-            border: 1px solid gray;
-            border-collapse: collapse;
-            padding: 10px 5px;
-        }
-        #content{
-            height: 250px;
-        }
-      table th{
-          width: 20%;
-      }
-      #listbutton{
-        text-align: center;
-        padding: 25px;
-      }
-    </style>
 </head>
 <body>
-    <div id="wrap">
-        <div id="Admin_Header">  <!-- í¤ë ìì­ -->
+    <div id="Wrapper">
+        <div id="Admin_Header">
             <%@include file="admin_Header.jsp" %>
-        </div>  <!--í¤ë ë«ì-->
+        </div>
 
-        <nav>    <!-- ê´ë¦¬ì ë¤ë¹ê²ì´ì-->
+        <nav>  
             <%@include file="admin_Nav.jsp" %>
-        </nav>  <!--ë¤ë¹ê²ì´ì ë«ì-->
-          <div id="ReportDetail">
-                <table>
+        </nav>  
+          <div id="Admin_Seller_List">
+                <table class="sellerlist" style="margin-left:auto; margin-right:auto;">
                     <tr>
                         <th>신고제목</th>
-                        <td>신고글 제목</td>
+                        <td>${selectedReport.subject }</td>
                     </tr>
                     <tr>
                         <th>신고자</th>
-                        <td>신고자 ID</td>
+                        <td>${selectedReport.reporter_id }</td>
                     </tr>
                     <tr>
                         <th>신고대상자</th>
-                        <td>신고 대상자 ID</td>
+                        <td>${selectedReport.target_id }</td>
                     </tr>
                     <tr>
                         <th>신고카테고리</th>
-                        <td>카테고리 내용</td>
+                        <td>${selectedReport.category }</td>
+                    </tr>
+                    <tr>
+                        <th>신고 처리상태</th>
+                        <td>
+                        	<c:if test="${selectedReport.status  == 0}">처리중</c:if>
+                        	<c:if test="${selectedReport.status  == 1}">처리완료</c:if>
+                        </td>
                     </tr>
                     <tr id="content">
-                        <td colspan="2"> 신고글 내용</td>
+                        <td colspan="2">${selectedReport.content }</td>
                     </tr>
                 </table>
-                <div id="listbutton">
-                    <button style="width: 200px; height: 30px;">신고관리 리스트</button>
+                <div id="listbutton" style="text-align: center;">
+                    <button style="width: 200px; height: 30px;" onclick="location.href='./rList'">신고관리 리스트</button>
                 </div>
                 
             </div>
