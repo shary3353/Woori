@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,12 +116,12 @@
                     </tr>
                     <tr>
                         <th>신고자</th>
-                        <td ><input type="text" name="userName"/></td> 
+                        <td ><input type="text" name="userName" /></td> 
                        <!--  value="${sessionScope.loginId}" readonly/> -->
                     </tr>
                     <tr>
                         <th>신고대상자</th>
-                        <th ><input type="text" name="sellerId"></th>
+                        <th ><input type="text" name="sellerId" ></th>
                     </tr>  
                     <tr>
                         <th>신고 카테고리</th>

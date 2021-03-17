@@ -18,7 +18,7 @@ import com.woori.report.service.ReportService;
 */
 @WebServlet({"/Seller/sReportList" ,"/Seller/sReportDetail","/Seller/sReprtForm", "/Seller/sReport"
 	, "/ServiceCenter/Report", "/ServiceCenter/ReportDetail"
-	, "/Consumer/cReportList", "/Consumer/cReportDetail"
+	, "/Consumer/cReportList", "/Consumer/cReportDetail", "/Consumer/cReportForm"
 	, "/rList", "/rSearch", "/rStatusUpdate"})
 public class ReportController extends HttpServlet {
 
@@ -84,7 +84,11 @@ public class ReportController extends HttpServlet {
 			System.out.println("Request Customer Report Detail");
 			service.cReportDetail();
 			break;
-		
+		case "/Consumer/cReportForm":
+			System.out.println("Request Customer Report Form");
+			service.cReportForm();
+			break;
+			
 		case "/rList":
 			System.out.println("Request Seller List");
 			adminService.rList();
