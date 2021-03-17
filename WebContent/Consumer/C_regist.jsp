@@ -71,7 +71,7 @@
         <img src="../img/Consumer_regist.PNG" alt="logo" class="logo">
     </div>
 
-    <form>
+    <form action="C_login.jsp">
         <table>
             <tr>
                 <th>이름</th>
