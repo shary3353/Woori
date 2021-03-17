@@ -177,8 +177,16 @@ public class MemberService {
     }
 
 	public void sPfpDatail() throws ServletException, IOException { //판매자메인 - 판매자 회원정보 상세보기
-		req.getSession().setAttribute("loginId","123-12-12345");//test용
-		String sid = (String)req.getSession().getAttribute("loginId");
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		System.out.println(sid); //로그인한 아이디 확인
 		
 		MemberDAO dao = new MemberDAO();
@@ -190,7 +198,16 @@ public class MemberService {
 	}
 
 	public void sPfpUpdateForm() throws ServletException, IOException{//판매자메인 - 판매자 수정폼 보기
-		String sid = req.getParameter("sid");
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		System.out.println("수정할 sid :" + sid);
 		
 		MemberDAO dao = new MemberDAO();
@@ -201,6 +218,16 @@ public class MemberService {
 	}
 
 	public void sPfpUpdate() throws ServletException, IOException{//판매자메인 - 판매자 회원정보 수정
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(loginID != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		String sid = req.getParameter("sid");
 		String name = req.getParameter("name");
 		String pw = req.getParameter("pw");
