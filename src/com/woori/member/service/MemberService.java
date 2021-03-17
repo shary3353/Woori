@@ -137,13 +137,13 @@ public class MemberService {
 		String pw = req.getParameter("adminPw");
 		System.out.println(id + "/" + pw);
 
-		page = "index.jsp";
+		page = "admin_Login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 
 		if (dao.login(id, pw)) {
-			page = "/list";
+			page = "/Admin/cList";
 			msg = id + " 님 반갑 습니다.";
-			req.getSession().setAttribute("loginId", id);
+			req.getSession().setAttribute("adminId", id);
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
