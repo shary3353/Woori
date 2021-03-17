@@ -118,21 +118,20 @@ form {
 					<tr>
 						<th>No</th>
 						<th>상품번호</th>
-						<th>상품정보</th>
+						<th style="width: 650px;">상품정보</th>
 						<th>가격</th>
 						<th>판매자</th>
 						<th>예약</th>
 						<th>삭제</th>
 					</tr>
 					<c:forEach items="${list}" var="list">
-					<input type="text" name="" value=""/>
 						<tr>
 							<td style="width: auto;">${list.wish_idx}</td>
 							<td>${list.p_idx}</td>
 							<td>
 								<table class="p_PhoNDesc">
 									<tr>
-										<td class="p_PhoNDesc" rowspan="3" style="width: 650px;"><img
+										<td class="p_PhoNDesc" rowspan="3" ><img
 											src="${list.photoPath}" alt="${list.photoPath}"
 											style="width: 125px; height: 125px;" />
 										</td>
