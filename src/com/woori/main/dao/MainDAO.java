@@ -51,7 +51,7 @@ public class MainDAO {
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String sql = "SELECT p.p_idx,p.p_name,p.likes,p.p_price,t.orifilename,t.newfilename " + 
-				"FROM (SELECT p_idx,p_name,likes,p_price,fileidx, ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product) p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE rk=?";
+				"FROM (SELECT p_idx,p_name,likes,p_price, ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product) p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE rk=?";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -75,6 +75,57 @@ public class MainDAO {
 		}
 		
 		return map;
+	}
+
+
+	public ProductDTO  citemdetail(String pidx) {
+		ProductDTO dto = null;
+		String sql="SELECT p.p_idx,p.p_name,p.p_content,p.p_price,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(pidx));
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				dto = new ProductDTO();
+				dto.setP_idx(rs.getInt("p_idx"));
+				dto.setP_name(rs.getString("p_name"));
+				dto.setP_content(rs.getString("p_content"));
+				dto.setP_price(rs.getInt("p_price"));
+				dto.setOriFileName(rs.getString("orifilename"));
+				dto.setNewFileName(rs.getString("newfilename"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+		
+	}
+
+
+	public ProductDTO citemreservation(String pidx) {
+		ProductDTO dto = null;
+		String sql="SELECT p.p_idx,p.p_name,p.p_price,p.sid,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(pidx));
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				dto = new ProductDTO();
+				dto.setP_idx(rs.getInt("p_idx"));
+				dto.setP_name(rs.getString("p_name"));
+				dto.setP_price(rs.getInt("p_price"));
+				dto.setSid(rs.getString("sid"));
+				dto.setOriFileName(rs.getString("orifilename"));
+				dto.setNewFileName(rs.getString("newfilename"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
 	}
 
 	

@@ -52,8 +52,6 @@
 		font-size: 20px;
 	}
 	/* 메인컨텐츠 */
-	#mainBox{
-	}
 
 	.mainContent1{
 		width: 1920px;
@@ -105,12 +103,14 @@
 		font-weight: 600;
 		font-family: Arial, sans-serif;
 	}
-
-
-
+	
+	.alink{
+		text-decoration: none;
+	}
 
 </style>
 </head>
+
 <body>
 	<div id="wrap">
 		<jsp:include page="../Include/navi.html"></jsp:include>
@@ -123,15 +123,16 @@
 				<span>HOT</span>
 			</div>
 			<div class="mainContent1">
+			
 				<div class="bestItem">
 					<c:forEach items="${list1}" var="best">
 					<table>
 						<tr>
-							<td rowspan="3" class="bestImage">
-								<img src="img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px"/>
+							<td rowspan="3" class="bestImage" >
+								<img src="img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
 							</td>
 							<td class="bestName">
-								${best.p_name}
+								<a href="#" class=".alink">${best.p_name}</a>
 							</td>
 						</tr>
 						<tr>
@@ -175,7 +176,9 @@
 								<img src="img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
+							<a href="C_itemDetail?p_idx=${best3.p_idx}" class="alink">
 								${best3.p_name}
+							</a>
 							</td>
 						</tr>
 						<tr>
@@ -196,7 +199,9 @@
 								<img src="img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								${best4.p_name}
+								<a href="C_itemDetail?p_idx=${best4.p_idx}" class="alink">
+									${best4.p_name}
+								</a>
 							</td>
 						</tr>
 						<tr>

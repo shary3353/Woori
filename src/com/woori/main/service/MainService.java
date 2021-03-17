@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.woori.main.dao.MainDAO;
+import com.woori.product.dto.ProductDTO;
 
 public class MainService {
 	
@@ -35,6 +36,36 @@ public class MainService {
 		dis = req.getRequestDispatcher("Consumer/C_main.jsp");
 		dis.forward(req, resp);
 		
+	}
+
+	public void Citemdetail() throws ServletException, IOException {
+		String pidx = req.getParameter("p_idx");
+		System.out.println(pidx);
+		MainDAO dao = new MainDAO();
+		ProductDTO dto = dao.citemdetail(pidx);
+		System.out.println(dto);
+		String page = "/";
+		if(dto != null) {
+			page="Consumer/C_ItemDetail.jsp";
+			req.setAttribute("dto", dto);
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+
+	public void CitemReservation() throws ServletException, IOException {
+		String pidx = req.getParameter("p_idx");
+		System.out.println(pidx);
+		MainDAO dao = new MainDAO();
+		ProductDTO dto = dao.citemreservation(pidx);
+		System.out.println(dto);
+		String page = "/";
+		if(dto != null) {
+			page="Consumer/C_ItemReservation.jsp";
+			req.setAttribute("dto", dto);
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
 	}
 
 }
