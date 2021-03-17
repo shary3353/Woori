@@ -6,6 +6,7 @@
 <head>
     <meta charset='utf-8'>
     <title>우리 양주</title>
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/AdminStyle.css">
 </head>
 <body>
@@ -33,7 +34,7 @@
                         <th>신고날짜</th>
                         <th>신고상태</th>
                     </tr>
-                    <c:forEach items="${rList }" var="report">
+                    <c:forEach items="${rList }" var="report" varStatus="status">
                     	<tr>
                     		<td>${report.r_idx }</td>
                     		<td>${report.rc_code }</td>
@@ -41,22 +42,19 @@
                     		<td>${report.reporter_id }</td>
                     		<td>${report.target_id }</td>
                     		<td>${report.r_date }</td>
-                    		<c:if test="${report.status == 0}">
-                                <td>
-                                    <select name="reportstate" id="">
-                                        <option value="100" selected="selected">처리중</option>
-                                        <option value="200">처리완료</option>
-                                    </select><br><button>신고상태저장</button>
-                                </td>
-                            </c:if>
-                            <c:if test="${report.status == 1}">
-                                <td>
-                                    <select name="reportstate" id="">
-                                        <option value="100">처리중</option>
-                                        <option value="200" selected="selected">처리완료</option>
-                                    </select><br><button>신고상태저장</button>
-                                </td>
-                            </c:if>
+                            <td>
+								<select name="reportstatus" id="reportStatus${status.count }">
+		                    		<c:if test="${report.status == 0}">
+										<option value="0" selected="selected">처리중</option>
+										<option value="1">처리완료</option>
+		                             </c:if>
+		                             <c:if test="${report.status == 1}">
+										<option value="0">처리중</option>
+										<option value="1" selected="selected">처리완료</option>
+		                              </c:if>
+								</select>
+	                              <br><button id="rStatusUpdateBtn${status.count }" value="${report.r_idx }">신고상태저장</button>
+							</td>
                     	</tr>
                     </c:forEach>
                 </table>
@@ -86,4 +84,30 @@
         </div>  <!--관리자 푸터 닫음-->
     </div>  <!--Wrapper 닫음-->
 </body>
+<script type="text/javascript">
+	$("body").on("click", "[id^=rStatusUpdateBtn]", function(event) {
+		var r_idx = $('#'+this.id).val();
+		var number = this.id.slice(-1);
+		console.log(number);
+		var rStatus = $('#reportStatus'+number).val();
+		console.log(r_idx+' / '+rStatus);
+		
+ 		$.ajax({
+			type:"GET"
+			,url:"rStatusUpdate"
+			,data:{"r_idx":r_idx, "rStatus":rStatus}
+			,dataType:"JSON"
+			,success:function(obj){
+				if(obj.updateReport){
+					alert('신고 상태를 수정하였습니다.')
+				}else{
+					alert('신고 상태를 수정하지못했습니다.');
+				}
+			}
+			,error:function(e){
+				console.log(e);
+			}
+		}); 
+	}); 
+</script>
 </html>

@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.woori.member.dao.ListDAO;
+import com.woori.report.dao.AdminReportDAO;
 import com.woori.report.dao.ReportDAO;
 import com.woori.report.dto.ReportDTO;
 

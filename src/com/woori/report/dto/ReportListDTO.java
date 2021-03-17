@@ -1,4 +1,4 @@
-package com.woori.member.dto;
+package com.woori.report.dto;
 
 public class ReportListDTO {
 	private int r_idx;

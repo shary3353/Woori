@@ -94,6 +94,7 @@
 		,success:function(obj){
 			console.log(obj);
 			if(obj.addBlack){
+				alert('해당 판매회원을 블랙리스트에 추가하였습니다.');
 				$('td').remove('#blackBtn'+number);
 				$('#inputReason'+number).attr('colspan', '2');
 				$('#inputReason'+number).html('이미등록된회원입니다.');
