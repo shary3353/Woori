@@ -35,7 +35,7 @@ public class AdminReportService {
 		req.setAttribute("rList", map.get("rList"));
 		req.setAttribute("maxReportPage", map.get("maxReportPage"));
 		req.setAttribute("currPage", group);
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher("admin_ReportList.jsp");
 		dis.forward(req, resp);
 	}
 
@@ -66,7 +66,7 @@ public class AdminReportService {
             req.setAttribute("currPage", group);
             req.setAttribute("maxReportPage", map.get("maxReportPage"));
         }
-        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_ReportList.jsp");
+        RequestDispatcher dis = req.getRequestDispatcher("admin_ReportList.jsp");
         dis.forward(req, resp);
     }
 

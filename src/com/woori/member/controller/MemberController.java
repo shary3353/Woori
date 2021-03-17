@@ -11,12 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.woori.member.service.MemberService;
-/*처리 : (회원가입, 로그인, 회원수정, 회원상세보기, 회원리스트)
+/*처리 : (회원가입,중복확인, 로그인, 회원수정, 회원상세보기, 회원리스트)
  	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
 	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
-@WebServlet({"/cLogin", "/sLogin", "/adminLogin","/logout", "/cJoin", "/sJoin", "/cList", "/sList"
-	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/cSearch", "/sSearch"
+
+@WebServlet({"/Admin/cLogin", "/Admin/sLogin", "/adminLogin", "/overlay" ,"/logout", "/cJoin", "/sJoin", "/Admin/cList", "/Admin/sList"
+	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/Admin/cSearch", "/Admin/sSearch"
 	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"})
 public class MemberController extends HttpServlet {
 
@@ -29,19 +30,19 @@ public class MemberController extends HttpServlet {
 		MemberService service = new MemberService(req, resp);
 		
 		switch(sub) {
-			case "/cList":
+			case "/Admin/cList":
 				System.out.println("Request Customer List");
 				service.cList();
 				break;
-			case "/sList":
+			case "/Admin/sList":
 				System.out.println("Request Seller List");
 				service.sList();
 				break;
-            case "/cSearch":
+            case "/Admin/cSearch":
                 System.out.println("Request Customer Search");
                 service.cSearch();
                 break;
-            case "/sSearch":
+            case "/Admin/sSearch":
                 System.out.println("Request Seller Search");
                 service.sSearch();
                 break;
@@ -142,6 +143,11 @@ public class MemberController extends HttpServlet {
 		case "/Consumer/cDetail":
 			System.out.println("Request Custumer Info");
 			service.cDetail();
+			break;
+		
+		case"/overlay"://중복체크요청
+			System.out.println("중복체크 요청");
+			service.overlay();
 			break;
 		}
 	}

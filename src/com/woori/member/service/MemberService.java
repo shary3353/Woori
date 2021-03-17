@@ -1,6 +1,7 @@
 package com.woori.member.service;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +29,32 @@ public class MemberService {
 	public MemberService(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
+	}
+	
+	public void overlay() throws IOException {//중복체크
+		String cid = req.getParameter("icd");
+		boolean success = false;
+		System.out.println("Cid :"+cid);
+		MemberDAO dao = new MemberDAO();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		try {
+			success = dao.overlay(cid);
+			System.out.println("아이디 사용여부 :"+success);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			
+			dao.resClose();
+			map.put("use",success); 
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+			
+			resp.getWriter().print(json);
+		}
 	}
 	
 	public void login() throws ServletException, IOException{
@@ -86,10 +113,8 @@ public class MemberService {
 		dis.forward(req, resp);
 		
 	}
-	
-	
-	
 
+	
 	public void cList() throws ServletException, IOException {
 		int group = 1;
 		String page = req.getParameter("page");
@@ -103,7 +128,7 @@ public class MemberService {
 		req.setAttribute("cList", map.get("cList"));
 		req.setAttribute("maxCustomerPage", map.get("maxCustomerPage"));
 		req.setAttribute("currPage", group);
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
 		dis.forward(req, resp);
 	 }
 
@@ -121,7 +146,7 @@ public class MemberService {
 		req.setAttribute("sList", map.get("sList"));
 		req.setAttribute("currPage", group);
 		req.setAttribute("maxSellerPage", map.get("maxPage"));
-		RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
 		dis.forward(req, resp);
 	}
 
@@ -134,7 +159,7 @@ public class MemberService {
         ArrayList<CustomerListDTO> searchedC = dao.cSearch(inputC);
         
         req.setAttribute("cList", searchedC);
-        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_CustomerList.jsp");
+        RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
         dis.forward(req, resp);
     }
 
@@ -147,13 +172,21 @@ public class MemberService {
         ArrayList<SellerListDTO> searchedS = dao.sSearch(inputS);
         
         req.setAttribute("sList", searchedS);
-        RequestDispatcher dis = req.getRequestDispatcher("Admin/admin_SellerList.jsp");
+        RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
         dis.forward(req, resp);
     }
 
 	public void sPfpDatail() throws ServletException, IOException { //판매자메인 - 판매자 회원정보 상세보기
-		req.getSession().setAttribute("loginId","123-12-12345");//test용
-		String sid = (String)req.getSession().getAttribute("loginId");
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		System.out.println(sid); //로그인한 아이디 확인
 		
 		MemberDAO dao = new MemberDAO();
@@ -165,7 +198,16 @@ public class MemberService {
 	}
 
 	public void sPfpUpdateForm() throws ServletException, IOException{//판매자메인 - 판매자 수정폼 보기
-		String sid = req.getParameter("sid");
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String sid = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(sid != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		System.out.println("수정할 sid :" + sid);
 		
 		MemberDAO dao = new MemberDAO();
@@ -176,6 +218,16 @@ public class MemberService {
 	}
 
 	public void sPfpUpdate() throws ServletException, IOException{//판매자메인 - 판매자 회원정보 수정
+		//로그인검사 추가예정
+		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		/*
+		if(loginID != null) {//로그인 여부 판별
+			
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("판매자로그인.jsp");
+		}
+		*/
 		String sid = req.getParameter("sid");
 		String name = req.getParameter("name");
 		String pw = req.getParameter("pw");

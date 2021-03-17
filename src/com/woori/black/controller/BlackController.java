@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.black.service.BlackService;
 
-@WebServlet({ "/bList", "/bSearch", "/cBlackRegist", "/sBlackRegist", "/blackUpdate" })
+@WebServlet({ "/Admin/bList", "/Admin/bSearch", "/Admin/cBlackRegist", "/Admin/sBlackRegist", "/Admin/blackUpdate" })
 public class BlackController extends HttpServlet {
 
 	@Override
@@ -30,23 +30,23 @@ public class BlackController extends HttpServlet {
 		BlackService service = new BlackService(req, resp);
 
 		switch (sub) {
-		case "/bList":
+		case "/Admin/bList":
 			System.out.println("Request Customer List");
 			service.bList();
 			break;
-		case "/bSearch":
+		case "/Admin/bSearch":
 			System.out.println("Request BlackList Search");
 			service.bSearch();
 			break;
-		case "/sBlackRegist":
+		case "/Admin/sBlackRegist":
 			System.out.println("Request Seller BlackList Search");
 			service.sBlackRegist();
 			break;
-		case "/cBlackRegist":
+		case "/Admin/cBlackRegist":
 			System.out.println("Request Customer BlackList Search");
 			service.cBlackRegist();
 			break;
-		case "/blackUpdate":
+		case "/Admin/blackUpdate":
 			System.out.println("Request BlackList Update");
 			service.blackCancel();
 			break;

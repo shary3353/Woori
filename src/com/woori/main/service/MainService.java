@@ -89,7 +89,12 @@ public class MainService {
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);	
-		dis.forward(req, resp);
+	}
+	
+	
+	public void AdminMain() {
+		
+
 	}
 
 }
