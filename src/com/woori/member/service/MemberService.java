@@ -336,6 +336,12 @@ public class MemberService {
 	public void AdminCustomerDetail() throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		HashMap<String, Object> map = new HashMap<>();
+		int group = 1;
+		String page = req.getParameter("page");
+
+		if (page != null) {
+			group = Integer.parseInt(page);
+		}
 		// 1. 상세보기할 cid 받기
 		String cid = req.getParameter("id");
 
@@ -351,7 +357,11 @@ public class MemberService {
 
 		// 4. REPORT 테이블에서 해당 cid가 target_id인 신고정보 받아오기
 		AdminReportDAO rDao = new AdminReportDAO();
-		ArrayList<ReportDTO> selectedCustomerRList = rDao.getRList(cid);
+		ArrayList<ReportDTO> selectedCustomerRList = rDao.getRList(cid, group);
+		rDao = new AdminReportDAO();
+		int maxRPage = rDao.getMaxSelectedRPage(cid);
+		map.put("Admin_selectedCRListCurrPage", group);
+		map.put("Admin_maxRPage", maxRPage);
 		map.put("Admin_selectedCRList", selectedCustomerRList);
 
 		// 5. admin_CustomerDetail.jsp 로 포워딩
@@ -363,6 +373,12 @@ public class MemberService {
 	public void AdminSellerDetail() throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		HashMap<String, Object> map = new HashMap<>();
+		int group = 1;
+		String page = req.getParameter("page");
+
+		if (page != null) {
+			group = Integer.parseInt(page);
+		}
 		// 1. 상세보기할 sid 받기
 		String sid = req.getParameter("id");
 
@@ -378,7 +394,12 @@ public class MemberService {
 
 		// 4. REPORT 테이블에서 해당 sid가 target_id인 신고정보 받아오기
 		AdminReportDAO rDao = new AdminReportDAO();
-		ArrayList<ReportDTO> selectedSellerRList = rDao.getRList(sid);
+		ArrayList<ReportDTO> selectedSellerRList = rDao.getRList(sid, group);
+		rDao = new AdminReportDAO();
+		int maxRPage = rDao.getMaxSelectedRPage(sid);
+		
+		map.put("Admin_selectedSRListCurrPage", group);
+		map.put("Admin_maxRPage", maxRPage);
 		map.put("Admin_selectedSRList", selectedSellerRList);
 
 		// 5. admin_SellerDetail.jsp 로 포워딩
