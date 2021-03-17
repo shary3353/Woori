@@ -90,11 +90,11 @@ public class MemberDAO {
 	}
 	
 	
-	public boolean overlay(String id) throws SQLException {//중복체크
+	public boolean overlay(String cid) throws SQLException {//중복체크
 		boolean success = false;
-		String sql = "SELECT id FORM member WHERE id=?";
+		String sql = "SELECT cid FORM member WHERE cid=?";
 		ps = conn.prepareStatement(sql);
-		ps.setString(1, id);// ?대응
+		ps.setString(1, cid);// ?대응
 		rs = ps.executeQuery();
 		success = rs.next();
 	
