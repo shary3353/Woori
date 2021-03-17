@@ -82,39 +82,62 @@ public class ReservationService {
 	}
 
 	public void cReservationList() throws ServletException, IOException {
+		//String loginId = (String) req.getParameter().getAttribute("loginId");
 		req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String cid = (String) req.getSession().getAttribute("loginId");
-		System.out.println(cid + " 의 예약내역 불러오기");
-		String pageParam = req.getParameter("page");
-		System.out.println("이동하고 싶은 page : " + pageParam);
-		int group = 1;
-		if (pageParam != null) {
-			group = Integer.parseInt(pageParam);
+		String msg = "";
+		String loginId = cid;
+		
+		if(loginId != null) {
+			System.out.println(cid + " 의 예약내역 불러오기");
+			String pageParam = req.getParameter("page");
+			System.out.println("이동하고 싶은 page : " + pageParam);
+			int group = 1;
+			if (pageParam != null) {
+				group = Integer.parseInt(pageParam);
+			}
+			ReservationDAO dao = new ReservationDAO();
+			HashMap<String, Object> map = dao.cReservationList(group, cid);
+
+			req.setAttribute("maxPage", map.get("maxPage"));
+			req.setAttribute("list", map.get("list"));
+			req.setAttribute("currPage", group);
+
+			RequestDispatcher dis = req.getRequestDispatcher("./C_ReservationList.jsp");
+			dis.forward(req, resp);
+		} else {
+			msg = "로그인을 해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("");
+			dis.forward(req, resp);
 		}
-		ReservationDAO dao = new ReservationDAO();
-		HashMap<String, Object> map = dao.cReservationList(group, cid);
-
-		req.setAttribute("maxPage", map.get("maxPage"));
-		req.setAttribute("list", map.get("list"));
-		req.setAttribute("currPage", group);
-
-		RequestDispatcher dis = req.getRequestDispatcher("./C_ReservationList.jsp");
-		dis.forward(req, resp);
+		
 	}
 
 	public void cMyPageMain() throws ServletException, IOException {
+		//String loginId = (String) req.getParameter().getAttribute("loginId");
+		String msg = "";
 		req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String cid = (String) req.getSession().getAttribute("loginId");
-		ReservationDAO dao = new ReservationDAO();
-		ArrayList<ReservationDTO> rList = dao.mainReservationList(cid);
+		String loginId = cid;
+		if(loginId != null) {
+			ReservationDAO dao = new ReservationDAO();
+			ArrayList<ReservationDTO> rList = dao.mainReservationList(cid);
+			
+			WishDAO wdao = new WishDAO();
+			ArrayList<WishDTO> wList = wdao.mainWishList(cid);
+			
+			req.setAttribute("rList", rList);
+			req.setAttribute("wList", wList);
+			RequestDispatcher dis = req.getRequestDispatcher("./C_MyPageMain.jsp");
+			dis.forward(req, resp);
+		} else {
+			msg = "로그인을 해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("");
+			dis.forward(req, resp);
+		}
 		
-		WishDAO wdao = new WishDAO();
-		ArrayList<WishDTO> wList = wdao.mainWishList(cid);
-		
-		req.setAttribute("rList", rList);
-		req.setAttribute("wList", wList);
-		RequestDispatcher dis = req.getRequestDispatcher("./C_MyPageMain.jsp");
-		dis.forward(req, resp);
 	}
 
 }
