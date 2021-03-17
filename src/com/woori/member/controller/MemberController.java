@@ -90,12 +90,12 @@ public class MemberController extends HttpServlet {
 		
 		switch(sub) {
 		
-		case "/cLogin":
+		case "/Admin/cLogin":
 			System.out.println("Request Customer Login");
 			service. C_Loginid();
 			break;
 		
-		case "/sLogin":
+		case "/Admin/sLogin":
 			System.out.println("Request Seller Login");
 			service.S_Loginid();
 			break;
