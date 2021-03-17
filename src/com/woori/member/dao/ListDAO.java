@@ -148,7 +148,7 @@ public class ListDAO {
 
 	public ArrayList<SellerListDTO> sSearch(String inputS) {
 		ArrayList<SellerListDTO> search = new ArrayList<SellerListDTO>();
-		String sql = "SELECT a.sid, count(c.target_id) AS cntReport, b.stack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id WHERE a.sid=? GROUP BY a.sid, b.isblack, a.reg_date b.stack ORDER BY a.reg_date";
+		String sql = "SELECT a.sid, count(c.target_id) AS cntReport, b.stack, b.isblack, a.reg_date FROM seller a left outer join s_blacklist b on a.sid = b.sid left outer join report c on a.sid = c.target_id WHERE a.sid=? GROUP BY a.sid, b.isblack, a.reg_date, b.stack ORDER BY a.reg_date";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, inputS);
