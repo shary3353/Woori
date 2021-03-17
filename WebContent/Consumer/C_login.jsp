@@ -147,7 +147,7 @@
             <!--컨테이너 바디-->
             <div class="tab_content" id="Pur_tab">
                 <!--구매자 로그인 탭열기-->
-                <form action="/C_main" method="POST">
+                <form action="C_main.jsp" method="POST">
                     <div>
                         <table>
                             <tr>
@@ -207,7 +207,7 @@
 	var content ="안녕하세요"+loginId+"님,<a href='logout'>[로그아웃]</a>";
 	document.getElementById("login").innerHTML = content;
 	}else{
-		location.href="index.jsp";
+		location.href="C_login.jsp";
 	}
 
 
