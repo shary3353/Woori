@@ -88,7 +88,7 @@
         <div class="seMain">
             <div class="sideMenu">
                       <div class="Service"><a href=qList>고객센터</a></div>
-                    <div class="One"><a href="qWrite">1:1 문의하기</a></div>
+                    <div class="One"><a href="Q_write.jsp">1:1 문의하기</a></div>
                     <div class="Question"><a href="Question.jsp">자주묻는 질문</a></div>
                     <div class="Report"><a href="Report.jsp">신고하기</a></div>
             </div> 
@@ -114,7 +114,7 @@
                     <th>판매자</th>
                     <td>${list.sid}</td>
                     <th>문의상품</th>
-                    <td colspan="3">Ballantine’s</td>
+                    <td colspan="3"></td>
                 </tr>
                 <tr>
                     <th colspan="6">문의내용</th>
@@ -124,7 +124,9 @@
                 </tr>
                 <c:if test="${list.s_answer == null}">
 	                <tr>
-	                    <th colspan="6" style="height: 70px;" >등록된 답변이 없습니다.</th>
+	                    <th colspan="6" style="height: 70px;" >
+	                    	등록된 답변이 없습니다.
+	                    </th>
 	                </tr>
                 </c:if>
                 <c:if test="${list.s_answer != null}"><tr>
@@ -132,7 +134,7 @@
 	                </tr>
 	            </c:if>
                 <tr>
-                    <th colspan="6"><button>목록으로 돌아가기</button></th>
+                    <th colspan="6"><button onclick="location.href='qList'">목록으로 돌아가기</button></th>
                 </tr>
             </table>
         </div>

@@ -7,6 +7,7 @@
 <html>
     <head>
         <title>1:1문의 게시판</title>
+        <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
         <style>
            
             a{
@@ -77,18 +78,16 @@
               padding : 20px 20px;
           }
           .num{
-              width: 7%;
+              width: 50px;
           }
           .subject{
-              width: 60%;
+              width: 1000px;
               text-align: left;
           }
           .date{
-              width: 10%;
+              width: 150px;
           }
-          #pass{
-              display: none;
-          }
+         
           #list_div{
             margin-left: 300px;
           }
@@ -103,13 +102,14 @@
             <div class="seMain">
                 <div class="sideMenu">
                     <div class="Service"><a href=qList>고객센터</a></div>
-                    <div class="One"><a href="qWrite">1:1 문의하기</a></div>
+                    <div class="One"><a href="Q_write.jsp">1:1 문의하기</a></div>
                     <div class="Question"><a href="Question.jsp">자주묻는 질문</a></div>
                     <div class="Report"><a href="Report.jsp">신고하기</a></div>
                 </div> 
             </div>
            <div id="list_div">
                <h3>1:1 문의내역</h3>
+               <form action="qDetail" method="post">
                <table>
                     <div id="list">
                         <tr>
@@ -120,14 +120,18 @@
                <c:forEach items="${list }" var="list">
                         <tr>
                             <th class="num">${list.q_idx }</th>
-                            <th class="subject" id="subjectDetail"><a href="#" onclick="showPw('pass')">${list.subject }</a></th>
+                            <th class="subject" ><a href="#" id="subjectDetail" onclick="has('${list.q_idx}');">${list.subject }</a></th>
                             <th class="date">${list.q_reg_date }</th>
                         </tr>
-                        <tr>
-                            <td colspan="3" id="pass"><input type="password" maxlength="4" id="p5"><button>확인</button></td>
+                        <tr>   
+                            <td colspan="3" id="${list.q_idx }" style="display:none;">
+                            <input type="password" maxlength="4" id="p5">
+                            <button>확인</button>
+                            </td>
                         </tr>
                </c:forEach>
                     </div>
+               </form>
                     
                     </table>
                     <div id="Admin_Seller_List_Paging"> <!--판매자리스트 페이징부분-->
@@ -157,17 +161,33 @@
                         </span>
                     </div>
                 </div>
-  	
        </body>
+  	
        <script>
-       function showPw(id){
-   	    obj = document.getElementById(id);
-   	    if(obj.style.display == "none"){
-   	        obj.style.display = "";
-   	    }else{
-   	        obj.style.display = "none";
-   	    }
-   	  }
-    
+    /*   function doDisplay(){
+    	  var con = document.getElementById("pass");
+    	  if(con.style.display == 'none'){
+    		  	con.style.display='inline';
+    	  }else{
+    		  con.style.display ='none';
+    	  }
+      }
+     */
+    	 /* $('#subjectDetail').click(function(){
+    		 $('#pass').toggle();
+    		 
+    	 }); */
+    	 
+     function has(id){
+    	 var idx = document.getElementById(id);
+    	 console.log(idx)
+    	 if(idx.style.display =="none"){
+    		 idx.style.display = '';
+    		 
+    	 }else{
+    		 idx.style.display = "none";
+    	 }
+     }
+     
 </script>
 </html>

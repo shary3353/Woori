@@ -14,7 +14,7 @@ import com.woori.product.dto.ProductDTO;
 import com.woori.question.dao.QuestionDAO;
 import com.woori.question.dto.QuestionDTO;
 import com.woori.wish.dao.WishDAO;
-
+import com.google.gson.Gson;
 public class QuestionService {
 
 	// 공통
@@ -26,7 +26,7 @@ public class QuestionService {
 		this.req = req;
 		this.resp = resp;
 	}
-
+	
 	public void sQAList() throws ServletException, IOException {// 판매자 문의 내역 리스트
 		// 로그인검사 추가예정
 		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
@@ -195,30 +195,46 @@ public class QuestionService {
 	}
 
 	public void qWrite() throws ServletException, IOException {
-		String sId = req.getParameter("sId");
-		String cId = req.getParameter("cId");
+		String sId = req.getParameter("sid");
+		String cId = req.getParameter("cid");
 		String category = req.getParameter("category");
 		String subject = req.getParameter("subject");
 		String content = req.getParameter("content");
-		String pass = req.getParameter("passWord");
-		System.out.println(sId + "/" + cId + "/" + category + "/" + subject + "/" + content + "/" + pass);
-		QuestionDAO dao = new QuestionDAO();
-		long q_idx = 0;
-		if(sId != null && sId.isEmpty() && cId != null && cId.isEmpty() && 
-				category != null && category.isEmpty() && subject != null && subject.isEmpty() &&
-				content != null && content.isEmpty() && pass != null && pass.isEmpty()) {
+		String pass = req.getParameter("pass");
+		System.out.println(sId + "/" + cId + "/" + category + "/" + subject + "/" + content + "/" + pass);		QuestionDAO dao = new QuestionDAO();
+		boolean success = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		long q_idx = dao.qWrite(sId,cId,Integer.parseInt(category),subject,content,Integer.parseInt(pass));
+		if(q_idx > 0 ) {
+			success = true;
 			System.out.println("성공");
-			 q_idx = dao.qWrite(sId,cId,Integer.parseInt(category),subject,content,Integer.parseInt(pass));
 		}
-		String msg = "문의 등록의 실패하였습니다.";
-		String page = "Q_write.jsp";
-		if(q_idx>0) {
-			 msg = "문의가 성공적으로 완료되었습니다	.";
-			 page = "qDetail?q_idx="+q_idx;
+		map.put("success", success);
+		map.put("q_idx" , q_idx);
+		Gson gson = new Gson();
+		String json = gson.toJson(map);
+		System.out.println(json);
+		
+		resp.getWriter().print(json);
+	}
 
+	public void qDetail() throws ServletException, IOException {
+		String q_idx = req.getParameter("q_idx");
+		String q_pw = req.getParameter("passWord");
+		
+		System.out.println("q_idx :" + q_idx + "/" + "q_pw :" + q_pw);
+		QuestionDAO dao = new QuestionDAO();
+		QuestionDTO dto = new QuestionDTO();
+		dto = dao.qDetail(q_idx,q_pw);
+		
+		String msg= "비밀번호가 틀렸습니다.";
+		String page ="qList";
+		if(dto != null) {
+			msg ="";
+			page = "Q_detail.jsp";
 		}
-
-		req.setAttribute("msg", msg);
+		req.setAttribute("msg",msg);
+		req.setAttribute("list", dto);
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}

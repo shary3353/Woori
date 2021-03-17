@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>q.write</title>
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     <style>
             body{
                     min-width: 1920;
@@ -62,7 +63,7 @@
               font-size: 27px;
           }
           #content{
-            width: 700px;
+            width: 1000px;
             height: 200px;
             resize: none;
           }
@@ -91,7 +92,14 @@
               margin-left: 300px;
           }
           table{
-              width: 60%;
+              width: 1300px;
+          }
+          #cId, #subject, #category, #productName, .sId, .productName{
+          	height: 30px;
+          	font-size: 15px;
+          }
+          #content{
+          	font-size: 20px;
           }
     </style>
 </head>
@@ -103,7 +111,7 @@
         <div class="seMain">
             <div class="sideMenu">
                    <div class="Service"><a href=qList>고객센터</a></div>
-                    <div class="One"><a href="qWrite">1:1 문의하기</a></div>
+                    <div class="One"><a href="Q_write.jsp">1:1 문의하기</a></div>
                     <div class="Question"><a href="Question.jsp">자주묻는 질문</a></div>
                     <div class="Report"><a href="Report.jsp">신고하기</a></div>
             </div> 
@@ -111,15 +119,17 @@
         <div>
         </div>
         <div id="form">
-        <form action="qWrite" method="post">
             <h3>1:1문의 작성</h3>
             <table id="table">
                 <tr>
                     <td class="column1">작성자</td>
-                    <td class="column2"><input type="text" name="cId" value="${sessionScope.loginId}" readonly/></td>
+                    <td class="column2"><input type="text" id="cId"name="consumerId">
+                     <!--  value="${sessionScope.loginId}" readonly/>
+                      -->
+                     </td>
                     <td>
                         카테고리
-                        <select name="category" value="문의/카테고리">
+                        <select id="category"name="category" value="문의/카테고리">
                             <option value="100" selected="selected">상품관련</option>
                             <option value="200">예약관련</option>
                             <option value="300" >매장관련</option>
@@ -128,35 +138,35 @@
                     </td>
                     <td class="column1" >문의상품</td>
                     <td class="culumn1"  name="productName">
-                    
                     <c:set var="p_name" value="<%=request.getParameter(\"p_name\") %>"></c:set>
                		<c:if test="${p_name != null}">
-                    <%=request.getParameter("p_name") %>
+                    <input class="productName" name="p_name" value="<%=request.getParameter("p_name") %>">
                		</c:if>
                		<c:if test="${p_name == null }">
-               			<input type="text" name=p_name>
+               			<input class="productName" type="text" name="p_name">
                		</c:if>
-                      
                     </td>
                 </tr>
                 <tr>
                     <td class="column1">제목</td>
-                    <td colspan="2"><input type="text" placeholder="제목을 입력해주세요" style="width: 380px" maxlength='30' name="subject"></td>
+                    <td colspan="2"><input type="text" id="subject"placeholder="제목을 입력해주세요" style="width: 380px" maxlength='30' name="subject"></td>
                     <td class="column1">판매자 </td>
-                    <td name="sId" >
-                    <c:set var ="sId" value="<%=request.getParameter(\"sId\") %>"></c:set>
+                    
+                    <td class="culumn1"  name="sellerId" >
+                    <c:set var ="sId"  value="<%=request.getParameter(\"sId\") %>"></c:set>
                     <c:if test="${sId != null }">
-                    <%=request.getParameter("sId") %>
+                    <input type="text" class="sId" value="<%=request.getParameter("sId") %>">
                     </c:if>
                     <c:if test="${sId == null}">
-                    	<input type=text name="sId">
+                    	<input type=text  class="sId" name="sId">
                     </c:if>
+
                     </td>
                 </tr>
                 <tr>
                     <td class="column1">내용</td>
                     <td colspan="4">
-                        <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                        <textarea id ="content" name="content" id="content" cols="30" rows="10"></textarea>
                     </td>
                 </tr>
             <tr>
@@ -164,16 +174,69 @@
                     확인 비빌번호
                 </td>
                 <td colspan="4" id="setpass">
-                    <input type="password" id="pass" placeholder="비밀번호4자리 입력" style="text-align: left;" maxlength='4' name="passWord"/>
-                    <button style="display: inline;">저장</button>
-                    <div style="display: inline; color:gray">비밀번호는 작성하신 글 확인시 사용됩니다.</div>
-                    
+                    <input type="password" id="pass" placeholder="숫자4자리 입력" style="text-align: left;" maxlength='4' name="passWord"/>
+                    <button id="submit"style="display: inline;">저장</button>
+                    <div style="display: inline; color:gray">비밀번호는 작성하신 글 확인시 사용됩니다.</div>  
                 </td>
-                
             </tr>
         </table>
-        </form>
     </div>
 </div>
 </body>
+<script>
+	$("#submit").click(function(){
+		var $cid = $("#cId");
+		var $category = $("#category");
+		var $product = $("#product");
+		var $subject = $("#subject");
+		var $sid = $(".sId");
+		var $content = $("#content");
+		var $pass = $("#pass")
+		
+		if($product ==''){
+			alert('상품이름을 입력해주세요');
+			$product.focus();
+		}else if($subject ==''){
+					alert('제목을 입력해주세요');
+					$subject.focus();
+		}else if($sid ==''){
+			alert('판매자를 입력해주세요');
+			$sid.focus();
+		}else if($content ==''){
+			alert('내용을 입력해주세요');
+			$content.focus();
+		}else if($pass ==''){
+			alert('비밀번호를 입력해주세요');
+			$pass.focus();
+		}else{
+			console.log('서버로전송');
+			var pa = {};
+			pa.cid = $cid.val();
+			pa.category = $category.val();
+			pa.product = $product.val();
+			pa.subject = $subject.val();
+			pa.sid = $sid.val();
+			pa.content = $content.val();
+			pa.pass = $pass.val();
+			$.ajax({
+				type:'post'
+				,url:'qWrite'
+				,data: pa
+				,dataType : 'json'
+				,success : function(data){
+					console.log(data)
+					console.log(data.q_idx)
+					if(data.success == true){
+						alert('문의등록에  성공하였습니다.');
+						location.href="qList";
+					}else{
+						alert('잠시 후 다시 시도해 주세요');
+					}
+				},error:function(e){
+					
+				}
+			});
+		}
+	})
+</script>
 </html>

@@ -15,7 +15,7 @@ import com.woori.question.service.QuestionService;
            구매자 문의내역 리스트, 구매자 문의내역 상세보기
 */
 @WebServlet({"/Seller/sQAList","/Seller/sAnswerForm","/Seller/sAnswerDetail" ,"/Seller/sAnswer"
-	,"/Consumer/cQuestionList", "/Consumer/cQuestionDetail" , "/ServiceCenter/qList", "/ServiceCenter/qWrite"})
+	,"/Consumer/cQuestionList", "/Consumer/cQuestionDetail" , "/ServiceCenter/qList", "/ServiceCenter/qWrite", "/ServiceCenter/qDetail"})
 public class QuestionController extends HttpServlet {
 
 	@Override
@@ -78,6 +78,10 @@ public class QuestionController extends HttpServlet {
 			System.out.println("Request Question Write");
 			service.qWrite();
 			break;
+			
+		case "/ServiceCenter/qDetail":
+			System.out.println("Request Question Detail");
+			service.qDetail();
 		}
 		
 	}

@@ -76,7 +76,7 @@ public class ReportService {
 		ReportDAO dao = new ReportDAO();
 		long idx = dao.report(dto);
 		if (idx > 0) {
-			page = "Service/ReportDetail?idx=" + idx;
+			page = "ReportDetail?idx=" + idx;
 		}
 
 		req.setAttribute("msg", msg);

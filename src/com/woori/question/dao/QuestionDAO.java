@@ -324,4 +324,30 @@ public class QuestionDAO {
 		return q_idx;
 	}
 
+	public QuestionDTO qDetail(String q_idx, String q_pw) {
+		String sql =   "SELECT subject, cid, category, q_reg_date, sid, content, s_answer FROM\r\n" + 
+				"Question q, Q_Categories qc WHERE q.qc_idx = qc.qc_idx AND q_idx=? AND q_pw=?";
+		QuestionDTO dto = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, q_idx);
+			ps.setString(2, q_pw);
+			rs = ps.executeQuery();
+			 dto = new QuestionDTO();
+			if(rs.next()) {
+				dto.setSubject(rs.getString("subject"));
+				dto.setCid(rs.getString("cid"));
+				dto.setCategory(rs.getString("category"));
+				dto.setQ_reg_date(rs.getString("q_reg_date"));
+				dto.setSid(rs.getString("sid"));
+				dto.setContent(rs.getString("content"));
+				dto.setS_answer(rs.getString("s_answer"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}return dto;
+	}
+
 }
