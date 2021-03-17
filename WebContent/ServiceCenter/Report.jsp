@@ -116,12 +116,12 @@
                     </tr>
                     <tr>
                         <th>신고자</th>
-                        <td ><input type="text" name="userName" /></td> 
+                        <td ><input type="text" name="userName" value="${dto.reporter_id}" /></td> 
                        <!--  value="${sessionScope.loginId}" readonly/> -->
                     </tr>
                     <tr>
                         <th>신고대상자</th>
-                        <th ><input type="text" name="sellerId" ></th>
+                        <th ><input type="text" name="sellerId" value="${dto.target_id}"></th>
                     </tr>  
                     <tr>
                         <th>신고 카테고리</th>

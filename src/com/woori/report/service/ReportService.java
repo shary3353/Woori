@@ -208,7 +208,7 @@ public class ReportService {
 		dis.forward(req, resp);
 	}
 
-	public void cReportForm() {
+	public void cReportForm() throws ServletException, IOException {
 		req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String cid = (String) req.getSession().getAttribute("loginId");
 		String target_id = req.getParameter("t_id");
@@ -220,7 +220,8 @@ public class ReportService {
 		dto.setTarget_id(target_id);
 		
 		req.setAttribute("dto", dto);
-		dis = req.getRequestDispatcher("");
+		dis = req.getRequestDispatcher("../ServiceCenter/Report.jsp");
+		dis.forward(req, resp);
 		
 	}
 

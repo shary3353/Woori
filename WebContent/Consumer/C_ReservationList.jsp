@@ -146,7 +146,7 @@ a{
 							<td>${list.reg_date}</td>
 							<td>${list.visit_date}</td>
 							<td class="reserProcess">${list.status}</td>
-							<td><a href="cReportForm?t_id=?" class="reportBtn">신고하기</a></td>
+							<td><a href="cReportForm?t_id=${list.sid}" class="reportBtn">신고하기</a></td>
 						</tr>
 					</c:forEach>
 				</table>
