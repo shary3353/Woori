@@ -119,7 +119,7 @@ a{
 					<tr>
 						<th>No</th>
 						<th>상품번호</th>
-						<th>상품정보</th>
+						<th style="width: 550px;">상품정보</th>
 						<th>판매자</th>
 						<th>예약등록일</th>
 						<th>방문예정일</th>
@@ -133,12 +133,12 @@ a{
 							<td>
 								<table class="p_PhoNDesc">
 									<tr>
-										<td class="p_PhoNDesc" rowspan="3" style="width: 550px;"><img
+										<td class="p_PhoNDesc" rowspan="3" ><img
 											src="../Uploaded_Img/${list.newFileName}" alt="${list.newFileName}"
 											style="width: 125px; height: 125px;" onclick="location=href='../C_itemDetail?p_idx=${list.p_idx}'"/></td>
 									</tr>
 									<tr>
-										<td class="p_PhoNDesc"><a href="'../C_itemDetail?p_idx=${list.p_idx}'">${list.p_name}</a></td>
+										<td class="p_PhoNDesc"><a href="../C_itemDetail?p_idx=${list.p_idx}">${list.p_name}</a></td>
 									</tr>
 								</table>
 							</td>

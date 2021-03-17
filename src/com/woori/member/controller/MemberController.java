@@ -92,17 +92,17 @@ public class MemberController extends HttpServlet {
 		
 		case "/cLogin":
 			System.out.println("Request Customer Login");
-			service.login();
+			service. C_Loginid();
 			break;
 		
 		case "/sLogin":
 			System.out.println("Request Seller Login");
-			service.login();
+			service.S_Loginid();
 			break;
 			
 		case "/adminLogin":
 			System.out.println("Request Admin Login");
-			service.login();
+			service.Admin_Loginid();
 			break;
 			
 		case "/cJoin":

@@ -135,7 +135,7 @@ form {
 						<tr>
 							<td style="width: auto;">${list.r_idx}</td>
 							<td>${list.category}</td>
-							<td class="reportSubject"><a href="cReportDetail?r_idx=${list.r_idx}">${list.subject}</a></td>
+							<td class="reportSubject"><a href="cReportDetail?r_idx=${list.r_idx}" style="text-decoration: none; color: black;">${list.subject}</a></td>
 							<td>${list.target_id}</td>
 							<td>${list.r_date}</td>
 							<c:if test="${list.status==0}">

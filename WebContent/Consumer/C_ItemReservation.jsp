@@ -104,10 +104,10 @@
     	<form action="C_Reservation" method="post">
             <table>
                 <tr>
-                    <td rowspan="8" id="ReservationImg"><img src="img/${dto.newFileName}" alt="${dto.oriFileName} width="400px" height="600px"/></td>
+                    <td rowspan="8" id="ReservationImg"><img src="Uploaded_Img/${dto.newFileName}" alt="${dto.oriFileName}" width="400px"  height="600px"/></td>
                     <td class="ReservationTitle" colspan="2">예약하기</td>
                 </tr>
-                <ol>
+
                 <tr>
                     <td><li class="ReservationName">상품명 : </li></td>
                     <td class="ReservationContent">${dto.p_name}

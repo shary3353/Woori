@@ -59,7 +59,7 @@ public class MemberService {
 		}
 	}
 	
-	public void login() throws ServletException, IOException{
+	public void Admin_Loginid() throws ServletException, IOException{
 		MemberDAO dao = new MemberDAO();
 		
 		String id =(String) req.getSession().getAttribute("adminId");
@@ -80,7 +80,7 @@ public class MemberService {
 		
 	}
 	
-	public void C_LoginService() throws ServletException, IOException {
+	public void C_Loginid() throws ServletException, IOException {
 		MemberDAO dao = new MemberDAO();
 		String cid =req.getParameter("cId");
 		String pw = req.getParameter("Pw");
@@ -97,7 +97,7 @@ public class MemberService {
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}
-	public void S_LoginService() throws ServletException, IOException {
+	public void S_Loginid() throws ServletException, IOException {
 		MemberDAO dao = new MemberDAO();
 		String sid =req.getParameter("sId");
 		String pw = req.getParameter("pw");
