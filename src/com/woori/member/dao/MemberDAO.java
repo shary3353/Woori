@@ -139,6 +139,7 @@ public class MemberDAO {
 		String sql ="SELECT id FROM member WHERE id= ? AND pw=?";
 		
 		try {
+			System.out.println("conn : "+conn);
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, cid);
 			ps.setString(2, pw);
@@ -166,6 +167,7 @@ public class MemberDAO {
 		String sql ="SELECT id FROM member WHERE id=? AND pw=?";
 		
 		try {
+			
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, sid);
 			ps.setString(2, pw);

@@ -150,6 +150,19 @@ public class MemberService {
 		dis.forward(req, resp);
 
 	}
+	 
+	/*public boolean C_Loginid(String cid, String pw) {
+		 MemberDAO dao = MemberDAO.clogin(cid, pw);
+	 if(dao == null)
+		 return false;
+	 else {
+		 if(dao.pw().equals(pw))
+			 return true;
+		 else
+			 return false;
+	 }
+	 }
+	 */
 
 	public void C_Loginid() throws ServletException, IOException {
 		MemberDAO dao = new MemberDAO();

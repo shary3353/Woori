@@ -57,13 +57,13 @@ public class MemberController extends HttpServlet {
 			case "/logout":
 				System.out.println("Request Logout");
 				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("C_Login.jsp");
+				resp.sendRedirect("/Admin/cLogin");
 				
 				req.getSession().removeAttribute("sid");
-				resp.sendRedirect("C_Login.jsp");
+				resp.sendRedirect("/Admin/sLogin");
 				
 				req.getSession().removeAttribute("aid");
-				resp.sendRedirect("admin_Login.jsp");
+				resp.sendRedirect("/adminLogin");
 				break;
 			
 		}
