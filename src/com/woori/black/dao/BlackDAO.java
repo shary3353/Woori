@@ -354,9 +354,44 @@ public class BlackDAO {
 	}
 
 	public int getCBlack(String cid) {
-		// TODO Auto-generated method stub
-		return 0;
+		int selectedCustomerIsBlack = 0;
+		String sql = "SELECT isblack FROM c_blacklist WHERE cid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				selectedCustomerIsBlack = rs.getInt("isblack");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return selectedCustomerIsBlack;
 	}
+	
+	public int getSBlack(String sid) {
+		int selectedSellerIsBlack = 0;
+		String sql = "SELECT isblack FROM s_blacklist WHERE sid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				selectedSellerIsBlack = rs.getInt("isblack");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return selectedSellerIsBlack;
+	}
+	
+	
 
 
 }

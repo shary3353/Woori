@@ -254,8 +254,51 @@ public class MemberDAO {
 	}
 
 	public CustomerDTO getCustomer(String cid) {
-		// TODO Auto-generated method stub
-		return null;
+		CustomerDTO dto = new CustomerDTO();
+		String sql = "SELECT cid, to_char(birthday, 'YYYY-MM-DD') AS birthday, name, gender, email, phone FROM consumer WHERE cid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			if(rs.next()) {
+				dto.setCid(rs.getString("cid"));
+				dto.setBirthday(rs.getString("birthday"));
+				dto.setName(rs.getString("name"));
+				dto.setGender(rs.getString("gender"));
+				dto.setEmail(rs.getString("email"));
+				dto.setPhone(rs.getString("phone"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
+	
+	public SellerDTO getSeller(String sid) {
+		SellerDTO dto = new SellerDTO();
+		String sql = "SELECT sid, email, to_char(birthday, 'YYYY-MM-DD') AS birthday, phone, gender, store_call, name, to_char(reg_date, 'YYYY-MM-DD') FROM seller WHERE sid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sid);
+			if(rs.next()) {
+				dto.setSid(rs.getString("sid"));
+				dto.setBirthday(rs.getString("birthday"));
+				dto.setName(rs.getString("name"));
+				dto.setGender(rs.getString("gender"));
+				dto.setEmail(rs.getString("email"));
+				dto.setPhone(rs.getString("phone"));
+				dto.setStore_call(rs.getString("store_call"));
+				dto.setReg_date(rs.getString("reg_date"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
 	}
 
 	

@@ -233,10 +233,34 @@ public class AdminReportDAO {
 		return success;
 	}
 
-	public ArrayList<ReportDTO> customerRList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ReportDTO> getRList(String id) {
+		ArrayList<ReportDTO> rList = new ArrayList<>();
+		String sql = "SELECT a.subject, a.content, a.reporter_id, a.target_id, b.categories, to_char(a.r_date, 'YYYY-MM-DD') AS r_date, a.status FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE target_id=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ReportDTO dto = new ReportDTO();
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setReporter_id(rs.getString("reporter_id"));
+				dto.setTarget_id(rs.getString("target_id"));
+				dto.setCategory(rs.getString("categories"));
+				dto.setR_date(rs.getString("r_date"));
+				dto.setStatus(rs.getInt("status"));
+				rList.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return rList;
 	}
+
 
 
 }
