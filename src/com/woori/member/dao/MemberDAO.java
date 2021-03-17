@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+
 import com.woori.member.dto.CustomerDTO;
 import com.woori.member.dto.SellerDTO;
 
@@ -40,7 +41,53 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
-	//회원가입 
+	
+	//구매자 회원가입 
+	public int cjoin(CustomerDTO dto) {
+		String sql = "INSERT INTO member(cid,pw,name,gender,email,birthday,phone,reg_date)VALUES(?,?,?,?,?,?,?,?)";
+		int success = -1;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getCid());//?대응 
+			ps.setString(2, dto.getPw());
+			ps.setString(3, dto.getName());
+			ps.setString(4, dto.getGender());
+			ps.setString(5, dto.getEmail());
+			ps.setString(6, dto.getBirthday());
+			ps.setString(7, dto.getPhone());
+			ps.setString(8, dto.getReg_date());
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+	
+	//판매자 회원가입
+	public int sjoin(SellerDTO dto) {
+		String sql = "INSERT INTO member(Sid,pw,name,gender,store_call,birthday,phone,email,reg_date)VALUES(?,?,?,?,?,?,?,?,?)";
+		int success = -1;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getSid());//?대응 
+			ps.setString(2, dto.getPw());
+			ps.setString(3, dto.getName());
+			ps.setString(4, dto.getGender());
+			ps.setString(5, dto.getStore_call());
+			ps.setString(6, dto.getBirthday());
+			ps.setString(7, dto.getPhone());
+			ps.setString(8, dto.getEmail());
+			ps.setString(9, dto.getReg_date());
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
 	
 	
 	public boolean overlay(String id) throws SQLException {//중복체크
