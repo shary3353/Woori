@@ -92,8 +92,19 @@ public class MainService {
 	}
 	
 	
-	public void AdminMain() {
-		
+	public void AdminMain() throws IOException, ServletException {
+		//로그인 세션의 아이디에 admin이 있는지 검사 
+		//admin이 포함되어있을 경우에만 관리자 메인 페이지를 띄운다
+		String loginID = "admin001";
+		if(loginID.contains("admin")) {
+			System.out.println("관리자 로그인중입니다.");
+			resp.sendRedirect("Admin/admin_Main.jsp");
+		}else {
+			String msg = "접근이 불가능한 페이지입니다.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("admin_Login.jsp");
+			dis.forward(req, resp);
+		}
 
 	}
 
