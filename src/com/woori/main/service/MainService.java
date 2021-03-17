@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.woori.main.dao.MainDAO;
 import com.woori.product.dto.ProductDTO;
 import com.woori.reservation.dto.ReservationDTO;
@@ -130,6 +131,65 @@ public class MainService {
 		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
 		dis.forward(req, resp);
 		
+	}
+
+	public void likeconfirm() throws ServletException, IOException {
+		boolean success = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String cid = req.getParameter("cid");
+		String pidx = req.getParameter("pidx");
+		System.out.println(cid +"/" + pidx);
+		MainDAO dao = new MainDAO();
+		success =  dao.likeconfirm(cid,pidx);
+		System.out.println("좋아요 가능여부 : " + success);
+		map.put("use", success);
+		Gson gson = new Gson();
+		String json = gson.toJson(map);
+		System.out.println(json);
+		resp.getWriter().print(json);
+	}
+	
+	public void Clikeplus() throws ServletException, IOException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String cid = req.getParameter("cid");
+		String pidx = req.getParameter("pidx");
+		System.out.println(cid+"/"+pidx);
+		MainDAO dao = new MainDAO();
+		int success = dao.likesTableAdd(cid,pidx);
+		System.out.println("likes 테이블에 정상추가 : " + success);
+		if(success >0) {
+			dao = new MainDAO();
+			boolean success1 = dao.likePlus(pidx);
+			System.out.println("Product 테이블 like +1 " + success1);
+			dao.resClose();
+			map.put("plus", success1);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+			resp.getWriter().print(json);
+		}
+	}
+
+	public void Clikeminus() throws ServletException, IOException {
+		
+		boolean success1 = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String cid = req.getParameter("cid");
+		String pidx = req.getParameter("pidx");
+		System.out.println(cid+"/"+pidx);
+		MainDAO dao = new MainDAO();
+		int success = dao.likesTableDel(cid,pidx);
+		System.out.println("likes 테이블에 정상삭제 : " + success);
+		if(success >0) {
+			dao = new MainDAO();
+			success1 = dao.likeMinus(pidx);
+			System.out.println("Product 테이블 like -1 " + success1);
+			map.put("minus", success1);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+			resp.getWriter().print(json);
+		}
 	}
 
 }

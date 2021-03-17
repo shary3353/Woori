@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>네비게이션을 만들어보자</title>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style>
 
 	*   {
@@ -76,6 +77,7 @@
 	<div id="wrap">
 		<jsp:include page="../Include/navi.jsp"></jsp:include>
     	<div id="detail">
+    	<!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
             <table>
                 <tr>
                     <td rowspan="6" id="detailImg"><img src="img/${dto.newFileName}"  alt="${dto.oriFileName} width="400px" height="600px"/></td>
@@ -95,7 +97,9 @@
                         <a href="C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
                         <button id="reservationButton">예약하기</button>
                         </a>
-                        <button id="likeButton">🤍&nbsp;좋아요</button>
+                        <!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
+                        <button id="likeButton"> &nbsp;좋아요</button>
+                        <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요</button>
                         <button id="wishlistButton">위시리스트</button>
                         <button id="reportButton">신고하기</button>
                     </td>
@@ -106,9 +110,93 @@
     </div>
 </body>
 <script>
-var msg = "${msg}";
-if(msg!=""){
-	alert(msg);
-}	
+	var msg = "${msg}";
+		if(msg!=""){
+			alert(msg);
+		}
+		
+	//좋아요 검사	
+	function likeConfirm(){
+		$.ajax({
+			type:'GET'
+			,url:'likeConfirm'
+			,data:{
+				cid: 'test1'
+				,pidx: '${dto.p_idx}'
+			}
+			,dataType:'JSON'
+			,success:function(likeChk){
+					console.log(likeChk)
+					if(likeChk.use){
+						$("#likeButton").css("display","");
+						$("#dislikeButton").css("display","none");
+					}else{
+						$("#likeButton").css("display","none");
+						$("#dislikeButton").css("display","");
+					}
+			}
+			,error:function(e){
+				console.log(e);
+			}
+		})
+	};
+	
+	likeConfirm();// 시작하자마자 like여부 검사
+	
+	var $likeButton = $("#likeButton");
+	var $dislikeButton = $("#dislikeButton");
+	
+	$likeButton.click(function(){
+		
+		var likeContent ={}
+		likeContent.pidx = '${dto.p_idx}';
+		likeContent.cid = 'test1';
+		console.log(likeContent.pidx,likeContent.cid);
+		
+		$.ajax({
+			type:'GET'
+			,url:'C_LikePlus'
+			,data:likeContent
+			,dataType:'JSON'
+			,success:function(data){
+					if(data.plus){
+						$("#likeButton").css("display","none");
+						$("#dislikeButton").css("display","");
+					}else{
+						console.log("좋아요 추가 실패입니다")
+					}
+			}
+			,error:function(e){
+				console.log(e);
+			}
+		})
+	})
+
+	$dislikeButton.click(function(){
+		
+		var likeContent ={}
+		likeContent.pidx = '${dto.p_idx}';
+		likeContent.cid = 'test1';
+		console.log(likeContent.pidx,likeContent.cid);
+		
+		$.ajax({
+			type:'GET'
+			,url:'C_LikeMinus'
+			,data:likeContent
+			,dataType:'JSON'
+			,success:function(data){
+					if(data.minus){
+						$("#likeButton").css("display","");
+						$("#dislikeButton").css("display","none");
+					}else{
+						console.log("좋아요 삭제 실패입니다")
+					}
+			}
+			,error:function(e){
+				console.log(e);
+			}
+		})
+	})
+
 </script>
 </html>

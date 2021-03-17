@@ -177,6 +177,104 @@ public class MainDAO {
 		return list;
 	}
 
+
+	public boolean likeconfirm(String cid, String pidx) {
+		boolean success = false;
+		String sql="SELECT ?,? FROM likes";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			ps.setInt(2, Integer.parseInt(pidx));
+			rs = ps.executeQuery();
+			success = rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return !success;
+		
+	}
+
+
+	public int likesTableAdd(String cid, String pidx) {
+		int success = 0;
+		String sql="INSERT INTO likes(cid,p_idx) VALUES(?,?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			ps.setInt(2, Integer.parseInt(pidx));
+			if(ps.executeUpdate()>0) {
+				success=1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+		
+		
+	}
+
+
+	public boolean likePlus(String pidx) {
+		boolean success = false;
+		String sql="UPDATE product SET likes = likes+1 WHERE p_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(pidx));
+			if(ps.executeUpdate()>0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+		
+	}
+
+
+	public int likesTableDel(String cid, String pidx) {
+		int success = 0;
+		String sql="DELETE FROM likes WHERE cid=? AND p_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, cid);
+			ps.setInt(2, Integer.parseInt(pidx));
+			if(ps.executeUpdate()>0) {
+				success=1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;		
+	}
+
+
+	public boolean likeMinus(String pidx) {
+		boolean success = false;
+		String sql="UPDATE product SET likes = likes-1 WHERE p_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(pidx));
+			if(ps.executeUpdate()>0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
 	
 	
 }
