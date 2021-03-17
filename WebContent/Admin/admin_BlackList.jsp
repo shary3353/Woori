@@ -7,6 +7,7 @@
 <head>
     <meta charset='utf-8'>
     <title>우리 양주</title>
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/AdminStyle.css">
 </head>
 <body>
@@ -34,10 +35,10 @@
                         <th>블랙리스트 취소</th>
                         <th>블랙리스트 등록 관리자</th>
                     </tr>
-                    <c:forEach items="${bList }" var="black">
+                    <c:forEach items="${bList }" var="black" varStatus="status">
 	                    <tr>
-	                        <td>${black.id }</td>
-	                        <td>판매자</td>
+	                        <td>${black.id }</td> <c:set var="id" value="${black.id }"></c:set>
+	                        <td><c:if test="${fn:indexOf(id, '-') == -1 }">구매자</c:if><c:if test="${fn:indexOf(id, '-') > -1 }">판매자</c:if></td>
 	                        <td>${black.stack }</td>
 	                        <td>${black.reason }</td>
 	                        <td>${black.reg_date }</td>
@@ -73,4 +74,7 @@
         </div>  <!--관리자 푸터 닫음-->
     </div>  <!--Wrapper 닫음-->
 </body>
+<script type="text/javascript">
+
+</script>
 </html>
