@@ -65,11 +65,33 @@
             </div>  <!--판매자리스트 검색 닫음-->
 
             <div id="Admin_Seller_List_Paging"> <!--판매자리스트 페이징부분-->
-               <span class="Page_Content"><a href="./sList?page=1">처음</a></span>
-                <span class="Page_Content"><a href="./sList?page=${currPage-1 }">이전</a></span>
+               <c:if test="${currPage == 1}">
+                	<span class="Page_Content"><a href="./sList?page=1">처음</a></span>
+                </c:if>
+                <c:if test="${currPage > 1}">
+                	<span class="Page_Content"><a href="./sList?page=1">처음</a></span>
+                </c:if>
+                <c:if test="${currPage == 1}">
+					<span class="Page_Content"><a href="./sList?page=1">이전</a></span>
+				</c:if>
+				<c:if test="${currPage > 1}">
+					<span class="Page_Content"><a href="./sList?page=${currPage-1 }">이전</a></span>
+				</c:if>
+				
                 <span class="Page_Number">${currPage }</span>
-                <span class="Page_Content"><a href="./sList?page=${currPage+1 }">다음</a></span>
-                <span class="Page_Content"><a href="./sList?page=${maxSellerPage }">마지막</a></span>
+                
+                <c:if test="${currPage == maxSellerPage}">
+					 <span class="Page_Content"><a href="./sList?page=${maxSellerPage }">다음</a></span>
+				</c:if>
+				<c:if test="${currPage < maxSellerPage}">
+					 <span class="Page_Content"><a href="./sList?page=${currPage+1 }">다음</a></span>
+				</c:if>
+				<c:if test="${currPage == maxSellerPage}">
+					 <span class="Page_Content"><a href="./sList?page=${maxSellerPage }">마지막</a></span>
+				</c:if>
+				<c:if test="${currPage < maxSellerPage}">
+					 <span class="Page_Content"><a href="./sList?page=${maxSellerPage }">마지막</a></span>
+				</c:if>
             </div>  <!--페이징 닫음-->
 
         </div>  <!--판매자관리 컨텐츠 닫음-->

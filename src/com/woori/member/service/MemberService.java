@@ -218,7 +218,7 @@ public class MemberService {
 
 		req.setAttribute("sList", map.get("sList"));
 		req.setAttribute("currPage", group);
-		req.setAttribute("maxSellerPage", map.get("maxPage"));
+		req.setAttribute("maxSellerPage", map.get("maxSellerPage"));
 		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
 		dis.forward(req, resp);
 	}
