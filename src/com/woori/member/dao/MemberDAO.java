@@ -31,7 +31,7 @@ public class MemberDAO {
 		}
 	}
 	
-	private void resClose() { //자원 반납
+	public void resClose() { //자원 반납
 		try {
 			if(rs != null) {rs.close();}
 			if(ps != null) {ps.close();}

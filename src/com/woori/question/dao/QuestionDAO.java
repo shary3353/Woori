@@ -291,4 +291,31 @@ public class QuestionDAO {
 		return success;
 	}
 
+	public long qWrite(String sId, String cId, int category, String subject,
+			String content, int pass) {
+		String sql = "INSERT INTO Question (q_idx, subject, content, q_pw, cid, sid, qc_idx)VALUES"
+				+"(Question_seq.NEXTVAL , ?,?,?,?,?,?)";
+		long q_idx = 0;
+		try {
+			ps = conn.prepareStatement(sql, new String[] {"q_idx"});
+			ps.setString(1, subject);
+			ps.setString(2, content);
+			ps.setInt(3, pass);
+			ps.setString(4, cId);
+			ps.setString(5, sId);
+			ps.setInt(6, category);
+			ps.executeUpdate();
+			rs = ps.getGeneratedKeys();
+			if(rs.next()) {
+				 q_idx = rs.getLong(1);
+			}
+			System.out.println(q_idx);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return q_idx;
+	}
+
 }

@@ -78,10 +78,10 @@
             
             <div class="seMain">
                 <div class="sideMenu">
-                    <div class="Service">고객센터</div>
-                    <div class="One"><a href="#">1:1 문의내역</a></div>
-                    <div class="Question"><a href="#">자주묻는 질문</a></div>
-                    <div class="Report"><a href="#">신고하기</a></div>
+                        <div class="Service"><a href=qList>고객센터</a></div>
+                    <div class="One"><a href="qWrite">1:1 문의하기</a></div>
+                    <div class="Question"><a href="Question.jsp">자주묻는 질문</a></div>
+                    <div class="Report"><a href="Report.jsp">신고하기</a></div>
                 </div> 
             </div>
             <div id="image">

@@ -98,7 +98,7 @@
 </head>
 <body>
 	<div id="wrap">
-		<iframe src="Include/navi.html" style="width: 100%" height="180px" scrolling="no" frameborder="none"></iframe>
+		<jsp:include page="../Include/navi.jsp"></jsp:include>
     	<div id="reservation">
     	
     	<form action="C_Reservation" method="post">

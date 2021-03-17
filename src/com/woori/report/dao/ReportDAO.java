@@ -98,7 +98,9 @@ public class ReportDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}finally{
+			resClose();
+		}
 		return max;
 	}
 
@@ -206,6 +208,8 @@ public class ReportDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			resClose();
 		}
 		return max;
 	}

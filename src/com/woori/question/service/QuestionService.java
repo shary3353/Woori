@@ -95,7 +95,7 @@ public class QuestionService {
 		
 	}
 
-	public void q_list() throws ServletException, IOException {
+	public void qList() throws ServletException, IOException {
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		
 		String pageParam = req.getParameter("page");
@@ -177,6 +177,33 @@ public class QuestionService {
 		
 		resp.sendRedirect("./sAnswerDetail?q_idx="+q_idx);
 		
+	}
+	public void qWrite() throws ServletException, IOException {
+		String sId = req.getParameter("sId");
+		String cId = req.getParameter("cId");
+		String category = req.getParameter("category");
+		String subject = req.getParameter("subject");
+		String content = req.getParameter("content");
+		String pass = req.getParameter("passWord");
+		System.out.println(sId + "/"  + cId + "/" + category
+				 + "/" + subject + "/" + content + "/" + pass);
+		QuestionDAO dao = new QuestionDAO();
+		long q_idx = 0;
+		if(sId != null && cId != null && category != null && subject != null && content != null && pass != null) {
+			
+			 q_idx = dao.qWrite(sId,cId,Integer.parseInt(category),subject,content,Integer.parseInt(pass));
+		}
+		String msg = "문의 등록의 실패하였습니다.";
+		String page = "Q_write.jsp";
+		if(q_idx>0) {
+			 msg = "문의가 성공적으로 완료되었습니다	.";
+			 page = "Q_detail?q_idx="+q_idx;
+			
+		}
+		
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
 	}
 
 
