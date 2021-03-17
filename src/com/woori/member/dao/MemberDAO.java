@@ -43,6 +43,22 @@ public class MemberDAO {
 	//회원가입 
 	
 	
+	public boolean overlay(String id) throws SQLException {//중복체크
+		boolean success = false;
+		String sql = "SELECT id FORM member WHERE id=?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, id);// ?대응
+		rs = ps.executeQuery();
+		success = rs.next();
+	
+	
+	      return !success;
+	}
+	
+
+
+
+	
 	
 	//관리자 로그인,구매자 판매자 로그인
 	public boolean login(String id, String pw) {

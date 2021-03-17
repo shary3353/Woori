@@ -208,4 +208,21 @@ public class ReportService {
 		dis.forward(req, resp);
 	}
 
+	public void cReportForm() throws ServletException, IOException {
+		req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String cid = (String) req.getSession().getAttribute("loginId");
+		String target_id = req.getParameter("t_id");
+		System.out.println("신고자 : " + cid);
+		System.out.println("신고 대상자 : " + target_id);
+		
+		ReportDTO dto = new ReportDTO();
+		dto.setReporter_id(cid);
+		dto.setTarget_id(target_id);
+		
+		req.setAttribute("dto", dto);
+		dis = req.getRequestDispatcher("../ServiceCenter/Report.jsp");
+		dis.forward(req, resp);
+		
+	}
+
 }

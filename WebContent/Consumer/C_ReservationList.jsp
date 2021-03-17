@@ -98,6 +98,13 @@ form {
 	margin-left: 20px;
 	margin-top: 30px;
 }
+img:hover{
+	cursor: pointer;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
 </style>
 </head>
 
@@ -128,10 +135,10 @@ form {
 									<tr>
 										<td class="p_PhoNDesc" rowspan="3" style="width: 550px;"><img
 											src="../Uploaded_Img/${list.newFileName}" alt="${list.newFileName}"
-											style="width: 125px; height: 125px;" /></td>
+											style="width: 125px; height: 125px;" onclick="location=href='../C_itemDetail?p_idx=${list.p_idx}'"/></td>
 									</tr>
 									<tr>
-										<td class="p_PhoNDesc">${list.p_name}</td>
+										<td class="p_PhoNDesc"><a href="'../C_itemDetail?p_idx=${list.p_idx}'">${list.p_name}</a></td>
 									</tr>
 								</table>
 							</td>
@@ -139,7 +146,7 @@ form {
 							<td>${list.reg_date}</td>
 							<td>${list.visit_date}</td>
 							<td class="reserProcess">${list.status}</td>
-							<td><a href="#" class="reportBtn">신고하기</a></td>
+							<td><a href="cReportForm?t_id=${list.sid}" class="reportBtn">신고하기</a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -175,6 +182,8 @@ form {
 		</div>
 	</div>
 </body>
-<script></script>
+<script>
+
+s</script>
 
 </html>
