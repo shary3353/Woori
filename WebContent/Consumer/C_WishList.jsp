@@ -112,7 +112,7 @@ form {
 		<jsp:include page="../Include/navi.html"></jsp:include>
 		<jsp:include page="../Include/SideBar.html"></jsp:include>
 		<div id="wishListBox">
-			<form action="" method="GET">
+			<form action="cReservation" method="GET">
 				<p class="headDESC">위시리스트</p>
 				<table>
 					<tr>
@@ -125,6 +125,7 @@ form {
 						<th>삭제</th>
 					</tr>
 					<c:forEach items="${list}" var="list">
+					<input type="text" name="" value=""/>
 						<tr>
 							<td style="width: auto;">${list.wish_idx}</td>
 							<td>${list.p_idx}</td>
@@ -143,7 +144,7 @@ form {
 							</td>
 							<td>${list.p_price}원</td>
 							<td>${list.sid}</td>
-							<td><a href="#" class="reserBtn">예약하기</a></td>
+							<td><a href="../C_ItemReservation?p_idx=${list.p_idx}" class="reserBtn">예약하기</a></td>
 							<td><input class="delBtn" type="button" value="X"
 								onclick="location.href='wishDel?wish_idx=${list.wish_idx}'" /></td>
 						</tr>
