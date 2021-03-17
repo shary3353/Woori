@@ -19,6 +19,9 @@ public class FileService {
 
 	public ProductDTO regist() { //물품파일 등록하기
 		String savePath = "D:/MVC/Woori/WebContent/Uploaded_Img/";//1. 저장할 폴더 지정
+		//String savePath = req.getSession().getServletContext().getRealPath("Uploaded_Img");
+		//D:\MVC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Woori\Uploaded_Img
+		System.out.println("사진파일저장경로 :" +savePath);
 		int maxSize = 10*1024*1024;//2. 사이즈 지정
 		ProductDTO dto = null; //초기값- null
 		
