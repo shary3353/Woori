@@ -166,8 +166,8 @@ public class MemberService {
 
 	public void C_Loginid() throws ServletException, IOException {
 		MemberDAO dao = new MemberDAO();
-		String cid = req.getParameter("cId");
-		String pw = req.getParameter("Pw");
+		String cid = req.getParameter("cid");
+		String pw = req.getParameter("pw");
 		System.out.println(cid + "/" + pw);
 		page = "C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
