@@ -270,13 +270,13 @@ public class MemberService {
 		String sid = (String) req.getSession().getAttribute("loginID");
 		if(sid != null) {//로그인 여부 판별
 		  
-		System.out.println("수정할 sid :" + sid);
-
-		MemberDAO dao = new MemberDAO();
-		SellerDTO dto = dao.sPfpDetail(sid);
-		req.setAttribute("detail", dto);
-		RequestDispatcher dis = req.getRequestDispatcher("./S_profileRevise.jsp");
-		dis.forward(req, resp);
+			System.out.println("수정할 sid :" + sid);
+	
+			MemberDAO dao = new MemberDAO();
+			SellerDTO dto = dao.sPfpDetail(sid);
+			req.setAttribute("detail", dto);
+			RequestDispatcher dis = req.getRequestDispatcher("./S_profileRevise.jsp");
+			dis.forward(req, resp);
 		
 		} else { //로그인을 안 했으면 로그인페이지로 
 			  resp.sendRedirect("../Consumer/C_login.jsp"); 
