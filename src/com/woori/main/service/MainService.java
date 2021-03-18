@@ -119,7 +119,7 @@ public class MainService {
 		String searchtitle = req.getParameter("searchname");
 		System.out.println(searchname);
 		MainDAO dao = new MainDAO();
-		ArrayList<ProductDTO> list = dao.Creservation(searchname);
+		ArrayList<ProductDTO> list = dao.mainSearch(searchname);
 		System.out.println(list);
 		System.out.println("리스트 크기 : " + list.size());
 		String msg = "현재 존재하는 게시글이 없습니다.";
@@ -194,6 +194,34 @@ public class MainService {
 
 	public void adminLogin() throws IOException {
 		resp.sendRedirect("./Admin/admin_Login.jsp");
+	}
+
+	public void NaviCategory() throws ServletException, IOException {
+		String c_idx = req.getParameter("c_idx");
+		String cate = "";
+		System.out.println(c_idx);
+		if(c_idx.equals("1")) {
+			cate = "와인";
+		}else if(c_idx.equals("2")) {
+			cate ="위스키";
+		}else if(c_idx.equals("3")) {
+			cate ="꼬냑/브랜디";
+		}else if(c_idx.equals("4")) {
+			cate ="보드카";
+		}else if(c_idx.equals("5")) {
+			cate ="샴페인";
+		}
+		MainDAO dao = new MainDAO();
+		ArrayList<ProductDTO> list =  dao.categorySearch(c_idx);
+		System.out.println("리스트 크기 : " + list.size());
+		String msg = "현재 존재하는 " +cate+ "이 없습니다.";
+		if(list != null && list.size()>0) {
+			req.setAttribute("search", list);	
+			msg=cate;
+		}
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
+		dis.forward(req, resp);
 	}
 
 }

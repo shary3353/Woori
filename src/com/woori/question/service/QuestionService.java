@@ -220,7 +220,7 @@ public class QuestionService {
 
 	public void qDetail() throws ServletException, IOException {
 		String q_idx = req.getParameter("q_idx");
-		String q_pw = req.getParameter("passWord");
+		String q_pw = req.getParameter("password");
 		
 		System.out.println("q_idx :" + q_idx + "/" + "q_pw :" + q_pw);
 		QuestionDAO dao = new QuestionDAO();

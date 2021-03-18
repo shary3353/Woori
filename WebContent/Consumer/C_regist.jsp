@@ -1,36 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>구매자회원가입</title>
-    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-    
- 	 <style>
-        body{
-            position: relative;
-        }
-    
-        tr,
-        th {
-            /* margin: 0 auto;삭제*/
+<meta charset="UTF-8">
+<title>구매자회원가입</title>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-            width: 150px;
-        }
+<style>
+body {
+	position: relative;
+}
 
-        th{
-            text-align: right;
-        }
+tr, th {
+	/* margin: 0 auto;삭제*/
+	width: 150px;
+}
 
+th {
+	text-align: right;
+}
 
-        th,
-        td {
-            padding-top: 5;
-        }
+th, td {
+	padding-top: 5;
+}
 
-       /** input[type='button'] {
+/** input[type='button'] {
             height: 30;
             background-color: rgb(94, 198, 240);
             color: white;
@@ -44,115 +40,106 @@
        
 
         }*/
-        
-    input[type=text], input[type=password],input[type=date],input[type=email],input[type=number] {
-    padding: 5px 10px; /* 상하 우좌 */
-    margin: 3px 0; /* 상하 우좌 */
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-family: inherit; /* 폰트 상속 */
-    font-size:10pt;
-    font-weight: bold;
-    }
+input[type=text], input[type=password], input[type=date], input[type=email],
+	input[type=number] {
+	padding: 5px 10px; /* 상하 우좌 */
+	margin: 3px 0; /* 상하 우좌 */
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-family: inherit; /* 폰트 상속 */
+	font-size: 10pt;
+	font-weight: bold;
+}
 
-    table{
-        margin-left: auto;
-        margin-right: auto;
-    }
-    #button{
-     height: 30;
-            background-color: rgb(94, 198, 240);
-            color: white;
-            font-weight: bold;
-            padding: 3px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 50%;
-            border-radius: 10px;
-       
-    }
-  
-    </style>
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
 
-	
-  
+#button {
+	height: 30;
+	background-color: rgb(94, 198, 240);
+	color: white;
+	font-weight: bold;
+	padding: 3px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 50%;
+	border-radius: 10px;
+}
+</style>
+
+
+
 </head>
 
 <body style="padding-top: 200;">
 
-    <div style="text-align: center;">
-        <img src="../img/Consumer_regist.PNG" alt="logo" class="logo">
-    </div>
+	<div style="text-align: center;">
+		<img src="../img/Consumer_regist.PNG" alt="logo" class="logo">
+	</div>
 
-    <form action="C_login.jsp">
-        <table>
-            <tr>
-                <th>이름</th>
-                <td>
-                    <input type="text" name="cunsumername" value="" placeholder="이름을 입력해주세요." />
-                </td>
+	<form action="">
+		<table>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="cunsumername" value=""
+					placeholder="이름을 입력해주세요." /></td>
 
-            </tr>
-            <tr>
-                <th>아이디</th>
-                <td>
-                    <input type="text" id="cid" name="cId" value="" placeholder="아이디를 입력해주세요." />
-                    <input type="button" id="overlay" value="중복확인" />
-                </td>
-            </tr>
+			</tr>
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" id="cid" name="cId" value=""
+					placeholder="아이디를 입력해주세요." /> <input type="button" id="overlay"
+					value="중복확인" /></td>
+			</tr>
 
 
-            <tr>
-                <th>비밀번호 </th>
-                <td>
-                    <input type="password" id="Pw" name="pw"  value="" placeholder="비밀번호를 입력해주세요."/>
-                </td>
-            </tr>
-            <tr>
-                <th>비밀번호 확인</th>
-                <td>
-                    <input type="password" id="PwChk" name="PwChk" value="" placeholder="비밀번호를 입력해주세요."/>
-                   	<font id="check" size="1"></font>
-                </td>
-            </tr>
-            <tr>
-                <th>생년월일</th>
-                <td>
-                    <!-- form name="birthday" id="birth" action="값을 보낼 주소" method="post"-->
-                        <input type='date' id="birth" name='userBirthday' />
-         
-                </td>
-            </tr>
-            <tr>
-                <th>성별</th>
-                <td>
-                    <input type="radio" name="gender" value="male" />남자
-                    <input type="radio" name="gender" value="female" />여자
-                </td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td>
-                    <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." />
-                </td>
-            </tr>
-            <tr>
-                <th>전화번호</th>
-                <td>
-                    <input type="number" id="phone" name="phone" placeholder="전화번호를 입력해주세요." />
-                </td>
-            </tr>
-           
-          
-           <td colspan="2" align="center">
-               <input type="button" id="button" value="회원가입완료"></td>
-        
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" id="Pw" name="pw" value=""
+					placeholder="비밀번호를 입력해주세요." /></td>
+			</tr>
+			<tr>
+				<th>비밀번호 확인</th>
+				<td><input type="password" id="PwChk" name="PwChk" value=""
+					placeholder="비밀번호를 입력해주세요." /> <font id="check" size="1"></font></td>
+			</tr>
+			<tr>
+				<th>생년월일</th>
+				<td>
+					<!-- form name="birthday" id="birth" action="값을 보낼 주소" method="post"-->
+					<input type='date' id="birth" name='userBirthday' />
 
-        </table>
-    </form>
+				</td>
+			</tr>
+			<tr>
+				<th>성별</th>
+				<td><input type="radio" name="gender" value="male" />남자 <input
+					type="radio" name="gender" value="female" />여자</td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input type="email" id="email" name="email"
+					placeholder="이메일을 입력해주세요." /></td>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<td><input type="number" id="phone" name="phone"
+					placeholder="전화번호를 입력해주세요." /></td>
+			</tr>
+
+			<tr>
+				<td colspan="2"><input type="button" id="button" value="회원가입완료">
+				</td>
+			</tr>
+
+
+		</table>
+	</form>
 </body>
- <script>
+<script>
  $(function(){
 	 $('#Pw').keyup(function(){
 		 $('#check').html('');
@@ -167,7 +154,7 @@
 			 $('#check').attr('color','#199894b3');
 		 }
 	 });
- }); //const $pwBox = $('#Pw');
+//const $pwBox = $('#Pw');
  //const $pwCheckBox = $('#PwChk');
  //const $pwCheckText = $('#Check');
  
@@ -185,12 +172,13 @@
 
 	
 	 var overChk = false;//중복체크 여부
+	 
 		$("#overlay").click(function(){
 			var inputCid = $('#cid').val();
 			if(inputCid == ""){
 				alert('아이디를 입력하세요.');
 			}else{
-				
+
 			$.ajax({
 				type:'get'
 				,url:'overlay'
@@ -199,16 +187,13 @@
 				,success:function(obj){
 					console.log(obj);
 					if(obj.use){
-						alert('사용할 수 있는 아이디 입니다.');
-						
+						alert('사용할 수 있는 아이디 입니다.');	
 						$("#cid").css({backgroundColor:'yellowgreen'});
 						overChk=true; //사용할 수 있는 아이디로 판정 받는다면
 					}else{
 						alert('이미 사용중인 아이디 입니다.');
 						$("#cid").val('');
-			}
-					
-						
+					}	
 				}
 				,error:function(e){
 					console.log(e);
@@ -282,24 +267,24 @@
 				alert('중복 체크 해주세요!');
 				$id.focus();
 			}
-			
-			
+
 		});
+});
 	
     
     </script>
-   
-  
+
+
 
 
 
 
 </html>
-           
-           
-           		
-                
-       
+
+
+
+
+
 
 
 
