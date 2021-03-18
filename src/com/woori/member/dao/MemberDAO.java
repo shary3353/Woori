@@ -132,59 +132,43 @@ public class MemberDAO {
 		}
 		return success;
 	}
-	public boolean clogin(String cid, String pw) {
+	public boolean clogin(String cid, String pw) {//구매자 로그인		
+		String sql ="SELECT cid FROM consumer WHERE cid= ? AND pw=?";
 		
 		boolean success = false;
-		
-		String sql ="SELECT id FROM consumer WHERE id= ? AND pw=?";
-		
 		try {
-			System.out.println("conn : "+conn);
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, cid);
 			ps.setString(2, pw);
 			rs = ps.executeQuery();
-			success = rs.next();
+			if(rs.next()) {				
+				success = true;
+				System.out.println("구매자로그인성공");
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				
-				rs.close();
-				ps.close();
-				conn.close();
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
+			resClose();
 		}
 		return success;
 	}
-	public boolean slogin(String sid, String pw) {
+	public boolean slogin(String sid, String pw) {//판매자 로그인
+		String sql ="SELECT sid FROM seller WHERE sid=? AND pw=?";
 		
 		boolean success = false;
-		
-		String sql ="SELECT id FROM member WHERE id=? AND pw=?";
-		
 		try {
-			
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, sid);
 			ps.setString(2, pw);
 			rs = ps.executeQuery();
-			success = rs.next();
+			if(rs.next()){				
+				success = true;
+				System.out.println("판매자로그인성공");
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				
-				rs.close();
-				ps.close();
-				conn.close();
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
+			resClose();
 		}
 		return success;
 	}
