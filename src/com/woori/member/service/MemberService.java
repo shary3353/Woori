@@ -183,66 +183,86 @@ public class MemberService {
 	}
 
 	public void cList() throws ServletException, IOException {
-		int group = 1;
-		String page = req.getParameter("page");
-
-		if (page != null) {
-			group = Integer.parseInt(page);
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			int group = 1;
+			String page = req.getParameter("page");
+			
+			if (page != null) {
+				group = Integer.parseInt(page);
+			}
+			ListDAO dao = new ListDAO();
+			HashMap<String, Object> map = dao.cList(group);
+			
+			req.setAttribute("cList", map.get("cList"));
+			req.setAttribute("maxCustomerPage", map.get("maxCustomerPage"));
+			req.setAttribute("currPage", group);
+			RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
+			dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./admin_Login.jsp");
 		}
-		ListDAO dao = new ListDAO();
-		HashMap<String, Object> map = dao.cList(group);
-
-		req.setAttribute("cList", map.get("cList"));
-		req.setAttribute("maxCustomerPage", map.get("maxCustomerPage"));
-		req.setAttribute("currPage", group);
-		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
-		dis.forward(req, resp);
 	}
 
 	public void sList() throws ServletException, IOException {
-		int group = 1;
-		String page = req.getParameter("page");
-
-		if (page != null) {
-			group = Integer.parseInt(page);
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			int group = 1;
+			String page = req.getParameter("page");
+			
+			if (page != null) {
+				group = Integer.parseInt(page);
+			}
+			
+			ListDAO dao = new ListDAO();
+			HashMap<String, Object> map = dao.sList(group);
+			
+			req.setAttribute("sList", map.get("sList"));
+			req.setAttribute("currPage", group);
+			req.setAttribute("maxSellerPage", map.get("maxSellerPage"));
+			RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
+			dis.forward(req, resp);	
+		}else {
+			resp.sendRedirect("./admin_Login.jsp");
 		}
-
-		ListDAO dao = new ListDAO();
-		HashMap<String, Object> map = dao.sList(group);
-
-		req.setAttribute("sList", map.get("sList"));
-		req.setAttribute("currPage", group);
-		req.setAttribute("maxSellerPage", map.get("maxSellerPage"));
-		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
-		dis.forward(req, resp);
 	}
 
 	public void cSearch() throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		String inputC = req.getParameter("cSearch");
-		System.out.println("검색할 구매자 : " + inputC);
-
-		ListDAO dao = new ListDAO();
-		ArrayList<CustomerListDTO> searchedC = dao.cSearch(inputC);
-
-		req.setAttribute("cList", searchedC);
-		req.setAttribute("inputC", inputC);
-		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
-		dis.forward(req, resp);
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			req.setCharacterEncoding("utf-8");
+			String inputC = req.getParameter("cSearch");
+			System.out.println("검색할 구매자 : " + inputC);
+			
+			ListDAO dao = new ListDAO();
+			ArrayList<CustomerListDTO> searchedC = dao.cSearch(inputC);
+			
+			req.setAttribute("cList", searchedC);
+			req.setAttribute("inputC", inputC);
+			RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
+			dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./admin_Login.jsp");
+		}
 	}
 
 	public void sSearch() throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		String inputS = req.getParameter("sSearch");
-		System.out.println("검색할 판매자 : " + inputS);
-
-		ListDAO dao = new ListDAO();
-		ArrayList<SellerListDTO> searchedS = dao.sSearch(inputS);
-
-		req.setAttribute("sList", searchedS);
-		req.setAttribute("inputS", inputS);
-		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
-		dis.forward(req, resp);
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			req.setCharacterEncoding("utf-8");
+			String inputS = req.getParameter("sSearch");
+			System.out.println("검색할 판매자 : " + inputS);
+			
+			ListDAO dao = new ListDAO();
+			ArrayList<SellerListDTO> searchedS = dao.sSearch(inputS);
+			
+			req.setAttribute("sList", searchedS);
+			req.setAttribute("inputS", inputS);
+			RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
+			dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./admin_Login.jsp");
+		}
 	}
 
 	public void sPfpDetail() throws ServletException, IOException { // 판매자메인 - 판매자 회원정보 상세보기
@@ -412,78 +432,88 @@ public class MemberService {
 	}
 
 	public void AdminCustomerDetail() throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		HashMap<String, Object> map = new HashMap<>();
-		int group = 1;
-		String page = req.getParameter("page");
-
-		if (page != null) {
-			group = Integer.parseInt(page);
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			req.setCharacterEncoding("utf-8");
+			HashMap<String, Object> map = new HashMap<>();
+			int group = 1;
+			String page = req.getParameter("page");
+			
+			if (page != null) {
+				group = Integer.parseInt(page);
+			}
+			// 1. 상세보기할 cid 받기
+			String cid = req.getParameter("id");
+			
+			// 2. Consumer 테이블에서 C 정보 받아오기
+			MemberDAO mDao = new MemberDAO();
+			CustomerDTO dto = mDao.getCustomer(cid);
+			map.put("Admin_selectedCData", dto);
+			
+			// 3. C_BLACKLIST 테이블에서 isblack 받아오기
+			BlackDAO bDao = new BlackDAO();
+			int isBlack = bDao.getCBlack(cid);
+			map.put("Admin_selectedCIsBlack", isBlack);
+			
+			// 4. REPORT 테이블에서 해당 cid가 target_id인 신고정보 받아오기
+			AdminReportDAO rDao = new AdminReportDAO();
+			ArrayList<ReportDTO> selectedCustomerRList = rDao.getRList(cid, group);
+			rDao = new AdminReportDAO();
+			int maxRPage = rDao.getMaxSelectedRPage(cid);
+			map.put("Admin_selectedCRListCurrPage", group);
+			map.put("Admin_maxRPage", maxRPage);
+			map.put("Admin_selectedCRList", selectedCustomerRList);
+			
+			// 5. admin_CustomerDetail.jsp 로 포워딩
+			req.setAttribute("Admin_CDetailData", map);
+			RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerDetail.jsp");
+			dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./admin_Login.jsp");
 		}
-		// 1. 상세보기할 cid 받기
-		String cid = req.getParameter("id");
-
-		// 2. Consumer 테이블에서 C 정보 받아오기
-		MemberDAO mDao = new MemberDAO();
-		CustomerDTO dto = mDao.getCustomer(cid);
-		map.put("Admin_selectedCData", dto);
-
-		// 3. C_BLACKLIST 테이블에서 isblack 받아오기
-		BlackDAO bDao = new BlackDAO();
-		int isBlack = bDao.getCBlack(cid);
-		map.put("Admin_selectedCIsBlack", isBlack);
-
-		// 4. REPORT 테이블에서 해당 cid가 target_id인 신고정보 받아오기
-		AdminReportDAO rDao = new AdminReportDAO();
-		ArrayList<ReportDTO> selectedCustomerRList = rDao.getRList(cid, group);
-		rDao = new AdminReportDAO();
-		int maxRPage = rDao.getMaxSelectedRPage(cid);
-		map.put("Admin_selectedCRListCurrPage", group);
-		map.put("Admin_maxRPage", maxRPage);
-		map.put("Admin_selectedCRList", selectedCustomerRList);
-
-		// 5. admin_CustomerDetail.jsp 로 포워딩
-		req.setAttribute("Admin_CDetailData", map);
-		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerDetail.jsp");
-		dis.forward(req, resp);
 	}
 
 	public void AdminSellerDetail() throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		HashMap<String, Object> map = new HashMap<>();
-		int group = 1;
-		String page = req.getParameter("page");
-
-		if (page != null) {
-			group = Integer.parseInt(page);
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			req.setCharacterEncoding("utf-8");
+			HashMap<String, Object> map = new HashMap<>();
+			int group = 1;
+			String page = req.getParameter("page");
+			
+			if (page != null) {
+				group = Integer.parseInt(page);
+			}
+			// 1. 상세보기할 sid 받기
+			String sid = req.getParameter("id");
+			
+			// 2. Seller 테이블에서 C 정보 받아오기
+			MemberDAO mDao = new MemberDAO();
+			SellerDTO dto = mDao.getSeller(sid);
+			map.put("Admin_selectedSData", dto);
+			
+			// 3. S_BLACKLIST 테이블에서 isblack 받아오기
+			BlackDAO bDao = new BlackDAO();
+			int isBlack = bDao.getSBlack(sid);
+			map.put("Admin_selectedSIsBlack", isBlack);
+			
+			// 4. REPORT 테이블에서 해당 sid가 target_id인 신고정보 받아오기
+			AdminReportDAO rDao = new AdminReportDAO();
+			ArrayList<ReportDTO> selectedSellerRList = rDao.getRList(sid, group);
+			rDao = new AdminReportDAO();
+			int maxRPage = rDao.getMaxSelectedRPage(sid);
+			
+			map.put("Admin_selectedSRListCurrPage", group);
+			map.put("Admin_maxRPage", maxRPage);
+			map.put("Admin_selectedSRList", selectedSellerRList);
+			
+			// 5. admin_SellerDetail.jsp 로 포워딩
+			req.setAttribute("Admin_SDetailData", map);
+			RequestDispatcher dis = req.getRequestDispatcher("admin_SellerDetail.jsp");
+			dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./admin_Login.jsp");
 		}
-		// 1. 상세보기할 sid 받기
-		String sid = req.getParameter("id");
-
-		// 2. Seller 테이블에서 C 정보 받아오기
-		MemberDAO mDao = new MemberDAO();
-		SellerDTO dto = mDao.getSeller(sid);
-		map.put("Admin_selectedSData", dto);
-
-		// 3. S_BLACKLIST 테이블에서 isblack 받아오기
-		BlackDAO bDao = new BlackDAO();
-		int isBlack = bDao.getSBlack(sid);
-		map.put("Admin_selectedSIsBlack", isBlack);
-
-		// 4. REPORT 테이블에서 해당 sid가 target_id인 신고정보 받아오기
-		AdminReportDAO rDao = new AdminReportDAO();
-		ArrayList<ReportDTO> selectedSellerRList = rDao.getRList(sid, group);
-		rDao = new AdminReportDAO();
-		int maxRPage = rDao.getMaxSelectedRPage(sid);
-		
-		map.put("Admin_selectedSRListCurrPage", group);
-		map.put("Admin_maxRPage", maxRPage);
-		map.put("Admin_selectedSRList", selectedSellerRList);
-
-		// 5. admin_SellerDetail.jsp 로 포워딩
-		req.setAttribute("Admin_SDetailData", map);
-		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerDetail.jsp");
-		dis.forward(req, resp);
 	}
 
 	public void adminLogin() throws ServletException, IOException {
