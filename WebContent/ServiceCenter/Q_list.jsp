@@ -133,15 +133,18 @@ h3 {
 						</tr>
 						<c:forEach items="${list}" var="list">
 							<tr>
-								<th class="num"><input type="text" name="q_idx"
-									value="${list.q_idx }" readonly style="display: none;" />${list.q_idx }</th>
+								<th class="num">
+								<input  type="text" name="q_idx"
+									value="${list.q_idx }" readonly style="display: none;" />
+									${list.q_idx }
+									</th>
 								<th class="subject"><a href="#" id="subjectDetail"
 									onclick="has('${list.q_idx}');">${list.subject }</a></th>
 								<th class="date">${list.q_reg_date }</th>
 							</tr>
 							<tr>
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
-									<input type="password" maxlength="4" id="p5" name="password">
+									<input type="password" maxlength="4" id="${list.q_idx }" name="password">
 									<button id="sbmBtn">확인</button>
 								</td>
 							</tr>
@@ -174,7 +177,7 @@ h3 {
 </body>
 
 <script>
-	var idx = "";
+	
 	function has(id) {
 		var idx = document.getElementById(id);
 		console.log(idx)
