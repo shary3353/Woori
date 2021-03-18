@@ -54,14 +54,15 @@ public class MemberController extends HttpServlet {
                 System.out.println("Request Seller Detail");
                 service.AdminSellerDetail();
                 break;
-			case "/logout":
+			
+            case "/logout":
 				System.out.println("Request Logout");
 				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("/Admin/cLogin");
-				
-				req.getSession().removeAttribute("sid");
-				resp.sendRedirect("/Admin/sLogin");
-				
+				resp.sendRedirect("/Consumer/cLogin");
+			
+				req.getSession().removeAttribute("cid");
+				resp.sendRedirect("/Consumer/sLogin");
+			
 				req.getSession().removeAttribute("aid");
 				resp.sendRedirect("/adminLogin");
 				break;

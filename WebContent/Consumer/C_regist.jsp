@@ -185,9 +185,12 @@
 
 	
 	 var overChk = false;//중복체크 여부
-		
 		$("#overlay").click(function(){
-			
+			var inputCid = $('#cid').val();
+			if(inputCid == ""){
+				alert('아이디를 입력하세요.');
+			}else{
+				
 			$.ajax({
 				type:'get'
 				,url:'overlay'
@@ -203,13 +206,13 @@
 					}else{
 						alert('이미 사용중인 아이디 입니다.');
 						$("#cid").val('');
-					}
+			}
+					
 						
 				}
 				,error:function(e){
 					console.log(e);
 				}
-				
 			});
 		});
 		
