@@ -50,8 +50,10 @@ public class AdminReportService {
 			group = Integer.parseInt(page);
 		}
 		
-        String inputR = req.getParameter("rSearch");
+        String inputR = req.getParameter("inputR");
         String rSearchOption = req.getParameter("rSearchOption");
+        
+        System.out.println(inputR+" / "+group+" / "+rSearchOption);
         
         if(rSearchOption.equals("100")) {                //신고자ID 검색
             System.out.println("검색할 신고자 id : "+inputR);
@@ -60,6 +62,8 @@ public class AdminReportService {
             req.setAttribute("rList", map.get("rList"));
             req.setAttribute("currPage", group);
             req.setAttribute("maxReportPage", map.get("maxReportPage"));
+            req.setAttribute("inputR", inputR);
+            req.setAttribute("rSearchOption", rSearchOption);
         }else if(rSearchOption.equals("200")) {    //신고대상자ID 검색
             System.out.println("검색할 신고대상자 id : "+inputR);
             AdminReportDAO dao = new AdminReportDAO();
@@ -67,6 +71,8 @@ public class AdminReportService {
             req.setAttribute("rList", map.get("rList"));
             req.setAttribute("currPage", group);
             req.setAttribute("maxReportPage", map.get("maxReportPage"));
+            req.setAttribute("inputR", inputR);
+            req.setAttribute("rSearchOption", rSearchOption);
         }
         RequestDispatcher dis = req.getRequestDispatcher("admin_ReportList.jsp");
         dis.forward(req, resp);

@@ -222,6 +222,7 @@ public class MemberService {
 		ArrayList<CustomerListDTO> searchedC = dao.cSearch(inputC);
 
 		req.setAttribute("cList", searchedC);
+		req.setAttribute("inputC", inputC);
 		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
 		dis.forward(req, resp);
 	}
@@ -235,6 +236,7 @@ public class MemberService {
 		ArrayList<SellerListDTO> searchedS = dao.sSearch(inputS);
 
 		req.setAttribute("sList", searchedS);
+		req.setAttribute("inputS", inputS);
 		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
 		dis.forward(req, resp);
 	}
