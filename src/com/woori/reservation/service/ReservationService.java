@@ -82,14 +82,10 @@ public class ReservationService {
 	}
 
 	public void cReservationList() throws ServletException, IOException {
-		//String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		String loginId = cid;
-		
-		if(loginId != null) {
-			System.out.println(cid + " 의 예약내역 불러오기");
+		if(loginID != null) {
+			System.out.println(loginID + " 의 예약내역 불러오기");
 			String pageParam = req.getParameter("page");
 			System.out.println("이동하고 싶은 page : " + pageParam);
 			int group = 1;
@@ -97,7 +93,7 @@ public class ReservationService {
 				group = Integer.parseInt(pageParam);
 			}
 			ReservationDAO dao = new ReservationDAO();
-			HashMap<String, Object> map = dao.cReservationList(group, cid);
+			HashMap<String, Object> map = dao.cReservationList(group, loginID);
 
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
@@ -115,17 +111,14 @@ public class ReservationService {
 	}
 
 	public void cMyPageMain() throws ServletException, IOException {
-		//String loginId = (String) req.getParameter().getAttribute("loginId");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
-		if(loginId != null) {
+		if(loginID != null) {
 			ReservationDAO dao = new ReservationDAO();
-			ArrayList<ReservationDTO> rList = dao.mainReservationList(cid);
+			ArrayList<ReservationDTO> rList = dao.mainReservationList(loginID);
 			
 			WishDAO wdao = new WishDAO();
-			ArrayList<WishDTO> wList = wdao.mainWishList(cid);
+			ArrayList<WishDTO> wList = wdao.mainWishList(loginID);
 			
 			req.setAttribute("rList", rList);
 			req.setAttribute("wList", wList);
