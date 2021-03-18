@@ -141,7 +141,7 @@ nav .navilist:hover {
 		</div>
 
 		<div id="searchmenu">
-		<form action="C_SearchList" method="post">
+		<form action="${pageContext.request.contextPath}/Consumer/C_SearchList" method="post">
 			<span id='search_border'> <input type='text' id='searchbar' name='searchname'
 				placeholder="검색어를 입력하세요"/>
 			</span>
@@ -162,7 +162,7 @@ nav .navilist:hover {
 			
 			<div class="toplist">
 				<img src="${pageContext.request.contextPath}/img/logout.png" width="40" height="40"> <a
-					href="#">로그아웃</a>
+					href="${pageContext.request.contextPath}/logout">로그아웃</a>
 			</div>
 			
 
