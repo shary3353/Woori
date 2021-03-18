@@ -94,15 +94,15 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="detailButtons">
-                        <button id="questionButton">문의하기</button>
+                        <button id="questionButton" onclick="location.href='${pageContext.request.contextPath}/ServiceCenter/Report.jsp?p_idx=${dto.p_name}&sId=${dto.sid}'">문의하기</button>
                         <a href="C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
                         <button id="reservationButton">예약하기</button>
                         </a>
                         <!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
                         <button id="likeButton"> &nbsp;좋아요</button>
-                        <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요</button>
-                        <button id="wishlistButton" onclick="location.href='addWishList?p_idx='${dto.p_idx}'">위시리스트</button>
-                        <button id="reportButton" onclick="location.href='Seller/sReport'">신고하기</button>
+                        <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요 취소</button>
+                        <button id="wishlistButton" onclick="location.href='addWishList?p_idx=${dto.p_idx}'">위시리스트</button>
+                        <button id="reportButton" onclick="location.href='Seller/sReport?sid=${dto.sid}'">신고하기</button>
                     </td>
                 </tr>
             </table>
@@ -126,12 +126,13 @@
 				,pidx: '${dto.p_idx}'
 			}
 			,dataType:'JSON'
-			,success:function(likeChk){
-					console.log(likeChk)
-					if(likeChk.use){
+			,success:function(data){
+					console.log(data.use);
+					if(data.use){
 						$("#likeButton").css("display","");
 						$("#dislikeButton").css("display","none");
-					}else{
+					}
+					else{
 						$("#likeButton").css("display","none");
 						$("#dislikeButton").css("display","");
 					}

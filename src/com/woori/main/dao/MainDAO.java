@@ -181,11 +181,12 @@ public class MainDAO {
 
 	public boolean likeconfirm(String cid, String pidx) {
 		boolean success = false;
-		String sql="SELECT ?,? FROM likes";
+		String sql="SELECT cid,p_idx FROM likes WHERE cid=? AND p_idx=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
 			ps.setInt(2, Integer.parseInt(pidx));
+			
 			rs = ps.executeQuery();
 			success = rs.next();
 		} catch (SQLException e) {
