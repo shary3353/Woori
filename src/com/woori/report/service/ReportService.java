@@ -27,35 +27,34 @@ public class ReportService {
 	}
 
 	public void sReportList() throws ServletException, IOException { // 판매자 신고내역 리스트
-		//로그인검사 추가예정
-		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		//로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
 		String sid = (String)req.getSession().getAttribute("loginID");
-		/*
 		if(sid != null) {//로그인 여부 판별
 			
+			System.out.println("판매자" + sid + "의 신고 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
+	
+			String pageParam = req.getParameter("page");
+			System.out.println("page : " + pageParam);
+	
+			int group = 1;
+			if (pageParam != null) {
+				group = Integer.parseInt(pageParam);
+			}
+	
+			ReportDAO dao = new ReportDAO();
+			HashMap<String, Object> map = dao.sReportList(sid, group);
+	
+			req.setAttribute("maxPage", map.get("maxPage"));
+			req.setAttribute("list", map.get("list"));
+			req.setAttribute("currPage", group);
+	
+			dis = req.getRequestDispatcher("S_Reportlist.jsp"); // S_Reportlist.jsp로 이동
+			dis.forward(req, resp);// 값보냄
+		
 		} else { //로그인을 안 했으면 로그인페이지로
-			resp.sendRedirect("판매자로그인.jsp");
+			resp.sendRedirect("../Consumer/C_login.jsp");
 		}
-		*/
-		System.out.println("판매자" + sid + "의 신고 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
-
-		String pageParam = req.getParameter("page");
-		System.out.println("page : " + pageParam);
-
-		int group = 1;
-		if (pageParam != null) {
-			group = Integer.parseInt(pageParam);
-		}
-
-		ReportDAO dao = new ReportDAO();
-		HashMap<String, Object> map = dao.sReportList(sid, group);
-
-		req.setAttribute("maxPage", map.get("maxPage"));
-		req.setAttribute("list", map.get("list"));
-		req.setAttribute("currPage", group);
-
-		dis = req.getRequestDispatcher("S_Reportlist.jsp"); // S_Reportlist.jsp로 이동
-		dis.forward(req, resp);// 값보냄
 	}
 
 	public void report() throws ServletException, IOException {
@@ -128,25 +127,24 @@ public class ReportService {
 	}
 
 	public void sReportDetail() throws ServletException, IOException {//판매자 신고상세보기
-		//로그인검사 추가예정
-		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		//로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
 		String sid = (String)req.getSession().getAttribute("loginID");
-		/*
 		if(sid != null) {//로그인 여부 판별
 			
+			String idx = req.getParameter("idx");
+			System.out.println("idx : " + idx);
+			ReportDAO dao = new ReportDAO();
+			ReportDTO dto = new ReportDTO();
+			dto = dao.detail(idx);
+	
+			req.setAttribute("dto", dto);
+			dis = req.getRequestDispatcher("S_ReportDetail.jsp");
+			dis.forward(req, resp);
+		
 		} else { //로그인을 안 했으면 로그인페이지로
-			resp.sendRedirect("판매자로그인.jsp");
+			resp.sendRedirect("../Consumer/C_login.jsp");
 		}
-		*/
-		String idx = req.getParameter("idx");
-		System.out.println("idx : " + idx);
-		ReportDAO dao = new ReportDAO();
-		ReportDTO dto = new ReportDTO();
-		dto = dao.detail(idx);
-
-		req.setAttribute("dto", dto);
-		dis = req.getRequestDispatcher("S_ReportDetail.jsp");
-		dis.forward(req, resp);
 	}
 
 	public void cReportDetail() throws ServletException, IOException {
@@ -171,58 +169,56 @@ public class ReportService {
 	}
 
 	public void sReportForm() throws ServletException, IOException { //판매자 신고하기 폼 보여주기
-		//로그인검사 추가예정
-		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		//로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
 		String sid = (String)req.getSession().getAttribute("loginID");
-		/*
 		if(sid != null) {//로그인 여부 판별
 			
+			String target_id = req.getParameter("target_id");
+			System.out.println("신고대상자 id :" +target_id);
+			req.setAttribute("target_id", target_id);
+			dis = req.getRequestDispatcher("./S_Report.jsp");
+			dis.forward(req, resp);
+		
 		} else { //로그인을 안 했으면 로그인페이지로
-			resp.sendRedirect("판매자로그인.jsp");
+			resp.sendRedirect("../Consumer/C_login.jsp");
 		}
-		*/
-		String target_id = req.getParameter("target_id");
-		System.out.println("신고대상자 id :" +target_id);
-		req.setAttribute("target_id", target_id);
-		dis = req.getRequestDispatcher("./S_Report.jsp");
-		dis.forward(req, resp);
 	}
 
 	public void sReport() throws ServletException, IOException {//판매자가 신고하기
 		//로그인검사 추가예정
-		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
 		String sid = (String)req.getSession().getAttribute("loginID");
-		/*
 		if(sid != null) {//로그인 여부 판별
+		
+			String subejct = req.getParameter("subject");
+			String reporter_id = req.getParameter("reporter_id");
+			String target_id = req.getParameter("target_id");
+			String category = req.getParameter("category");
+			String content = req.getParameter("content");
+			System.out.println("신고내용: "+subejct + "/" + reporter_id + "/" + target_id + "/" + category + "/" + content);
 			
+			ReportDTO dto = new ReportDTO();
+			dto.setSubject(subejct);
+			dto.setReporter_id(reporter_id);
+			dto.setTarget_id(target_id);
+			dto.setCategory(category);
+			dto.setContent(content);
+			
+			ReportDAO dao = new ReportDAO();
+			long r_idx = dao.report(dto);
+			
+			String page = "sReportForm?target_id"+target_id;
+			if (r_idx > 0) {
+				page = "sReportDetail?idx="+r_idx;
+			}
+	
+			dis = req.getRequestDispatcher(page);
+			dis.forward(req, resp);
+		
 		} else { //로그인을 안 했으면 로그인페이지로
-			resp.sendRedirect("판매자로그인.jsp");
+			resp.sendRedirect("../Consumer/C_login.jsp");
 		}
-		*/
-		String subejct = req.getParameter("subject");
-		String reporter_id = req.getParameter("reporter_id");
-		String target_id = req.getParameter("target_id");
-		String category = req.getParameter("category");
-		String content = req.getParameter("content");
-		System.out.println("신고내용: "+subejct + "/" + reporter_id + "/" + target_id + "/" + category + "/" + content);
-		
-		ReportDTO dto = new ReportDTO();
-		dto.setSubject(subejct);
-		dto.setReporter_id(reporter_id);
-		dto.setTarget_id(target_id);
-		dto.setCategory(category);
-		dto.setContent(content);
-		
-		ReportDAO dao = new ReportDAO();
-		long r_idx = dao.report(dto);
-		
-		String page = "sReportForm?target_id"+target_id;
-		if (r_idx > 0) {
-			page = "sReportDetail?idx="+r_idx;
-		}
-
-		dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
 	}
 
 	public void cReportForm() throws ServletException, IOException {
