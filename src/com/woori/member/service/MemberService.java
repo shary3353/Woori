@@ -245,34 +245,31 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	public void sPfpDatail() throws ServletException, IOException { // 판매자메인 - 판매자 회원정보 상세보기
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
+	public void sPfpDetail() throws ServletException, IOException { // 판매자메인 - 판매자 회원정보 상세보기
+		// 로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
 		String sid = (String) req.getSession().getAttribute("loginID");
-		/*
-		 * if(sid != null) {//로그인 여부 판별
-		 * 
-		 * } else { //로그인을 안 했으면 로그인페이지로 resp.sendRedirect("판매자로그인.jsp"); }
-		 */
-		System.out.println(sid); // 로그인한 아이디 확인
-
-		MemberDAO dao = new MemberDAO();
-		SellerDTO dto = dao.sPfpDetail(sid);
-		System.out.println(dto);// 해당판매자정보
-		req.setAttribute("detail", dto);
-		RequestDispatcher dis = req.getRequestDispatcher("./S_profile.jsp");
-		dis.forward(req, resp);
+		if(sid != null) {//로그인 여부 판별
+		  
+			System.out.println(sid+"의 회원정보"); // 로그인한 아이디 확인
+			MemberDAO dao = new MemberDAO();
+			SellerDTO dto = dao.sPfpDetail(sid);
+			System.out.println(dto);// 해당판매자정보
+			req.setAttribute("detail", dto);
+			RequestDispatcher dis = req.getRequestDispatcher("./S_profile.jsp");
+			dis.forward(req, resp);
+			
+		} else { //로그인을 안 했으면 로그인페이지로 
+			  resp.sendRedirect("../Consumer/C_login.jsp"); 
+		}
 	}
 
 	public void sPfpUpdateForm() throws ServletException, IOException {// 판매자메인 - 판매자 수정폼 보기
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
+		// 로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
 		String sid = (String) req.getSession().getAttribute("loginID");
-		/*
-		 * if(sid != null) {//로그인 여부 판별
-		 * 
-		 * } else { //로그인을 안 했으면 로그인페이지로 resp.sendRedirect("판매자로그인.jsp"); }
-		 */
+		if(sid != null) {//로그인 여부 판별
+		  
 		System.out.println("수정할 sid :" + sid);
 
 		MemberDAO dao = new MemberDAO();
@@ -280,45 +277,50 @@ public class MemberService {
 		req.setAttribute("detail", dto);
 		RequestDispatcher dis = req.getRequestDispatcher("./S_profileRevise.jsp");
 		dis.forward(req, resp);
+		
+		} else { //로그인을 안 했으면 로그인페이지로 
+			  resp.sendRedirect("../Consumer/C_login.jsp"); 
+		}
 	}
 
 	public void sPfpUpdate() throws ServletException, IOException {// 판매자메인 - 판매자 회원정보 수정
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
+		// 로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
 		String loginID = (String) req.getSession().getAttribute("loginID");
-		/*
-		 * if(loginID != null) {//로그인 여부 판별
-		 * 
-		 * } else { //로그인을 안 했으면 로그인페이지로 resp.sendRedirect("판매자로그인.jsp"); }
-		 */
-		String sid = req.getParameter("sid");
-		String name = req.getParameter("name");
-		String pw = req.getParameter("pw");
-		String email = req.getParameter("email");
-		String phone = req.getParameter("phone");
-		String storeCall = req.getParameter("storeCall");
-		System.out.println("변경정보:" + sid + "/" + name + "/" + pw + "/" + email + "/" + phone + "/" + storeCall);
-
-		SellerDTO dto = new SellerDTO();
-		dto.setSid(sid);
-		dto.setName(name);
-		dto.setPw(pw);
-		dto.setEmail(email);
-		dto.setPhone(phone);
-		dto.setStore_call(storeCall);
-		
-		boolean success = false;
-		MemberDAO dao = new MemberDAO();
-		if(dao.sPfpUpdate(dto)>0) {
-			success = true;
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("update", success);
-			Gson gson = new Gson();
-			String json = gson.toJson(map);
-			System.out.println(json);
-			resp.getWriter().print(json);
-			//resp.sendRedirect("sPfpDetail?sid=" + dto.getSid());
-		};
+		if(loginID != null) {//로그인 여부 판별
+			
+			String sid = req.getParameter("sid");
+			String name = req.getParameter("name");
+			String pw = req.getParameter("pw");
+			String email = req.getParameter("email");
+			String phone = req.getParameter("phone");
+			String storeCall = req.getParameter("storeCall");
+			System.out.println("변경정보:" + sid + "/" + name + "/" + pw + "/" + email + "/" + phone + "/" + storeCall);
+	
+			SellerDTO dto = new SellerDTO();
+			dto.setSid(sid);
+			dto.setName(name);
+			dto.setPw(pw);
+			dto.setEmail(email);
+			dto.setPhone(phone);
+			dto.setStore_call(storeCall);
+			
+			boolean success = false;
+			MemberDAO dao = new MemberDAO();
+			if(dao.sPfpUpdate(dto)>0) {
+				success = true;
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("update", success);
+				Gson gson = new Gson();
+				String json = gson.toJson(map);
+				System.out.println(json);
+				resp.getWriter().print(json);
+				//resp.sendRedirect("sPfpDetail?sid=" + dto.getSid());
+			};
+			
+		}else { //로그인을 안 했으면 로그인페이지로 
+			  resp.sendRedirect("../Consumer/C_login.jsp"); 
+		}
 	}
 
 	public void cDetail() throws ServletException, IOException {
