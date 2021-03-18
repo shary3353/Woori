@@ -40,7 +40,7 @@ public class BlackService {
 			RequestDispatcher dis = req.getRequestDispatcher("admin_BlackList.jsp");
 			dis.forward(req, resp);
 		}else {
-			resp.sendRedirect("./AdminLoginPage");
+			resp.sendRedirect("./admin_Login.jsp");
 		}
 	}
 	
