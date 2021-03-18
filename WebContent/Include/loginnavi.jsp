@@ -154,7 +154,7 @@ nav .navilist:hover {
 		<div id="toplistBox">
 			<div class="toplist">
 				<img src="img/login.png" width="40" height="40">
-				<a href="C_login.jsp">로그인</a>
+				<a href="${pageContext.request.contextPath}/Consumer/C_login.jsp">로그인</a>
 			</div>
 		</div>
 
