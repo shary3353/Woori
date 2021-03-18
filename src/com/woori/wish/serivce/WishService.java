@@ -23,13 +23,10 @@ public class WishService {
 	}
 
 	public void wishPaging() throws ServletException, IOException {
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		if (loginId != null) {
-			System.out.println(cid + " 의 위시리스트 불러오기");
+		if (loginID != null) {
+			System.out.println(loginID + " 의 위시리스트 불러오기");
 			String pageParam = req.getParameter("page");
 			System.out.println("이동하고 싶은 page : " + pageParam);
 			int group = 1;
@@ -37,7 +34,7 @@ public class WishService {
 				group = Integer.parseInt(pageParam);
 			}
 			WishDAO dao = new WishDAO();
-			HashMap<String, Object> map = dao.pagingList(group, cid);
+			HashMap<String, Object> map = dao.pagingList(group, loginID);
 
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
@@ -55,12 +52,10 @@ public class WishService {
 	}
 
 	public void delWishList() throws ServletException, IOException {
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
-		if (loginId != null) {
+		if (loginID != null) {
 			String wish_idx = req.getParameter("wish_idx");
 			System.out.println("삭제하고 싶은 WishList idx : " + wish_idx);
 			WishDAO dao = new WishDAO();
@@ -77,16 +72,14 @@ public class WishService {
 
 	public void addWishList() throws ServletException, IOException {
 
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
-		if (loginId != null) {
+		if (loginID != null) {
 			String p_idx = req.getParameter("p_idx");
 			System.out.println("Add Wish List p_idx : " + p_idx);
 			WishDAO dao = new WishDAO();
-			dao.addWishList(p_idx, cid);
+			dao.addWishList(p_idx, loginID);
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);

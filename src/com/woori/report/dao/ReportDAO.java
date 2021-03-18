@@ -104,11 +104,13 @@ public class ReportDAO {
 		return max;
 	}
 
-	public long report(ReportDTO dto) { //고객센터 신고하기, 판매자 신고하기에서 둘다 사용 중 - 변경 시 알릴 것.
+	public HashMap<String, Object> report(ReportDTO dto) { //고객센터 신고하기, 판매자 신고하기에서 둘다 사용 중 - 변경 시 알릴 것.
 
 		String sql = "INSERT INTO report (R_IDX, CONTENT,RC_code,Reporter_ID,Target_ID,"
 				+"SUBJECT)VALUES(Report_seq.NEXTVAL, ?, ?, ?, ?, ?)";
 		long r_idx = 0;
+		boolean success = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		try {
 			ps = conn.prepareStatement(sql,new String[] {"R_IDX"});
 			ps.setString(1, dto.getContent());
@@ -120,14 +122,16 @@ public class ReportDAO {
 			System.out.println("실행완료");
 			rs = ps.getGeneratedKeys();
 			if(rs.next()) {
+				success = true;
 				r_idx = rs.getLong(1);
-				System.out.println("r_idx : " + r_idx);
 			}
+			map.put("r_idx", r_idx);
+			map.put("success", success);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
-		}return r_idx;
+		}return  map;
 	}
 
 	public ReportDTO detail(String idx) { //고객센터 신고상세보기, 판매자 신고상세보기에서 둘다 사용 중 - 변경 시 알릴 것.

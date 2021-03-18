@@ -28,43 +28,42 @@ public class QuestionService {
 	}
 	
 	public void sQAList() throws ServletException, IOException {// 판매자 문의 내역 리스트
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
+		// 로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
 		String sid = (String) req.getSession().getAttribute("loginID");
-		/*
-		 * if(sid != null) {//로그인 여부 판별
-		 * 
-		 * } else { //로그인을 안 했으면 로그인페이지로 resp.sendRedirect("판매자로그인.jsp"); }
-		 */
-		System.out.println("판매자" + sid + "의 문의 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
-
-		String pageParam = req.getParameter("page");
-		System.out.println("page : " + pageParam);
-
-		int group = 1;
-		if (pageParam != null) {
-			group = Integer.parseInt(pageParam);
+		if(sid != null) {//로그인 여부 판별
+			
+			System.out.println("판매자" + sid + "의 문의 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
+	
+			String pageParam = req.getParameter("page");
+			System.out.println("page : " + pageParam);
+	
+			int group = 1;
+			if (pageParam != null) {
+				group = Integer.parseInt(pageParam);
+			}
+	
+			QuestionDAO dao = new QuestionDAO();
+			HashMap<String, Object> map = dao.sQAList(sid, group);
+	
+			req.setAttribute("maxPage", map.get("maxPage"));
+			req.setAttribute("list", map.get("list"));
+			req.setAttribute("currPage", group);
+	
+			dis = req.getRequestDispatcher("S_QnAList.jsp"); // S_QnAList.jsp로 이동
+			dis.forward(req, resp);// 값보냄
+			
+		} else { //로그인을 안 했으면 로그인페이지로 
+			resp.sendRedirect("../Consumer/C_login.jsp"); 
 		}
-
-		QuestionDAO dao = new QuestionDAO();
-		HashMap<String, Object> map = dao.sQAList(sid, group);
-
-		req.setAttribute("maxPage", map.get("maxPage"));
-		req.setAttribute("list", map.get("list"));
-		req.setAttribute("currPage", group);
-
-		dis = req.getRequestDispatcher("S_QnAList.jsp"); // S_QnAList.jsp로 이동
-		dis.forward(req, resp);// 값보냄
 	}
 
 	public void cQuestionList() throws ServletException, IOException {
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
-		if (loginId != null) {
-			System.out.println(cid + " 의 문의내역 불러오기");
+		if (loginID != null) {
+			System.out.println(loginID + " 의 문의내역 불러오기");
 
 			String pageParam = req.getParameter("page");
 			System.out.println("이동하고 싶은 page : " + pageParam);
@@ -74,7 +73,7 @@ public class QuestionService {
 			}
 
 			QuestionDAO dao = new QuestionDAO();
-			HashMap<String, Object> map = dao.cQuestionList(group, cid);
+			HashMap<String, Object> map = dao.cQuestionList(group, loginID);
 
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
@@ -92,12 +91,11 @@ public class QuestionService {
 	}
 
 	public void cQuestionDetail() throws ServletException, IOException {
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
+
 		String msg = "";
-		if (loginId != null) {
+		if (loginID != null) {
 			String q_idx = req.getParameter("q_idx");
 			System.out.println(q_idx + "번 문의 상세보기 요청");
 			QuestionDAO dao = new QuestionDAO();
@@ -136,62 +134,64 @@ public class QuestionService {
 	}
 
 	public void sAnswerDetail() throws ServletException, IOException { // 판매자 문의내역 상세보기
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
+		// 로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
 		String sid = (String) req.getSession().getAttribute("loginID");
-		/*
-		 * if(sid != null) {//로그인 여부 판별
-		 * 
-		 * } else { //로그인을 안 했으면 로그인페이지로 resp.sendRedirect("판매자로그인.jsp"); }
-		 */
-		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
-		System.out.println("상세보기할 문의 p_idx :" + q_idx);
-
-		QuestionDAO dao = new QuestionDAO();
-		QuestionDTO dto = dao.sAnswerDetail(q_idx);
-		req.setAttribute("dto", dto);
-		dis = req.getRequestDispatcher("./S_answer.jsp");
-		dis.forward(req, resp);
+		if(sid != null) {//로그인 여부 판별
+		  
+			int q_idx = Integer.parseInt(req.getParameter("q_idx"));
+			System.out.println("상세보기할 문의 p_idx :" + q_idx);
+	
+			QuestionDAO dao = new QuestionDAO();
+			QuestionDTO dto = dao.sAnswerDetail(q_idx);
+			req.setAttribute("dto", dto);
+			dis = req.getRequestDispatcher("./S_answer.jsp");
+			dis.forward(req, resp);
+		
+		} else { //로그인을 안 했으면 로그인페이지로 
+			  resp.sendRedirect("../Consumer/C_login.jsp"); 
+		}
 
 	}
 
 	public void sAnswerForm() throws ServletException, IOException { // 판매자 문의답변하기 폼
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
+		// 로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
 		String sid = (String) req.getSession().getAttribute("loginID");
-		/*
-		 * if(sid != null) {//로그인 여부 판별
-		 * 
-		 * } else { //로그인을 안 했으면 로그인페이지로 resp.sendRedirect("판매자로그인.jsp"); }
-		 */
-		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
-		System.out.println("상세보기할 문의 p_idx :" + q_idx);
-
-		QuestionDAO dao = new QuestionDAO();
-		QuestionDTO dto = dao.sAnswerDetail(q_idx);
-		req.setAttribute("dto", dto);
-		dis = req.getRequestDispatcher("./S_noAnswer.jsp");
-		dis.forward(req, resp);
+		if(sid != null) {//로그인 여부 판별
+		
+			int q_idx = Integer.parseInt(req.getParameter("q_idx"));
+			System.out.println("상세보기할 문의 p_idx :" + q_idx);
+	
+			QuestionDAO dao = new QuestionDAO();
+			QuestionDTO dto = dao.sAnswerDetail(q_idx);
+			req.setAttribute("dto", dto);
+			dis = req.getRequestDispatcher("./S_noAnswer.jsp");
+			dis.forward(req, resp);
+		
+		} else { //로그인을 안 했으면 로그인페이지로 
+			resp.sendRedirect("../Consumer/C_login.jsp"); 
+		}
 	}
 
 	public void sAnswer() throws IOException { // 판매자 문의답변하기
-		// 로그인검사 추가예정
-		req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
+		// 로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
 		String sid = (String) req.getSession().getAttribute("loginID");
-		/*
-		 * if(sid != null) {//로그인 여부 판별
-		 * 
-		 * } else { //로그인을 안 했으면 로그인페이지로 resp.sendRedirect("판매자로그인.jsp"); }
-		 */
-		int q_idx = Integer.parseInt(req.getParameter("q_idx"));
-		String s_answer = req.getParameter("s_answer");
-		System.out.println("문의번호/답변 : " + q_idx + "/" + s_answer);
-
-		QuestionDAO dao = new QuestionDAO();
-		dao.sAnswer(q_idx, s_answer);
-
-		resp.sendRedirect("./sAnswerDetail?q_idx=" + q_idx);
-
+		if(sid != null) {//로그인 여부 판별
+		 
+			int q_idx = Integer.parseInt(req.getParameter("q_idx"));
+			String s_answer = req.getParameter("s_answer");
+			System.out.println("문의번호/답변 : " + q_idx + "/" + s_answer);
+	
+			QuestionDAO dao = new QuestionDAO();
+			dao.sAnswer(q_idx, s_answer);
+	
+			resp.sendRedirect("./sAnswerDetail?q_idx=" + q_idx);
+			
+		  } else { //로그인을 안 했으면 로그인페이지로 
+			  resp.sendRedirect("../Consumer/C_login.jsp"); 
+		}
 	}
 
 	public void qWrite() throws ServletException, IOException {

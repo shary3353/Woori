@@ -27,69 +27,63 @@ public class ReservationService {
 	}
 
 	public void sReservationList() throws ServletException, IOException { //판매자 예약내역 리스트
-		//로그인검사 추가예정
-		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		//로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
 		String sid = (String)req.getSession().getAttribute("loginID");
-		/*
 		if(sid != null) {//로그인 여부 판별
+	
+			System.out.println("판매자"+ sid +"의 예약 내역입니다."); //로그인한 아이디 확인& 판매자 확인
+			
+			String pageParam = req.getParameter("page");
+			System.out.println("page : "+pageParam);
+			
+			int group = 1;
+			if(pageParam != null) {
+				group = Integer.parseInt(pageParam);
+			}
+			
+			ReservationDAO dao = new ReservationDAO();
+			HashMap<String, Object> map = dao.sReservationList(sid, group);
+			
+			req.setAttribute("maxPage", map.get("maxPage"));
+			req.setAttribute("list", map.get("list"));
+			req.setAttribute("currPage", group);
+			
+			dis = req.getRequestDispatcher("S_Reservationlist.jsp"); //S_Reservationlist.jsp로 이동
+			dis.forward(req, resp);//값보냄
 			
 		} else { //로그인을 안 했으면 로그인페이지로
-			resp.sendRedirect("판매자로그인.jsp");
+			resp.sendRedirect("../Consumer/C_login.jsp");
 		}
-		*/
-		System.out.println("판매자"+ sid +"의 예약 내역입니다."); //로그인한 아이디 확인& 판매자 확인
-		
-		String pageParam = req.getParameter("page");
-		System.out.println("page : "+pageParam);
-		
-		int group = 1;
-		if(pageParam != null) {
-			group = Integer.parseInt(pageParam);
-		}
-		
-		ReservationDAO dao = new ReservationDAO();
-		HashMap<String, Object> map = dao.sReservationList(sid, group);
-		
-		req.setAttribute("maxPage", map.get("maxPage"));
-		req.setAttribute("list", map.get("list"));
-		req.setAttribute("currPage", group);
-		
-		dis = req.getRequestDispatcher("S_Reservationlist.jsp"); //S_Reservationlist.jsp로 이동
-		dis.forward(req, resp);//값보냄
 	}
 
 	public void updateResevationStatus() throws ServletException, IOException {//판매자 예약현황변경
-		//로그인검사 추가예정
-		req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
+		//로그인검사 추가됨.
+		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
 		String sid = (String)req.getSession().getAttribute("loginID");
-		/*
 		if(sid != null) {//로그인 여부 판별
+		
+			System.out.println("판매자"+ sid +"가 예약 현황을 변경합니다."); //로그인한 아이디 확인& 판매자 확인
 			
+			int r_idx = Integer.parseInt(req.getParameter("r_idx"));
+			int rs_idx = Integer.parseInt(req.getParameter("reservationState"));
+			System.out.println("변경예약:"+r_idx+"/"+rs_idx);
+			
+			ReservationDAO dao = new ReservationDAO();
+			dao.updateResevationStatus(r_idx, rs_idx);
+			
+			resp.sendRedirect("./sReservationList");//예약리스트로 이동
+		
 		} else { //로그인을 안 했으면 로그인페이지로
-			resp.sendRedirect("판매자로그인.jsp");
+			resp.sendRedirect("../Consumer/C_login.jsp");
 		}
-		*/
-		System.out.println("판매자"+ sid +"가 예약 현황을 변경합니다."); //로그인한 아이디 확인& 판매자 확인
-		
-		int r_idx = Integer.parseInt(req.getParameter("r_idx"));
-		int rs_idx = Integer.parseInt(req.getParameter("reservationState"));
-		System.out.println("변경예약:"+r_idx+"/"+rs_idx);
-		
-		ReservationDAO dao = new ReservationDAO();
-		dao.updateResevationStatus(r_idx, rs_idx);
-		
-		resp.sendRedirect("./sReservationList");//예약리스트로 이동
 	}
 
 	public void cReservationList() throws ServletException, IOException {
-		//String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		String loginId = cid;
-		
-		if(loginId != null) {
-			System.out.println(cid + " 의 예약내역 불러오기");
+		if(loginID != null) {
+			System.out.println(loginID + " 의 예약내역 불러오기");
 			String pageParam = req.getParameter("page");
 			System.out.println("이동하고 싶은 page : " + pageParam);
 			int group = 1;
@@ -97,7 +91,7 @@ public class ReservationService {
 				group = Integer.parseInt(pageParam);
 			}
 			ReservationDAO dao = new ReservationDAO();
-			HashMap<String, Object> map = dao.cReservationList(group, cid);
+			HashMap<String, Object> map = dao.cReservationList(group, loginID);
 
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
@@ -115,17 +109,14 @@ public class ReservationService {
 	}
 
 	public void cMyPageMain() throws ServletException, IOException {
-		//String loginId = (String) req.getParameter().getAttribute("loginId");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
-		if(loginId != null) {
+		if(loginID != null) {
 			ReservationDAO dao = new ReservationDAO();
-			ArrayList<ReservationDTO> rList = dao.mainReservationList(cid);
+			ArrayList<ReservationDTO> rList = dao.mainReservationList(loginID);
 			
 			WishDAO wdao = new WishDAO();
-			ArrayList<WishDTO> wList = wdao.mainWishList(cid);
+			ArrayList<WishDTO> wList = wdao.mainWishList(loginID);
 			
 			req.setAttribute("rList", rList);
 			req.setAttribute("wList", wList);

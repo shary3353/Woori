@@ -104,10 +104,18 @@ th {
 		</div>
 		<div class="seMain">
 			<div class="sideMenu">
-			      <div class="Service"><a href=qList>고객센터</a></div>
-                    <div class="One"><a href="Q_write.jsp">1:1 문의하기</a></div>
-                    <div class="Question"><a href="Question.jsp">자주묻는 질문</a></div>
-                    <div class="Report"><a href="Report.jsp">신고하기</a></div>
+				<div class="Service">
+					<a href=qList>고객센터</a>
+				</div>
+				<div class="One">
+					<a href="Q_write.jsp">1:1 문의하기</a>
+				</div>
+				<div class="Question">
+					<a href="Question.jsp">자주묻는 질문</a>
+				</div>
+				<div class="Report">
+					<a href="Report.jsp">신고하기</a>
+				</div>
 			</div>
 		</div>
 		<div id="form">
@@ -131,10 +139,8 @@ th {
 				</tr>
 				<tr>
 					<th>처리상태</th>
-					<td>
-						<c:if test="${dto.status == 0}">처리중</c:if>
-						<c:if test="${dto.status > 0}">완료됨</c:if>
-					</td>
+					<td><c:if test="${dto.status == 0}">처리중</c:if> <c:if
+							test="${dto.status > 0}">완료됨</c:if></td>
 				</tr>
 				<tr>
 					<td colspan="2" id="content">${dto.content }</td>
@@ -142,8 +148,12 @@ th {
 			</table>
 		</div>
 		<div id="button">
-			<button onclick="location.href='../Consumer/cReportList'">내 신고내역 목록 가기</button>
+			<button  onclick="location.href='../Consumer/cReportList'">내
+				신고내역 목록 가기</button>
 		</div>
 	</div>
 </body>
+<script>
+
+</script>
 </html>
