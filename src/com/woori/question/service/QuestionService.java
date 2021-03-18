@@ -61,10 +61,8 @@ public class QuestionService {
 	public void cQuestionList() throws ServletException, IOException {
 		String loginID = (String) req.getSession().getAttribute("loginID");
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
 		String msg = "";
-		if (loginId != null) {
+		if (loginID != null) {
 			System.out.println(cid + " 의 문의내역 불러오기");
 
 			String pageParam = req.getParameter("page");
@@ -75,7 +73,7 @@ public class QuestionService {
 			}
 
 			QuestionDAO dao = new QuestionDAO();
-			HashMap<String, Object> map = dao.cQuestionList(group, cid);
+			HashMap<String, Object> map = dao.cQuestionList(group, loginID);
 
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
@@ -93,12 +91,11 @@ public class QuestionService {
 	}
 
 	public void cQuestionDetail() throws ServletException, IOException {
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String loginId = cid;
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
+
 		String msg = "";
-		if (loginId != null) {
+		if (loginID != null) {
 			String q_idx = req.getParameter("q_idx");
 			System.out.println(q_idx + "번 문의 상세보기 요청");
 			QuestionDAO dao = new QuestionDAO();
