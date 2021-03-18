@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <title>Document</title>
 <style>
 a {
@@ -123,28 +124,27 @@ table {
 			<div id="form">
 
 				<h3>신고하기</h3>
-				<form action="Report" method="post">
 					<table>
 						<tr>
 							<th>신고제목</th>
-							<th><input type="text" name="subject" style="width: 500px;"
+							<th><input id="subject" type="text" name="subject" style="width: 500px;"
 								placeholder="신고제목을 입력해주세요."></th>
 						</tr>
 						<tr>
 							<th>신고자</th>
-							<td><input type="text" name="userName"
+							<td><input id="cId" type="text" name="userName"
 								value="${dto.reporter_id}" /></td>
 							<!--  value="${sessionScope.loginId}" readonly/> -->
 						</tr>
 						<tr>
 							<th>신고대상자</th>
-							<th><input type="text" name="sellerId"
-								value="${dto.target_id}"></th>
+							<th><input id="sId" type="text" name="sellerId"
+								value=""></th>
 						</tr>
 						<tr>
 							<th>신고 카테고리</th>
 							<th>카테고리 선택 <select name="categorie" id="cate">
-									<option value="신고사유/카테고리" selected="selected">신고사유/카테고리</option>
+									<option value="0" selected="selected">신고사유/카테고리</option>
 									<option value="100">상품관련</option>
 									<option value="200">판매자관련</option>
 									<option value="300">기타</option>
@@ -161,11 +161,62 @@ table {
 						</tr>
 					</table>
 					<div id="button">
-						<button style="width: 80px;">신고하기</button>
+						<button id="btn" style="width: 80px;">신고하기</button>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
 </body>
+<script>
+	$("#btn").click(function(){
+		var $subject = $("#subject").val();
+		var $cId = $("#cId").val();
+		var $sId = $("#sId").val();
+		var $category = $("#cate").val();
+		var $content = $("#content").val();
+		
+		if($subject == ''){
+			alert('제목을 입력해주세요');
+			$subject.focus();
+		}else if($cId == ''){
+			alert('로그인 하세요');
+			$cId.focus();
+		}else if($sId == ''){
+			alert('신고자를 확인해주세요')
+			$sId.focus();
+		}else if($category == 0){
+			alert('카테고리 선택해세주세요')
+			$category.focus();
+		}else if($content == ''){
+			alert('내용을 입력해 주세요')
+			$content.focus();
+		}else{
+			console.log('서버로 전송');
+			var pa = {};
+			pa.subject = $subject;
+			pa.cId = $cId;
+			pa.sId = $sId;
+			pa.category = $category;
+			pa.content = $content;
+			$.ajax({
+				type : 'post'
+				,url : 'Report'
+				,data : pa
+				,dataType : 'json'
+				,success : function(data){
+					console.log(data);
+					if(data.success == true){
+						console.log(data.r_idx);
+						alert('신고등록을 완료하였습니다.');
+					location.href="ReportDetail?r_idx="+ data.r_idx;
+					}else{
+						alert('잠시 후 다시 시도해 주세요');
+					}
+				}, error : function(e){
+					
+				}
+			})
+		}
+	})
+</script>
 </html>

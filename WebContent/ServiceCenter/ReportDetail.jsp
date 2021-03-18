@@ -148,9 +148,12 @@ th {
 			</table>
 		</div>
 		<div id="button">
-			<button onclick="location.href='../Consumer/cReportList'">내
+			<button  onclick="location.href='../Consumer/cReportList'">내
 				신고내역 목록 가기</button>
 		</div>
 	</div>
 </body>
+<script>
+
+</script>
 </html>

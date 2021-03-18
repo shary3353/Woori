@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.woori.member.dao.ListDAO;
 import com.woori.report.dao.AdminReportDAO;
 import com.woori.report.dao.ReportDAO;
@@ -60,35 +61,36 @@ public class ReportService {
 
 	public void report() throws ServletException, IOException {
 		String subejct = req.getParameter("subject");
-		String reporter_id = req.getParameter("userName");
-		String target_id = req.getParameter("sellerId");
-		String category = req.getParameter("categorie");
+		String reporter_id = req.getParameter("cId");
+		String target_id = req.getParameter("sId");
+		String category = req.getParameter("category");
 		String content = req.getParameter("content");
-
-		System.out.println(subejct + "/" + reporter_id + "/" + target_id + "/" + category + "/" + content);
+		long r_idx = 0;
+		boolean success = false;
+		System.out.println(subejct + "/" + reporter_id + "/" + target_id + "/" + Integer.parseInt(category) + "/" + content);
 		ReportDTO dto = new ReportDTO();
 		dto.setSubject(subejct);
 		dto.setReporter_id(reporter_id);
 		dto.setTarget_id(target_id);
 		dto.setCategory(category);
 		dto.setContent(content);
-		String page = "Service/report.jsp";
-		String msg = "신고 등록에 실패하였습니다.";
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		ReportDAO dao = new ReportDAO();
-		long idx = dao.report(dto);
-		if (idx > 0) {
-			page = "ReportDetail?idx=" + idx;
-		}
+		 map = dao.report(dto);
+		success = (boolean) map.get("success");
+		r_idx = (long) map.get("r_idx");
+		map.put("success", success);
+		map.put("r_idx", r_idx);
 
-		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
-
+		Gson gson = new Gson();
+		String json = gson.toJson(map);
+		
+		resp.getWriter().print(json);
 	}
 
 	public void detail() throws ServletException, IOException {
-		String idx = req.getParameter("idx");
-		System.out.println("idx : " + idx);
+		String idx = req.getParameter("r_idx");
+		System.out.println("r_idx : " + idx);
 		ReportDAO dao = new ReportDAO();
 		ReportDTO dto = new ReportDTO();
 		dto = dao.detail(idx);
