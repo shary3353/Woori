@@ -140,10 +140,10 @@
                     <td class="culumn1"  name="productName">
                     <c:set var="p_name" value="<%=request.getParameter(\"p_name\") %>"></c:set>
                		<c:if test="${p_name != null}">
-                    <input class="productName" name="p_name" value="<%=request.getParameter("p_name") %>">
+                    <input class="productName" name="p_name" value="<%=request.getParameter("p_name") %>" readonly>
                		</c:if>
                		<c:if test="${p_name == null }">
-               			<input class="productName" type="text" name="p_name">
+               			<input class="productName" type="text" name="p_name" >
                		</c:if>
                     </td>
                 </tr>
@@ -155,7 +155,7 @@
                     <td class="culumn1"  name="sellerId" >
                     <c:set var ="sId"  value="<%=request.getParameter(\"sId\") %>"></c:set>
                     <c:if test="${sId != null }">
-                    <input type="text" class="sId" value="<%=request.getParameter("sId") %>">
+                    <input type="text" class="sId" value="<%=request.getParameter("sId") %>" readonly>
                     </c:if>
                     <c:if test="${sId == null}">
                     	<input type=text  class="sId" name="sId">
@@ -174,7 +174,7 @@
                     확인 비빌번호
                 </td>
                 <td colspan="4" id="setpass">
-                    <input type="password" id="pass" placeholder="숫자4자리 입력" style="text-align: left;" maxlength='4' name="passWord"/>
+                    <input type="number" id="pass" placeholder="숫자4자리 입력" style="text-align: left;" maxlength='4' name="passWord"/>
                     <button id="submit"style="display: inline;">저장</button>
                     <div style="display: inline; color:gray">비밀번호는 작성하신 글 확인시 사용됩니다.</div>  
                 </td>
@@ -187,25 +187,25 @@
 	$("#submit").click(function(){
 		var $cid = $("#cId");
 		var $category = $("#category");
-		var $product = $("#product");
+		var $product = $(".productName");
 		var $subject = $("#subject");
 		var $sid = $(".sId");
 		var $content = $("#content");
 		var $pass = $("#pass")
 		
-		if($product ==''){
+		if($product.val() ==''){
 			alert('상품이름을 입력해주세요');
 			$product.focus();
-		}else if($subject ==''){
+		}else if($subject.val() ==''){
 					alert('제목을 입력해주세요');
 					$subject.focus();
-		}else if($sid ==''){
+		}else if($sid.val() ==''){
 			alert('판매자를 입력해주세요');
 			$sid.focus();
-		}else if($content ==''){
+		}else if($content.val() ==''){
 			alert('내용을 입력해주세요');
 			$content.focus();
-		}else if($pass ==''){
+		}else if($pass.val() == ''){
 			alert('비밀번호를 입력해주세요');
 			$pass.focus();
 		}else{

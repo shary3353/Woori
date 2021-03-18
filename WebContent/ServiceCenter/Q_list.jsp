@@ -141,10 +141,10 @@
                         </c:if>
                         </span>
                         <span class="Page_Content">
-                       		<c:if test="${currPage == 1 }">이전</c:if>
-                        	<c:if test="${currPage > 1}">
-                        	<a href="./qList?page=${currPage-1 }">이전</a>
-                        	</c:if>
+                             <c:if test="${currPage == 1 }">이전</c:if>
+                           <c:if test="${currPage > 1}">
+                           <a href="./qList?page=${currPage-1 }">이전</a>
+                           </c:if>
                         </span>
                         <span id="Page_Number"><a>${currPage}</a></span>
                         <span class="Page_Content">
@@ -154,38 +154,31 @@
                         </c:if>
                         </span>
                         <span class="Page_Content">
-						<c:if test="${currPage < maxPage }">
+                  <c:if test="${currPage < maxPage }">
                         <a href="./qList?page=${maxPage}">마지막</a>
-						</c:if>                        
+                  </c:if>                        
                         </span>
                     </div>
                 </div>
        </body>
-  	
+     
        <script>
-    /*   function doDisplay(){
-    	  var con = document.getElementById("pass");
-    	  if(con.style.display == 'none'){
-    		  	con.style.display='inline';
-    	  }else{
-    		  con.style.display ='none';
-    	  }
-      }
-     */
-    	 /* $('#subjectDetail').click(function(){
-    		 $('#pass').toggle();
-    		 
-    	 }); */
-	var idx = "";    	 
+   var idx = "";        
      function has(id){
-    	 var idx = document.getElementById(id);
-    	 console.log(idx)
-    	 if(idx.style.display =="none"){
-    		 idx.style.display = '';
-    		 
-    	 }else{
-    		 idx.style.display = "none";
-    	 }
+        var idx = document.getElementById(id);
+        console.log(idx)
+        if(idx.style.display =="none"){
+           idx.style.display = '';
+           
+        }else{
+           idx.style.display = "none";
+        }
      }
+     
+     var msg = "${msg}";
+ 	if(msg != ""){
+ 		alert(msg);
+ 	}
+     
 </script>
 </html>

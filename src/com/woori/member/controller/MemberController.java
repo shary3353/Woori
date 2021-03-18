@@ -17,7 +17,8 @@ import com.woori.member.service.MemberService;
  */
 @WebServlet({"/Consumer/cLogin", "/Seller/sLogin", "/AdminLogin", "/Consumer/overlay" ,"/logout", "/cJoin", "/sJoin", "/Admin/cList", "/Admin/sList"
 	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/Admin/cSearch", "/Admin/sSearch", "/Admin/sDetail", "/Admin/cDetail"
-	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"})
+	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"
+	,"/Seller/soverlay"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -55,15 +56,10 @@ public class MemberController extends HttpServlet {
                 break;
 			
             case "/logout":
-				System.out.println("Request Logout");
-				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("/Consumer/cLogin");
-			
-				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("/Consumer/sLogin");
-			
-				req.getSession().removeAttribute("aid");
-				resp.sendRedirect("/adminLogin");
+				String loginID = (String)req.getSession().getAttribute("loginID");
+				System.out.println("지워질 세션ID: "+ loginID);
+				req.getSession().removeAttribute("loginID");
+				resp.sendRedirect("index.jsp");
 				break;
 			
 		}
@@ -158,10 +154,16 @@ public class MemberController extends HttpServlet {
 			System.out.println("중복체크 요청");
 			service.overlay();
 			break;
+		
+		case"/Seller/soverlay"://중복체크요청
+			System.out.println("중복체크 요청");
+			service.overlay();
+			break;
 		}
 	}
+	}
 	
-}
+
 			
 			
 		

@@ -298,9 +298,9 @@ public class QuestionDAO {
 	}
 
 	public long qWrite(String sId, String cId, int category, String subject,
-			String content, int pass) {
-		String sql = "INSERT INTO Question (q_idx, subject, content, q_pw, cid, sid, qc_idx)VALUES"
-				+"(Question_seq.NEXTVAL , ?,?,?,?,?,?)";
+			String content, int pass, String p_name) {
+		String sql = "INSERT INTO Question (q_idx, subject, content, q_pw, cid, sid, qc_idx, p_name)VALUES"
+				+"(Question_seq.NEXTVAL , ?,?,?,?,?,?,?)";
 		long q_idx = 0;
 		try {
 			ps = conn.prepareStatement(sql, new String[] {"q_idx"});
@@ -310,6 +310,7 @@ public class QuestionDAO {
 			ps.setString(4, cId);
 			ps.setString(5, sId);
 			ps.setInt(6, category);
+			ps.setString(7, p_name);
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
 			if(rs.next()) {
@@ -324,9 +325,11 @@ public class QuestionDAO {
 		return q_idx;
 	}
 
-	public QuestionDTO qDetail(String q_idx, String q_pw) {
-		String sql =   "SELECT subject, cid, category, q_reg_date, sid, content, s_answer FROM\r\n" + 
+	public HashMap<String, Object> qDetail(String q_idx, String q_pw) {
+		String sql =   "SELECT  subject, cid, category, q_reg_date, sid, content, s_answer, p_name FROM\r\n" + 
 				"Question q, Q_Categories qc WHERE q.qc_idx = qc.qc_idx AND q_idx=? AND q_pw=?";
+		boolean success = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		QuestionDTO dto = null;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -342,12 +345,17 @@ public class QuestionDAO {
 				dto.setSid(rs.getString("sid"));
 				dto.setContent(rs.getString("content"));
 				dto.setS_answer(rs.getString("s_answer"));
+				dto.setP_name(rs.getString("p_name"));
+				success = true;
 			}
+			map.put("success", success);
+			map.put("dto", dto);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
-		}return dto;
+		}return map;
 	}
 
 }
