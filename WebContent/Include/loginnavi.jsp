@@ -77,6 +77,7 @@ body {
 }
 
 #toplistBox {
+	margin-left: 150px;
 }
 
 #toplistBox .toplist {
@@ -152,21 +153,9 @@ nav .navilist:hover {
 
 		<div id="toplistBox">
 			<div class="toplist">
-				<img src="img/mypage.png" width="40" height="40"> <a
-					href="cMyPageMain">마이페이지</a>
+				<img src="img/login.png" width="40" height="40">
+				<a href="C_login.jsp">로그인</a>
 			</div>
-
-			<div class="toplist">
-				<img src="img/wishlist.png" width="40" height="40"> <a
-					href="wishPaging?page=1">위시리스트</a>
-			</div>
-			
-			<div class="toplist">
-				<img src="img/logout.png" width="40" height="40"> <a
-					href="#">로그아웃</a>
-			</div>
-			
-
 		</div>
 
 	</div>

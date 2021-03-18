@@ -113,7 +113,15 @@
 
 <body>
 	<div id="wrap">
-		<jsp:include page="../Include/navi.jsp"></jsp:include>
+		<c:choose>
+    		<c:when test="${session.loginId eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${session.loginId ne null}">
+			<jsp:include page="../Include/navi.jsp"></jsp:include>
+    		</c:when>
+    	</c:choose>	
     	<!--  메인페이지 시작 -->
 		<!-- 메인컨텐츠 박스 -->
 		<div id="mainBox">
