@@ -197,7 +197,7 @@ public class MemberService {
 		String pw = req.getParameter("pw");
 		System.out.println(sid + "/" + pw);
 		
-		page = "../Seller/S_Login.jsp";
+		page = "../Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
 		if (dao.slogin(sid, pw)) {

@@ -75,7 +75,7 @@
                 <th>예약현황</th>
                 <th>신고하기</th>
             </tr>
-            <c:forEach items="${list}" var="rlist">
+            <c:forEach items="${list}" var="rlist" varStatus="status">
             <tr>
                 <td>${rlist.r_idx }</td>
                 <td>${rlist.p_idx }</td>
@@ -99,16 +99,14 @@
                 <td>${rlist.visit_date }</td>
                 <td>${rlist.reg_date }</td>
                 <td>
-                	<form action="updateResevationStatus">
                 		<input type="hidden" name="r_idx" value="${rlist.r_idx }"/>
-		                <span  class="chk">${rlist.status}</span><br/>
-		                <select name="reservationState" id="">
+		                <span  class="chk" id="chk${status.count}">${rlist.status}</span><br/>
+		                <select name="reservationState" id="reservationState${status.count }">
 		                    <option value="0">신청중</option>
 		                    <option value="1">예약완료</option>
 		                    <option value="2">상담완료</option>
 		                </select><br/>
-		                <button>예약현황변경</button>
-	                </form>
+		                <button id="updateResevationBtn${status.count}"  value="${rlist.r_idx}">예약현황변경</button>
 	            </td>
                 <td><button onclick="location.href='./sReprtForm?target_id=${rlist.cid}'">신고하기</button></td>
             </tr>
@@ -139,15 +137,56 @@
     </div>
 </body>
 <script>
-	var chktext = $('.chk'); //진행중, 답변완료 색표시
-	for (var i = 0; i < chktext.length; i++) {
-	    if(chktext[i].textContent ==="신청중"){
-	        chktext[i].classList.add('red');
-	    } else if(chktext[i].textContent === "상담완료"){
-	        chktext[i].classList.add('green');
-	    } else if (chktext[i].textContent === "예약완료"){
-	        chktext[i].classList.add('blue');
-		}
+	$(document).ready(color());
+
+	function color(){
+		var chktext = $('.chk'); //진행중, 답변완료 색표시
+		for (var i = 0; i < chktext.length; i++) {
+		    if(chktext[i].textContent ==="신청중"){
+		        chktext[i].classList.add('red');
+		    } else if(chktext[i].textContent === "상담완료"){
+		        chktext[i].classList.add('green');
+		    } else if (chktext[i].textContent === "예약완료"){
+		        chktext[i].classList.add('blue');
+			}
+		}		
 	}
+	
+	$("body").on("click", "[id^=updateResevationBtn]", function(event) {
+		console.log("예약현황변경요청");
+		
+		console.log( this.id);
+		var $r_idx = $('#'+this.id).val();
+		var number = this.id.slice(-1);
+		var $status = $('#reservationState'+number+' option:selected').val();
+		console.log($r_idx+' / '+$status);
+		
+		$.ajax({
+			type:'get'
+			,url:'updateResevationStatus'
+			,data:{"status":$status, "r_idx":$r_idx}
+			,dataType:'JSON'
+			,success:function(obj){
+				console.log(obj);
+				if(obj.update){
+					alert('예약현황이변경되었습니다.');
+					$('#chk'+number).html(obj.status);
+					if(obj.status == "예약완료"){
+						$('#chk'+number).css("color","blue");
+					} else if(obj.status == "상담완료"){
+						$('#chk'+number).css("color","green");
+					} else{
+						$('#chk'+number).css("color","red");
+					}
+				} else{
+					alert('변경 실패');
+				}
+			}
+			,error:function(e){
+				console.log(e);
+			}
+		});
+		
+	});
 </script>
 </html>

@@ -114,7 +114,7 @@ public class ReservationDAO {
 		return max;
 	}
 
-	public void updateResevationStatus(int r_idx, int rs_idx) { // 판매자 예약현황 변경
+	public int updateResevationStatus(int r_idx, int rs_idx) { // 판매자 예약현황 변경
 		String sql = "UPDATE reservation SET rs_idx=? WHERE r_idx=?";
 
 		int success = 0;
@@ -129,6 +129,7 @@ public class ReservationDAO {
 		} finally {
 			resClose();
 		}
+		return success;
 	}
 
 	public HashMap<String, Object> cReservationList(int group, String cid) {
@@ -218,6 +219,25 @@ public class ReservationDAO {
 		}
 		
 		return list;
+	}
+
+	public String getNewReservationStatus(int r_idx) {//판매자 예약상황변경시 사용
+		String sql = "SELECT status FROM reservation r, reservation_status rs WHERE r.rs_idx = rs.rs_idx AND r_idx=?";
+		
+		String status ="";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, r_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				status = rs.getString("status");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return status;
 	}
 
 }

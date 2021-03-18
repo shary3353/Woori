@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.woori.reservation.dao.ReservationDAO;
 import com.woori.reservation.dto.ReservationDTO;
 import com.woori.wish.dao.WishDAO;
@@ -66,14 +67,27 @@ public class ReservationService {
 			System.out.println("판매자"+ sid +"가 예약 현황을 변경합니다."); //로그인한 아이디 확인& 판매자 확인
 			
 			int r_idx = Integer.parseInt(req.getParameter("r_idx"));
-			int rs_idx = Integer.parseInt(req.getParameter("reservationState"));
+			int rs_idx = Integer.parseInt(req.getParameter("status"));
 			System.out.println("변경예약:"+r_idx+"/"+rs_idx);
 			
-			ReservationDAO dao = new ReservationDAO();
-			dao.updateResevationStatus(r_idx, rs_idx);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			boolean success = false;
 			
-			resp.sendRedirect("./sReservationList");//예약리스트로 이동
-		
+			ReservationDAO dao = new ReservationDAO();
+			if(dao.updateResevationStatus(r_idx, rs_idx)>0) {//성공시
+				success = true;
+				dao = new ReservationDAO();
+				String status = dao.getNewReservationStatus(r_idx);//새상태
+				map.put("update", success);
+				map.put("status", status);
+				Gson gson = new Gson();
+				String json = gson.toJson(map);
+				System.out.println(json);
+				resp.setContentType("text/html charset-UTF-8");
+				resp.setCharacterEncoding("UTF-8");
+				resp.getWriter().print(json);
+			}
+					
 		} else { //로그인을 안 했으면 로그인페이지로
 			resp.sendRedirect("../Consumer/C_login.jsp");
 		}
