@@ -126,10 +126,11 @@
 			
 				<div class="bestItem">
 					<c:forEach items="${list1}" var="best">
+					<a href="C_itemDetail?p_idx=${best.p_idx}" class="alink">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage" >
-								<img src="img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
+								<img src="Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
 							</td>
 							<td class="bestName">
 								<a href="#" class=".alink">${best.p_name}</a>
@@ -144,13 +145,15 @@
 							<td class="bestPrice">${best.p_price} 원</td>
 						</tr>
 					</table>
+					</a>
 					</c:forEach>
 					
 					<c:forEach items="${list2}" var="best2">
+					<a href="C_itemDetail?p_idx=${best2.p_idx}" class="alink">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="img/${best2.newFileName}"  alt="${best2.oriFileName}"width="300px" height="400px"/>
+								<img src="Uploaded_Img/${best2.newFileName}"  alt="${best2.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best2.p_name}
@@ -167,18 +170,18 @@
 							</td>
 						</tr>
 					</table>
+					</a>
 					</c:forEach>
 					
 					<c:forEach items="${list3}" var="best3">
+					<a href="C_itemDetail?p_idx=${best3.p_idx}" class="alink">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
+								<img src="Uploaded_Img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-							<a href="C_itemDetail?p_idx=${best3.p_idx}" class="alink">
 								${best3.p_name}
-							</a>
 							</td>
 						</tr>
 						<tr>
@@ -190,18 +193,18 @@
 							<td class="bestPrice">${best3.p_price}원</td>
 						</tr>
 					</table>
+					</a>
 					</c:forEach>
 					
 					<c:forEach items="${list4}" var="best4">
+					<a href="C_itemDetail?p_idx=${best4.p_idx}" class="alink">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
+								<img src="Uploaded_Img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
-								<a href="C_itemDetail?p_idx=${best4.p_idx}" class="alink">
 									${best4.p_name}
-								</a>
 							</td>
 						</tr>
 						<tr>
@@ -213,13 +216,15 @@
 							<td class="bestPrice">${best4.p_price} 원</td>
 						</tr>
 					</table>
+					</a>
 					</c:forEach>
 					
 					<c:forEach items="${list5}" var="best5">
+					<a href="C_itemDetail?p_idx=${best5.p_idx}" class="alink">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="img/${best5.newFileName}"  alt="${best5.oriFileName}"width="300px" height="400px"/>
+								<img src="Uploaded_Img/${best5.newFileName}"  alt="${best5.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best5.p_name}
@@ -234,13 +239,15 @@
 							<td class="bestPrice">${best5.p_price} 원</td>
 						</tr>
 					</table>
+					</a>
 					</c:forEach>
 					
 					<c:forEach items="${list6}" var="best6">
+					<a href="C_itemDetail?p_idx=${best6.p_idx}" class="alink">
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="img/${best6.newFileName}"  alt="${best6.oriFileName}"width="300px" height="400px"/>
+								<img src="Uploaded_Img/${best6.newFileName}"  alt="${best6.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best6.p_name}
@@ -255,6 +262,7 @@
 							<td class="bestPrice">${best6.p_price} 원</td>
 						</tr>
 					</table>
+					</a>
 					</c:forEach>
 				</div>
 				
