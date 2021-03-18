@@ -55,15 +55,10 @@ public class MemberController extends HttpServlet {
                 break;
 			
             case "/logout":
-				System.out.println("Request Logout");
-				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("/Consumer/cLogin");
-			
-				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("/Consumer/sLogin");
-			
-				req.getSession().removeAttribute("aid");
-				resp.sendRedirect("/adminLogin");
+				String loginID = (String)req.getSession().getAttribute("loginID");
+				System.out.println("지워질 세션ID: "+ loginID);
+				req.getSession().removeAttribute("loginID");
+				resp.sendRedirect("index.jsp");
 				break;
 			
 		}
