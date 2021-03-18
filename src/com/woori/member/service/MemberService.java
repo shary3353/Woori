@@ -149,11 +149,13 @@ public class MemberService {
 		String pw = req.getParameter("pw");
 		System.out.println(cid + "/" + pw);
 		
+		page = "../Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
+		
 		if (dao.clogin(cid, pw)) {
 			page = "/C_main.jsp";
 			msg = cid + " 님 반갑 습니다.";
-			req.getSession().setAttribute("logincId", cid);
+			req.getSession().setAttribute("loginID", cid);
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
@@ -166,11 +168,13 @@ public class MemberService {
 		String pw = req.getParameter("pw");
 		System.out.println(sid + "/" + pw);
 		
+		page = "/Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
+		
 		if (dao.slogin(sid, pw)) {
 			page = "/Seller/sItemList";
 			msg = sid + " 님 반갑 습니다.";
-			req.getSession().setAttribute("loginsID", sid);
+			req.getSession().setAttribute("loginID", sid);
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
