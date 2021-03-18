@@ -181,11 +181,22 @@ public class MemberService {
 		page = "../Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
-		if (dao.clogin(cid, pw)) {
-			page = "/C_main";
-			msg = cid + " 님 반갑 습니다.";
-			req.getSession().setAttribute("loginID", cid);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map = dao.clogin(cid, pw);
+		boolean success = (boolean)map.get("success");
+		boolean isblack = (boolean)map.get("isblack");
+		System.out.println("로그인 성공여부 :"+success+"/블락여부:"+isblack);
+		
+		if(!isblack) {//블락이 아니고 성공하면
+			if (success) {
+				page = "/C_main";
+				msg = cid + " 님 반갑 습니다.";
+				req.getSession().setAttribute("loginID", cid);
+			}
+		} else if(isblack) {//블락이면
+			msg = "블랙리스트에 등록된 아이디입니다.";
 		}
+		
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
@@ -200,11 +211,22 @@ public class MemberService {
 		page = "../Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
-		if (dao.slogin(sid, pw)) {
-			page = "/Seller/sItemList";
-			msg = sid + " 님 반갑 습니다.";
-			req.getSession().setAttribute("loginID", sid);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map = dao.slogin(sid, pw);
+		boolean success = (boolean)map.get("success");
+		boolean isblack = (boolean)map.get("isblack");
+		System.out.println("로그인 성공여부 :"+success+"/블락여부:"+isblack);
+		
+		if(!isblack) {//블락이 아니고 성공하면
+			if (success) {
+				page = "/Seller/sItemList";
+				msg = sid + " 님 반갑 습니다.";
+				req.getSession().setAttribute("loginID", sid);
+			}
+		} else if(isblack) {//블락이면
+			msg = "블랙리스트에 등록된 아이디입니다.";
 		}
+		
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);

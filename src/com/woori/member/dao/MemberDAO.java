@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -145,10 +146,12 @@ public class MemberDAO {
 		}
 		return success;
 	}
-	public boolean clogin(String cid, String pw) {//구매자 로그인		
-		String sql ="SELECT cid FROM consumer WHERE cid= ? AND pw=?";
+	public HashMap<String, Object> clogin(String cid, String pw) {//구매자 로그인		
+		String sql ="SELECT c.cid, b.isblack FROM consumer c, c_blacklist b WHERE c.cid = b.cid(+) AND c.cid=? AND c.pw=?";
 		
 		boolean success = false;
+		boolean isblack = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		try {
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, cid);
@@ -157,33 +160,47 @@ public class MemberDAO {
 			if(rs.next()) {				
 				success = true;
 				System.out.println("구매자로그인성공");
+				if(rs.getInt("isblack") == 1) {
+					isblack = true;
+					System.out.println("블랙리스트회원이네..");
+				}
+				map.put("success",success);
+				map.put("isblack",isblack);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		return success;
+		return map;
 	}
-	public boolean slogin(String sid, String pw) {//판매자 로그인
-		String sql ="SELECT sid FROM seller WHERE sid=? AND pw=?";
+	public HashMap<String, Object> slogin(String sid, String pw) {//판매자 로그인
+		String sql ="SELECT s.sid, b.isblack FROM seller s, s_blacklist b WHERE s.sid = b.sid(+) AND s.sid=? AND s.pw=?";
 		
 		boolean success = false;
+		boolean isblack = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		try {
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, sid);
 			ps.setString(2, pw);
 			rs = ps.executeQuery();
-			if(rs.next()){				
+			if(rs.next()) {				
 				success = true;
-				System.out.println("판매자로그인성공");
+				System.out.println("구매자로그인성공");
+				if(rs.getInt("isblack") == 1) {
+					isblack = true;
+					System.out.println("블랙리스트회원이네..");
+				}
+				map.put("success",success);
+				map.put("isblack",isblack);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		return success;
+		return map;
 	}
 
 	
