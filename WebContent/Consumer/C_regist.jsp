@@ -100,7 +100,7 @@
                 <th>비밀번호 확인</th>
                 <td>
                     <input type="password" name="PwChk" value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw"/>
-                   
+                   	<font id="ChkNotice" size="5"><</font>
                 </td>
             </tr>
             <tr>
