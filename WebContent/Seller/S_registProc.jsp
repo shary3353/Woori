@@ -30,7 +30,7 @@
 	Connection conn = ds.getConnection();
 	
 
-	String sql = "INSERT INTO member(SID,PW,NAME,GENDER,store_call,BIRTHDAY,PHONE,email,reg_date)VALUES(?,?,?,?,?,?,?,?,?)";
+	String sql = "INSERT INTO Seller(SID,PW,NAME,GENDER,store_call,BIRTHDAY,PHONE,email,reg_date)VALUES(?,?,?,?,?,?,?,?,?)";
 	
 	PreparedStatement ps = conn.prepareStatement(sql);
 	//?대응
