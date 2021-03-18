@@ -132,7 +132,7 @@ public class MainService {
 			msg = searchtitle;
 		}
 		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
+		dis = req.getRequestDispatcher("C_SearchList.jsp");
 		dis.forward(req, resp);
 		
 	}
@@ -221,7 +221,7 @@ public class MainService {
 			msg=cate;
 		}
 		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
+		dis = req.getRequestDispatcher("C_SearchList");
 		dis.forward(req, resp);
 	}
 

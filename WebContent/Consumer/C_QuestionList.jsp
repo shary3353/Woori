@@ -108,8 +108,8 @@ form {
 
 <body>
 	<div style="min-width: 1920px">
-		<jsp:include page="../Include/navi.html"></jsp:include>
-		<jsp:include page="../Include/SideBar.html"></jsp:include>
+	<%@include file="../Include/navi.jsp" %>
+	<%@include file="../Include/SideBar.jsp" %>
 		<div id="reservationBox">
 			<form action="" method="GET">
 				<p class="headDESC">문의 내역</p>
@@ -123,7 +123,8 @@ form {
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td>${list.q_idx}</td>
-							<td><a href="cQuestionDetail?q_idx=${list.q_idx}" style="text-decoration: none; color: black;">${list.subject}</a></td>
+							<td><a href="cQuestionDetail?q_idx=${list.q_idx}"
+								style="text-decoration: none; color: black;">${list.subject}</a></td>
 							<c:if test="${list.s_answer != null}">
 								<td style="color: steelblue;">&nbsp;&nbsp;답변 완료</td>
 							</c:if>

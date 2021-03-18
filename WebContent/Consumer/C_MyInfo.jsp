@@ -24,11 +24,9 @@
 #infoBox {
 	margin-top: 75px;
 	margin-left: 35%;
-	position:absolute;
+	position: absolute;
 	width: 550px;
-	
 }
-
 
 #memInfo {
 	background-color: rgb(138, 138, 138);
@@ -59,46 +57,48 @@ th {
 </head>
 
 <body>
-	<jsp:include page="../Include/navi.html"></jsp:include>
-	<jsp:include page="../Include/SideBar.html"></jsp:include>
-		<div id="myInfo">
-			<form action="cUpadateForm" method="POST">
-				<div id="infoBox">
-					<p
-						style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue">나의
-						정보</p>
-					<input type="text"  value="${list.cid}" name="cid" readonly="readonly" hidden="hidden"/>
-					<table>
-						<tr>
-							<th>아이디</th>
-							<td>${list.cid}</td>
-						</tr>
-						<tr>
-							<th>생년월일</th>
-							<td>${list.birthday}</td>
-						</tr>
-						<tr>
-							<th>성별
-							<td>${list.gender}</td>
-						</tr>
-						<tr>
-							<th>이메일</th>
-							<td>${list.email}</td>
-						</tr>
-						<tr>
-							<th>전화번호</th>
-							<td>${list.phone}</td>
-						</tr>
-					</table>
-					<div id="pwInputBox">
-						<span id="pwBox" style="visibility: hidden">비밀번호 : <input type="password"
-							placeholder="비밀번호를 입력하세요." name="pw" 
-							style="width: 150px;"><input type="submit" value="확인"></span> 
-						<span style="text-align: right"><input type="button"value="수정하기" onclick="modifyBtn()" /></span>
-					</div>
+	<%@include file="../Include/navi.jsp" %>
+	<%@include file="../Include/SideBar.jsp" %>
+	<div id="myInfo">
+		<form action="cUpadateForm" method="POST">
+			<div id="infoBox">
+				<p
+					style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue">나의
+					정보</p>
+				<input type="text" value="${list.cid}" name="cid"
+					readonly="readonly" hidden="hidden" />
+				<table>
+					<tr>
+						<th>아이디</th>
+						<td>${list.cid}</td>
+					</tr>
+					<tr>
+						<th>생년월일</th>
+						<td>${list.birthday}</td>
+					</tr>
+					<tr>
+						<th>성별
+						<td>${list.gender}</td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td>${list.email}</td>
+					</tr>
+					<tr>
+						<th>전화번호</th>
+						<td>${list.phone}</td>
+					</tr>
+				</table>
+				<div id="pwInputBox">
+					<span id="pwBox" style="visibility: hidden">비밀번호 : <input
+						type="password" placeholder="비밀번호를 입력하세요." name="pw"
+						style="width: 150px;"><input type="submit" value="확인"></span>
+					<span style="text-align: right"><input type="button"
+						value="수정하기" onclick="modifyBtn()" /></span>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
+	</div>
 </body>
 <script>
 function modifyBtn() {

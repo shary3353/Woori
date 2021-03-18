@@ -98,10 +98,12 @@ form {
 	margin-left: 20px;
 	margin-top: 30px;
 }
-img:hover{
+
+img:hover {
 	cursor: pointer;
 }
-a{
+
+a {
 	text-decoration: none;
 	color: black;
 }
@@ -110,8 +112,8 @@ a{
 
 <body>
 	<div style="min-width: 1920px">
-		<jsp:include page="../Include/navi.html"></jsp:include>
-		<jsp:include page="../Include/SideBar.html"></jsp:include>
+	<%@include file="../Include/navi.jsp" %>
+	<%@include file="../Include/SideBar.jsp" %>
 		<div id="reservationListBox">
 			<form action="" method="GET">
 				<p class="headDESC">예약 내역</p>
@@ -133,12 +135,15 @@ a{
 							<td>
 								<table class="p_PhoNDesc">
 									<tr>
-										<td class="p_PhoNDesc" rowspan="3" ><img
-											src="${pageContext.request.contextPath}/Uploaded_Img/${list.newFileName}" alt="${list.newFileName}"
-											style="width: 125px; height: 125px;" onclick="location=href='../C_itemDetail?p_idx=${list.p_idx}'"/></td>
+										<td class="p_PhoNDesc" rowspan="3"><img
+											src="${pageContext.request.contextPath}/Uploaded_Img/${list.newFileName}"
+											alt="${list.newFileName}"
+											style="width: 125px; height: 125px;"
+											onclick="location=href='../C_itemDetail?p_idx=${list.p_idx}'" /></td>
 									</tr>
 									<tr>
-										<td class="p_PhoNDesc"><a href="../C_itemDetail?p_idx=${list.p_idx}">${list.p_name}</a></td>
+										<td class="p_PhoNDesc"><a
+											href="../C_itemDetail?p_idx=${list.p_idx}">${list.p_name}</a></td>
 									</tr>
 								</table>
 							</td>

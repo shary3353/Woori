@@ -68,8 +68,8 @@ td {
 </head>
 
 <body>
-	<jsp:include page="../Include/navi.html"></jsp:include>
-	<jsp:include page="../Include/SideBar.html"></jsp:include>
+	<%@include file="../Include/navi.jsp" %>
+	<%@include file="../Include/SideBar.jsp" %>
 	<div class="wrapper">
 		<div class="reservationBox">
 			<div class="more">
@@ -84,7 +84,7 @@ td {
 				<div class="reservationInnerBox">
 					<table>
 						<tr>
-							<th rowspan="3"><img src="photo/${rList.newFileName}"
+							<th rowspan="3"><img src="${pageContext.request.contextPath}/Uploaded_Img/${rList.newFileName}"
 								alt="${rList.newFileName}" class="pImg" /></th>
 							<td>${rList.p_name}</td>
 						</tr>
@@ -92,7 +92,7 @@ td {
 							<td>${rList.p_price}원</td>
 						</tr>
 						<tr>
-							<td>방문 예정일  ${rList.visit_date}</td>
+							<td>방문 예정일 ${rList.visit_date}</td>
 						</tr>
 					</table>
 				</div>
@@ -110,7 +110,7 @@ td {
 				<div class="wishListInnerBox">
 					<table>
 						<tr>
-							<th rowspan="3"><img src="photo/${wList.newFileName}"
+							<th rowspan="3"><img src="${pageContext.request.contextPath}/Uploaded_Img/${wList.newFileName}"
 								alt="${wList.newFileName}" class="pImg" /></th>
 							<td>${wList.p_name}</td>
 						</tr>
