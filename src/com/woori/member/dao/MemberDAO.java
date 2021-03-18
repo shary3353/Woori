@@ -62,11 +62,14 @@ public class MemberDAO {
 			resClose();
 		}
 		return success;
-	}
+	
+		
+		}
+
 	
 	//판매자 회원가입
 	public int sjoin(SellerDTO dto) {
-		String sql = "INSERT INTO member(Sid,pw,name,gender,store_call,birthday,phone,email,reg_date)VALUES(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO seller(Sid,pw,name,gender,store_call,birthday,phone,email,reg_date)VALUES(?,?,?,?,?,?,?,?,?)";
 		int success = -1;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -91,17 +94,29 @@ public class MemberDAO {
 	
 	public boolean overlay(String cid) throws SQLException {//중복체크
 		boolean success = false;
-		String sql = "SELECT cid FORM member WHERE cid=?";
+		String sql = "SELECT cid FROM consumer WHERE cid=?";
+		
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, cid);// ?대응
 		rs = ps.executeQuery();
 		success = rs.next();
-	
+		System.out.println(rs.next());
 	
 	      return !success;
 	}
+	public boolean soverlay(String cid) throws SQLException {//중복체크
+		boolean success = false;
+		String sql = "SELECT cid FROM seller WHERE cid=?";
+		
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, cid);// ?대응
+		rs = ps.executeQuery();
+		success = rs.next();
+		System.out.println(rs.next());
 	
-
+	      return !success;
+	
+	}
 
 
 	
@@ -109,7 +124,7 @@ public class MemberDAO {
 	//관리자 로그인,구매자 판매자 로그인
 	public boolean login(String id, String pw) {
 		boolean success = false;
-		String sql ="SELECT id FROM member WHERE id=? AND pw=?";
+		String sql ="SELECT id FROM admin WHERE id=? AND pw=?";
 		try {
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, id);
