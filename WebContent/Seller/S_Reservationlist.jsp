@@ -100,13 +100,13 @@
                 <td>${rlist.reg_date }</td>
                 <td>
                 		<input type="hidden" name="r_idx" value="${rlist.r_idx }"/>
-		                <span  class="chk" id="chk${status.count}">${rlist.status}</span><br/>
-		                <select name="reservationState" id="reservationState${status.count }">
+		                <span  class="chk" id="chk${status.index}">${rlist.status}</span><br/>
+		                <select name="reservationState" id="reservationState${status.index }">
 		                    <option value="0">신청중</option>
 		                    <option value="1">예약완료</option>
 		                    <option value="2">상담완료</option>
 		                </select><br/>
-		                <button id="updateResevationBtn${status.count}"  value="${rlist.r_idx}">예약현황변경</button>
+		                <button id="updateResevationBtn${status.index}"  value="${rlist.r_idx}">예약현황변경</button>
 	            </td>
                 <td><button onclick="location.href='./sReprtForm?target_id=${rlist.cid}'">신고하기</button></td>
             </tr>

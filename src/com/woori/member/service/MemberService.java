@@ -181,10 +181,10 @@ public class MemberService {
 		page = "../Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
 		map = dao.clogin(cid, pw);
-		boolean success = (boolean)map.get("success");
-		boolean isblack = (boolean)map.get("isblack");
+		boolean success = map.get("success");
+		boolean isblack = map.get("isblack");
 		System.out.println("로그인 성공여부 :"+success+"/블락여부:"+isblack);
 		
 		if(!isblack) {//블락이 아니고 성공하면
@@ -211,7 +211,7 @@ public class MemberService {
 		page = "../Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
 		map = dao.slogin(sid, pw);
 		boolean success = (boolean)map.get("success");
 		boolean isblack = (boolean)map.get("isblack");

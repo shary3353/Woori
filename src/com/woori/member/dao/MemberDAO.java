@@ -146,12 +146,12 @@ public class MemberDAO {
 		}
 		return success;
 	}
-	public HashMap<String, Object> clogin(String cid, String pw) {//구매자 로그인		
+	public HashMap<String, Boolean> clogin(String cid, String pw) {//구매자 로그인		
 		String sql ="SELECT c.cid, b.isblack FROM consumer c, c_blacklist b WHERE c.cid = b.cid(+) AND c.cid=? AND c.pw=?";
 		
 		boolean success = false;
 		boolean isblack = false;
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
 		try {
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, cid);
@@ -164,9 +164,10 @@ public class MemberDAO {
 					isblack = true;
 					System.out.println("블랙리스트회원이네..");
 				}
-				map.put("success",success);
-				map.put("isblack",isblack);
 			}
+			map.put("success", success);
+			map.put("isblack", isblack);
+			System.out.println("map:"+map);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -174,12 +175,12 @@ public class MemberDAO {
 		}
 		return map;
 	}
-	public HashMap<String, Object> slogin(String sid, String pw) {//판매자 로그인
+	public HashMap<String, Boolean> slogin(String sid, String pw) {//판매자 로그인
 		String sql ="SELECT s.sid, b.isblack FROM seller s, s_blacklist b WHERE s.sid = b.sid(+) AND s.sid=? AND s.pw=?";
 		
 		boolean success = false;
 		boolean isblack = false;
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
 		try {
 			ps= conn.prepareStatement(sql);
 			ps.setString(1, sid);
@@ -192,9 +193,10 @@ public class MemberDAO {
 					isblack = true;
 					System.out.println("블랙리스트회원이네..");
 				}
-				map.put("success",success);
-				map.put("isblack",isblack);
 			}
+			map.put("success",success);
+			map.put("isblack",isblack);
+			System.out.println("map:"+map);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
