@@ -63,7 +63,7 @@ public class QuestionService {
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
 		if (loginID != null) {
-			System.out.println(cid + " 의 문의내역 불러오기");
+			System.out.println(loginID + " 의 문의내역 불러오기");
 
 			String pageParam = req.getParameter("page");
 			System.out.println("이동하고 싶은 page : " + pageParam);
