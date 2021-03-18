@@ -73,23 +73,23 @@
         </div>
 
         <div class="container-body"><!--컨테이너 바디-->
-            <form action="#" method="">
+            <form action="${pageContext.request.contextPath}/AdminLogin" method="post">
                 <div class="form-group row"><!--폼 밑부분-->
                     <label for="userId" class="col-sm-4 col-form-label"><b>아이디/ID</b></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="userId" placeholder="아이디를 입력해주세요.">
+                        <input type="text" class="form-control" id="userId" placeholder="아이디를 입력해주세요." name="userID">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-4 col-form-label"><b>패스워드/PW</b></label>
                     <div class="col-sm-8">
-                        <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요.">
+                        <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요." name="userPW">
                     </div>
                 </div><!--폼 밑부분 닫음-->
                 <br />
                 <div class="form-group row"><!--로그인 버튼-->
                     <div class="col-sm-12" style="text-align: center;">
-                        
+                  		<div id="confirmID" style="margin-bottom:30px;">관리자 아이디는 'admin'이 포함되어야 합니다.</div>
                         <button type="submit" class="btn btn-danger" 
                             style="width: 200px; background-color: #ca4b42;"><b>로그인</b></button>
                     </div><!--로그인 버튼 닫음-->
@@ -102,5 +102,13 @@
         <p><a href="#" style="font-size: small; color: rgb(196, 196, 196);">메인페이지로></a></p>
     </div><!--컨테이너 div닫음-->
 </body>
-
+<script type="text/javascript">
+	$('#userId').keydown(function(){
+		if($(this).val().includes('admin')){
+			$('#confirmID').html("'admin'이 포함되어있습니다.");
+		}else{
+			$('#confirmID').html("관리자 아이디는 'admin'이 포함되어야 합니다.");
+		}
+	});
+</script>
 </html>

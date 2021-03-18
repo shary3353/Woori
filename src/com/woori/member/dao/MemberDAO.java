@@ -337,6 +337,27 @@ public class MemberDAO {
 		return dto;
 	}
 
+	public boolean adminLogin(String adminID, String adminPW) {
+		boolean success = false;
+		String sql = "SELECT id FROM admin WHERE id=? AND pw=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, adminID);
+			ps.setString(2, adminPW);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
 	
 
 }

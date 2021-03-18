@@ -129,27 +129,6 @@ public class MemberService {
 			resp.getWriter().print(json);
 		}
 	}
-
-	public void Admin_Loginid() throws ServletException, IOException {
-		MemberDAO dao = new MemberDAO();
-
-		String id = (String) req.getSession().getAttribute("adminId");
-		String pw = req.getParameter("adminPw");
-		System.out.println(id + "/" + pw);
-
-		page = "admin_Login.jsp";
-		msg = "아이디 비밀번호를 다시 확인해 주세요!";
-
-		if (dao.login(id, pw)) {
-			page = "/Admin/cList";
-			msg = id + " 님 반갑 습니다.";
-			req.getSession().setAttribute("adminId", id);
-		}
-		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
-
-	}
 	 
 	/*public boolean C_Loginid(String cid, String pw) {
 		 MemberDAO dao = MemberDAO.clogin(cid, pw);
@@ -496,6 +475,22 @@ public class MemberService {
 		// 5. admin_SellerDetail.jsp 로 포워딩
 		req.setAttribute("Admin_SDetailData", map);
 		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerDetail.jsp");
+		dis.forward(req, resp);
+	}
+
+	public void Admin_Login() throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		String adminID = req.getParameter("userID");
+		String adminPW = req.getParameter("userPW");
+		System.out.println(adminID+" / "+adminPW);
+		String page = "AdminLoginPage";
+		MemberDAO dao = new MemberDAO();
+		if(dao.adminLogin(adminID, adminPW)) {
+			System.out.println("관리자 로그인 성공");
+			req.getSession().setAttribute("loginID", adminID);
+			page = "AdminMain";
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}
 

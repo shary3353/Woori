@@ -30,7 +30,7 @@
             padding-top: 5;
         }
 
-        input[type='submit'] {
+       /** input[type='button'] {
             height: 30;
             background-color: rgb(94, 198, 240);
             color: white;
@@ -43,7 +43,7 @@
             border-radius: 10px;
        
 
-        }
+        }*/
         
     input[type=text], input[type=password],input[type=date],input[type=email],input[type=number] {
     padding: 5px 10px; /* 상하 우좌 */
@@ -58,6 +58,19 @@
     table{
         margin-left: auto;
         margin-right: auto;
+    }
+    #button{
+     height: 30;
+            background-color: rgb(94, 198, 240);
+            color: white;
+            font-weight: bold;
+            padding: 3px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 50%;
+            border-radius: 10px;
+       
     }
   
     </style>
@@ -93,22 +106,22 @@
             <tr>
                 <th>비밀번호 </th>
                 <td>
-                    <input type="password" id="Pw" name="pw"  value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw" />
+                    <input type="password" id="Pw" name="pw"  value="" placeholder="비밀번호를 입력해주세요."/>
                 </td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
                 <td>
-                    <input type="password" id="PwChk" name="PwChk" value="" placeholder="비밀번호를 입력해주세요." onchange="check_pw"/>
-                   	<font id="check" size="5"></font>
+                    <input type="password" id="PwChk" name="PwChk" value="" placeholder="비밀번호를 입력해주세요."/>
+                   	<font id="check" size="1"></font>
                 </td>
             </tr>
             <tr>
                 <th>생년월일</th>
                 <td>
-                    <form name="birthday" id="birth" action="값을 보낼 주소" method="post">
-                        <input type='date' name='userBirthday' />
-          </form>
+                    <!-- form name="birthday" id="birth" action="값을 보낼 주소" method="post"-->
+                        <input type='date' id="birth" name='userBirthday' />
+         
                 </td>
             </tr>
             <tr>
@@ -130,38 +143,46 @@
                     <input type="number" id="phone" name="phone" placeholder="전화번호를 입력해주세요." />
                 </td>
             </tr>
-            <br />
-        
            
-           
+          
            <td colspan="2" align="center">
-               <input type="submit" id="button" style="border: rgb(94, 198, 240);  " value="회원가입완료"></td>
-           		
-                
-       
-
-
-
+               <input type="button" id="button" value="회원가입완료"></td>
+        
 
         </table>
     </form>
 </body>
  <script>
-	
-	
- 	function check_pw(){//비밀번호 일치
-		 var pw = document.getElementById('Pw').value;
-		 
-		 if(document.getElementById('Pw').value!=''&&document.getElementById('PwChk').value!=''){
-			 if(document.getElementById('Pw').value == document.getElementById('PwChk').value){
-				 document.getElementById('check_pw').innerHTML='비밀번호가 일치합니다.'
-				 document.getElemnetById('check_pw').style.color='green';
-			 }else{
-				 document.getElementById('check_pw'.innerHTML)='비밀번호가 일치하지 않습니다.';
-				 document.getElemnetById('check_pw').style.color='red';
-			 }
+ $(function(){
+	 $('#Pw').keyup(function(){
+		 $('#check').html('');
+	 });
+	 
+	 $('#PwChk').keyup(function(){
+		 if($('#Pw').val != $('#PwChk').val()){
+			 $('#check').html('비밀번호 일치하지 않음<br><br>');
+			 $('#check').attr('color','#f82a2aa3');
+		 }else{
+			 $('#check').html('비밀번호 일치<br><br>');
+			 $('#check').attr('color','#199894b3');
 		 }
-	 }
+	 });
+ }); //const $pwBox = $('#Pw');
+ //const $pwCheckBox = $('#PwChk');
+ //const $pwCheckText = $('#Check');
+ 
+ //$pwCheckBox.keyup(()=>{
+	 //if($pwBox.val()==$pwCheckText){
+		// $pwCheckText.html
+		 //$pwCheckText.css("color","blue");
+	// }else{
+		// $pwCheckText.css("color","red");
+	// }
+	 
+// })
+ 
+
+
 	
 	 var overChk = false;//중복체크 여부
 		
@@ -271,4 +292,12 @@
 
 
 </html>
+           
+           
+           		
+                
+       
+
+
+
 
