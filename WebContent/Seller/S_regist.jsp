@@ -67,12 +67,12 @@ table{
 		<img src="../img/Sel_regist.PNG" alt="logo" class="logo">
 	</div>
 
-	<form action="">
+	
 		<table>
 			<tr>
 				<th>아이디</th>
 				<td><input type="text" id="sid" name="SellerId" value=""
-					placeholder="아이디를 입력해주세요." /> <input type="button" id="overlay"
+					placeholder="***-**-*****" /> <input type="button" id="overlay"
 					value="중복확인"></td>
 			</tr>
 
@@ -88,7 +88,7 @@ table{
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="sellername" value=""
+				<td><input type="text" id="sellername" name="sellername" value=""
 					placeholder="이름을 입력해주세요." /></td>
 			</tr>
 			<tr>
@@ -108,12 +108,12 @@ table{
 
 			<tr>
 				<th>성별</th>
-				<td><input type="radio" name="gender" value="male" />남자 <input
-					type="radio" name="gender" value="female" />여자</td>
+				<td><input type="radio" id="gender" name="gender" value="남" />남자
+				 <input type="radio" name="gender" value="여" />여자</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="email" name="email" placeholder="이메일을 입력해주세요." />
+				<td><input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." />
 				</td>
 			</tr>
 			<tr>
@@ -125,7 +125,7 @@ table{
 
 
 		</table>
-	</form>
+
 
 
 </body>
@@ -136,7 +136,7 @@ table{
 				});
 
 				$('#PwChk').keyup(function () {
-					if ($('#Pw').val != $('#PwChk').val()) {
+					if ($('#Pw').val() != $('#PwChk').val()) {
 						$('#check').html('비밀번호 일치하지 않음<br><br>');
 						$('#check').attr('color', '#f82a2aa3');
 					} else {
@@ -146,7 +146,23 @@ table{
 				});
 			});
 
-
+	$("#birth").change(()=>{
+				
+				var today = new Date();
+			    var curYear = today.getFullYear();
+			    var birthDay = ($('#birth').val());
+			    var birthYear = parseInt(birthDay.substr(0,4));
+			   
+			  	 if(curYear - birthYear > 19){
+			    	
+			    		
+			     alert('확인되었습니다.');
+			   
+			    }else{
+			    	
+			    	alert('미성년자는 가입할 수 없습니다.');
+				}
+			});
 
 
 				var overChk = false;//중복체크 여부
@@ -213,6 +229,11 @@ table{
 						} else if ($phone.val() == '') {
 							alert('핸드폰 번호를 입력해 주세요!');
 							$phone.focus();
+						} else if($store_call.val() == ''){
+							 alert('사업장 번호를 입력해 주세요!');
+							 $store_call.focus();
+							
+						
 
 						} else {
 							var params = {};
@@ -223,17 +244,17 @@ table{
 							params.gender = $gender.val();
 							params.email = $email.val();
 							params.phone = $phone.val();
-
-							$ajax({
+							params.store_call =$store_call.val();
+							$.ajax({
 								type: 'POST'
-								, url: 'join'
+								, url: 'sJoin'
 								, data: params
 								, dataType: 'JSON'
 								, success: function (data) {
 									console.log(data);
-									if (data.success == true) {
+									if (data.sJoinSuccess == true) {
 										alert('회원가입을 축하드립니다.');
-										location.href = "S_login.jsp";
+										location.href = "${pageContext.request.contextPath}/Consumer/C_login.jsp";
 									} else {
 										alert('잠시 후 다시 시도해 주세요.');
 									}

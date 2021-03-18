@@ -69,7 +69,7 @@ public class MemberDAO {
 	
 	//판매자 회원가입
 	public int sjoin(SellerDTO dto) {
-		String sql = "INSERT INTO seller(Sid,pw,name,gender,store_call,birthday,phone,email,reg_date)VALUES(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO seller(Sid,pw,name,gender,store_call,birthday,phone,email)VALUES(?,?,?,?,?,?,?,?)";
 		int success = -1;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -81,7 +81,6 @@ public class MemberDAO {
 			ps.setString(6, dto.getBirthday());
 			ps.setString(7, dto.getPhone());
 			ps.setString(8, dto.getEmail());
-			ps.setString(9, dto.getReg_date());
 			success = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,12 +103,12 @@ public class MemberDAO {
 	
 	      return !success;
 	}
-	public boolean soverlay(String cid) throws SQLException {//중복체크
+	public boolean soverlay(String sid) throws SQLException {//중복체크
 		boolean success = false;
-		String sql = "SELECT cid FROM seller WHERE cid=?";
+		String sql = "SELECT sid FROM seller WHERE sid=?";
 		
 		ps = conn.prepareStatement(sql);
-		ps.setString(1, cid);// ?대응
+		ps.setString(1, sid);// ?대응
 		rs = ps.executeQuery();
 		success = rs.next();
 		System.out.println(rs.next());

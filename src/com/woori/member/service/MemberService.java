@@ -38,17 +38,17 @@ public class MemberService {
 	
 	//구매자 회원가입
 	public void cjoin() throws ServletException, IOException {
-		String name = req.getParameter("Cunsumername");
-		String cid = req.getParameter("cid");
-		String pw = req.getParameter("Pw");
-		String Birthday = req.getParameter("Birthday");
+		String name = req.getParameter("name");
+		String cid = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		String Birthday = req.getParameter("birth");
 		String gender = req.getParameter("gender");
 		String email = req.getParameter("email");
-		String Phone = req.getParameter("Phone");
+		String Phone = req.getParameter("phone");
 		System.out.println(cid+"/"+pw+"/"+name+"/"+Birthday+"/"+gender+"/"+email+"/"+Phone);
 		
 		CustomerDTO dto = new CustomerDTO();
-		
+		dao = new MemberDAO();
 		dto.setCid(cid);
 		dto.setPw(pw);
 		dto.setName(name);
@@ -58,31 +58,33 @@ public class MemberService {
 		dto.setPhone(Phone);
 		//실패했을 때
 		msg="회원가입 실패";
-		page="/cJoin";
+		page="./C_regist.jsp";
 		//성공했을때
 		if(dao.cjoin(dto)>0) {
-			msg="회원가입 성공";
-			page="/Consumer/cLogin";
+			boolean success = true;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("cJoinSuccess", success);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+			resp.getWriter().print(json);
 		}
-		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
 	}
 	//판매자 회원가입
 	public void sjoin() throws ServletException, IOException {
-		String sid = req.getParameter("sid");
-		String pw = req.getParameter("Pw");
-		String name = req.getParameter("Sellername");
+		String sid = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		String name = req.getParameter("name");
 		String gender = req.getParameter("gender");
-		String Store_call = req.getParameter("number");
-		String Birthday = req.getParameter("Birthday");
+		String Store_call = req.getParameter("store_call");
+		String Birthday = req.getParameter("birth");
 		String email = req.getParameter("email");
-		String Phone = req.getParameter("Phone");
+		String Phone = req.getParameter("phone");
 		
 		System.out.println(sid+"/"+pw+"/"+name+"/"+gender+"/"+Store_call+"/"+Birthday+"/"+email+"/"+Phone);
 		
 		SellerDTO dto = new SellerDTO();
-		
+		dao=new MemberDAO();
 		dto.setSid(sid);
 		dto.setPw(pw);
 		dto.setName(name);
@@ -94,15 +96,18 @@ public class MemberService {
 		
 		//실패했을 때
 		msg="회원가입 실패";
-		page="/Seller/sLogin";
+		
 		//성공했을때
 		if(dao.sjoin(dto)>0) {
-			msg="회원가입 성공";
-			page="/sJoin";
+			boolean success = true;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("sJoinSuccess", success);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+			resp.getWriter().print(json);
 		}
-		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
+		
 	}
 
 	public void overlay() throws IOException {// 중복체크
@@ -114,6 +119,30 @@ public class MemberService {
 
 		try {
 			success = dao.overlay(cid);
+			System.out.println("아이디 사용여부 :" + success);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+
+			dao.resClose();
+			map.put("use", success);
+			Gson gson = new Gson();
+			String json = gson.toJson(map);
+			System.out.println(json);
+
+			resp.getWriter().print(json);
+		}
+	}
+	public void soverlay() throws IOException {// 중복체크
+		String sid = req.getParameter("sid");
+		boolean success = false;
+		System.out.println("sid :" + sid);
+		MemberDAO dao = new MemberDAO();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		try {
+			success = dao.soverlay(sid);
 			System.out.println("아이디 사용여부 :" + success);
 		} catch (SQLException e) {
 
@@ -168,7 +197,7 @@ public class MemberService {
 		String pw = req.getParameter("pw");
 		System.out.println(sid + "/" + pw);
 		
-		page = "/Consumer/C_login.jsp";
+		page = "../Seller/S_Login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
 		if (dao.slogin(sid, pw)) {

@@ -87,11 +87,10 @@
 				<img src="../img/Consumer_regist.PNG" alt="logo" class="logo">
 			</div>
 
-			<form action="">
 				<table>
 					<tr>
 						<th>이름</th>
-						<td><input type="text" name="cunsumername" value="" placeholder="이름을 입력해주세요." /></td>
+						<td><input type="text" name="cunsumername" id="cunsumername" value="" placeholder="이름을 입력해주세요." /></td>
 
 					</tr>
 					<tr>
@@ -116,32 +115,30 @@
 						<td>
 							<!-- form name="birthday" id="birth" action="값을 보낼 주소" method="post"-->
 							<input type='date' id="birth" name='userBirthday' />
+							
 
 						</td>
 					</tr>
 					<tr>
 						<th>성별</th>
-						<td><input type="radio" name="gender" value="male" />남자 <input type="radio" name="gender"
-								value="female" />여자</td>
+						<td><input type="radio" name="gender" value="남" />남자 
+							<input type="radio" name="gender" value="여" />여자</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td><input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." /></td>
+						<td><input type="email" id="email" name="email" placeholder="이메일을 입력해주세요."required/></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td><input type="number" id="phone" name="phone" placeholder="전화번호를 입력해주세요." /></td>
+						<td><input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요." /> </td>
 					</tr>
 
 					<tr>
 						<td colspan="2" style="text-align:center;">
-						<input type="button" id="button" value="회원가입완료">
+						<button id="button">회원가입</button>
 						</td>
 					</tr>
-
-
 				</table>
-			</form>
 		</body>
 		<script>
 			$(function () {
@@ -150,16 +147,36 @@
 				});
 
 				$('#PwChk').keyup(function () {
-					if ($('#Pw').val != $('#PwChk').val()) {
-						$('#check').html('비밀번호 일치하지 않음<br><br>');
+					if ($('#Pw').val() != $('#PwChk').val()) {
+						$('#check').html('비밀번호 일치하지 않음');
 						$('#check').attr('color', '#f82a2aa3');
-					} else {
-						$('#check').html('비밀번호 일치<br><br>');
+						} else {
+						$('#check').html('비밀번호 일치');
 						$('#check').attr('color', '#199894b3');
 					}
 				});
 			});
-
+			$("#birth").change(()=>{
+				
+				var today = new Date();
+			    var curYear = today.getFullYear();
+			    var birthDay = ($('#birth').val());
+			    var birthYear = parseInt(birthDay.substr(0,4));
+			   
+			  	 if(curYear - birthYear > 19){
+			    	
+			    		
+			     alert('확인되었습니다.');
+			   
+			    }else{
+			    	
+			    	alert('미성년자는 가입할 수 없습니다.');
+				}
+			});
+				
+			
+			    
+		
 
 
 
@@ -208,7 +225,7 @@
 						if ($id.val() == '') {
 							alert('아이디를 입력해 주세요!');
 							$id.focus();
-						} else if ($pw.val() == '') {
+						}else if ($pw.val() == '') {
 							alert('비밀번호를 입력해 주세요!');
 							$pw.focus();
 						} else if ($name.val() == '') {
@@ -236,15 +253,15 @@
 							params.gender = $gender.val();
 							params.email = $email.val();
 							params.phone = $phone.val();
-
-							$ajax({
+							
+							$.ajax({
 								type: 'POST'
-								, url: 'join'
+								, url: 'cJoin'
 								, data: params
 								, dataType: 'JSON'
 								, success: function (data) {
 									console.log(data);
-									if (data.success == true) {
+									if (data.cJoinSuccess == true) {
 										alert('회원가입을 축하드립니다.');
 										location.href = "C_login.jsp";
 									} else {

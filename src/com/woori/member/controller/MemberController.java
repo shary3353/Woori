@@ -15,7 +15,7 @@ import com.woori.member.service.MemberService;
  	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
 	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
-@WebServlet({"/Consumer/cLogin", "/Seller/sLogin", "/AdminLogin", "/Consumer/overlay" ,"/logout", "/cJoin", "/sJoin", "/Admin/cList", "/Admin/sList"
+@WebServlet({"/Consumer/cLogin", "/Seller/sLogin", "/AdminLogin", "/Consumer/overlay" ,"/logout", "/Consumer/cJoin", "/Seller/sJoin", "/Admin/cList", "/Admin/sList"
 	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/Admin/cSearch", "/Admin/sSearch", "/Admin/sDetail", "/Admin/cDetail"
 	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"
 	,"/Seller/soverlay"})
@@ -106,12 +106,13 @@ public class MemberController extends HttpServlet {
 			service.Admin_Login();
 			break;
 			
-		case "/cJoin":
+		case "/Consumer/cJoin":
 			System.out.println("Request Customer Join");
 			service.cjoin();
 			break;
-		case "/sJoin":
+		case "/Seller/sJoin":
 			System.out.println("Request Seller Join");
+			service.sjoin();
 			break;
 		case "/Consumer/cUpadateForm":
 			System.out.println("Requset Customer UpdateForm");
@@ -162,7 +163,7 @@ public class MemberController extends HttpServlet {
 		
 		case"/Seller/soverlay"://중복체크요청
 			System.out.println("중복체크 요청");
-			service.overlay();
+			service.soverlay();
 			break;
 		}
 	}
