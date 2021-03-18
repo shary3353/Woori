@@ -73,17 +73,17 @@
         </div>
 
         <div class="container-body"><!--컨테이너 바디-->
-            <form action="#" method="">
+            <form action="${pageContext.request.contextPath}/AdminLogin" method="post">
                 <div class="form-group row"><!--폼 밑부분-->
                     <label for="userId" class="col-sm-4 col-form-label"><b>아이디/ID</b></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="userId" placeholder="아이디를 입력해주세요.">
+                        <input type="text" class="form-control" id="userId" placeholder="아이디를 입력해주세요." name="userID">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-4 col-form-label"><b>패스워드/PW</b></label>
                     <div class="col-sm-8">
-                        <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요.">
+                        <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요." name="userPW">
                     </div>
                 </div><!--폼 밑부분 닫음-->
                 <br />

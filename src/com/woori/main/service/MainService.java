@@ -104,7 +104,7 @@ public class MainService {
 		}else {
 			String msg = "접근이 불가능한 페이지입니다.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("admin_Login.jsp");
+			RequestDispatcher dis = req.getRequestDispatcher("AdminLoginPage");
 			dis.forward(req, resp);
 		}
 		
@@ -190,6 +190,10 @@ public class MainService {
 			System.out.println(json);
 			resp.getWriter().print(json);
 		}
+	}
+
+	public void adminLogin() throws IOException {
+		resp.sendRedirect("./Admin/admin_Login.jsp");
 	}
 
 }
