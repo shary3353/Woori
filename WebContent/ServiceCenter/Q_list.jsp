@@ -110,30 +110,29 @@
            <div id="list_div">
                <h3>1:1 문의내역</h3>
                <form action="qDetail" method="post">
+                <div id="list">
                <table>
-                    <div id="list">
                         <tr>
                             <th class="num">번호</th>
                             <th class="subject">제목</th>
                             <th class="date">날짜</th>
                         </tr>
-               <c:forEach items="${list }" var="list">
+               <c:forEach items="${list}" var="list">
                         <tr>
-                            <th class="num">${list.q_idx }</th>
+                            <th class="num"><input type="text" name="q_idx"value="${list.q_idx }" readonly style="display:none;"/>${list.q_idx }</th>
                             <th class="subject" ><a href="#" id="subjectDetail" onclick="has('${list.q_idx}');">${list.subject }</a></th>
                             <th class="date">${list.q_reg_date }</th>
                         </tr>
                         <tr>   
                             <td colspan="3" id="${list.q_idx }" style="display:none;">
-                            <input type="password" maxlength="4" id="p5">
-                            <button>확인</button>
+                            <input type="password" maxlength="4" id="p5" name="password">
+                            <button id="sbmBtn">확인</button>
                             </td>
                         </tr>
                </c:forEach>
+                    </table>
                     </div>
                </form>
-                    
-                    </table>
                     <div id="Admin_Seller_List_Paging"> <!--판매자리스트 페이징부분-->
                         <span class="Page_Content">
                         <c:if test="${currnPage == 1}">처음</c:if>
@@ -177,7 +176,7 @@
     		 $('#pass').toggle();
     		 
     	 }); */
-    	 
+	var idx = "";    	 
      function has(id){
     	 var idx = document.getElementById(id);
     	 console.log(idx)
@@ -188,6 +187,5 @@
     		 idx.style.display = "none";
     	 }
      }
-     
 </script>
 </html>
