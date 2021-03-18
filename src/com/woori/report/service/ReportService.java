@@ -208,7 +208,8 @@ public class ReportService {
 			dto.setContent(content);
 			
 			ReportDAO dao = new ReportDAO();
-			long r_idx = dao.report(dto);
+			HashMap<String, Object> map = dao.report(dto);
+			long r_idx = (long) map.get("r_idx");
 			
 			String page = "sReportForm?target_id"+target_id;
 			if (r_idx > 0) {
