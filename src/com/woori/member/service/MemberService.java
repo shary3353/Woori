@@ -106,7 +106,7 @@ public class MemberService {
 	}
 
 	public void overlay() throws IOException {// 중복체크
-		String cid = req.getParameter("icd");
+		String cid = req.getParameter("cid");
 		boolean success = false;
 		System.out.println("Cid :" + cid);
 		MemberDAO dao = new MemberDAO();
