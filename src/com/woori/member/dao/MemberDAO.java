@@ -136,7 +136,7 @@ public class MemberDAO {
 		
 		boolean success = false;
 		
-		String sql ="SELECT id FROM member WHERE id= ? AND pw=?";
+		String sql ="SELECT id FROM consumer WHERE id= ? AND pw=?";
 		
 		try {
 			System.out.println("conn : "+conn);

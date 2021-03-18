@@ -16,7 +16,7 @@ import com.woori.member.service.MemberService;
 	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
 
-@WebServlet({"/Admin/cLogin", "/Admin/sLogin", "/adminLogin", "/Consumer/overlay" ,"/logout", "/cJoin", "/sJoin", "/Admin/cList", "/Admin/sList"
+@WebServlet({"/Consumer/cLogin", "/Consumer/sLogin", "/adminLogin", "/Consumer/overlay" ,"/logout", "/cJoin", "/sJoin", "/Admin/cList", "/Admin/sList"
 	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/Admin/cSearch", "/Admin/sSearch", "/Admin/sDetail", "/Admin/cDetail"
 	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"})
 public class MemberController extends HttpServlet {
@@ -90,12 +90,12 @@ public class MemberController extends HttpServlet {
 		
 		switch(sub) {
 		
-		case "/Admin/cLogin":
+		case "/Consumer/cLogin":
 			System.out.println("Request Customer Login");
 			service. C_Loginid();
 			break;
 		
-		case "/Admin/sLogin":
+		case "/Consumer/sLogin":
 			System.out.println("Request Seller Login");
 			service.S_Loginid();
 			break;
