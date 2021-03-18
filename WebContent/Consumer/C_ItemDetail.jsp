@@ -102,7 +102,7 @@
                         <button id="likeButton"> &nbsp;좋아요</button>
                         <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요</button>
                         <button id="wishlistButton" onclick="location.href='addWishList?p_idx='${dto.p_idx}'">위시리스트</button>
-                        <button id="reportButton">신고하기</button>
+                        <button id="reportButton" onclick="location.href='Seller/sReport'">신고하기</button>
                     </td>
                 </tr>
             </table>
