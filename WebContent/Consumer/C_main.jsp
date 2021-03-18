@@ -139,7 +139,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage" >
-								<img src="Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
 							</td>
 							<td class="bestName">
 								${best.p_name}
@@ -162,7 +162,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best2.newFileName}"  alt="${best2.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best2.newFileName}"  alt="${best2.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best2.p_name}
@@ -187,7 +187,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best3.p_name}
@@ -210,7 +210,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 									${best4.p_name}
@@ -233,7 +233,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best5.newFileName}"  alt="${best5.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best5.newFileName}"  alt="${best5.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best5.p_name}
@@ -256,7 +256,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best6.newFileName}"  alt="${best6.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best6.newFileName}"  alt="${best6.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best6.p_name}
