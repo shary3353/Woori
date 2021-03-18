@@ -113,6 +113,7 @@
 
 <body>
 	<div id="wrap">
+	${sessionScope.loginID}
 		<c:choose>
     		<c:when test="${session.loginId eq null}">
 			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
