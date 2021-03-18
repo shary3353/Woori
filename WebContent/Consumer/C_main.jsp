@@ -141,7 +141,7 @@
 								<img src="Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
 							</td>
 							<td class="bestName">
-								<a href="#" class=".alink">${best.p_name}</a>
+								${best.p_name}
 							</td>
 						</tr>
 						<tr>
