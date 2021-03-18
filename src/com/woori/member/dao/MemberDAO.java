@@ -44,7 +44,7 @@ public class MemberDAO {
 	
 	//구매자 회원가입 
 	public int cjoin(CustomerDTO dto) {
-		String sql = "INSERT INTO member(cid,pw,name,gender,email,birthday,phone,reg_date)VALUES(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO Consumer(cid,pw,name,gender,email,birthday,phone)VALUES(?,?,?,?,?,?,?)";
 		int success = -1;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -55,7 +55,6 @@ public class MemberDAO {
 			ps.setString(5, dto.getEmail());
 			ps.setString(6, dto.getBirthday());
 			ps.setString(7, dto.getPhone());
-			ps.setString(8, dto.getReg_date());
 			success = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

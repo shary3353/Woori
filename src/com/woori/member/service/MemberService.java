@@ -58,11 +58,11 @@ public class MemberService {
 		dto.setPhone(Phone);
 		//실패했을 때
 		msg="회원가입 실패";
-		page="C_regist.jsp";
+		page="/cJoin";
 		//성공했을때
 		if(dao.cjoin(dto)>0) {
 			msg="회원가입 성공";
-			page="C_login.jsp";
+			page="/Consumer/cLogin";
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
@@ -77,9 +77,9 @@ public class MemberService {
 		String Store_call = req.getParameter("number");
 		String Birthday = req.getParameter("Birthday");
 		String email = req.getParameter("email");
-		String reg_date = req.getParameter("date");
 		String Phone = req.getParameter("Phone");
-		System.out.println(sid+"/"+pw+"/"+name+"/"+gender+"/"+Store_call+"/"+Birthday+"/"+email+"/"+reg_date+"/"+Phone);
+		
+		System.out.println(sid+"/"+pw+"/"+name+"/"+gender+"/"+Store_call+"/"+Birthday+"/"+email+"/"+Phone);
 		
 		SellerDTO dto = new SellerDTO();
 		
@@ -90,15 +90,15 @@ public class MemberService {
 		dto.setStore_call(Store_call);
 		dto.setBirthday(Birthday);
 		dto.setEmail(email);
-		dto.setReg_date(reg_date);
 		dto.setPhone(Phone);
+		
 		//실패했을 때
 		msg="회원가입 실패";
-		page="S_regist.jsp";
+		page="/Seller/sLogin";
 		//성공했을때
 		if(dao.sjoin(dto)>0) {
 			msg="회원가입 성공";
-			page="C_login.jsp";
+			page="/sJoin";
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
