@@ -117,8 +117,8 @@ form {
 
 <body>
 	<div style="min-width: 1920px">
-		<jsp:include page="../Include/navi.html"></jsp:include>
-		<jsp:include page="../Include/SideBar.html"></jsp:include>
+	<%@include file="../Include/navi.jsp" %>
+	<%@include file="../Include/SideBar.jsp" %>
 		<div id="reportBox">
 			<form action="" method="GET">
 				<p class="headDESC">신고 내역</p>
@@ -135,7 +135,9 @@ form {
 						<tr>
 							<td style="width: auto;">${list.r_idx}</td>
 							<td>${list.category}</td>
-							<td class="reportSubject"><a href="cReportDetail?r_idx=${list.r_idx}" style="text-decoration: none; color: black;">${list.subject}</a></td>
+							<td class="reportSubject"><a
+								href="cReportDetail?r_idx=${list.r_idx}"
+								style="text-decoration: none; color: black;">${list.subject}</a></td>
 							<td>${list.target_id}</td>
 							<td>${list.r_date}</td>
 							<c:if test="${list.status==0}">

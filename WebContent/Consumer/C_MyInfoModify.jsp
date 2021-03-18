@@ -21,7 +21,7 @@
 	width: auto;
 	margin-top: 25px;
 	margin-left: 32%;
-	position:absolute;
+	position: absolute;
 	text-align: center;
 }
 
@@ -70,11 +70,12 @@ th {
 	text-align: center;
 }
 
-.readonlyInputs{
+.readonlyInputs {
 	border: none;
 	text-align: center;
 	font-size: 15px;
 }
+
 .headDESC {
 	font-size: 25px;
 	font-weight: 600;
@@ -87,8 +88,8 @@ th {
 </head>
 
 <body>
-	<jsp:include page="../Include/navi.html"></jsp:include>
-	<jsp:include page="../Include/SideBar.html"></jsp:include>
+	<%@include file="../Include/navi.jsp" %>
+	<%@include file="../Include/SideBar.jsp" %>
 	<div id="myInfo">
 		<form action="cUpdateInfo" method="POST" name="updateForm">
 			<div id="infoBox">
@@ -96,29 +97,33 @@ th {
 				<table>
 					<tr>
 						<th>아이디</th>
-						<td><input type="text" name="cid" class="readonlyInputs" value="${list.cid}"readonly></td>
+						<td><input type="text" name="cid" class="readonlyInputs"
+							value="${list.cid}" readonly></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" name="pw" class="inputs"  id="pw" /></td>
+						<td><input type="password" name="pw" class="inputs" id="pw" /></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인</th>
-						<td><input type="password" name="pwCfm" id="pwCfm" class="inputs" /><br>
-							<span id="pwCfmMsg">비밀번호가 일치하지 않습니다.</span></td>
+						<td><input type="password" name="pwCfm" id="pwCfm"
+							class="inputs" /><br> <span id="pwCfmMsg">비밀번호가 일치하지
+								않습니다.</span></td>
 					</tr>
 					<tr>
 						<th>생년월일</th>
-						<td><input type="text" name="birthday" class="readonlyInputs" value="${list.birthday}" readonly></td>
+						<td><input type="text" name="birthday" class="readonlyInputs"
+							value="${list.birthday}" readonly></td>
 					</tr>
 					<tr>
 						<th>성별
-						<td><input type="text" name="gender" class="readonlyInputs" value="${list.gender}" readonly></td>
+						<td><input type="text" name="gender" class="readonlyInputs"
+							value="${list.gender}" readonly></td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td><input type="email" name="email" id="email" class="inputs"
-							value="${list.email}" /></td>
+						<td><input type="email" name="email" id="email"
+							class="inputs" value="${list.email}" /></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>

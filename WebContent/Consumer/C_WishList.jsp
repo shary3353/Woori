@@ -109,8 +109,8 @@ form {
 
 <body>
 	<div style="min-width: 1920px">
-		<jsp:include page="../Include/navi.html"></jsp:include>
-		<jsp:include page="../Include/SideBar.html"></jsp:include>
+	<%@include file="../Include/navi.jsp" %>
+	<%@include file="../Include/SideBar.jsp" %>
 		<div id="wishListBox">
 			<form action="cReservation" method="GET">
 				<p class="headDESC">위시리스트</p>
@@ -125,54 +125,57 @@ form {
 						<th>삭제</th>
 					</tr>
 					<c:forEach items="${list}" var="list">
-					<c:if test="${list.is_sold == 1}">
-						<tr>
-							<td style="width: auto;">${list.wish_idx}</td>
-							<td>${list.p_idx}</td>
-							<td>
-								<table class="p_PhoNDesc">
-									<tr>
-										<td class="p_PhoNDesc" rowspan="3" ><img
-											src="${pageContext.request.contextPath}/Uploaded_Img/${list.photoPath}" alt="${list.photoPath}"
-											style="width: 125px; height: 125px;" />
-										</td>
-									</tr>
-									<tr>
-										<td class="p_PhoNDesc">${list.p_name}</td>
-									</tr>
-								</table>
-							</td>
-							<td>${list.p_price}원</td>
-							<td>${list.sid}</td>
-							<td><a href="../C_ItemReservation?p_idx=${list.p_idx}" class="reserBtn">예약하기</a></td>
-							<td><input class="delBtn" type="button" value="X"
-								onclick="location.href='wishDel?wish_idx=${list.wish_idx}'" /></td>
-						</tr>
-					</c:if>
-					<c:if test="${list.is_sold == 0}">
-						<tr style="background-color: gray;">
-							<td style="width: auto;">${list.wish_idx}</td>
-							<td>${list.p_idx}</td>
-							<td>
-								<table class="p_PhoNDesc">
-									<tr>
-										<td class="p_PhoNDesc" rowspan="3" ><img
-											src="${pageContext.request.contextPath}/Uploaded_Img/${list.photoPath}" alt="${list.photoPath}"
-											style="width: 125px; height: 125px;" />
-										</td>
-									</tr>
-									<tr>
-										<td class="p_PhoNDesc" style="color:red;">현재 판매중인 상품이 아닙니다, 삭제해주세요!</td>
-									</tr>
-								</table>
-							</td>
-							<td>${list.p_price}원</td>
-							<td>${list.sid}</td>
-							<td><a href="../C_ItemReservation?p_idx=${list.p_idx}" class="reserBtn" hidden="hidden">예약하기</a></td>
-							<td><input class="delBtn" type="button" value="X"
-								onclick="location.href='wishDel?wish_idx=${list.wish_idx}'" /></td>
-						</tr>
-					</c:if>
+						<c:if test="${list.is_sold == 1}">
+							<tr>
+								<td style="width: auto;">${list.wish_idx}</td>
+								<td>${list.p_idx}</td>
+								<td>
+									<table class="p_PhoNDesc">
+										<tr>
+											<td class="p_PhoNDesc" rowspan="3"><img
+												src="${pageContext.request.contextPath}/Uploaded_Img/${list.photoPath}"
+												alt="${list.photoPath}" style="width: 125px; height: 125px;" />
+											</td>
+										</tr>
+										<tr>
+											<td class="p_PhoNDesc">${list.p_name}</td>
+										</tr>
+									</table>
+								</td>
+								<td>${list.p_price}원</td>
+								<td>${list.sid}</td>
+								<td><a href="../C_ItemReservation?p_idx=${list.p_idx}"
+									class="reserBtn">예약하기</a></td>
+								<td><input class="delBtn" type="button" value="X"
+									onclick="location.href='wishDel?wish_idx=${list.wish_idx}'" /></td>
+							</tr>
+						</c:if>
+						<c:if test="${list.is_sold == 0}">
+							<tr style="background-color: gray;">
+								<td style="width: auto;">${list.wish_idx}</td>
+								<td>${list.p_idx}</td>
+								<td>
+									<table class="p_PhoNDesc">
+										<tr>
+											<td class="p_PhoNDesc" rowspan="3"><img
+												src="${pageContext.request.contextPath}/Uploaded_Img/${list.photoPath}"
+												alt="${list.photoPath}" style="width: 125px; height: 125px;" />
+											</td>
+										</tr>
+										<tr>
+											<td class="p_PhoNDesc" style="color: red;">현재 판매중인 상품이
+												아닙니다, 삭제해주세요!</td>
+										</tr>
+									</table>
+								</td>
+								<td>${list.p_price}원</td>
+								<td>${list.sid}</td>
+								<td><a href="../C_ItemReservation?p_idx=${list.p_idx}"
+									class="reserBtn" hidden="hidden">예약하기</a></td>
+								<td><input class="delBtn" type="button" value="X"
+									onclick="location.href='wishDel?wish_idx=${list.wish_idx}'" /></td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>
 			</form>

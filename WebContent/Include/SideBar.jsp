@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +22,7 @@
         width: 150px;
         height: 125px;
         line-height: 125px;
-        font-size: 25px;
+        font-size: 20px;
         font-weight: 600;
         text-align: right;
         background-color: rgb(202, 202, 202);
@@ -42,7 +45,7 @@
 <body>
 <div id="naviBox">
     <div id="mainMyPage" class="C_MyPageNavi">
-        <a href="cMyPageMain" style="text-decoration: none; color: black">마이페이지&nbsp;</a>
+        <a href="cMyPageMain" style="text-decoration: none; color: black">마이페이지&nbsp;</a>
     </div>
     <div class="C_MyPageNavi">
         <a href="cDetail">회원정보&nbsp;</a>
