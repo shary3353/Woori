@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.main.service.MainService;
 
-@WebServlet({"/C_main","/C_itemDetail","/C_ItemReservation","/C_Reservation", "/AdminMain","/C_SearchList","/C_LikePlus","/likeConfirm","/C_LikeMinus","/NaviCategory"})
+@WebServlet({"/C_main","/C_itemDetail","/C_ItemReservation","/C_Reservation", "/AdminMain","/Consumer/C_SearchList","/C_LikePlus","/likeConfirm","/C_LikeMinus","/Consumer/NaviCategory"})
 public class MainController extends HttpServlet {
 
 	@Override
@@ -48,7 +48,7 @@ public class MainController extends HttpServlet {
 			System.out.println("물품 예약 페이지");
 			service.CReservation();
 			break;	
-		case "/C_SearchList":
+		case "/Consumer/C_SearchList":
 			System.out.println("물품 검색");
 			service.Csearch();
 			break;	
@@ -71,7 +71,7 @@ public class MainController extends HttpServlet {
 			System.out.println("좋아요 확인");
 			service.likeconfirm();
 			break;
-		case "/NaviCategory"	:
+		case "/Consumer/NaviCategory":
 			System.out.println("네비게이션 카테고리");
 			service.NaviCategory();
 			break;
