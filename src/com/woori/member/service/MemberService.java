@@ -484,12 +484,12 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	public void Admin_Login() throws ServletException, IOException {
+	public void adminLogin() throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String adminID = req.getParameter("userID");
 		String adminPW = req.getParameter("userPW");
 		System.out.println(adminID+" / "+adminPW);
-		String page = "AdminLoginPage";
+		String page = "./Admin/admin_Login.jsp";
 		MemberDAO dao = new MemberDAO();
 		if(dao.adminLogin(adminID, adminPW)) {
 			System.out.println("관리자 로그인 성공");

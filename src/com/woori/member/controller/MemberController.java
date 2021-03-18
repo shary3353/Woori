@@ -102,7 +102,7 @@ public class MemberController extends HttpServlet {
 			
 		case "/AdminLogin":
 			System.out.println("Request Admin Login");
-			service.Admin_Login();
+			service.adminLogin();
 			break;
 			
 		case "/cJoin":
