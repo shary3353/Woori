@@ -153,7 +153,7 @@ public class MemberService {
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
 		if (dao.clogin(cid, pw)) {
-			page = "/C_main.jsp";
+			page = "/C_main";
 			msg = cid + " 님 반갑 습니다.";
 			req.getSession().setAttribute("loginID", cid);
 		}
