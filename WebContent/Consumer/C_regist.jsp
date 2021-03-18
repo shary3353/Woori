@@ -147,21 +147,21 @@
     </form>
 </body>
  <script>
-	var PwChk = false;
+	
 	
  	function check_pw(){//비밀번호 일치
 		 var pw = document.getElementById('Pw').value;
 		 
 		 if(document.getElementById('Pw').value!=''&&document.getElementById('PwChk').value!=''){
 			 if(document.getElementById('Pw').value == document.getElementById('PwChk').value){
-				 document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
-				 document.getElemnetById('check').style.color='green';
+				 document.getElementById('check_pw').innerHTML='비밀번호가 일치합니다.'
+				 document.getElemnetById('check_pw').style.color='green';
 			 }else{
-				 document.getElementById('check'.innerHTML)='비밀번호가 일치하지 않습니다.';
-				 document.getElemnetById('check').style.color='red';
+				 document.getElementById('check_pw'.innerHTML)='비밀번호가 일치하지 않습니다.';
+				 document.getElemnetById('check_pw').style.color='red';
 			 }
-		 };
-	 };
+		 }
+	 }
 	
 	 var overChk = false;//중복체크 여부
 		
