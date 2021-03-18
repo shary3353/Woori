@@ -123,8 +123,8 @@ h3 {
 		</div>
 		<div id="list_div">
 			<h3>1:1 문의내역</h3>
-			<form action="qDetail" method="post">
 				<div id="list">
+	
 					<table>
 						<tr>
 							<th class="num">번호</th>
@@ -145,13 +145,13 @@ h3 {
 							<tr>
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
 									<input type="password" maxlength="4" id="${list.q_idx }" name="password">
-									<button id="sbmBtn">확인</button>
+									<button type="button" onclick="send();">저장</button>
 								</td>
 							</tr>
 						</c:forEach>
 					</table>
+			
 				</div>
-			</form>
 			<div id="Admin_Seller_List_Paging">
 				<!--판매자리스트 페이징부분-->
 				<span class="Page_Content"> <c:if test="${currnPage == 1}">처음</c:if>
@@ -192,6 +192,10 @@ h3 {
 	var msg = "${msg}";
 	if (msg != "") {
 		alert(msg);
+	}
+	
+	function send() {
+		form.submit();
 	}
 </script>
 </html>
