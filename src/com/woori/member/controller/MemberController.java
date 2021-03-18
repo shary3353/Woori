@@ -133,7 +133,7 @@ public class MemberController extends HttpServlet {
 		switch(sub) {
 		case "/Seller/sPfpDetail": //판매자 회원 상세보기 요청 
 			System.out.println("Request  seller profile Detail");
-			service.sPfpDatail();
+			service.sPfpDetail();
 			break;
 			
 		case "/Seller/sPfpUpdateForm": //판매자 회원정보 수정보기 요청
