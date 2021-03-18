@@ -113,12 +113,13 @@
 
 <body>
 	<div id="wrap">
+	${sessionScope.loginID}
 		<c:choose>
-    		<c:when test="${session.loginId eq null}">
+    		<c:when test="${sessionScope.loginID eq null}">
 			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
     		</c:when>
    
-    		<c:when test="${session.loginId ne null}">
+    		<c:when test="${sessionScope.loginID ne null}">
 			<jsp:include page="../Include/navi.jsp"></jsp:include>
     		</c:when>
     	</c:choose>	
@@ -138,7 +139,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage" >
-								<img src="Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
 							</td>
 							<td class="bestName">
 								${best.p_name}
@@ -161,7 +162,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best2.newFileName}"  alt="${best2.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best2.newFileName}"  alt="${best2.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best2.p_name}
@@ -186,7 +187,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best3.newFileName}"  alt="${best3.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best3.p_name}
@@ -209,7 +210,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best4.newFileName}"  alt="${best4.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 									${best4.p_name}
@@ -232,7 +233,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best5.newFileName}"  alt="${best5.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best5.newFileName}"  alt="${best5.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best5.p_name}
@@ -255,7 +256,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage">
-								<img src="Uploaded_Img/${best6.newFileName}"  alt="${best6.oriFileName}"width="300px" height="400px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${best6.newFileName}"  alt="${best6.oriFileName}"width="300px" height="400px"/>
 							</td>
 							<td class="bestName">
 								${best6.p_name}

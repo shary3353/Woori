@@ -131,14 +131,13 @@ nav .navilist:hover {
 
 <body>
 	<div id="topmenu">
-
 		<div id="mainlogo">
-			<a href="C_main"><img src="img/mainlogo.png" width="200"
+			<a href="${pageContext.request.contextPath}/C_main"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200"
 				height="100"></a>
 		</div>
 
 		<div id="searchicon">
-			<img src="img/search.png" alt="검색" width="55" height="55">
+			<img src="${pageContext.request.contextPath}/img/search.png" alt="검색" width="55" height="55">
 		</div>
 
 		<div id="searchmenu">
@@ -152,17 +151,17 @@ nav .navilist:hover {
 
 		<div id="toplistBox">
 			<div class="toplist">
-				<img src="img/mypage.png" width="40" height="40"> <a
+				<img src="${pageContext.request.contextPath}/img/mypage.png" width="40" height="40"> <a
 					href="cMyPageMain">마이페이지</a>
 			</div>
 
 			<div class="toplist">
-				<img src="img/wishlist.png" width="40" height="40"> <a
+				<img src="${pageContext.request.contextPath}/img/wishlist.png" width="40" height="40"> <a
 					href="wishPaging?page=1">위시리스트</a>
 			</div>
 			
 			<div class="toplist">
-				<img src="img/logout.png" width="40" height="40"> <a
+				<img src="${pageContext.request.contextPath}/img/logout.png" width="40" height="40"> <a
 					href="#">로그아웃</a>
 			</div>
 			

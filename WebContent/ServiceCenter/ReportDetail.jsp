@@ -99,7 +99,7 @@ th {
 	<div style="min-width: 1920px">
 
 		<div>
-			<iframe src="../Include/navi.jsp" style="width: 100%" height="180px"
+			<iframe src="../Include/navi.html" style="width: 100%" height="180px"
 				scrolling="no" frameborder="none"></iframe>
 		</div>
 		<div class="seMain">

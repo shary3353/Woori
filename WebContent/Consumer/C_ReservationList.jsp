@@ -134,7 +134,7 @@ a{
 								<table class="p_PhoNDesc">
 									<tr>
 										<td class="p_PhoNDesc" rowspan="3" ><img
-											src="../Uploaded_Img/${list.newFileName}" alt="${list.newFileName}"
+											src="${pageContext.request.contextPath}/Uploaded_Img/${list.newFileName}" alt="${list.newFileName}"
 											style="width: 125px; height: 125px;" onclick="location=href='../C_itemDetail?p_idx=${list.p_idx}'"/></td>
 									</tr>
 									<tr>
