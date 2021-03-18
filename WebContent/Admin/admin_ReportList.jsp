@@ -40,7 +40,12 @@
                     	<c:set var="reporter_id" value="${report.reporter_id }"></c:set>
                     	<c:set var="target_id" value="${report.target_id }"></c:set>
                     		<td>${report.r_idx }</td>
-                    		<td>${report.rc_code }</td>
+                    		<td>
+                    				<c:if test="${report.rc_code == 100}">상품관련</c:if>
+                    				<c:if test="${report.rc_code == 200}">판매자관련</c:if>
+                    				<c:if test="${report.rc_code == 300}">구매자관련</c:if>
+                    				<c:if test="${report.rc_code == 400}">기타</c:if>
+                    		</td>
                     		<td><a href="${pageContext.request.contextPath}/Admin/rDetail?r_idx=${report.r_idx }">${report.subject }</a></td>
                     		<td>
                     			<c:if test="${fn:indexOf(reporter_id, '-') == -1 }"><a href="cDetail?id=${report.reporter_id }">${report.reporter_id }</a></c:if>	<!-- 구매자 -->

@@ -88,7 +88,7 @@ public class MemberController extends HttpServlet {
 		
 		case "/Consumer/cLogin":
 			System.out.println("Request Customer Login");
-			service. C_Loginid();
+			service.C_Loginid();
 			break;
 		
 		case "/Seller/sLogin":

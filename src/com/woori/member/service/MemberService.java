@@ -547,11 +547,14 @@ public class MemberService {
 		System.out.println(adminID+" / "+adminPW);
 		String page = "./Admin/admin_Login.jsp";
 		MemberDAO dao = new MemberDAO();
+		String msg = "아이디와 비밀번호를 확인해주세요.";
 		if(dao.adminLogin(adminID, adminPW)) {
 			System.out.println("관리자 로그인 성공");
 			req.getSession().setAttribute("loginID", adminID);
 			page = "AdminMain";
+			msg = "";
 		}
+		req.setAttribute("msg", msg);
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}

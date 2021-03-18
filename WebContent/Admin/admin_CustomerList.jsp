@@ -107,29 +107,33 @@
 		var cid = $('#'+this.id).val();
 		var number = this.id.slice(-1);
 		var bReason = $('#bReason'+number).val();
-		console.log(cid+' / '+bReason);
 		
-		$.ajax({
-			type:"GET"
-			,url:"cBlackRegist"
-			,data:{"id":cid, "bReason":bReason}
-			,dataType:"JSON"
-			,success:function(obj){
-				if(obj.addBlack){
-					alert('해당 구매회원을 블랙리스트에 추가하였습니다.');
-					$('td').remove('#blackBtn'+number);
-					$('#inputReason'+number).attr('colspan', '2');
-					$('#inputReason'+number).html('이미등록된회원입니다.');
-					$('#stack'+number).html(obj.newStack);
-					$('#false'+number).html('true');
-				}else{
-					alert('블랙리스트 등록에 실패하였습니다.');
+		if(bReason == ""){
+			alert('블락 사유를 적어주세요.');
+		}else{
+			$.ajax({
+				type:"GET"
+				,url:"cBlackRegist"
+				,data:{"id":cid, "bReason":bReason}
+				,dataType:"JSON"
+				,success:function(obj){
+					if(obj.addBlack){
+						alert('해당 구매회원을 블랙리스트에 추가하였습니다.');
+						$('td').remove('#blackBtn'+number);
+						$('#inputReason'+number).attr('colspan', '2');
+						$('#inputReason'+number).html('이미등록된회원입니다.');
+						$('#stack'+number).html(obj.newStack);
+						$('#false'+number).html('true');
+					}else{
+						alert('블랙리스트 등록에 실패하였습니다.');
+					}
 				}
-			}
-			,error:function(e){
-				console.log(e);
-			}
-		});
+				,error:function(e){
+					console.log(e);
+				}
+			});
+		}
+		
 	}); 
 	
 	
