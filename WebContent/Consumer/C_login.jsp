@@ -117,8 +117,8 @@
         <div class="tabs">
             <!--tab 부분-->
             <!--수정 style="background-color: #b44e46; min-height: 30px; border-top-left-radius: 4px; border-top-right-radius: 4px; text-align:center; color: white; padding-top:5px "-->
-            <button class="tab_item" for="Pur_tab" onclick="lookCLogin()">구매자 로그인</button>
-            <button class="tab_item" for="sell_tab" onclick="lookSLogin()">판매자 로그인</button>
+            <button class="tab_item" id="c_btn" onclick="lookCLogin()" style="background-color: gray;">구매자 로그인</button>
+            <button class="tab_item" id="s_btn" onclick="lookSLogin()">판매자 로그인</button>
         </div>
         <!--탭부분 닫음-->
 
@@ -226,11 +226,15 @@
         console.log("구매자로그인");
         document.getElementById('s_login_tab').style.display = 'none';
         document.getElementById('c_login_tab').style.display = 'block';
+        document.getElementById('c_btn').style.backgroundColor = 'gray';
+        document.getElementById('s_btn').style.backgroundColor = 'rgb(240, 239, 236)';
     }
     function lookSLogin(){
         console.log("판매자로그인");
         document.getElementById('s_login_tab').style.display = 'block';
         document.getElementById('c_login_tab').style.display = 'none';
+        document.getElementById('c_btn').style.backgroundColor = 'rgb(240, 239, 236)';
+        document.getElementById('s_btn').style.backgroundColor = 'gray';
     }
 
 
