@@ -143,16 +143,15 @@ public class MemberService {
 	 }
 	 */
 
-	public void C_Loginid() throws ServletException, IOException {
+	public void C_Loginid() throws ServletException, IOException {//구매자 로그인
 		MemberDAO dao = new MemberDAO();
 		String cid = req.getParameter("cid");
 		String pw = req.getParameter("pw");
 		System.out.println(cid + "/" + pw);
-		page = "C_login.jsp";
+		
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
-
 		if (dao.clogin(cid, pw)) {
-			page = "/clist";
+			page = "/C_main.jsp";
 			msg = cid + " 님 반갑 습니다.";
 			req.getSession().setAttribute("logincId", cid);
 		}
@@ -161,18 +160,17 @@ public class MemberService {
 		dis.forward(req, resp);
 	}
 
-	public void S_Loginid() throws ServletException, IOException {
+	public void S_Loginid() throws ServletException, IOException {//판매자 로그인
 		MemberDAO dao = new MemberDAO();
-		String sid = req.getParameter("sId");
+		String sid = req.getParameter("sid");
 		String pw = req.getParameter("pw");
 		System.out.println(sid + "/" + pw);
-		page = "C_login.jsp";
+		
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
-
 		if (dao.slogin(sid, pw)) {
-			page = "/slist";
+			page = "/Seller/sItemList";
 			msg = sid + " 님 반갑 습니다.";
-			req.getSession().setAttribute("loginsId", sid);
+			req.getSession().setAttribute("loginsID", sid);
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
