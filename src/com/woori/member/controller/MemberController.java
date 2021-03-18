@@ -56,15 +56,10 @@ public class MemberController extends HttpServlet {
                 break;
 			
             case "/logout":
-				System.out.println("Request Logout");
-				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("/Consumer/cLogin");
-			
-				req.getSession().removeAttribute("cid");
-				resp.sendRedirect("/Consumer/sLogin");
-			
-				req.getSession().removeAttribute("aid");
-				resp.sendRedirect("/adminLogin");
+				String loginID = (String)req.getSession().getAttribute("loginID");
+				System.out.println("지워질 세션ID: "+ loginID);
+				req.getSession().removeAttribute("loginID");
+				resp.sendRedirect("index.jsp");
 				break;
 			
 		}
@@ -103,7 +98,7 @@ public class MemberController extends HttpServlet {
 			
 		case "/AdminLogin":
 			System.out.println("Request Admin Login");
-			service.Admin_Login();
+			service.adminLogin();
 			break;
 			
 		case "/cJoin":
@@ -138,7 +133,7 @@ public class MemberController extends HttpServlet {
 		switch(sub) {
 		case "/Seller/sPfpDetail": //판매자 회원 상세보기 요청 
 			System.out.println("Request  seller profile Detail");
-			service.sPfpDatail();
+			service.sPfpDetail();
 			break;
 			
 		case "/Seller/sPfpUpdateForm": //판매자 회원정보 수정보기 요청

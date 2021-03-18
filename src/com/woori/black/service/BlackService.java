@@ -23,23 +23,29 @@ public class BlackService {
 	}
 	
 	public void bList() throws ServletException, IOException {
-		int group = 1;
-		String page = req.getParameter("page");
-		
-		if(page != null) {
-			group = Integer.parseInt(page);
+		String loginID = (String)req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			int group = 1;
+			String page = req.getParameter("page");
+			
+			if(page != null) {
+				group = Integer.parseInt(page);
+			}
+			BlackDAO dao = new BlackDAO();
+			HashMap<String, Object> map = dao.bList(group);
+			
+			req.setAttribute("bList", map.get("bList"));
+			req.setAttribute("maxBlackPage", map.get("maxBlackPage"));
+			req.setAttribute("currPage", group);
+			RequestDispatcher dis = req.getRequestDispatcher("admin_BlackList.jsp");
+			dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./admin_Login.jsp");
 		}
-		BlackDAO dao = new BlackDAO();
-		HashMap<String, Object> map = dao.bList(group);
-		
-		req.setAttribute("bList", map.get("bList"));
-		req.setAttribute("maxBlackPage", map.get("maxBlackPage"));
-		req.setAttribute("currPage", group);
-		RequestDispatcher dis = req.getRequestDispatcher("admin_BlackList.jsp");
-		dis.forward(req, resp);
 	}
 	
 	public void bSearch() throws ServletException, IOException {
+		String loginID = (String)req.getSession().getAttribute("loginID");
         req.setCharacterEncoding("utf-8");
         String inputB = req.getParameter("bSearch");
         String bSearchOption = req.getParameter("bSearchOption");
@@ -65,11 +71,12 @@ public class BlackService {
     
     //블랙리스트에 추가시 필요한 데이터 - id, admin_id, reason
   	public void sBlackRegist() throws ServletException, IOException {
+  		String loginID = (String)req.getSession().getAttribute("loginID");
   		req.setCharacterEncoding("utf-8");
   		HashMap<String, Object> map = new HashMap<>();
   		String sid = req.getParameter("id");
-  		//String admin_id = (String) req.getSession().getAttribute("loginID");
-  		String admin_id = "admin001";	//테스트용
+  		String admin_id = (String) req.getSession().getAttribute("loginID");
+
   		String reason = req.getParameter("bReason");
   		System.out.println(sid+" / "+reason);
   		
@@ -100,11 +107,11 @@ public class BlackService {
   	}
   	
   	public void cBlackRegist() throws ServletException, IOException {
+  		String loginID = (String)req.getSession().getAttribute("loginID");
   		req.setCharacterEncoding("utf-8");
   		HashMap<String, Object> map = new HashMap<>();
   		String cid = req.getParameter("id");
-  		//String admin_id = (String) req.getSession().getAttribute("loginID");
-  		String admin_id = "admin001";	//테스트용
+  		String admin_id = (String) req.getSession().getAttribute("loginID");
   		String reason = req.getParameter("bReason");
   		System.out.println(cid+" / "+reason);
   		
@@ -135,6 +142,7 @@ public class BlackService {
   	}
   	
 	public void blackCancel() throws ServletException, IOException{
+		String loginID = (String)req.getSession().getAttribute("loginID");
 		req.setCharacterEncoding("utf-8");
 		String id = req.getParameter("id");
 		System.out.println("블랙리스트 취소 할 아이디 : "+id);

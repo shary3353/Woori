@@ -97,15 +97,19 @@ public class MainService {
 	public void AdminMain() throws IOException, ServletException {
 		//로그인 세션의 아이디에 admin이 있는지 검사 
 		//admin이 포함되어있을 경우에만 관리자 메인 페이지를 띄운다
-		String loginID = "admin001";
-		if(loginID.contains("admin")) {
-			System.out.println("관리자 로그인중입니다.");
-			resp.sendRedirect("Admin/admin_Main.jsp");
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		if(loginID != null) {
+			if(loginID.contains("admin")) {
+				System.out.println("관리자 로그인중입니다.");
+				resp.sendRedirect("Admin/admin_Main.jsp");
+			}else {
+				String msg = "접근이 불가능한 페이지입니다.";
+				req.setAttribute("msg", msg);
+				RequestDispatcher dis = req.getRequestDispatcher("AdminLoginPage");
+				dis.forward(req, resp);
+			}
 		}else {
-			String msg = "접근이 불가능한 페이지입니다.";
-			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("AdminLoginPage");
-			dis.forward(req, resp);
+			resp.sendRedirect("./AdminLoginPage");
 		}
 		
 	}
@@ -192,9 +196,6 @@ public class MainService {
 		}
 	}
 
-	public void adminLogin() throws IOException {
-		resp.sendRedirect("./Admin/admin_Login.jsp");
-	}
 
 	public void NaviCategory() throws ServletException, IOException {
 		String c_idx = req.getParameter("c_idx");
@@ -214,7 +215,7 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ArrayList<ProductDTO> list =  dao.categorySearch(c_idx);
 		System.out.println("리스트 크기 : " + list.size());
-		String msg = "현재 존재하는 " +cate+ "이 없습니다.";
+		String msg = "현재 존재하는 " +cate+ "이(가) 없습니다.";
 		if(list != null && list.size()>0) {
 			req.setAttribute("search", list);	
 			msg=cate;

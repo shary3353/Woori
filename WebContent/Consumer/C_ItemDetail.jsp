@@ -81,7 +81,7 @@
     	<!-- 좋아요 , 물품 상세보기 , 물품예약하기 세션처리해서 id값 넣어야함 -->
             <table>
                 <tr>
-                    <td rowspan="6" id="detailImg"><img src="img/${dto.newFileName}"  alt="${dto.oriFileName} width="400px" height="600px"/></td>
+                    <td rowspan="6" id="detailImg"><img src="Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName} width="400px" height="600px"/></td>
                     <td class="detailName" colspan="2">${dto.p_name}</td>
                 </tr>
                 <tr>
@@ -101,8 +101,8 @@
                         <!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
                         <button id="likeButton"> &nbsp;좋아요</button>
                         <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요</button>
-                        <button id="wishlistButton">위시리스트</button>
-                        <button id="reportButton">신고하기</button>
+                        <button id="wishlistButton" onclick="location.href='addWishList?p_idx='${dto.p_idx}'">위시리스트</button>
+                        <button id="reportButton" onclick="location.href='Seller/sReport'">신고하기</button>
                     </td>
                 </tr>
             </table>
