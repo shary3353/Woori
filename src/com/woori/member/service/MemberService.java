@@ -344,17 +344,15 @@ public class MemberService {
 	}
 
 	public void cDetail() throws ServletException, IOException {
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		String loginId = cid;
+		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		if (loginId != null) {
-			System.out.println("상세보기할 cid : " + cid);
+		if (loginID != null) {
+			System.out.println("상세보기할 cid : " + loginID);
 
 			MemberDAO dao = new MemberDAO();
 			CustomerDTO dto = new CustomerDTO();
-			dto = dao.cDetail(cid);
+			dto = dao.cDetail(loginID);
 			req.setAttribute("list", dto);
 			RequestDispatcher dis = req.getRequestDispatcher("./C_MyInfo.jsp");
 			dis.forward(req, resp);
@@ -368,11 +366,9 @@ public class MemberService {
 	}
 
 	public void cUpdateForm() throws ServletException, IOException {
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String loginId = (String) req.getSession().getAttribute("loginId");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		if (loginId != null) {
+		if (loginID != null) {
 			String cid = req.getParameter("cid");
 			String pw = req.getParameter("pw");
 			System.out.println("cid / pw : " + cid + " / " + pw);
@@ -397,11 +393,10 @@ public class MemberService {
 	}
 
 	public void cUpdateInfo() throws ServletException, IOException {
-		// String loginId = (String) req.getParameter().getAttribute("loginId");
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String loginId = (String) req.getSession().getAttribute("loginId");
+		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String msg = "";
-		if (loginId != null) {
+		if (loginID != null) {
 			String cid = req.getParameter("cid");
 			String pw = req.getParameter("pw");
 			String email = req.getParameter("email");
