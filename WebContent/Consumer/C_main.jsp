@@ -114,11 +114,11 @@
 <body>
 	<div id="wrap">
 		<c:choose>
-    		<c:when test="${session.loginId eq null}">
+    		<c:when test="${sessionScope.loginID eq null}">
 			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
     		</c:when>
    
-    		<c:when test="${session.loginId ne null}">
+    		<c:when test="${sessionScope.loginID ne null}">
 			<jsp:include page="../Include/navi.jsp"></jsp:include>
     		</c:when>
     	</c:choose>	

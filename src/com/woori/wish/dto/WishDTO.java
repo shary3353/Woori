@@ -9,12 +9,19 @@ public class WishDTO {
 	private String sid;
 	private int p_price;
 	private String p_name;
+	private int is_sold;
 	// thumbFile
 	private int fileIdx;
 	private String oriFileName;
 	private String newFileName;
 	private String photoPath;
 	
+	public int getIs_sold() {
+		return is_sold;
+	}
+	public void setIs_sold(int is_sold) {
+		this.is_sold = is_sold;
+	}
 	public String getPhotoPath() {
 		return photoPath;
 	}
