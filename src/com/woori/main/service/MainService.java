@@ -82,15 +82,15 @@ public class MainService {
 		ReservationDTO dto = new ReservationDTO();
 		boolean success = dao.Creservation(pidx,cid,visitdate);
 		
-		String page = "/C_ItemReservation";
+		String page = "C_ItemReservation";
 		String msg = "예약이 되지않았습니다 다시 예약을 해주시길 바랍니다.";
-		
 		if(success = true) {
-			page = "Consumer/C_ItemReservation.jsp";
+			page = "Consumer/cReservationList";
 			msg = "정상적으로 예약되었습니다.";
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);	
+		dis.forward(req, resp);
 	}
 	
 	
