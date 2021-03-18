@@ -68,8 +68,8 @@
             <tr>
                 <th class="column-name">처리상태</th>
                 <td>
-                <c:if test="${dto.status == 0}">처리중</c:if>
-                <c:if test="${dto.status > 0}">완료됨</c:if>
+                <c:if test="${dto.status == 0}"><span style="color:red;">처리중</span></c:if>
+                <c:if test="${dto.status > 0}"><span style="color:green">처리완료</span></c:if>
                 </td>
                 
             </tr>

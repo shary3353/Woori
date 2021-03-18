@@ -149,6 +149,7 @@ public class ReportDAO {
 				dto.setReporter_id(rs.getString("reporter_id"));
 				dto.setTarget_id(rs.getString("target_id"));
 				dto.setCategory(rs.getString("categories"));
+				dto.setStatus(rs.getInt("status"));
 				dto.setContent(rs.getString("content"));
 			}
 		} catch (SQLException e) {
