@@ -149,11 +149,13 @@ public class MemberService {
 		String pw = req.getParameter("pw");
 		System.out.println(cid + "/" + pw);
 		
+		page = "../Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
+		
 		if (dao.clogin(cid, pw)) {
-			page = "/C_main.jsp";
+			page = "/C_main";
 			msg = cid + " 님 반갑 습니다.";
-			req.getSession().setAttribute("logincId", cid);
+			req.getSession().setAttribute("loginID", cid);
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
@@ -166,11 +168,13 @@ public class MemberService {
 		String pw = req.getParameter("pw");
 		System.out.println(sid + "/" + pw);
 		
+		page = "/Consumer/C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
+		
 		if (dao.slogin(sid, pw)) {
 			page = "/Seller/sItemList";
 			msg = sid + " 님 반갑 습니다.";
-			req.getSession().setAttribute("loginsID", sid);
+			req.getSession().setAttribute("loginID", sid);
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
@@ -222,6 +226,7 @@ public class MemberService {
 		ArrayList<CustomerListDTO> searchedC = dao.cSearch(inputC);
 
 		req.setAttribute("cList", searchedC);
+		req.setAttribute("inputC", inputC);
 		RequestDispatcher dis = req.getRequestDispatcher("admin_CustomerList.jsp");
 		dis.forward(req, resp);
 	}
@@ -235,6 +240,7 @@ public class MemberService {
 		ArrayList<SellerListDTO> searchedS = dao.sSearch(inputS);
 
 		req.setAttribute("sList", searchedS);
+		req.setAttribute("inputS", inputS);
 		RequestDispatcher dis = req.getRequestDispatcher("admin_SellerList.jsp");
 		dis.forward(req, resp);
 	}

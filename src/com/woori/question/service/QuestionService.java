@@ -200,11 +200,17 @@ public class QuestionService {
 		String category = req.getParameter("category");
 		String subject = req.getParameter("subject");
 		String content = req.getParameter("content");
+		String p_name = req.getParameter("product");
 		String pass = req.getParameter("pass");
-		System.out.println(sId + "/" + cId + "/" + category + "/" + subject + "/" + content + "/" + pass);		QuestionDAO dao = new QuestionDAO();
+		if(pass == null) {
+			pass = "";
+		}
+		System.out.println(sId + "/" + cId + "/" + category + "/" + subject + 
+				"/" + content + "/" + pass + "/" + p_name);	
+		QuestionDAO dao = new QuestionDAO();
 		boolean success = false;
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		long q_idx = dao.qWrite(sId,cId,Integer.parseInt(category),subject,content,Integer.parseInt(pass));
+		long q_idx = dao.qWrite(sId,cId,Integer.parseInt(category),subject,content,Integer.parseInt(pass),p_name);
 		if(q_idx > 0 ) {
 			success = true;
 			System.out.println("성공");
@@ -220,21 +226,25 @@ public class QuestionService {
 
 	public void qDetail() throws ServletException, IOException {
 		String q_idx = req.getParameter("q_idx");
-		String q_pw = req.getParameter("passWord");
+		String q_pw = req.getParameter("password");
 		
 		System.out.println("q_idx :" + q_idx + "/" + "q_pw :" + q_pw);
+		boolean success = false;
 		QuestionDAO dao = new QuestionDAO();
-		QuestionDTO dto = new QuestionDTO();
-		dto = dao.qDetail(q_idx,q_pw);
-		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map = dao.qDetail(q_idx,q_pw);
+		success  = (boolean) map.get("success");
+		System.out.println("성공 비밀번호 : " + success);
 		String msg= "비밀번호가 틀렸습니다.";
 		String page ="qList";
-		if(dto != null) {
-			msg ="";
-			page = "Q_detail.jsp";
+		if(success) {
+				msg ="";
+				page = "Q_detail.jsp";
+			
 		}
+		
 		req.setAttribute("msg",msg);
-		req.setAttribute("list", dto);
+		req.setAttribute("list", map.get("dto"));
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}

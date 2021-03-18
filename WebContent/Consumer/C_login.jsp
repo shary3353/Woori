@@ -127,7 +127,7 @@
         <div class="container-body" style="background-color:  rgb(240, 239, 236);" id="c_login_tab" >
                 <!--구매자 로그인 탭열기-->
         		<div class="tab_content" >
-      <form action="cLogin" method="POST">
+      <form action="../Consumer/cLogin" method="POST">
                     <div>
                         <table>
                             <tr>
@@ -214,6 +214,7 @@
     <!--컨테이너 닫음-->
 </body>
 <script>
+/*
 	var loginID = "${sessionScope.loginID}";
 	if(loginID !=""){
 	var content ="안녕하세요"+loginId+"님,<a href='logout'>[로그아웃]</a>";
@@ -221,7 +222,7 @@
 	}else{
 		location.href="#";
 	}
-	
+*/
     function lookCLogin(){
         console.log("구매자로그인");
         document.getElementById('s_login_tab').style.display = 'none';
@@ -236,9 +237,11 @@
         document.getElementById('c_btn').style.backgroundColor = 'rgb(240, 239, 236)';
         document.getElementById('s_btn').style.backgroundColor = 'gray';
     }
-
-
+    
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+	
 </script>
-
-
 </html>

@@ -15,6 +15,7 @@ public class QuestionDTO {
 	/*Q_Categories*/
 	private int qc_idx;
 	private String category;
+	private String p_name;
 	
 	//
 	public int getQ_idx() {
@@ -76,6 +77,12 @@ public class QuestionDTO {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public String getP_name() {
+		return p_name;
+	}
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
 	
 }

@@ -114,7 +114,7 @@
                     <th>판매자</th>
                     <td>${list.sid}</td>
                     <th>문의상품</th>
-                    <td colspan="3"></td>
+                    <td colspan="3">${list.p_name }</td>
                 </tr>
                 <tr>
                     <th colspan="6">문의내용</th>

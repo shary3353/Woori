@@ -49,11 +49,13 @@ public class BlackService {
             BlackDAO dao = new BlackDAO();
             ArrayList<BlackListDTO> searchedB = dao.bSellerSearch(inputB);
             req.setAttribute("bList", searchedB);
+            req.setAttribute("inputB", inputB);
         }else if(bSearchOption.equals("200")) {    //구매자 검색
             System.out.println("검색할 구매자 id : "+inputB);
             BlackDAO dao = new BlackDAO();
             ArrayList<BlackListDTO> searchedB = dao.bCustomerSearch(inputB);
             req.setAttribute("bList", searchedB);
+            req.setAttribute("inputB", inputB);
         }
         
         RequestDispatcher dis = req.getRequestDispatcher("admin_BlackList.jsp");
