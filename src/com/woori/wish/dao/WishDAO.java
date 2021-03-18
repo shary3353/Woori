@@ -21,7 +21,7 @@ public class WishDAO {
 	ResultSet rs = null;
 
 	public WishDAO() {// db접근
-		try {
+		try { 
 			Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Oracle");
 			conn = ds.getConnection();
@@ -53,8 +53,8 @@ public class WishDAO {
 		int start = end - (pagePerCnt - 1);
 		System.out.println(start + " ~ " + end + "까지의 리스트");
 		ArrayList<WishDTO> list = new ArrayList<WishDTO>();
-		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.newfilename\r\n" + 
-				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist) w, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p\r\n" + 
+		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.newfilename, p.is_sold\r\n" + 
+				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist) w, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, p.is_sold, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p\r\n" + 
 				"    WHERE w.cid=? and w.p_idx = p.p_idx(+) and rnum BETWEEN ? AND ?";
 		try {
 			ps = conn.prepareStatement(sql);
@@ -70,7 +70,8 @@ public class WishDAO {
 				dto.setSid(rs.getString(4));
 				dto.setP_price(rs.getInt(5));
 				dto.setNewFileName(rs.getString(6));
-				dto.setPhotoPath("photo/"+dto.getNewFileName());
+				dto.setPhotoPath(dto.getNewFileName());
+				dto.setIs_sold(rs.getInt(7));
 				list.add(dto);
 				System.out.println(dto.getNewFileName());
 			}
