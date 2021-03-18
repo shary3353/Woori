@@ -242,7 +242,7 @@ public class ReportService {
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("");
+			RequestDispatcher dis = req.getRequestDispatcher("../Consumer/C_login.jsp");
 			dis.forward(req, resp);
 		}
 		
