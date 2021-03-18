@@ -12,6 +12,7 @@ import com.woori.member.dao.ListDAO;
 import com.woori.report.dao.AdminReportDAO;
 import com.woori.report.dao.ReportDAO;
 import com.woori.report.dto.ReportDTO;
+import com.woori.wish.dao.WishDAO;
 
 public class ReportService {
 
@@ -99,24 +100,31 @@ public class ReportService {
 	}
 
 	public void cReportList() throws ServletException, IOException {
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		System.out.println(cid + " 의 신고내역 불러오기");
-		String pageParam = req.getParameter("page");
-		System.out.println("이동하고 싶은 page : " + pageParam);
-		int group = 1;
-		if (pageParam != null) {
-			group = Integer.parseInt(pageParam);
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		String msg = "";
+		if (loginID != null) {
+			System.out.println(loginID + " 의 신고내역 불러오기");
+			String pageParam = req.getParameter("page");
+			System.out.println("이동하고 싶은 page : " + pageParam);
+			int group = 1;
+			if (pageParam != null) {
+				group = Integer.parseInt(pageParam);
+			}
+			ReportDAO dao = new ReportDAO();
+			HashMap<String, Object> map = dao.cReportList(group, loginID);
+			
+			req.setAttribute("maxPage", map.get("maxPage"));
+			req.setAttribute("list", map.get("list"));
+			req.setAttribute("currPage", group);
+			
+			RequestDispatcher dis = req.getRequestDispatcher("./C_ReportList.jsp");
+			dis.forward(req, resp);
+		} else {
+			msg = "로그인을 해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("");
+			dis.forward(req, resp);
 		}
-		ReportDAO dao = new ReportDAO();
-		HashMap<String, Object> map = dao.cReportList(group, cid);
-
-		req.setAttribute("maxPage", map.get("maxPage"));
-		req.setAttribute("list", map.get("list"));
-		req.setAttribute("currPage", group);
-
-		RequestDispatcher dis = req.getRequestDispatcher("./C_ReportList.jsp");
-		dis.forward(req, resp);
 	}
 
 	public void sReportDetail() throws ServletException, IOException {//판매자 신고상세보기
@@ -142,14 +150,23 @@ public class ReportService {
 	}
 
 	public void cReportDetail() throws ServletException, IOException {
-		String r_idx = req.getParameter("r_idx");
-		System.out.println(r_idx +"번 신고 상세보기");
-		ReportDAO dao = new ReportDAO();
-		ReportDTO dto = dao.detail(r_idx);
-		
-		req.setAttribute("dto", dto);
-		dis = req.getRequestDispatcher("../ServiceCenter/ReportDetail.jsp");
-		dis.forward(req, resp);
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		String msg = "";
+		if (loginID != null) {
+			String r_idx = req.getParameter("r_idx");
+			System.out.println(r_idx +"번 신고 상세보기");
+			ReportDAO dao = new ReportDAO();
+			ReportDTO dto = dao.detail(r_idx);
+			
+			req.setAttribute("dto", dto);
+			dis = req.getRequestDispatcher("../ServiceCenter/ReportDetail.jsp");
+			dis.forward(req, resp);
+		} else {
+			msg = "로그인을 해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("");
+			dis.forward(req, resp);
+		}
 		
 	}
 
@@ -209,19 +226,26 @@ public class ReportService {
 	}
 
 	public void cReportForm() throws ServletException, IOException {
-		req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String cid = (String) req.getSession().getAttribute("loginId");
-		String target_id = req.getParameter("t_id");
-		System.out.println("신고자 : " + cid);
-		System.out.println("신고 대상자 : " + target_id);
-		
-		ReportDTO dto = new ReportDTO();
-		dto.setReporter_id(cid);
-		dto.setTarget_id(target_id);
-		
-		req.setAttribute("dto", dto);
-		dis = req.getRequestDispatcher("../ServiceCenter/Report.jsp");
-		dis.forward(req, resp);
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		String msg = "";
+		if (loginID != null) {
+			String target_id = req.getParameter("t_id");
+			System.out.println("신고자 : " + loginID);
+			System.out.println("신고 대상자 : " + target_id);
+			
+			ReportDTO dto = new ReportDTO();
+			dto.setReporter_id(loginID);
+			dto.setTarget_id(target_id);
+			
+			req.setAttribute("dto", dto);
+			dis = req.getRequestDispatcher("../ServiceCenter/Report.jsp");
+			dis.forward(req, resp);
+		} else {
+			msg = "로그인을 해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("");
+			dis.forward(req, resp);
+		}
 		
 	}
 
