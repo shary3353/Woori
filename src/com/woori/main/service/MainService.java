@@ -214,7 +214,7 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ArrayList<ProductDTO> list =  dao.categorySearch(c_idx);
 		System.out.println("리스트 크기 : " + list.size());
-		String msg = "현재 존재하는 " +cate+ "이 없습니다.";
+		String msg = "현재 존재하는 " +cate+ "이(가) 없습니다.";
 		if(list != null && list.size()>0) {
 			req.setAttribute("search", list);	
 			msg=cate;
