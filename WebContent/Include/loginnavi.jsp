@@ -134,12 +134,12 @@ nav .navilist:hover {
 	<div id="topmenu">
 
 		<div id="mainlogo">
-			<a href="C_main"><img src="img/mainlogo.png" width="200"
+			<a href="C_main"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200"
 				height="100"></a>
 		</div>
 
 		<div id="searchicon">
-			<img src="img/search.png" alt="검색" width="55" height="55">
+			<img src="${pageContext.request.contextPath}/img/search.png" alt="검색" width="55" height="55">
 		</div>
 
 		<div id="searchmenu">
