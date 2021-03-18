@@ -65,7 +65,7 @@
 <body>
     <div class="container"><!--컨테이너 div-->
         <div class="img-container"><!--로고 부분-->
-            <img src="../img/main_logo.png" alt="logo" class="logo"><!--메인 이미지 변경-->
+            <img src="${pageContext.request.contextPath}/img/main_logo.png" alt="logo" class="logo"><!--메인 이미지 변경-->
         </div><!--로고부분 닫음-->
 
         <div class="container-head"><!--컨테이너 헤더-->
@@ -103,6 +103,10 @@
     </div><!--컨테이너 div닫음-->
 </body>
 <script type="text/javascript">
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
 	$('#userId').keydown(function(){
 		if($(this).val().includes('admin')){
 			$('#confirmID').html("'admin'이 포함되어있습니다.");
