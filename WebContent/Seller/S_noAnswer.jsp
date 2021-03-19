@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!DOCTYPE html>
-<html lang="kor">
+<html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <title>seller noAnswer</title>
     <style>
         *{margin: 0; padding: 0;}
@@ -66,12 +68,12 @@
                 <td class="column-name">내용</td>
                 <td colspan="5">${dto.content}</td>
             </tr>
-            <form action="./sAnswer" method="post">
+            <form action="./sAnswer" method="post" onsubmit="return check()">
 	           <tr>
 	               <td class="column-name">답변하기</td>
 	               <td colspan="5" style="text-align: center;">
 	               		<input type="hidden" name="q_idx" value="${dto.q_idx}"/>
-	                   <textarea name="s_answer" id="" cols="95" rows="10">${dto.s_answer}</textarea>
+	                   <textarea name="s_answer" id="s_answer" cols="95" rows="10" id="s_answer">${dto.s_answer}</textarea>
 	               </td>
 	           </tr>
 	           <tr>
@@ -84,4 +86,14 @@
         </table>
     </div>
 </body>
+<script>
+    function check(){
+        if($('#s_answer').val()==""){
+            console.log($('#s_answer').val());
+            alert("답변을 입력하세요!");
+            return false;
+        } 
+        return true;
+    }
+</script>
 </html>

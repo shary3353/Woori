@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="kor">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <title>seller regist goods</title>
     <style>
         *{margin: 0; padding: 0;}
@@ -51,19 +53,19 @@
             <tr>
                 <td colspan="3" class="title">등록 물품 수정</td>
             </tr>
-            <form action="sUpdateItem" method="post" enctype="multipart/form-data">
+            <form action="sUpdateItem" method="post" enctype="multipart/form-data" onsubmit="return check()">
             <input type="hidden" value="${dto.p_idx}" name="p_idx"/>
 	            <tr>
 	                <td rowspan="5">
 	                    <input type="file" name="photo" id="imageFile" accept="image/*"/>
 	                </td>
 	                <td class="column-name" >물품이름</td>
-	                <td><input type="text" value="${dto.p_name}" name="p_name"/></td>
+	                <td><input type="text" value="${dto.p_name}" name="p_name" id="p_name"/></td>
 	            </tr>
 	            <tr>
 	                <td class="column-name" >카테고리</td>
 	                <td>
-	                    <select name="c_idx" id="" value="${dto.c_idx}">
+	                    <select name="c_idx" id="c_idx" value="${dto.c_idx}">
 	                        <option value="1">와인</option>
 	                        <option value="2">위스키</option>
 	                        <option value="3">꼬냑/브랜디</option>
@@ -75,7 +77,7 @@
 	            <tr>
 	                <td class="column-name" >가격</td>
 	                <td>
-	                    <input type="text" placeholder="가격(원)을 입력해주세요." value="${dto.p_price}" name ="p_price">원
+	                    <input type="text" placeholder="가격(원)을 입력해주세요." value="${dto.p_price}" name ="p_price" id="p_price"/>원
 	                </td>
 	            </tr>
 	            <tr>
@@ -88,11 +90,25 @@
 	            </tr>
 	            <tr>
 	                <td colspan="3" class="btnArea">
-	                    <button>저장</button>
+	                    <button type="submit">저장</button>
 	                </td>
 	            </tr>
             </form>
         </table>
     </div>
 </body>
+<script>
+    function check(){
+        if($('#p_name').val()==""){
+            console.log($('#p_name').val());
+            alert("물품이름을 입력하세요!");
+            return false;
+        }else if($('#p_price').val()==""){
+            console.log($('#p_price').val());
+            alert("가격을 입력하세요!");
+            return false;
+        }
+        return true;
+    }
+</script>
 </html>
