@@ -136,13 +136,13 @@ table {
 						</tr>
 						<tr>
 							<th>신고자</th>
-							<td><input id="cId" type="text" name="userName"
+							<td><input id="rId" type="text" name="userName"
 								value="${sessionScope.loginID}" readonly/></td>
 						
 						</tr>
 						<tr>
 							<th>신고대상자</th>
-							<th><input id="sId" type="text" name="sellerId"
+							<th><input id="tId" type="text" name="sellerId"
 								value=""></th>
 						</tr>
 						<tr>
@@ -174,18 +174,18 @@ table {
 <script>
 	$("#btn").click(function(){
 		var $subject = $("#subject").val();
-		var $cId = $("#cId").val();
-		var $sId = $("#sId").val();
+		var $rId = $("#rId").val();
+		var $tId = $("#tId").val();
 		var $category = $("#cate").val();
 		var $content = $("#content").val();
 		
 		if($subject == ''){
 			alert('제목을 입력해주세요');
 			$subject.focus();
-		}else if($cId == ''){
+		}else if($rId == ''){
 			alert('로그인 하세요');
 			$cId.focus();
-		}else if($sId == ''){
+		}else if($tId == ''){
 			alert('신고자를 확인해주세요')
 			$sId.focus();
 		}else if($category == 0){
@@ -198,8 +198,8 @@ table {
 			console.log('서버로 전송');
 			var pa = {};
 			pa.subject = $subject;
-			pa.cId = $cId;
-			pa.sId = $sId;
+			pa.rId = $rId;
+			pa.tId = $tId;
 			pa.category = $category;
 			pa.content = $content;
 			$.ajax({

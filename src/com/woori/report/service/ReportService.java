@@ -62,8 +62,8 @@ public class ReportService {
 		String id = (String)req.getSession().getAttribute("loginID");
 		if(id != null) {//로그인 여부 판별
 		String subejct = req.getParameter("subject");
-		String reporter_id = req.getParameter("cId");
-		String target_id = req.getParameter("sId");
+		String reporter_id = req.getParameter("rId");
+		String target_id = req.getParameter("tId");
 		String category = req.getParameter("category");
 		String content = req.getParameter("content");
 		long r_idx = 0;
