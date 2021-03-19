@@ -152,12 +152,12 @@ nav .navilist:hover {
 		<div id="toplistBox">
 			<div class="toplist">
 				<img src="${pageContext.request.contextPath}/img/mypage.png" width="40" height="40"> <a
-					href="cMyPageMain">마이페이지</a>
+					href="${pageContext.request.contextPath}/Consumer/cMyPageMain">마이페이지</a>
 			</div>
 
 			<div class="toplist">
 				<img src="${pageContext.request.contextPath}/img/wishlist.png" width="40" height="40"> <a
-					href="wishPaging?page=1">위시리스트</a>
+					href="${pageContext.request.contextPath}/Consumer/wishPaging?page=1">위시리스트</a>
 			</div>
 			
 			<div class="toplist">

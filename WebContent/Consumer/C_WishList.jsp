@@ -157,10 +157,18 @@ form {
 								<td>
 									<table class="p_PhoNDesc">
 										<tr>
+											<c:if test="${empty list.photoPath  }">
+											<td class="p_PhoNDesc" rowspan="3"><img
+												src="${pageContext.request.contextPath}/img/no-image.png"
+												alt="${list.photoPath}" style="width: 125px; height: 125px;" />
+											</td>
+											</c:if>
+											<c:if test="${!empty list.photoPath  }">
 											<td class="p_PhoNDesc" rowspan="3"><img
 												src="${pageContext.request.contextPath}/Uploaded_Img/${list.photoPath}"
 												alt="${list.photoPath}" style="width: 125px; height: 125px;" />
 											</td>
+											</c:if>
 										</tr>
 										<tr>
 											<td class="p_PhoNDesc" style="color: red;">현재 판매중인 상품이

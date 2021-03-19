@@ -54,8 +54,8 @@ public class WishDAO {
 		System.out.println(start + " ~ " + end + "까지의 리스트");
 		ArrayList<WishDTO> list = new ArrayList<WishDTO>();
 		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.newfilename, p.is_sold\r\n" + 
-				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist) w, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, p.is_sold, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p\r\n" + 
-				"    WHERE w.cid=? and w.p_idx = p.p_idx(+) and rnum BETWEEN ? AND ?";
+				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist WHERE cid=?) w, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, p.is_sold, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p\r\n" + 
+				"    WHERE w.p_idx = p.p_idx(+) and rnum BETWEEN ? AND ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);

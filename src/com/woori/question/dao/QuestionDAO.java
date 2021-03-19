@@ -119,9 +119,9 @@ public class QuestionDAO {
 		System.out.println(start + " ~ " + end + "까지의 리스트");
 
 		ArrayList<QuestionDTO> list = new ArrayList<QuestionDTO>();
-		String sql = "SELECT rnum, q_idx, subject, s_answer, cid, to_char(q_reg_date,'yyyy-mm-dd') q_reg_date "
-				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY q_idx DESC) AS rnum, q_idx,subject, s_answer, cid, q_reg_date FROM question) "
-				+ "WHERE cid=? AND rnum BETWEEN ? AND ?";
+		String sql = "SELECT q_idx, subject, s_answer, cid, to_char(q_reg_date,'yyyy-mm-dd') q_reg_date "
+				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY q_idx DESC) AS rnum, q_idx,subject, s_answer, cid, q_reg_date FROM question WHERE cid=?) "
+				+ "WHERE rnum BETWEEN ? AND ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
@@ -130,10 +130,10 @@ public class QuestionDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				QuestionDTO dto = new QuestionDTO();
-				dto.setQ_idx(rs.getInt("q_idx"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setS_answer(rs.getString("s_answer"));
-				dto.setQ_reg_date(rs.getString("q_reg_date"));
+				dto.setQ_idx(rs.getInt(1));
+				dto.setSubject(rs.getString(2));
+				dto.setS_answer(rs.getString(3));
+				dto.setQ_reg_date(rs.getString(5));
 				list.add(dto);
 			}
 			System.out.println("위시리스트 데이터 수 : " + list.size());
