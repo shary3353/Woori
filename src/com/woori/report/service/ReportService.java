@@ -59,8 +59,8 @@ public class ReportService {
 	}
 
 	public void report() throws ServletException, IOException {
-		String sid = (String)req.getSession().getAttribute("loginID");
-		if(sid != null) {//로그인 여부 판별
+		String id = (String)req.getSession().getAttribute("loginID");
+		if(id != null) {//로그인 여부 판별
 		String subejct = req.getParameter("subject");
 		String reporter_id = req.getParameter("cId");
 		String target_id = req.getParameter("sId");

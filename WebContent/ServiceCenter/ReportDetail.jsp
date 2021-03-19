@@ -98,23 +98,29 @@ th {
 <body>
 	<div style="min-width: 1920px">
 
-		<div>
-			<iframe src="../Include/navi.jsp" style="width: 100%" height="180px"
-				scrolling="no" frameborder="none"></iframe>
-		</div>
+		<c:choose>
+    		<c:when test="${sessionScope.loginID eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${sessionScope.loginID ne null}">
+			<jsp:include page="../Include/navi.jsp"></jsp:include>
+    		</c:when>
+    	</c:choose>
 		<div class="seMain">
 			<div class="sideMenu">
 				<div class="Service">
-					<a href=qList>고객센터</a>
+						<a href="qList">고객센터</a>
 				</div>
 				<div class="One">
-					<a href="Q_write.jsp">1:1 문의하기</a>
+					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+				 
 				</div>
 				<div class="Question">
 					<a href="Question.jsp">자주묻는 질문</a>
 				</div>
 				<div class="Report">
-					<a href="Report.jsp">신고하기</a>
+					<a href="#" onclick="idCheck2();">신고하기</a>
 				</div>
 			</div>
 		</div>
@@ -154,6 +160,26 @@ th {
 	</div>
 </body>
 <script>
+function idCheck(){ 
+    var uid = '<%=(String)session.getAttribute("loginID")%>';
+	console.log(uid);
+     if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+        alert("로그인이 필요한 항목입니다."); 
+     }
+     else{
+        location.replace("./Q_write.jsp");
+     }
+}  
 
+function idCheck2(){ 
+    var uid = '<%=(String)session.getAttribute("loginID")%>';
+	console.log(uid);
+     if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+        alert("로그인이 필요한 항목입니다."); 
+     }
+     else{
+        location.replace("./Report.jsp");
+     }
+}   
 </script>
 </html>
