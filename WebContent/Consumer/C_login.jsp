@@ -12,8 +12,6 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            position: relative;
-
         }
         .tabs {
             /*탭 전체 스타일*/
@@ -69,13 +67,9 @@
 
         .container {
             position: absolute;
-            height: 300px;
-            left: 40%;
+            left: 50%;
             top: 50%;
-            margin-left: 100px;
-            margin-top: 150px;
-
-
+			transform: translate(-50%, -50%);
         }
 
         input[type=text],
@@ -85,7 +79,9 @@
             display: inline-block;
             border: 1px solid #ccc;
         }
-
+		input:focus{
+			background-color:  rgb(226, 226, 226);
+		}
         button {
             background-color: #4CAF50;
             color: white;
