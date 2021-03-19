@@ -104,6 +104,16 @@ form {
 	margin-left: 20px;
 	margin-top: 30px;
 }
+a {
+text-decoration: none;
+color: black;
+}
+a:hover{
+color: black;
+}
+img:hover{
+cursor: pointer;
+}
 </style>
 </head>
 
@@ -134,11 +144,12 @@ form {
 										<tr>
 											<td class="p_PhoNDesc" rowspan="3"><img
 												src="${pageContext.request.contextPath}/Uploaded_Img/${list.photoPath}"
-												alt="${list.photoPath}" style="width: 125px; height: 125px;" />
+												alt="${list.photoPath}" style="width: 125px; height: 125px;"
+												onclick="location=href='../C_itemDetail?p_idx=${list.p_idx}'" />
 											</td>
 										</tr>
 										<tr>
-											<td class="p_PhoNDesc">${list.p_name}</td>
+											<td class="p_PhoNDesc"><a href="../C_itemDetail?p_idx=${list.p_idx}">${list.p_name}</a></td>
 										</tr>
 									</table>
 								</td>
