@@ -149,8 +149,8 @@ table {
 				<tr>
 					<td class="column1">작성자</td>
 					<td class="column2"><input type="text" id="cId"
-						name="consumerId"> <!--  value="${sessionScope.loginId}" readonly/>
-                      --></td>
+						name="consumerId" value="${sessionScope.loginID}" readonly/>
+                      </td>
 					<td>카테고리 <select id="category" name="category" value="문의/카테고리">
 							<option value="100" selected="selected">상품관련</option>
 							<option value="200">예약관련</option>
@@ -230,7 +230,10 @@ table {
 		} else if ($pass.val().length != 4) {
 			alert('비밀번호를 입력해주세요');
 			$pass.focus();
-		} else {
+		} else if(isNaN($pass.val()) == true){
+			alert('비밀번호를 숫자로 입력하세요');
+			$pass.focus();
+		}else{		
 			console.log('서버로전송');
 			var pa = {};
 			pa.cid = $cid.val();
@@ -252,7 +255,7 @@ table {
 						alert('문의등록에  성공하였습니다.');
 						location.href = "qList";
 					} else {
-						alert('잠시 후 다시 시도해 주세요');
+						alert('판매자 ID를 확인해주세요');
 					}
 				},
 				error : function(e) {

@@ -102,13 +102,13 @@ h3 {
 <body>
 	<div style="min-width: 1920px">
 		<div>
-			<iframe src="../Include/navi.html" style="width: 100%" height="180px"
+			<iframe src="../Include/navi.jsp" style="width: 100%" height="180px"
 				scrolling="no" frameborder="none"></iframe>
 		</div>
 		<div class="seMain">
 			<div class="sideMenu">
 				<div class="Service">
-					<a href=qList>고객센터</a>
+					<a href="qList">고객센터</a>
 				</div>
 				<div class="One">
 					<a href="Q_write.jsp">1:1 문의하기</a>
@@ -124,7 +124,8 @@ h3 {
 		<div id="list_div">
 			<h3>1:1 문의내역</h3>
 				<div id="list">
-	
+					<!-- <form action="qDetail" method="post"> -->
+			<form action="qDetail" method ="post">
 					<table>
 						<tr>
 							<th class="num">번호</th>
@@ -144,12 +145,13 @@ h3 {
 							</tr>
 							<tr>
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
-									<input type="password" maxlength="4" id="${list.q_idx }" name="password">
-									<button type="button" onclick="send();">저장</button>
+									<input id ="${list.q_idx -100 }" type="password" maxlength="4"  name="password">
+									<button onclick = "sss(${list.q_idx -100});">저장</button>
 								</td>
 							</tr>
 						</c:forEach>
 					</table>
+					</form>
 			
 				</div>
 			<div id="Admin_Seller_List_Paging">
@@ -194,8 +196,7 @@ h3 {
 		alert(msg);
 	}
 	
-	function send() {
-		form.submit();
-	}
+	
+
 </script>
 </html>

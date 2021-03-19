@@ -101,7 +101,7 @@ table {
 
 
 		<div>
-			<iframe src="../Include/navi.html" style="width: 100%" height="180px"
+			<iframe src="../Include/navi.jsp" style="width: 100%" height="180px"
 				scrolling="no" frameborder="none"></iframe>
 		</div>
 		<div class="seMain">
@@ -133,8 +133,8 @@ table {
 						<tr>
 							<th>신고자</th>
 							<td><input id="cId" type="text" name="userName"
-								value="${dto.reporter_id}" /></td>
-							<!--  value="${sessionScope.loginId}" readonly/> -->
+								value="${sessionScope.loginID}" readonly/></td>
+						
 						</tr>
 						<tr>
 							<th>신고대상자</th>

@@ -59,6 +59,8 @@ public class ReportService {
 	}
 
 	public void report() throws ServletException, IOException {
+		String sid = (String)req.getSession().getAttribute("loginID");
+		if(sid != null) {//로그인 여부 판별
 		String subejct = req.getParameter("subject");
 		String reporter_id = req.getParameter("cId");
 		String target_id = req.getParameter("sId");
@@ -85,6 +87,9 @@ public class ReportService {
 		String json = gson.toJson(map);
 		
 		resp.getWriter().print(json);
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("../Consumer/C_login.jsp");
+		}
 	}
 
 	public void detail() throws ServletException, IOException {
