@@ -163,22 +163,22 @@ nav .navilist:hover {
 
 	<nav class="navi">
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=1">와인</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=1">와인</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=2">위스키</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=2">위스키</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=3">보드카</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=3">보드카</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=4">꼬냑/브랜디</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=4">꼬냑/브랜디</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=5">샴페인</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=5">샴페인</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/ServiceCenter/qList">고객센터</a>
+			<a href="${pageContext.request.contextPath}/ServiceCenter/qList">고객센터</a>
 		</div>
 	</nav>
 </body>

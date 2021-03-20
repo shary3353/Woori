@@ -43,6 +43,7 @@ public class MainService {
 
 	public void Citemdetail() throws ServletException, IOException {
 		String pidx = req.getParameter("p_idx");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		System.out.println(pidx);
 		MainDAO dao = new MainDAO();
 		ProductDTO dto = dao.Citemdetail(pidx);
@@ -51,6 +52,9 @@ public class MainService {
 		if(dto != null) {
 			page="Consumer/C_ItemDetail.jsp";
 			req.setAttribute("dto", dto);
+		}
+		if (loginID != null) {
+			page="./C_ItemDetail.jsp";
 		}
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
@@ -116,6 +120,7 @@ public class MainService {
 
 	public void Csearch() throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String searchname = "%"+req.getParameter("searchname")+"%";
 		if(searchname.equals("%%")) {
 			searchname = null;
@@ -132,7 +137,10 @@ public class MainService {
 			msg = searchtitle;
 		}
 		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher("C_SearchList.jsp");
+		if (loginID != null) {
+			dis = req.getRequestDispatcher("./C_SearchList.jsp");
+		}
+		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
 		dis.forward(req, resp);
 		
 	}
@@ -198,6 +206,7 @@ public class MainService {
 
 
 	public void NaviCategory() throws ServletException, IOException {
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String c_idx = req.getParameter("c_idx");
 		String cate = "";
 		System.out.println(c_idx);
@@ -221,7 +230,7 @@ public class MainService {
 			msg=cate;
 		}
 		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher("C_SearchList");
+		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
 		dis.forward(req, resp);
 	}
 

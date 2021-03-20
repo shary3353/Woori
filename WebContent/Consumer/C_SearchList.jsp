@@ -78,7 +78,15 @@
 </head>
 <body>
 	<div id="wrap">
-		<jsp:include page="../Include/navi.jsp"></jsp:include>
+		<c:choose>
+    		<c:when test="${sessionScope.loginID eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${sessionScope.loginID ne null}">
+			<jsp:include page="../Include/navi.jsp"></jsp:include>
+    		</c:when>
+    	</c:choose>	
     	<!--  메인페이지 시작 -->
         <div id="searchBox">
 
@@ -88,13 +96,14 @@
             <div class="searchList">
             
 			<c:forEach items="${search}" var="search">
+				<a href="C_itemDetail?p_idx=${search.p_idx}" class="alink">
                 <table>
 					<tr>
 						<td class="listItemLike">❤️${search.likes}</td>
 					</tr>
 					<tr>
 						<td class="listItemImg">
-							<img src="Uploaded_Img/${dto.newFileName}" alt="${dto.oriFileName}" width="200px"  height="300px"/>
+								<img src="Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="300px"/>
 						</td>
 					</tr>
 					<tr>
@@ -104,6 +113,7 @@
                         <td class="listItemPrice">${search.p_price} 원</td>
                     </tr>
 				</table>
+				</a>
             </c:forEach>
             
             </div>

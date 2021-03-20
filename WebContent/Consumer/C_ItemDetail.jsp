@@ -75,13 +75,29 @@
 </head>
 <body>
 	<div id="wrap">
-		<jsp:include page="../Include/navi.jsp"></jsp:include>
+		<c:choose>
+    		<c:when test="${sessionScope.loginID eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${sessionScope.loginID ne null}">
+			<jsp:include page="../Include/navi.jsp"></jsp:include>
+    		</c:when>
+    	</c:choose>	
     	<div id="detail">
     	<!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
     	<!-- 좋아요 , 물품 상세보기 , 물품예약하기 세션처리해서 id값 넣어야함 -->
             <table>
                 <tr>
-                    <td rowspan="6" id="detailImg"><img src="Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName} width="400px" height="600px"/></td>
+                    <td rowspan="6" id="detailImg">
+                    
+                    	<c:if test="${sessionScope.loginID ne null}">
+                    		<img src="${pageContext.request.contextPath}/Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName}" width="400px" height="600px"/>
+                    	</c:if>
+                    	<c:if test="${sessionScope.loginID eq null}">
+                    		<img src="Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName}" width="400px" height="600px"/>
+                    	</c:if>
+                    </td>
                     <td class="detailName" colspan="2">${dto.p_name}</td>
                 </tr>
                 <tr>

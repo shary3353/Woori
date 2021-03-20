@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.main.service.MainService;
 
-@WebServlet({"/C_main","/C_itemDetail","/C_ItemReservation","/C_Reservation", "/AdminMain","/Consumer/C_SearchList","/C_LikePlus","/likeConfirm","/C_LikeMinus","/Consumer/NaviCategory"})
+@WebServlet({"/C_main","/C_itemDetail","/Consumer/C_itemDetail","/C_ItemReservation","/C_Reservation", "/AdminMain","/C_SearchList","/C_LikePlus","/likeConfirm","/C_LikeMinus","/NaviCategory"})
 public class MainController extends HttpServlet {
 
 	@Override
@@ -39,6 +39,13 @@ public class MainController extends HttpServlet {
 			System.out.println("물품 상세정보 페이지");
 			service.Citemdetail();
 			break;
+			
+		case "/Consumer/C_itemDetail":
+			System.out.println("로그인 물품 상세정보 페이지");
+			service.Citemdetail();
+			break;	
+			
+			
 		case "/C_ItemReservation":
 			System.out.println("물품 예약 상세보기 페이지");
 			service.CitemReservation();
@@ -47,11 +54,12 @@ public class MainController extends HttpServlet {
 		case "/C_Reservation":
 			System.out.println("물품 예약 페이지");
 			service.CReservation();
-			break;	
-		case "/Consumer/C_SearchList":
+			break;
+		
+		case "/C_SearchList":
 			System.out.println("물품 검색");
 			service.Csearch();
-			break;	
+			break;
 
 		case "/AdminMain":
 			System.out.println("관리자 메인 페이지");
@@ -71,12 +79,15 @@ public class MainController extends HttpServlet {
 			System.out.println("좋아요 확인");
 			service.likeconfirm();
 			break;
-		case "/Consumer/NaviCategory":
+			
+		case "/NaviCategory":
 			System.out.println("네비게이션 카테고리");
 			service.NaviCategory();
-			break;
+			break;	
+			
+			
 		}
-		
+
 	}
 }
 
