@@ -61,6 +61,9 @@ public class MainService {
 	}
 
 	public void CitemReservation() throws ServletException, IOException {
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		System.out.println(loginID);
+		if (loginID != null) {
 		String pidx = req.getParameter("p_idx");
 		System.out.println(pidx);
 		MainDAO dao = new MainDAO();
@@ -68,15 +71,20 @@ public class MainService {
 		System.out.println(dto);
 		String page = "/";
 		if(dto != null) {
-			page="Consumer/C_ItemReservation.jsp";
+			page="./C_ItemReservation.jsp";
 			req.setAttribute("dto", dto);
 		}
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./Consumer/C_login.jsp");
+		}
 	}
 
 	public void CReservation() throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		if (loginID != null) {
 		String pidx = req.getParameter("p_idx");
 		String sid = req.getParameter("sid");
 		String cid = req.getParameter("cid");
@@ -86,15 +94,18 @@ public class MainService {
 		ReservationDTO dto = new ReservationDTO();
 		boolean success = dao.Creservation(pidx,cid,visitdate);
 		
-		String page = "C_ItemReservation";
+		String page = "./C_ItemReservation.jsp";
 		String msg = "예약이 되지않았습니다 다시 예약을 해주시길 바랍니다.";
 		if(success = true) {
-			page = "Consumer/cReservationList";
+			page="/Consumer/cReservationList";
 			msg = "정상적으로 예약되었습니다.";
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);	
 		dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./Consumer/C_login.jsp");
+		}
 	}
 	
 	
@@ -138,7 +149,7 @@ public class MainService {
 		}
 		req.setAttribute("msg", msg);
 		if (loginID != null) {
-			dis = req.getRequestDispatcher("./C_SearchList.jsp");
+			dis = req.getRequestDispatcher("C_SearchList.jsp");
 		}
 		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
 		dis.forward(req, resp);

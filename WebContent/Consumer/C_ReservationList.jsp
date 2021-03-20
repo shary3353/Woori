@@ -196,7 +196,11 @@ a {
 	</div>
 </body>
 <script>
+var msg = "${msg}";
 
-s</script>
+if(msg!=""){
+	alert(msg);
+}	
+</script>
 
 </html>
