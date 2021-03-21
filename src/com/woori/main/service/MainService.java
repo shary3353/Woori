@@ -109,7 +109,7 @@ public class MainService {
 				dis.forward(req, resp);
 			}
 		}else {
-			resp.sendRedirect("./AdminLoginPage");
+			resp.sendRedirect("./Admin/admin_Login.jsp");
 		}
 		
 	}

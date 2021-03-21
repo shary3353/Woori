@@ -72,6 +72,9 @@ public class ListDAO {
 				cList.add(dto);
 			}
 			int maxPage = getMaxCustomerPage();
+			if(maxPage == 0) {
+				maxPage=1;
+			}
 			map.put("maxCustomerPage", maxPage);
 			map.put("cList", cList);
 		} catch (SQLException e) {
@@ -111,6 +114,9 @@ public class ListDAO {
 				sList.add(dto);
 			}
 			int maxPage = getMaxSellerPage();
+			if(maxPage == 0) {
+				maxPage=1;
+			}
 			map.put("sList", sList);
 			map.put("maxSellerPage", maxPage);
 		} catch (SQLException e) {

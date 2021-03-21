@@ -69,6 +69,9 @@ public class BlackDAO {
 				bList.add(dto);
 			}
 			int maxPage = getMaxBlackPage();
+			if(maxPage == 0) {
+				maxPage=1;
+			}
 			map.put("maxBlackPage", maxPage);
 			map.put("bList", bList);
 		} catch (SQLException e) {
@@ -132,18 +135,25 @@ public class BlackDAO {
 	}
 
 	private int getMaxBlackPage() {
-		String sql = "SELECT count(sid) AS cnt FROM s_blacklist WHERE (sid, reg_date) in (SELECT sid, MAX(reg_date) FROM s_blacklist WHERE 1=1 GROUP BY sid)"
-				+ " UNION "
-				+ "SELECT count(cid) AS cnt FROM c_blacklist WHERE (cid, reg_date) in (SELECT cid, MAX(reg_date) FROM c_blacklist WHERE 1=1 GROUP BY cid)";
+		String sql1 = "SELECT count(sid) AS cnt FROM s_blacklist";
+		String sql2 = "SELECT count(cid) AS cnt FROM c_blacklist";
+		int maxS = 0;
+		int maxC = 0;
 		int max = 0;
 		int cnt = 0;
 
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql1);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				cnt += rs.getInt("cnt");
+				maxS = rs.getInt("cnt");
 			}
+			ps = conn.prepareStatement(sql2);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				maxC = rs.getInt("cnt");
+			}
+			cnt = maxS + maxC;
 			if (cnt != 0) {
 				max = (int) Math.ceil(cnt / (double) pagePerCnt);
 			}

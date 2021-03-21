@@ -37,20 +37,20 @@
 	                    <tr>
 	                        <td><a href="cDetail?id=${customer.cid }">${customer.cid }</a></td>
 	                        <td>${customer.cntReport }</td>
-	                        <td id="stack${status.count }">${customer.stack }</td>
+	                        <td id="stack${status.index }">${customer.stack }</td>
 	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td>true</td>
 	                        </c:if>
 	                        <c:if test="${customer.isBlack == 0}">	<!-- 블랙리스트 false -->
-	                        	<td id="false${status.count }">false</td>
+	                        	<td id="false${status.index }">false</td>
 	                        </c:if>
 	                        <td>${customer.reg_date }</td>
 	                        <c:if test="${customer.isBlack == 1}">	<!-- 블랙리스트 true -->
 	                        	<td colspan="2">이미등록된회원입니다.</td>
 	                        </c:if>
 	                        <c:if test="${customer.isBlack == 0}">	<!-- 블랙리스트 false -->
-	                        	<td id="inputReason${status.count }"><input type="text" id="bReason${status.count }" placeholder="블락사유를 적어주세요."></td>
-	                        	<td id="blackBtn${status.count }"><button id="bRegistBtn${status.count }" style="color:red;" value="${customer.cid }">등록</button></td>
+	                        	<td id="inputReason${status.index }"><input type="text" id="bReason${status.index }" placeholder="블락사유를 적어주세요."></td>
+	                        	<td id="blackBtn${status.index }"><button id="bRegistBtn${status.index }" style="color:red;" value="${customer.cid }">등록</button></td>
 	                        </c:if>
 	                    </tr>
                     </c:forEach>

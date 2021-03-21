@@ -74,6 +74,9 @@ public class AdminReportDAO {
 				rList.add(dto);
 			}
 			int maxPage = getMaxReportPage();
+			if(maxPage == 0) {
+				maxPage=1;
+			}
 			map.put("rList", rList);
 			map.put("maxReportPage", maxPage);
 
@@ -115,6 +118,9 @@ public class AdminReportDAO {
 				rList.add(dto);
 			}
 			int maxPage = getMaxSearchReporterReportPage(inputR);
+			if(maxPage == 0) {
+				maxPage=1;
+			}
 			map.put("maxReportPage", maxPage);
 			map.put("rList", rList);
 		} catch (SQLException e) {
@@ -155,6 +161,9 @@ public class AdminReportDAO {
 				rList.add(dto);
 			}
 			int maxPage = getMaxSearchTargetReportPage(inputR);
+			if(maxPage == 0) {
+				maxPage=1;
+			}
 			map.put("maxReportPage", maxPage);
 			map.put("rList", rList);
 		} catch (SQLException e) {
@@ -167,7 +176,7 @@ public class AdminReportDAO {
 
 	private int getMaxReportPage() {
 		String sql = "SELECT COUNT(r_idx) AS cnt FROM report";
-		int max = 0;
+		int max = 1;
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -184,7 +193,7 @@ public class AdminReportDAO {
 
 	private int getMaxSearchReporterReportPage(String inputR) {
 		String sql = "SELECT COUNT(r_idx) AS cnt FROM report WHERE reporter_id = ?";
-		int max = 0;
+		int max = 1;
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -202,7 +211,7 @@ public class AdminReportDAO {
 
 	private int getMaxSearchTargetReportPage(String inputR) {
 		String sql = "SELECT COUNT(r_idx) AS cnt FROM report WHERE target_id = ?";
-		int max = 0;
+		int max = 1;
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -276,7 +285,7 @@ public class AdminReportDAO {
 	
 	public int getMaxSelectedRPage(String id) {
 		String sql = "SELECT count(rnum) AS cnt FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.r_date) AS rnum FROM report a left outer join report_categories b ON a.rc_code = b.rc_idx WHERE a.target_id = ?)";
-		int max = 0;
+		int max = 1;
 
 		try {
 			ps = conn.prepareStatement(sql);

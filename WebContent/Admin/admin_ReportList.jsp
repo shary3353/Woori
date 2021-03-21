@@ -24,7 +24,7 @@
             <div id="Admin_Seller_List">    <!--판매자 리스트-->
                 <table class="sellerlist" style="margin-left:auto; margin-right:auto;">
                     <tr>
-                        <th colspan="7">블랙리스트 목록</th>
+                        <th colspan="7">신고 목록</th>
                     </tr>
                     <tr>
                         <th>번호</th>

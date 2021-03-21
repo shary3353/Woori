@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${sessionScope.loginID eq null }">
+	<script type="text/javascript">
+	location.href = "./admin_Login.jsp";
+</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>

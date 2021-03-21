@@ -244,7 +244,7 @@ public class MemberService {
 			}
 			ListDAO dao = new ListDAO();
 			HashMap<String, Object> map = dao.cList(group);
-			
+
 			req.setAttribute("cList", map.get("cList"));
 			req.setAttribute("maxCustomerPage", map.get("maxCustomerPage"));
 			req.setAttribute("currPage", group);
@@ -506,6 +506,10 @@ public class MemberService {
 			ArrayList<ReportDTO> selectedCustomerRList = rDao.getRList(cid, group);
 			rDao = new AdminReportDAO();
 			int maxRPage = rDao.getMaxSelectedRPage(cid);
+			if(maxRPage == 0) {
+				maxRPage=1;
+			}
+			System.out.println("상세보기 maxRPage : "+maxRPage);
 			map.put("Admin_selectedCRListCurrPage", group);
 			map.put("Admin_maxRPage", maxRPage);
 			map.put("Admin_selectedCRList", selectedCustomerRList);
@@ -548,7 +552,10 @@ public class MemberService {
 			ArrayList<ReportDTO> selectedSellerRList = rDao.getRList(sid, group);
 			rDao = new AdminReportDAO();
 			int maxRPage = rDao.getMaxSelectedRPage(sid);
-			
+			if(maxRPage == 0) {
+				maxRPage=1;
+			}
+			System.out.println("상세보기 maxRPage : "+maxRPage);
 			map.put("Admin_selectedSRListCurrPage", group);
 			map.put("Admin_maxRPage", maxRPage);
 			map.put("Admin_selectedSRList", selectedSellerRList);
