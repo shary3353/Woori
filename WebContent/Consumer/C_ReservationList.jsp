@@ -150,7 +150,15 @@ a {
 							<td>${list.sid}</td>
 							<td>${list.reg_date}</td>
 							<td>${list.visit_date}</td>
-							<td class="reserProcess">${list.status}</td>
+							<c:if test="${list.status eq '상담완료'}">
+								<td class="reserProcess" style="color:steelblue;">${list.status}</td>
+							</c:if>
+							<c:if test="${list.status eq '예약완료'}">
+								<td class="reserProcess" style="color:#01DF74;">${list.status}</td>
+							</c:if>
+							<c:if test="${list.status eq '신청중'}">
+								<td class="reserProcess" style="color:tomato;">${list.status}</td>
+							</c:if>
 							<td><a href="cReportForm?t_id=${list.sid}" class="reportBtn">신고하기</a></td>
 						</tr>
 					</c:forEach>
@@ -188,7 +196,11 @@ a {
 	</div>
 </body>
 <script>
+var msg = "${msg}";
 
-s</script>
+if(msg!=""){
+	alert(msg);
+}	
+</script>
 
 </html>

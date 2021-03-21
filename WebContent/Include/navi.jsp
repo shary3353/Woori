@@ -132,7 +132,7 @@ nav .navilist:hover {
 <body>
 	<div id="topmenu">
 		<div id="mainlogo">
-			<a href="${pageContext.request.contextPath}/C_main"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200"
+			<a href="Consumer/C_main"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200"
 				height="100"></a>
 		</div>
 
@@ -141,7 +141,7 @@ nav .navilist:hover {
 		</div>
 
 		<div id="searchmenu">
-		<form action="${pageContext.request.contextPath}/Consumer/C_SearchList" method="post">
+		<form action="${pageContext.request.contextPath}/C_SearchList" method="post">
 			<span id='search_border'> <input type='text' id='searchbar' name='searchname'
 				placeholder="검색어를 입력하세요"/>
 			</span>
@@ -173,19 +173,19 @@ nav .navilist:hover {
 
 	<nav class="navi">
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=1">와인</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=1">와인</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=2">위스키</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=2">위스키</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=3">보드카</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=3">보드카</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=4">꼬냑/브랜디</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=4">꼬냑/브랜디</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=5">샴페인</a>
+			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=5">샴페인</a>
 		</div>
 		<div class="navilist">
 			<a href="${pageContext.request.contextPath}/ServiceCenter/qList">고객센터</a>

@@ -104,7 +104,7 @@
     	<form action="C_Reservation" method="post">
             <table>
                 <tr>
-                    <td rowspan="8" id="ReservationImg"><img src="Uploaded_Img/${dto.newFileName}" alt="${dto.oriFileName}" width="400px"  height="600px"/></td>
+                    <td rowspan="8" id="ReservationImg"><img src="${pageContext.request.contextPath}/Uploaded_Img/${dto.newFileName}" alt="${dto.oriFileName}" width="400px"  height="600px"/></td>
                     <td class="ReservationTitle" colspan="2">예약하기</td>
                 </tr>
 
@@ -134,7 +134,7 @@
                     <td><li class="ReservationName">구매자 : </li></td>
                     <td class="ReservationContent">
                     	<!-- 로그인 세션처리 안해서 구매자 id 임시 지정 -->
-                    	<input type="text" name="cid"   value="test1" readonly  style="border:none;  font-size: 20px;  padding-top: 8px;"/>
+                    	<input type="text" name="cid"   value="${sessionScope.loginID}" readonly  style="border:none;  font-size: 20px;  padding-top: 8px;"/>
                     </td>
                 </tr>
                 <tr>

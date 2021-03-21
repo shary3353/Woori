@@ -27,6 +27,7 @@ public class MainService {
 	}
 
 	public void Cmain() throws ServletException, IOException {
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		HashMap<String, Object> map = null;
 		MainDAO dao = new MainDAO();
 		for (int i = 1; i < 7; i++) {
@@ -36,27 +37,39 @@ public class MainService {
 			req.setAttribute("list"+i, map.get("list"+i));
 		}
 		dao.resClose();
-		dis = req.getRequestDispatcher("Consumer/C_main.jsp");
+		
+		String page="Consumer/C_main.jsp";
+		if(loginID !=null) {
+			page="./Consumer/C_main.jsp";
+		}
+		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 		
 	}
 
 	public void Citemdetail() throws ServletException, IOException {
 		String pidx = req.getParameter("p_idx");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		System.out.println(pidx);
 		MainDAO dao = new MainDAO();
 		ProductDTO dto = dao.Citemdetail(pidx);
 		System.out.println(dto);
-		String page = "/";
+		String page = "./Consumer/C_ItemDetail.jsp";
 		if(dto != null) {
 			page="Consumer/C_ItemDetail.jsp";
-			req.setAttribute("dto", dto);
 		}
+		if (loginID != null) {
+			page="./C_ItemDetail.jsp";
+		}
+		req.setAttribute("dto", dto);
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}
 
 	public void CitemReservation() throws ServletException, IOException {
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		System.out.println(loginID);
+		if (loginID != null) {
 		String pidx = req.getParameter("p_idx");
 		System.out.println(pidx);
 		MainDAO dao = new MainDAO();
@@ -64,15 +77,20 @@ public class MainService {
 		System.out.println(dto);
 		String page = "/";
 		if(dto != null) {
-			page="Consumer/C_ItemReservation.jsp";
+			page="./C_ItemReservation.jsp";
 			req.setAttribute("dto", dto);
 		}
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./Consumer/C_login.jsp");
+		}
 	}
 
 	public void CReservation() throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		if (loginID != null) {
 		String pidx = req.getParameter("p_idx");
 		String sid = req.getParameter("sid");
 		String cid = req.getParameter("cid");
@@ -82,15 +100,18 @@ public class MainService {
 		ReservationDTO dto = new ReservationDTO();
 		boolean success = dao.Creservation(pidx,cid,visitdate);
 		
-		String page = "C_ItemReservation";
+		String page = "./C_ItemReservation.jsp";
 		String msg = "예약이 되지않았습니다 다시 예약을 해주시길 바랍니다.";
 		if(success = true) {
-			page = "Consumer/cReservationList";
+			page="/Consumer/cReservationList";
 			msg = "정상적으로 예약되었습니다.";
 		}
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);	
 		dis.forward(req, resp);
+		}else {
+			resp.sendRedirect("./Consumer/C_login.jsp");
+		}
 	}
 	
 	
@@ -116,6 +137,7 @@ public class MainService {
 
 	public void Csearch() throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String searchname = "%"+req.getParameter("searchname")+"%";
 		if(searchname.equals("%%")) {
 			searchname = null;
@@ -132,7 +154,10 @@ public class MainService {
 			msg = searchtitle;
 		}
 		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher("C_SearchList.jsp");
+		if (loginID != null) {
+			dis = req.getRequestDispatcher("C_SearchList.jsp");
+		}
+		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
 		dis.forward(req, resp);
 		
 	}
@@ -198,6 +223,7 @@ public class MainService {
 
 
 	public void NaviCategory() throws ServletException, IOException {
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		String c_idx = req.getParameter("c_idx");
 		String cate = "";
 		System.out.println(c_idx);
@@ -221,7 +247,7 @@ public class MainService {
 			msg=cate;
 		}
 		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher("C_SearchList");
+		dis = req.getRequestDispatcher("Consumer/C_SearchList.jsp");
 		dis.forward(req, resp);
 	}
 

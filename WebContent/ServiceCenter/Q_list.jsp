@@ -101,39 +101,47 @@ h3 {
 </head>
 <body>
 	<div style="min-width: 1920px">
-		<div>
-			<iframe src="../Include/navi.html" style="width: 100%" height="180px"
-				scrolling="no" frameborder="none"></iframe>
-		</div>
+		<c:choose>
+    		<c:when test="${sessionScope.loginID eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${sessionScope.loginID ne null}">
+			<jsp:include page="../Include/navi.jsp"></jsp:include>
+    		</c:when>
+    	</c:choose>
 		<div class="seMain">
 			<div class="sideMenu">
 				<div class="Service">
-					<a href=qList>고객센터</a>
+				<a href="qList">고객센터</a>
 				</div>
 				<div class="One">
-					<a href="Q_write.jsp">1:1 문의하기</a>
+					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+				 
 				</div>
 				<div class="Question">
 					<a href="Question.jsp">자주묻는 질문</a>
 				</div>
 				<div class="Report">
-					<a href="Report.jsp">신고하기</a>
+					<a href="#" onclick="idCheck2();">신고하기</a>
 				</div>
 			</div>
 		</div>
 		<div id="list_div">
 			<h3>1:1 문의내역</h3>
 				<div id="list">
-	
+					<!-- <form action="qDetail" method="post"> -->
+		
 					<table>
 						<tr>
 							<th class="num">번호</th>
 							<th class="subject">제목</th>
 							<th class="date">날짜</th>
 						</tr>
-						<c:forEach items="${list}" var="list">
+						<c:forEach items="${list}" var="list" varStatus="status">
+							<form id="mainF" action="qDetail" method ="post">
 							<tr>
-								<th class="num">
+								<th id="line${status.index }" class="num">
 								<input  type="text" name="q_idx"
 									value="${list.q_idx }" readonly style="display: none;" />
 									${list.q_idx }
@@ -144,12 +152,14 @@ h3 {
 							</tr>
 							<tr>
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
-									<input type="password" maxlength="4" id="${list.q_idx }" name="password">
-									<button type="button" onclick="send();">저장</button>
+									<input id ="pw${status.index }" type="password" maxlength="4"  name="password">
+									<button calss="viewBtn" name="viewButton">확인</button>
 								</td>
 							</tr>
+								</form>
 						</c:forEach>
 					</table>
+				
 			
 				</div>
 			<div id="Admin_Seller_List_Paging">
@@ -193,9 +203,30 @@ h3 {
 	if (msg != "") {
 		alert(msg);
 	}
+    function idCheck(){ 
+        var uid = '<%=(String)session.getAttribute("loginID")%>';
+		console.log(uid);
+         if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+            alert("로그인이 필요한 항목입니다."); 
+         }
+         else{
+            location.replace("./Q_write.jsp");
+         }
+   }  
 	
-	function send() {
-		form.submit();
-	}
+	 function idCheck2(){ 
+        var uid = '<%=(String)session.getAttribute("loginID")%>';
+		console.log(uid);
+         if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+            alert("로그인이 필요한 항목입니다."); 
+         }
+         else{
+            location.replace("./Report.jsp");
+         }
+   }   
+	/* 	$(".viewBtn").click(function(){
+			
+		}) */
+
 </script>
 </html>

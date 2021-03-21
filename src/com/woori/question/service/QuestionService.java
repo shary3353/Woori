@@ -195,6 +195,8 @@ public class QuestionService {
 	}
 
 	public void qWrite() throws ServletException, IOException {
+		String sid = (String) req.getSession().getAttribute("loginID");
+		if(sid != null) {//로그인 여부 판별
 		String sId = req.getParameter("sid");
 		String cId = req.getParameter("cid");
 		String category = req.getParameter("category");
@@ -222,6 +224,10 @@ public class QuestionService {
 		System.out.println(json);
 		
 		resp.getWriter().print(json);
+		
+		} else { //로그인을 안 했으면 로그인페이지로 
+			resp.sendRedirect("../Consumer/C_login.jsp"); 
+		}
 	}
 
 	public void qDetail() throws ServletException, IOException {

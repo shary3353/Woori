@@ -64,6 +64,10 @@ td {
 .moreBtn {
 	text-decoration: none;
 }
+
+.ListDetail:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -82,7 +86,7 @@ td {
 			</div>
 			<c:forEach items="${rList}" var="rList">
 				<div class="reservationInnerBox">
-					<table>
+					<table class="ListDetail" onclick="location=href='../C_itemDetail?p_idx=${rList.p_idx}'">
 						<tr>
 							<th rowspan="3"><img src="${pageContext.request.contextPath}/Uploaded_Img/${rList.newFileName}"
 								alt="${rList.newFileName}" class="pImg" /></th>
@@ -108,7 +112,7 @@ td {
 			</div>
 			<c:forEach items="${wList}" var="wList">
 				<div class="wishListInnerBox">
-					<table>
+					<table class="ListDetail" onclick="location=href='../C_itemDetail?p_idx=${wList.p_idx}'">
 						<tr>
 							<th rowspan="3"><img src="${pageContext.request.contextPath}/Uploaded_Img/${wList.newFileName}"
 								alt="${wList.newFileName}" class="pImg" /></th>

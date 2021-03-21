@@ -1,3 +1,4 @@
+<%@page import="com.sun.jdi.Location"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -122,23 +123,29 @@ table {
 </head>
 <body>
 	<div style="min-width: 1920px">
-		<div>
-			<iframe src="../Include/navi.jsp" style="width: 100%" height="180px"
-				scrolling="no" frameborder="none"></iframe>
-		</div>
+		<c:choose>
+    		<c:when test="${sessionScope.loginID eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${sessionScope.loginID ne null}">
+			<jsp:include page="../Include/navi.jsp"></jsp:include>
+    		</c:when>
+    	</c:choose>
 		<div class="seMain">
 			<div class="sideMenu">
 				<div class="Service">
-					<a href=qList>고객센터</a>
+					<a href="qList">고객센터</a>
 				</div>
 				<div class="One">
-					<a href="Q_write.jsp">1:1 문의하기</a>
+					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+				 
 				</div>
 				<div class="Question">
 					<a href="Question.jsp">자주묻는 질문</a>
 				</div>
 				<div class="Report">
-					<a href="Report.jsp">신고하기</a>
+					<a href="#" onclick="idCheck2();">신고하기</a>
 				</div>
 			</div>
 		</div>
@@ -149,8 +156,8 @@ table {
 				<tr>
 					<td class="column1">작성자</td>
 					<td class="column2"><input type="text" id="cId"
-						name="consumerId"> <!--  value="${sessionScope.loginId}" readonly/>
-                      --></td>
+						name="consumerId" value="${sessionScope.loginID}" readonly/>
+                      </td>
 					<td>카테고리 <select id="category" name="category" value="문의/카테고리">
 							<option value="100" selected="selected">상품관련</option>
 							<option value="200">예약관련</option>
@@ -230,7 +237,10 @@ table {
 		} else if ($pass.val().length != 4) {
 			alert('비밀번호를 입력해주세요');
 			$pass.focus();
-		} else {
+		} else if(isNaN($pass.val()) == true){
+			alert('비밀번호를 숫자로 입력하세요');
+			$pass.focus();
+		}else{		
 			console.log('서버로전송');
 			var pa = {};
 			pa.cid = $cid.val();
@@ -252,7 +262,7 @@ table {
 						alert('문의등록에  성공하였습니다.');
 						location.href = "qList";
 					} else {
-						alert('잠시 후 다시 시도해 주세요');
+						alert('판매자 ID를 확인해주세요');
 					}
 				},
 				error : function(e) {
@@ -261,5 +271,30 @@ table {
 			});
 		}
 	})
+	
+	
+    function idCheck(){ 
+         var uid = '<%=(String)session.getAttribute("loginID")%>';
+		console.log(uid);
+          if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+             alert("로그인이 필요한 항목입니다."); 
+          }
+          else{
+             location.replace("./Q_write.jsp");
+          }
+    }  
+	
+	 function idCheck2(){ 
+         var uid = '<%=(String)session.getAttribute("loginID")%>';
+		console.log(uid);
+          if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+             alert("로그인이 필요한 항목입니다."); 
+          }
+          else{
+             location.replace("./Report.jsp");
+          }
+    }   
+	
+	
 </script>
 </html>

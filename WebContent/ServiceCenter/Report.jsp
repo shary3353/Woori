@@ -98,25 +98,29 @@ table {
 </head>
 <body>
 	<div style="min-width: 1920px">
-
-
-		<div>
-			<iframe src="../Include/navi.html" style="width: 100%" height="180px"
-				scrolling="no" frameborder="none"></iframe>
-		</div>
+<c:choose>
+    		<c:when test="${sessionScope.loginID eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${sessionScope.loginID ne null}">
+			<jsp:include page="../Include/navi.jsp"></jsp:include>
+    		</c:when>
+    	</c:choose>
 		<div class="seMain">
 			<div class="sideMenu">
 				<div class="Service">
-					<a href=qList>고객센터</a>
+					<a href="qList">고객센터</a>
 				</div>
 				<div class="One">
-					<a href="Q_write.jsp">1:1 문의하기</a>
+					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+				 
 				</div>
 				<div class="Question">
 					<a href="Question.jsp">자주묻는 질문</a>
 				</div>
 				<div class="Report">
-					<a href="Report.jsp">신고하기</a>
+					<a href="#" onclick="idCheck2();">신고하기</a>
 				</div>
 			</div>
 		</div>
@@ -132,13 +136,13 @@ table {
 						</tr>
 						<tr>
 							<th>신고자</th>
-							<td><input id="cId" type="text" name="userName"
-								value="${dto.reporter_id}" /></td>
-							<!--  value="${sessionScope.loginId}" readonly/> -->
+							<td><input id="rId" type="text" name="userName"
+								value="${sessionScope.loginID}" readonly/></td>
+						
 						</tr>
 						<tr>
 							<th>신고대상자</th>
-							<th><input id="sId" type="text" name="sellerId"
+							<th><input id="tId" type="text" name="sellerId"
 								value=""></th>
 						</tr>
 						<tr>
@@ -170,18 +174,18 @@ table {
 <script>
 	$("#btn").click(function(){
 		var $subject = $("#subject").val();
-		var $cId = $("#cId").val();
-		var $sId = $("#sId").val();
+		var $rId = $("#rId").val();
+		var $tId = $("#tId").val();
 		var $category = $("#cate").val();
 		var $content = $("#content").val();
 		
 		if($subject == ''){
 			alert('제목을 입력해주세요');
 			$subject.focus();
-		}else if($cId == ''){
+		}else if($rId == ''){
 			alert('로그인 하세요');
 			$cId.focus();
-		}else if($sId == ''){
+		}else if($tId == ''){
 			alert('신고자를 확인해주세요')
 			$sId.focus();
 		}else if($category == 0){
@@ -194,8 +198,8 @@ table {
 			console.log('서버로 전송');
 			var pa = {};
 			pa.subject = $subject;
-			pa.cId = $cId;
-			pa.sId = $sId;
+			pa.rId = $rId;
+			pa.tId = $tId;
 			pa.category = $category;
 			pa.content = $content;
 			$.ajax({
@@ -218,5 +222,27 @@ table {
 			})
 		}
 	})
+	
+	    function idCheck(){ 
+         var uid = '<%=(String)session.getAttribute("loginID")%>';
+		console.log(uid);
+          if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+             alert("로그인이 필요한 항목입니다."); 
+          }
+          else{
+             location.replace("./Q_write.jsp");
+          }
+    }  
+	
+	 function idCheck2(){ 
+         var uid = '<%=(String)session.getAttribute("loginID")%>';
+		console.log(uid);
+          if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+             alert("로그인이 필요한 항목입니다."); 
+          }
+          else{
+             location.replace("./Report.jsp");
+          }
+    }   
 </script>
 </html>

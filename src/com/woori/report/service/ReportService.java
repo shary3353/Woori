@@ -59,9 +59,11 @@ public class ReportService {
 	}
 
 	public void report() throws ServletException, IOException {
+		String id = (String)req.getSession().getAttribute("loginID");
+		if(id != null) {//로그인 여부 판별
 		String subejct = req.getParameter("subject");
-		String reporter_id = req.getParameter("cId");
-		String target_id = req.getParameter("sId");
+		String reporter_id = req.getParameter("rId");
+		String target_id = req.getParameter("tId");
 		String category = req.getParameter("category");
 		String content = req.getParameter("content");
 		long r_idx = 0;
@@ -85,6 +87,9 @@ public class ReportService {
 		String json = gson.toJson(map);
 		
 		resp.getWriter().print(json);
+		} else { //로그인을 안 했으면 로그인페이지로
+			resp.sendRedirect("../Consumer/C_login.jsp");
+		}
 	}
 
 	public void detail() throws ServletException, IOException {
@@ -123,7 +128,7 @@ public class ReportService {
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("");
+			RequestDispatcher dis = req.getRequestDispatcher("./C_login.jsp");
 			dis.forward(req, resp);
 		}
 	}
@@ -164,7 +169,7 @@ public class ReportService {
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("");
+			RequestDispatcher dis = req.getRequestDispatcher("./C_login.jsp");
 			dis.forward(req, resp);
 		}
 		

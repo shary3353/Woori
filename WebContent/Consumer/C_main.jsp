@@ -113,7 +113,6 @@
 
 <body>
 	<div id="wrap">
-	${sessionScope.loginID}
 		<c:choose>
     		<c:when test="${sessionScope.loginID eq null}">
 			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
@@ -280,7 +279,13 @@
 	</div>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+	var msg = "${msg}";
+
+	if(msg!=""){	
+		alert(msg);
+	}	
 </script>
 </html>
 
