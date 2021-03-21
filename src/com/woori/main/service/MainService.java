@@ -27,6 +27,7 @@ public class MainService {
 	}
 
 	public void Cmain() throws ServletException, IOException {
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		HashMap<String, Object> map = null;
 		MainDAO dao = new MainDAO();
 		for (int i = 1; i < 7; i++) {
@@ -36,7 +37,12 @@ public class MainService {
 			req.setAttribute("list"+i, map.get("list"+i));
 		}
 		dao.resClose();
-		dis = req.getRequestDispatcher("Consumer/C_main.jsp");
+		
+		String page="Consumer/C_main.jsp";
+		if(loginID !=null) {
+			page="./Consumer/C_main.jsp";
+		}
+		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 		
 	}
@@ -48,14 +54,14 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ProductDTO dto = dao.Citemdetail(pidx);
 		System.out.println(dto);
-		String page = "/";
+		String page = "./Consumer/C_ItemDetail.jsp";
 		if(dto != null) {
 			page="Consumer/C_ItemDetail.jsp";
-			req.setAttribute("dto", dto);
 		}
 		if (loginID != null) {
 			page="./C_ItemDetail.jsp";
 		}
+		req.setAttribute("dto", dto);
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 	}

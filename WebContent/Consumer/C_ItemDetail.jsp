@@ -131,14 +131,15 @@
 		if(msg!=""){
 			alert(msg);
 		}
-		
+		 var loginid = '<%=(String)session.getAttribute("loginID")%>';	
 	//좋아요 검사	
 	function likeConfirm(){
+		if(loginid != 'null'){
 		$.ajax({
 			type:'GET'
 			,url:'likeConfirm'
 			,data:{
-				cid: 'test1'
+				cid: loginid
 				,pidx: '${dto.p_idx}'
 			}
 			,dataType:'JSON'
@@ -157,9 +158,15 @@
 				console.log(e);
 			}
 		})
+		}else{
+			console.log("아이디가 없습니다");
+			$("#likeButton").css("display","none");
+			$("#dislikeButton").css("display","none");
+		}
 	};
-	
+
 	likeConfirm();// 시작하자마자 like여부 검사
+
 	
 	var $likeButton = $("#likeButton");
 	var $dislikeButton = $("#dislikeButton");
@@ -168,7 +175,7 @@
 		
 		var likeContent ={}
 		likeContent.pidx = '${dto.p_idx}';
-		likeContent.cid = 'test1';
+		likeContent.cid = loginid;
 		console.log(likeContent.pidx,likeContent.cid);
 		
 		$.ajax({
@@ -194,7 +201,7 @@
 		
 		var likeContent ={}
 		likeContent.pidx = '${dto.p_idx}';
-		likeContent.cid = 'test1';
+		likeContent.cid = loginid;
 		console.log(likeContent.pidx,likeContent.cid);
 		
 		$.ajax({

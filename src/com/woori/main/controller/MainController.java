@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.main.service.MainService;
 
-@WebServlet({"/C_main","/C_itemDetail","/Consumer/C_itemDetail","/C_ItemReservation","/Consumer/C_ItemReservation","/Consumer/C_Reservation", "/AdminMain","/C_SearchList","/C_LikePlus","/likeConfirm","/C_LikeMinus","/NaviCategory"})
+@WebServlet({"/C_main","/Consumer/C_main","/C_itemDetail","/Consumer/C_itemDetail","/C_ItemReservation","/Consumer/C_ItemReservation","/Consumer/C_Reservation", "/AdminMain","/C_SearchList","/Consumer/C_LikePlus","/Consumer/likeConfirm","/Consumer/C_LikeMinus","/NaviCategory"})
 public class MainController extends HttpServlet {
 
 	@Override
@@ -34,6 +34,10 @@ public class MainController extends HttpServlet {
 			System.out.println("Consumer Mainpage");
 			service.Cmain();
 			break;
+		case "/Consumer/C_main":
+			System.out.println("Consumer login Mainpage");
+			service.Cmain();
+			break;	
 			
 		case "/C_itemDetail":
 			System.out.println("물품 상세정보 페이지");
@@ -70,16 +74,16 @@ public class MainController extends HttpServlet {
 			service.AdminMain();
 			break;
 			
-		case "/C_LikePlus":
+		case "/Consumer/C_LikePlus":
 			System.out.println("좋아요 추가");
 			service.Clikeplus();
 			break;
-		case "/C_LikeMinus":
+		case "/Consumer/C_LikeMinus":
 			System.out.println("좋아요 뺴기");
 			service.Clikeminus();
 			break;
 		
-		case "/likeConfirm"	:
+		case "/Consumer/likeConfirm"	:
 			System.out.println("좋아요 확인");
 			service.likeconfirm();
 			break;
