@@ -39,9 +39,11 @@ public class MainService {
 		dao.resClose();
 		
 		String page="Consumer/C_main.jsp";
-		if(loginID !=null) {
-			page="./Consumer/C_main.jsp";
+		String homekey = req.getParameter("main");
+		if(homekey !=null) {
+			page="C_main.jsp";
 		}
+		System.out.println(homekey);
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 		
