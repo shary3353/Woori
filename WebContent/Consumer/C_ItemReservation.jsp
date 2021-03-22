@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>디테일</title>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style>
 
 	*   {
@@ -159,6 +160,21 @@
 	
 	if(msg!=""){
 		alert(msg);
-	}	
+	}
+	
+	var $date = $("#ReservationDate");
+	console.log($date)
+	var $ReservationButton = $("#ReservationButton");
+	console.log($ReservationButton);
+	
+	$ReservationButton.click(function(){
+		
+		if($date.val() == ""){
+			alert('날짜를 입력해 주세요!');
+		}else{
+			var param = {};
+		}
+	});
+	
 </script>
 </html>
