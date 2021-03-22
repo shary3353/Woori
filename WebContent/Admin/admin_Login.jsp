@@ -99,7 +99,7 @@
         <br /><!--하단 문구-->
         <p class="row-text-top">아이디/비밀번호를 잊어버리셨나요? 관리자 이외에는 로그인 할 수 없습니다.</p>
         <p class="row-text-row" style="color: rgb(196, 196, 196); font-weight: bold;">고객센터| 1588-1588 </p>
-        <p><a href="#" style="font-size: small; color: rgb(196, 196, 196);">메인페이지로></a></p>
+        <p><a href="../C_main" style="font-size: small; color: rgb(196, 196, 196);">메인페이지로></a></p>
     </div><!--컨테이너 div닫음-->
 </body>
 <script type="text/javascript">
