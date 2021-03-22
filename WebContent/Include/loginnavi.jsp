@@ -134,8 +134,8 @@ nav .navilist:hover {
 	<div id="topmenu">
 
 		<div id="mainlogo">
-			<a href="${pageContext.request.contextPath}/C_main"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200"
-				height="100"></a>
+
+			<a href="${pageContext.request.contextPath}/Consumer/C_main"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200" height="100"></a>
 		</div>
 
 		<div id="searchicon">

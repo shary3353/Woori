@@ -178,7 +178,7 @@ public class MemberService {
 		String pw = req.getParameter("pw");
 		System.out.println(cid + "/" + pw);
 		
-		page = "../Consumer/C_login.jsp";
+		page = "./C_login.jsp";
 		msg = "아이디 비밀번호를 다시 확인해 주세요!";
 		
 		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
@@ -189,16 +189,16 @@ public class MemberService {
 		
 		if(!isblack) {//블락이 아니고 성공하면
 			if (success) {
-				page = "/C_main";
+				page = "C_main";//로그인되었을때,
 				msg = cid + " 님 반갑 습니다.";
 				req.getSession().setAttribute("loginID", cid);
+				System.out.println("로그인성공");
 			}
 		} else if(isblack) {//블락이면
 			msg = "블랙리스트에 등록된 아이디입니다.";
 		}
-		
 		req.setAttribute("msg", msg);
-		dis = req.getRequestDispatcher(page);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 
 	}

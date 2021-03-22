@@ -27,7 +27,6 @@ public class MainService {
 	}
 
 	public void Cmain() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
 		HashMap<String, Object> map = null;
 		MainDAO dao = new MainDAO();
 		for (int i = 1; i < 7; i++) {
@@ -38,15 +37,9 @@ public class MainService {
 		}
 		dao.resClose();
 		
-		String page="Consumer/C_main.jsp";
-		String homekey = req.getParameter("main");
-		if(homekey !=null) {
-			page="C_main.jsp";
-		}
-		System.out.println(homekey);
+		String page="./C_main.jsp";
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
-		
 	}
 
 	public void Citemdetail() throws ServletException, IOException {
