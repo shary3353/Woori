@@ -108,7 +108,7 @@ h3 {
     function idCheck(){ 
          var uid = '<%=(String)session.getAttribute("loginID")%>';
 		console.log(uid);
-          if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+          if(uid=="null"){ 
              alert("로그인이 필요한 항목입니다."); 
           }
           else{
@@ -119,7 +119,7 @@ h3 {
 	 function idCheck2(){ 
          var uid = '<%=(String)session.getAttribute("loginID")%>';
 		console.log(uid);
-          if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+          if(uid=="null"){ 
              alert("로그인이 필요한 항목입니다."); 
           }
           else{

@@ -152,8 +152,8 @@ h3 {
 							</tr>
 							<tr>
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
-									<input id ="pw${status.index }" type="password" maxlength="4"  name="password">
-									<button calss="viewBtn" name="viewButton">확인</button>
+									<input id ="pw${status.index }" type="number"  style="-webkit-text-security: disc;" max="9999"  name="password">
+									<button  calss="viewBtn" name="viewButton" >확인</button>
 								</td>
 							</tr>
 								</form>
@@ -206,7 +206,7 @@ h3 {
     function idCheck(){ 
         var uid = '<%=(String)session.getAttribute("loginID")%>';
 		console.log(uid);
-         if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+         if(uid=="null"){ 
             alert("로그인이 필요한 항목입니다."); 
          }
          else{
@@ -217,16 +217,19 @@ h3 {
 	 function idCheck2(){ 
         var uid = '<%=(String)session.getAttribute("loginID")%>';
 		console.log(uid);
-         if(uid=="null"){ //jsp 표현식 써서 그런지 진짜 literal하게 null이라는 문자와 비교해야 if문에 들어가는 아주 황당한 사례
+         if(uid=="null"){ 
             alert("로그인이 필요한 항목입니다."); 
          }
          else{
             location.replace("./Report.jsp");
          }
    }   
-	/* 	$(".viewBtn").click(function(){
-			
-		}) */
+
+	function cc(){
+		var pwpw = document.getElementByClass('viewBtn');
+		console.log(pwpw.val());
+		
+	}
 
 </script>
 </html>
