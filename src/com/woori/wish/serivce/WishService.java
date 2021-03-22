@@ -80,10 +80,13 @@ public class WishService {
 			System.out.println("Add Wish List p_idx : " + p_idx);
 			WishDAO dao = new WishDAO();
 			dao.addWishList(p_idx, loginID);
+			req.setAttribute("p_idx", p_idx);
+			RequestDispatcher dis = req.getRequestDispatcher("wishPaging?page=1");
+			dis.forward(req, resp);
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("./C_login.jsp");
+			RequestDispatcher dis = req.getRequestDispatcher("C_login.jsp");
 			dis.forward(req, resp);
 		}
 	}
