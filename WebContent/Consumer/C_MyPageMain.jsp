@@ -80,7 +80,7 @@ td {
 				<p
 					style="font-size: 25px; font-weight: 600; text-align: left; color: mediumslateblue">
 					예약 내역 <a href="cReservationList?page=1" class="moreBtn"><img
-						src="../img/plus_Btn.png" style="width: 25px; height: 25px" /></a>
+						src="../img/plus_Btn.png" style="width: 25px; height: 25px; " /></a>
 				</p>
 
 			</div>
