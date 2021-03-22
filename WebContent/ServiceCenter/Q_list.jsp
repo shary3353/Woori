@@ -156,7 +156,7 @@ input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
 									<input id ="pw${status.index }" type="number"  style="-webkit-text-security: disc;" 
 									 maxlength="4"  name="password" oninput="maxLengthCheck(this)">
-									<button  calss="viewBtn" name="viewButton" >확인</button>
+									<button  class="viewBtn" name="viewButton" >확인</button>
 								</td>
 							</tr>
 								</form>
@@ -186,6 +186,7 @@ input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin
 					</c:if>
 				</span>
 			</div>
+		</div>
 		</div>
 </body>
 

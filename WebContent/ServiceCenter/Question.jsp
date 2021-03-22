@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Question</title>
 <style>
 body {
@@ -75,10 +78,15 @@ h3 {
 </head>
 <body>
 	<div style="min-width: 1920px">
-	
-    	
+		<c:choose>
+    		<c:when test="${sessionScope.loginID eq null}">
+			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
+    		</c:when>
+   
+    		<c:when test="${sessionScope.loginID ne null}">
 			<jsp:include page="../Include/navi.jsp"></jsp:include>
-    
+    	</c:when>
+    	</c:choose>
 		<div class="wrap">
 
 			<div class="seMain">
