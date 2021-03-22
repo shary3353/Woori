@@ -135,7 +135,7 @@ nav .navilist:hover {
 
 		<div id="mainlogo">
 
-			<a href="${pageContext.request.contextPath}/Consumer/C_main"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200" height="100"></a>
+			<a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/img/mainlogo.png" width="200" height="100"></a>
 		</div>
 
 		<div id="searchicon">
@@ -143,7 +143,7 @@ nav .navilist:hover {
 		</div>
 
 		<div id="searchmenu">
-		<form action="C_SearchList" method="post">
+		<form action="../Consumer/C_SearchList" method="post">
 			<span id='search_border'> <input type='text' id='searchbar' name='searchname'
 				placeholder="검색어를 입력하세요"/>
 			</span>
@@ -153,7 +153,7 @@ nav .navilist:hover {
 
 		<div id="toplistBox">
 			<div class="toplist">
-				<img src="img/login.png" width="40" height="40">
+				<img src="${pageContext.request.contextPath}/img/login.png" width="40" height="40">
 				<a href="${pageContext.request.contextPath}/Consumer/C_login.jsp">로그인</a>
 			</div>
 		</div>
@@ -163,19 +163,19 @@ nav .navilist:hover {
 
 	<nav class="navi">
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=1">와인</a>
+			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=1">와인</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=2">위스키</a>
+			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=2">위스키</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=3">보드카</a>
+			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=3">보드카</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=4">꼬냑/브랜디</a>
+			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=4">꼬냑/브랜디</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/NaviCategory?c_idx=5">샴페인</a>
+			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=5">샴페인</a>
 		</div>
 		<div class="navilist">
 			<a href="${pageContext.request.contextPath}/ServiceCenter/qList">고객센터</a>
