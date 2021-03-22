@@ -166,14 +166,18 @@ table {
 					</select>
 					</td>
 					<td class="column1">문의상품</td>
-					<td class="culumn1" name="productName"><c:set var="p_name"
-							value="<%=request.getParameter(\"p_name\")%>"></c:set> <c:if
-							test="${p_name != null}">
+					<td class="culumn1" name="productName">
+					<c:set var="p_name"
+							value="<%=request.getParameter(\"p_name\")%>">
+					</c:set> 
+					<c:if test="${p_name != null}">
 							<input class="productName" name="p_name" maxlength='50'
 								value="<%=request.getParameter("p_name")%>" readonly>
-						</c:if> <c:if test="${p_name == null }">
+						</c:if> 
+						<c:if test="${p_name == null }">
 							<input class="productName" type="text" name="p_name">
-						</c:if></td>
+						</c:if>
+						</td>
 				</tr>
 				<tr>
 					<td class="column1">제목</td>

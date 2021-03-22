@@ -142,8 +142,18 @@ table {
 						</tr>
 						<tr>
 							<th>신고대상자</th>
-							<th><input id="tId" type="text" name="sellerId"
-								value=""></th>
+							<th>
+							<c:set var="targetId" value="<%=request.getParameter(\"sid\")%>"></c:set>
+							<c:if test="${targetId == null }">
+							<input id="tId" type="text" name="sellerId"
+								value="">
+								</c:if>
+								<c:if test="${targetId != null}">
+									<input id="tId" type="text" name="sellerId"
+								value="<%=request.getParameter("sid")%>" readonly>
+								</c:if>
+								</th>
+								
 						</tr>
 						<tr>
 							<th>신고 카테고리</th>

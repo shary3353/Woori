@@ -97,6 +97,8 @@ h3 {
 #list_div {
 	margin-left: 300px;
 }
+input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}
+
 </style>
 </head>
 <body>
@@ -152,7 +154,8 @@ h3 {
 							</tr>
 							<tr>
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
-									<input id ="pw${status.index }" type="number"  style="-webkit-text-security: disc;" max="9999"  name="password">
+									<input id ="pw${status.index }" type="number"  style="-webkit-text-security: disc;" 
+									 maxlength="4"  name="password" oninput="maxLengthCheck(this)">
 									<button  calss="viewBtn" name="viewButton" >확인</button>
 								</td>
 							</tr>
@@ -230,6 +233,12 @@ h3 {
 		console.log(pwpw.val());
 		
 	}
+	function maxLengthCheck(object){
+	    if (object.value.length > object.maxLength){
+	        object.value = object.value.slice(0, object.maxLength);
+	    }    
+	}
+
 
 </script>
 </html>
