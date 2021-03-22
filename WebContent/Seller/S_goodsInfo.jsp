@@ -84,7 +84,7 @@
             </tr>
             <tr>
                 <td class="column-name">내용</td>
-                <td>${dto.p_content}</td>
+                <td style="white-space: pre-line;">${dto.p_content}</td>
             </tr>
             <tr>
                 <td colspan="3" class="btnArea">
