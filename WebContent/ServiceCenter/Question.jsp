@@ -90,12 +90,10 @@ h3 {
 		<div class="wrap">
 
 			<div class="seMain">
-				<div class="sideMenu">
-					<div class="Service">
-						<a href="qList">고객센터</a>
-				</div>
+			<div class="sideMenu">
+				<div class="Service">고객센터</div>
 				<div class="One">
-					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+					<a href="qList">1:1 문의하기</a>
 				 
 				</div>
 				<div class="Question">
@@ -103,9 +101,9 @@ h3 {
 				</div>
 				<div class="Report">
 					<a href="#" onclick="idCheck2();">신고하기</a>
-					</div>
 				</div>
 			</div>
+		</div>
 			<div id="image">
 				<img src="../img/FQA.PNG" width="1000" height="400" />
 			</div>

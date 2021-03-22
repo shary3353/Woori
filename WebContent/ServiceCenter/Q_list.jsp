@@ -114,11 +114,9 @@ input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin
     	</c:choose>
 		<div class="seMain">
 			<div class="sideMenu">
-				<div class="Service">
-				<a href="qList">고객센터</a>
-				</div>
+				<div class="Service">고객센터</div>
 				<div class="One">
-					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+					<a href="qList">1:1 문의하기</a>
 				 
 				</div>
 				<div class="Question">
@@ -183,8 +181,12 @@ input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin
 				</span> <span class="Page_Content"> <c:if
 						test="${currPage < maxPage }">
 						<a href="./qList?page=${maxPage}">마지막</a>
-					</c:if>
+					</c:if>	
 				</span>
+				
+				<div style=" float: right;">
+					<button style="padding:3px 7px;" onclick="idCheck();"> 문의하기</button>
+				</div>
 			</div>
 		</div>
 		</div>

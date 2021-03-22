@@ -101,11 +101,9 @@ h3 {
 		
 		<div class="seMain">
 			<div class="sideMenu">
-				<div class="Service">
-					<a href="qList">고객센터</a>
-				</div>
+				<div class="Service">고객센터</div>
 				<div class="One">
-					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+					<a href="qList">1:1 문의하기</a>
 				 
 				</div>
 				<div class="Question">
@@ -116,7 +114,6 @@ h3 {
 				</div>
 			</div>
 		</div>
-
 
 		<div id="form">
 			<h3>문의 내용</h3>

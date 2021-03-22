@@ -90,8 +90,7 @@ table {
 
 #button {
 	text-align: center;
-	width: 650px;
-	margin-left: 120px;
+	width: 1298px;	
 	margin-top: 30px;
 }
 </style>
@@ -109,11 +108,9 @@ table {
     	</c:choose>
 		<div class="seMain">
 			<div class="sideMenu">
-				<div class="Service">
-					<a href="qList">고객센터</a>
-				</div>
+				<div class="Service">고객센터</div>
 				<div class="One">
-					<a href="#" onclick="idCheck();">1:1 문의하기</a>
+					<a href="qList">1:1 문의하기</a>
 				 
 				</div>
 				<div class="Question">
@@ -175,7 +172,7 @@ table {
 						</tr>
 					</table>
 					<div id="button">
-						<button id="btn" style="width: 80px;">신고하기</button>
+						<button id="btn" style="width: 80px; padding:3px 7px;">신고하기</button>
 					</div>
 			</div>
 		</div>
