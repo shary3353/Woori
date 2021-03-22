@@ -169,7 +169,7 @@ public class ReportDAO {
 
 		String sql = "SELECT r.rnum, r.r_idx, r.subject, r.target_id, r.r_date, rc.categories, r.status "
 				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY r_idx DESC) AS rnum, r_idx, rc_code, subject, target_id, to_char(r_date, 'yyyy-mm-dd') r_date, status FROM report WHERE reporter_id = ?) r,report_categories rc "
-				+ "WHERE r.rc_code=rc.rc_idx AND r.rnum BETWEEN ? AND ?";
+				+ "WHERE r.rc_code=rc.rc_idx AND r.rnum BETWEEN ? AND ? ORDER BY r.rnum";
 
 		try {
 			ps = conn.prepareStatement(sql);
