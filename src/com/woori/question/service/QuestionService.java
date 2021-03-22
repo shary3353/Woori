@@ -102,7 +102,7 @@ public class QuestionService {
 			QuestionDTO dto = dao.cQuestionDetail(q_idx);
 
 			req.setAttribute("list", dto);
-			RequestDispatcher dis = req.getRequestDispatcher("../ServiceCenter/Q_detail.jsp");
+			RequestDispatcher dis = req.getRequestDispatcher("../Consumer/C_QuestionDetail.jsp");
 			dis.forward(req, resp);
 		} else {
 			msg = "로그인을 해주세요.";

@@ -164,7 +164,7 @@ public class ReportService {
 			ReportDTO dto = dao.detail(r_idx);
 			
 			req.setAttribute("dto", dto);
-			dis = req.getRequestDispatcher("../ServiceCenter/ReportDetail.jsp");
+			dis = req.getRequestDispatcher("../Consumer/C_ReportDetail.jsp");
 			dis.forward(req, resp);
 		} else {
 			msg = "로그인을 해주세요.";
