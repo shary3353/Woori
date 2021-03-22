@@ -82,7 +82,9 @@
 	            </tr>
 	            <tr>
 	                <td class="column-name" >판매자</td>
-	                <td>${sessionScope.loginID}</td>
+	                <td>${sessionScope.loginID}
+	                	<input type="hidden" name="sid" value="${sessionScope.loginID}" />
+	                </td>
 	            </tr>
 	            <tr>
 	                <td class="column-name" >상품설명</td>
