@@ -51,8 +51,7 @@ public class MainDAO {
 		
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		String sql = "SELECT p.p_idx,p.p_name,p.likes,p.p_price,t.orifilename,t.newfilename " + 
-				"FROM (SELECT p_idx,p_name,likes,p_price, ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product) p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE rk=?";
+		String sql = "SELECT p.p_idx,p.p_name,p.likes,p.p_price,p.is_sold,t.orifilename,t.newfilename,rk FROM (SELECT p_idx,p_name,likes,p_price,is_sold,ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product WHERE is_sold=1) p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE rk=?";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -155,7 +154,7 @@ public class MainDAO {
 	public ArrayList<ProductDTO> mainSearch(String searchname) {
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		String sql="SELECT p.p_idx,p.p_name,p.likes,p.p_price,t.orifilename,t.newfilename \r\n" + 
-				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_name LIKE ?";
+				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_name LIKE ? AND is_sold=1";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, searchname);
@@ -281,7 +280,7 @@ public class MainDAO {
 	public ArrayList<ProductDTO> categorySearch(String c_idx) {
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		String sql="SELECT p.p_idx,p.p_name,p.likes,p.p_price,t.orifilename,t.newfilename " + 
-				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE c_idx=?";
+				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE c_idx=? AND is_sold=1";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(c_idx));
