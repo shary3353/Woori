@@ -75,7 +75,7 @@
             </tr>
             <tr>
                 <th class="column-name">신고내용</th>
-                <td id="content">${dto.content }</td>
+                <td id="content" style="white-space: pre-line;">${dto.content }</td>
             </tr>
             <tr>
 	            <td colspan="2" class="btnArea">

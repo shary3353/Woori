@@ -64,11 +64,11 @@
             </tr>
             <tr>
                 <td class="column-name">내용</td>
-                <td colspan="5">${dto.content}</td>
+                <td colspan="5" style="white-space: pre-line;">${dto.content}</td>
             </tr>
             <tr>
                 <td class="column-name">답변내용</td>
-                <td colspan="5">
+                <td colspan="5" style="white-space: pre-line;">
                 	${dto.s_answer}
                     <div style="background:lightgray;margin-top: 5px;">*이외의 문의 있을시 새로운 문의작성 부탁드립니다.</div>
                 </td>
