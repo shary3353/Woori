@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.main.service.MainService;
 
-@WebServlet({"/Consumer/C_main","/C_itemDetail","/Consumer/C_itemDetail","/C_ItemReservation","/Consumer/C_ItemReservation","/Consumer/C_Reservation", "/AdminMain","/C_SearchList","/Consumer/C_LikePlus","/Consumer/likeConfirm","/Consumer/C_LikeMinus","/NaviCategory"})
+@WebServlet({"/Consumer/C_main","/Consumer/C_itemDetail","/C_ItemReservation","/Consumer/C_ItemReservation","/Consumer/C_Reservation", "/AdminMain","/Consumer/C_SearchList","/Consumer/C_LikePlus","/Consumer/likeConfirm","/Consumer/C_LikeMinus","/Consumer/NaviCategory"})
 public class MainController extends HttpServlet {
 
 	@Override
@@ -35,11 +35,6 @@ public class MainController extends HttpServlet {
 			service.Cmain();
 			break;	
 			
-		case "/C_itemDetail":
-			System.out.println("물품 상세정보 페이지");
-			service.Citemdetail();
-			break;
-			
 		case "/Consumer/C_itemDetail":
 			System.out.println("로그인 물품 상세정보 페이지");
 			service.Citemdetail();
@@ -60,7 +55,7 @@ public class MainController extends HttpServlet {
 			service.CReservation();
 			break;
 		
-		case "/C_SearchList":
+		case "/Consumer/C_SearchList":
 			System.out.println("물품 검색");
 			service.Csearch();
 			break;
@@ -84,7 +79,7 @@ public class MainController extends HttpServlet {
 			service.likeconfirm();
 			break;
 			
-		case "/NaviCategory":
+		case "/Consumer/NaviCategory":
 			System.out.println("네비게이션 카테고리");
 			service.NaviCategory();
 			break;	

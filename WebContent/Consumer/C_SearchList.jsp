@@ -96,7 +96,6 @@
             <div class="searchList">
             
 			<c:forEach items="${search}" var="search">
-				<c:if test="${sessionScope.loginID eq null}">
 				<a href="C_itemDetail?p_idx=${search.p_idx}" class="alink">
                 <table>
 					<tr>
@@ -104,7 +103,8 @@
 					</tr>
 					<tr>
 						<td class="listItemImg">
-								<img src="Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="300px"/>
+								<img src="${pageContext.request.contextPath}/Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="300px"/>
+
 						</td>
 					</tr>
 					<tr>
@@ -115,32 +115,7 @@
                     </tr>
 				</table>
 				</a>
-				</c:if>
             </c:forEach>
-            
-			<c:forEach items="${search}" var="search">
-				<c:if test="${sessionScope.loginID ne null}">
-				<a href="Consumer/C_itemDetail?p_idx=${search.p_idx}" class="alink">
-                <table>
-					<tr>
-						<td class="listItemLike">❤️${search.likes}</td>
-					</tr>
-					<tr>
-						<td class="listItemImg">
-								<img src="Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="300px"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="listItemName">${search.p_name}</td>
-					</tr>
-                    <tr>
-                        <td class="listItemPrice">${search.p_price} 원</td>
-                    </tr>
-				</table>
-				</a>
-				</c:if>
-            </c:forEach>            
-            
             </div>
         </div>
     </div>

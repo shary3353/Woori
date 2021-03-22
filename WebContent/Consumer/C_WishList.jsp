@@ -145,11 +145,11 @@ cursor: pointer;
 											<td class="p_PhoNDesc" rowspan="3"><img
 												src="${pageContext.request.contextPath}/Uploaded_Img/${list.photoPath}"
 												alt="${list.photoPath}" style="width: 125px; height: 125px;"
-												onclick="location=href='../C_itemDetail?p_idx=${list.p_idx}'" />
+												onclick="location=href='${pageContext.request.contextPath}/Consumer/C_itemDetail?p_idx=${list.p_idx}'" />
 											</td>
 										</tr>
 										<tr>
-											<td class="p_PhoNDesc"><a href="../C_itemDetail?p_idx=${list.p_idx}">${list.p_name}</a></td>
+											<td class="p_PhoNDesc"><a href="${pageContext.request.contextPath}/Consumer/C_itemDetail?p_idx=${list.p_idx}">${list.p_name}</a></td>
 										</tr>
 									</table>
 								</td>

@@ -90,13 +90,7 @@
             <table>
                 <tr>
                     <td rowspan="6" id="detailImg">
-                    
-                    	<c:if test="${sessionScope.loginID ne null}">
-                    		<img src="${pageContext.request.contextPath}/Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName}" width="400px" height="600px"/>
-                    	</c:if>
-                    	<c:if test="${sessionScope.loginID eq null}">
-                    		<img src="Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName}" width="400px" height="600px"/>
-                    	</c:if>
+                    		<img src="../Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName}" width="400px" height="600px"/>
                     </td>
                     <td class="detailName" colspan="2">${dto.p_name}</td>
                 </tr>
@@ -110,7 +104,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="detailButtons">
-                        <button id="questionButton" onclick="location.href='${pageContext.request.contextPath}/ServiceCenter/Report.jsp?p_idx=${dto.p_name}&sId=${dto.sid}'">문의하기</button>
+                        <button id="questionButton" onclick="location.href='${pageContext.request.contextPath}/ServiceCenter/Q_write.jsp?p_name=${dto.p_name}&sId=${dto.sid}'">문의하기</button>
                         <a href="C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
                         <button id="reservationButton">예약하기</button>
                         </a>
@@ -118,7 +112,7 @@
                         <button id="likeButton"> &nbsp;좋아요</button>
                         <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요 취소</button>
                         <button id="wishlistButton" onclick="location.href='${pageContext.request.contextPath}/Consumer/addWishList?p_idx=${dto.p_idx}'">위시리스트</button>
-                        <button id="reportButton" onclick="location.href='Seller/sReport?sid=${dto.sid}'">신고하기</button>
+                        <button id="reportButton" onclick="location.href='${pageContext.request.contextPath}/Consumer/cReportForm?sid=${dto.sid}'">신고하기</button>
                     </td>
                 </tr>
             </table>
@@ -168,7 +162,10 @@
 
 	likeConfirm();// 시작하자마자 like여부 검사
 
-	
+	var $reservationButton = $("#reservationButton");
+	$reservationButton.click(function(){
+		alert("로그인이 필요한 서비스 입니다")
+	});
 	var $likeButton = $("#likeButton");
 	var $dislikeButton = $("#dislikeButton");
 	

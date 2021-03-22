@@ -159,7 +159,7 @@ a {
 							<c:if test="${list.status eq '신청중'}">
 								<td class="reserProcess" style="color:tomato;">${list.status}</td>
 							</c:if>
-							<td><a href="cReportForm?t_id=${list.sid}" class="reportBtn">신고하기</a></td>
+							<td><a href="cReportForm?sid=${list.sid}" class="reportBtn">신고하기</a></td>
 						</tr>
 					</c:forEach>
 				</table>
