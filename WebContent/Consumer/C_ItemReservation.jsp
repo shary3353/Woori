@@ -161,7 +161,7 @@
 	if(msg!=""){
 		alert(msg);
 	}
-	
+
 	var $date = $("#ReservationDate");
 	console.log($date)
 	var $ReservationButton = $("#ReservationButton");
@@ -171,8 +171,7 @@
 		
 		if($date.val() == ""){
 			alert('날짜를 입력해 주세요!');
-		}else{
-			var param = {};
+			location.href='${pageContext.request.contextPath}/Consumer/C_ItemReservation'
 		}
 	});
 	

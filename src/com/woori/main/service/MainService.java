@@ -90,7 +90,6 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ReservationDTO dto = new ReservationDTO();
 		boolean success = dao.Creservation(pidx,cid,visitdate);
-		
 		String page = "./C_ItemReservation.jsp";
 		String msg = "예약이 되지않았습니다 다시 예약을 해주시길 바랍니다.";
 		if(success = true) {
