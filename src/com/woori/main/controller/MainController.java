@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.woori.main.service.MainService;
 
-@WebServlet({"/C_main","/Consumer/C_main","/C_itemDetail","/Consumer/C_itemDetail","/C_ItemReservation","/Consumer/C_ItemReservation","/Consumer/C_Reservation", "/AdminMain","/C_SearchList","/Consumer/C_LikePlus","/Consumer/likeConfirm","/Consumer/C_LikeMinus","/NaviCategory"})
+@WebServlet({"/Consumer/C_main","/C_itemDetail","/Consumer/C_itemDetail","/C_ItemReservation","/Consumer/C_ItemReservation","/Consumer/C_Reservation", "/AdminMain","/C_SearchList","/Consumer/C_LikePlus","/Consumer/likeConfirm","/Consumer/C_LikeMinus","/NaviCategory"})
 public class MainController extends HttpServlet {
 
 	@Override
@@ -30,12 +30,8 @@ public class MainController extends HttpServlet {
 		
 		MainService service = new MainService(req, resp);
 		switch (sub) {
-		case "/C_main":
-			System.out.println("Consumer Mainpage");
-			service.Cmain();
-			break;
 		case "/Consumer/C_main":
-			System.out.println("Consumer login Mainpage");
+			System.out.println("Consumer Main");
 			service.Cmain();
 			break;	
 			
