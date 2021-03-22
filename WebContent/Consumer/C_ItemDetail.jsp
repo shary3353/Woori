@@ -117,7 +117,7 @@
                         <!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
                         <button id="likeButton"> &nbsp;좋아요</button>
                         <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요 취소</button>
-                        <button id="wishlistButton" onclick="location.href='/addWishList?p_idx=${dto.p_idx}'">위시리스트</button>
+                        <button id="wishlistButton" onclick="location.href='${pageContext.request.contextPath}/Consumer/addWishList?p_idx=${dto.p_idx}'">위시리스트</button>
                         <button id="reportButton" onclick="location.href='Seller/sReport?sid=${dto.sid}'">신고하기</button>
                     </td>
                 </tr>
