@@ -45,7 +45,7 @@
 <body>
 <div id="naviBox">
     <div id="mainMyPage" class="C_MyPageNavi">
-        <a href="cMyPageMain" style="text-decoration: none; color: black">마이페이지</a>
+        <a href="cMyPageMain" style="text-decoration: noen; color: black;">마이페이지</a>
     </div>
     <div class="C_MyPageNavi">
         <a href="cDetail">회원정보&nbsp;</a>
