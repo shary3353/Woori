@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	response.sendRedirect("./C_main");
+	response.sendRedirect("Consumser/C_main");
 %>
