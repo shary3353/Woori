@@ -39,6 +39,7 @@ public class ReservationController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("dual request url : "+sub);
+		System.out.println(req.getContextPath()+" | "+req.getRequestURL()+" | "+req.getServletContext());
 		
 		ReservationService service = new ReservationService(req, resp);
 		switch(sub) {
