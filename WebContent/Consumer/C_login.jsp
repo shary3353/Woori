@@ -123,7 +123,7 @@
         <div class="container-body" style="background-color:  rgb(240, 239, 236);" id="c_login_tab" >
                 <!--구매자 로그인 탭열기-->
         		<div class="tab_content" >
-      <form action="${pageContext.request.contextPath}/Consumer/cLogin" method="POST">
+      	<form action="cLogin" method="POST">
                     <div>
                         <table>
                             <tr>
