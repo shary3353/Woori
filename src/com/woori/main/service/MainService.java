@@ -61,7 +61,7 @@ public class MainService {
 			page="Consumer/C_ItemDetail.jsp";
 		}
 		if (loginID != null) {
-			page="./C_ItemDetail.jsp";
+			page="C_ItemDetail.jsp";
 		}
 		req.setAttribute("dto", dto);
 		RequestDispatcher dis = req.getRequestDispatcher(page);

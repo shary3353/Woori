@@ -200,6 +200,7 @@ public class MemberService {
 		req.setAttribute("msg", msg);
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
+
 	}
 
 	public void S_Loginid() throws ServletException, IOException {//판매자 로그인
