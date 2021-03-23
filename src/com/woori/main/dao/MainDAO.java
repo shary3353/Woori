@@ -51,7 +51,7 @@ public class MainDAO {
 		
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		String sql = "SELECT p.p_idx,p.p_name,p.likes,p.p_price,p.is_sold,t.orifilename,t.newfilename,rk FROM (SELECT p_idx,p_name,likes,p_price,is_sold,ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product WHERE is_sold=1) p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE rk=?";
+		String sql = "SELECT p.p_idx,p.p_name,p.likes,p.p_price,p.is_sold,t.orifilename,t.newfilename,rk FROM (SELECT p_idx,p_name,likes,p_price,is_sold,ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product WHERE is_sold=1) p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE rk=?";
 
 		try {
 			ps = conn.prepareStatement(sql);
