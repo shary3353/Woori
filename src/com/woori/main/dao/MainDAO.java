@@ -80,7 +80,7 @@ public class MainDAO {
 
 	public ProductDTO  Citemdetail(String pidx) {
 		ProductDTO dto = null;
-		String sql="SELECT p.p_idx,p.p_name,p.p_content,p.p_price,p.sid,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_idx=?";
+		String sql="SELECT p.p_idx,p.p_name,p.p_content,p.p_price,p.sid,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE p.p_idx=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(pidx));
@@ -154,7 +154,7 @@ public class MainDAO {
 	public ArrayList<ProductDTO> mainSearch(String searchname) {
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		String sql="SELECT p.p_idx,p.p_name,p.likes,p.p_price,t.orifilename,t.newfilename \r\n" + 
-				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE p.p_name LIKE ? AND is_sold=1";
+				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE p.p_name LIKE ? AND is_sold=1";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, searchname);

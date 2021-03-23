@@ -103,7 +103,7 @@
 					</tr>
 					<tr>
 						<td class="listItemImg">
-								<img src="${pageContext.request.contextPath}/Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="300px"/>
+								<img id="itemImage" src="${pageContext.request.contextPath}/Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="300px"/>
 
 						</td>
 					</tr>
@@ -120,7 +120,12 @@
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+	var $itemImage = $("#itemImage");
+	if($itemImage.attr('src') == "/Woori/Uploaded_Img/"){
+		$itemImage.attr("src", "${pageContext.request.contextPath}/img/no-image.png");
+	}
 </script>
 </html>
 
