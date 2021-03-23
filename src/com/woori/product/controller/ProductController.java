@@ -33,6 +33,22 @@ public class ProductController extends HttpServlet {
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("post request url : "+sub);
 		
+		ProductService service = new ProductService(req, resp);
+		
+		switch(sub) {
+		
+		case "/Seller/sUpdateItemForm":
+			System.out.println("판매자 물품 수정 폼 보이기");
+			service.sUpdateItemForm();
+			break;
+			
+		case "/Seller/sDeleteItem":
+			System.out.println("판매자 물품 삭제하기 - 판매여부변경");
+			service.sDeleteItem();
+			break;
+		
+		}
+		
 		dual(req,resp);
 	}
 	
@@ -60,20 +76,11 @@ public class ProductController extends HttpServlet {
 			service.registItem();
 			break;
 		
-		case "/Seller/sUpdateItemForm":
-			System.out.println("판매자 물품 수정 폼 보이기");
-			service.sUpdateItemForm();
-			break;
-		
 		case "/Seller/sUpdateItem":
 			System.out.println("판매자 물품 수정 하기");
 			service.sUpdateItem();
 			break;
 			
-		case "/Seller/sDeleteItem":
-			System.out.println("판매자 물품 삭제하기 - 판매여부변경");
-			service.sDeleteItem();
-			break;
 			
 		}
 		

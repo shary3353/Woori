@@ -89,7 +89,10 @@
             <tr>
                 <td colspan="3" class="btnArea">
                     <button onclick="location.href='./sItemList'">물품목록으로가기</button>
-                    <button onclick="location.href='./sUpdateItemForm?p_idx=${dto.p_idx}'">수정하기</button>
+                    <form action="sUpdateItemForm" method="post" style='display:inline;'>
+                		<input type="hidden" name="p_idx" value="${dto.p_idx }"/>
+	                	<button id="reviseButton">수정하기</button>
+                	</form>
                 </td>
             </tr>
         </table>

@@ -110,8 +110,18 @@ String fullpath = savePath +"\\";
 			         -->
                 </td>
                 <td>${item.p_price} 원</td>
-                <td><button id="reviseButton" onclick="location.href='./sUpdateItemForm?p_idx=${item.p_idx}'">수정하기</button></td>
-                <td><button id="delButton" onclick="location.href='./sDeleteItem?p_idx=${item.p_idx}'">❌</button></td>
+                <td>
+                	<form action="sUpdateItemForm" method="post">
+                		<input type="hidden" name="p_idx" value="${item.p_idx }"/>
+	                	<button id="reviseButton">수정하기</button>
+                	</form>
+                </td>
+                <td>
+                	<form action="sDeleteItem" method="post">
+                		<input type="hidden" name="p_idx" value="${item.p_idx }"/>
+		                <button id="delButton">❌</button>
+                	</form>
+                </td>
             </tr>
             </c:forEach>
         </table>

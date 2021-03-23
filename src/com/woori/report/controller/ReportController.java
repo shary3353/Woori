@@ -37,6 +37,16 @@ public class ReportController extends HttpServlet {
 		String sub = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("post request url : "+sub);
 		
+		ReportService  service = new ReportService(req,resp);
+		switch(sub) {
+		
+		case "/Seller/sReprtForm":
+			System.out.println("판매자 신고하기 폼 보여주기");
+			service.sReportForm();
+			break;
+		
+		}
+		
 		dual(req,resp);
 	}
 
@@ -58,10 +68,7 @@ public class ReportController extends HttpServlet {
 			System.out.println("판매자 신고 상세보기 요청");
 			service.sReportDetail();
 			break;
-		case "/Seller/sReprtForm":
-			System.out.println("판매자 신고하기 폼 보여주기");
-			service.sReportForm();
-			break;
+
 		case "/Seller/sReport":
 			System.out.println("판매자 신고하기");
 			service.sReport();

@@ -56,7 +56,7 @@
                     <input type="file" name="photo" id="imageFile" accept="image/*">
                 </td>
                 <td class="column-name" >물품이름</td>
-                <td><input type="text" placeholder="물품이름을 입력해주세요." name="p_name" id="p_name"/></td>
+                <td><input type="text" placeholder="물품이름을 입력해주세요." name="p_name" id="p_name" onKeyUp="fnChkByte(this,'50')"/></td>
             </tr>
             <tr>
                 <td class="column-name" >카테고리</td>
@@ -74,7 +74,8 @@
             <tr>
                 <td class="column-name">가격</td>
                 <td>
-                    <input type="text" placeholder="가격(원)을 입력해주세요." name="p_price" id="p_price"/>원
+                    <input type="text" placeholder="가격(원)을 입력해주세요." name="p_price" id="p_price"
+                    onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>원
                 </td>
             </tr>
             <tr>
@@ -85,7 +86,7 @@
             </tr>
             <tr>
                 <td class="column-name" >상품설명</td>
-                <td><textarea name="p_content" id="p_content" cols="50" rows="10"></textarea></td>
+                <td><textarea name="p_content" id="p_content" cols="50" rows="10" onKeyUp="fnChkByte(this,'1000')" style="resize: none;"></textarea></td>
             </tr>
             <tr>
                 <td colspan="3" class="btnArea">
@@ -112,6 +113,37 @@
             return false;
         }
         return true;
+    }
+    
+    function fnChkByte(obj, maxByte){//글자 bytes 제한
+        var str = obj.value;
+        var str_len = str.length;
+
+        var rbyte = 0;
+        var rlen = 0;
+        var one_char = "";
+        var str2 = "";
+
+        for(var i=0; i<str_len; i++){
+            one_char = str.charAt(i);
+            if(escape(one_char).length > 4){
+    			rbyte += 2;//한글2Byte
+    		} else {
+    		    rbyte++;//영문 등 나머지 1Byte
+            }
+    		if(rbyte <= maxByte){
+                rlen = i+1;//return할 문자열 갯수
+            }
+         }
+         if(rbyte > maxByte){
+      		// alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+      		alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+      		str2 = str.substr(0,rlen);//문자열 자르기
+      		obj.value = str2;
+      		fnChkByte(obj, maxByte);
+         }else{
+            //document.getElementById('byteInfo').innerText = rbyte;
+         }
     }
 </script>
 </html>

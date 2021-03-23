@@ -66,14 +66,14 @@
             </tr>
             <tr>
                 <td class="column-name">내용</td>
-                <td colspan="5">${dto.content}</td>
+                <td colspan="5" style="white-space: pre-line;">${dto.content}</td>
             </tr>
             <form action="./sAnswer" method="post" onsubmit="return check()">
 	           <tr>
 	               <td class="column-name">답변하기</td>
 	               <td colspan="5" style="text-align: center;">
 	               		<input type="hidden" name="q_idx" value="${dto.q_idx}"/>
-	                   <textarea name="s_answer" id="s_answer" cols="95" rows="10" id="s_answer">${dto.s_answer}</textarea>
+	                   <textarea name="s_answer" id="s_answer" cols="95" rows="10" id="s_answer" onKeyUp="fnChkByte(this,'1000')" style="resize: none;">${dto.s_answer}</textarea>
 	               </td>
 	           </tr>
 	           <tr>
@@ -94,6 +94,37 @@
             return false;
         } 
         return true;
+    }
+    
+    function fnChkByte(obj, maxByte){//글자 bytes 제한
+        var str = obj.value;
+        var str_len = str.length;
+
+        var rbyte = 0;
+        var rlen = 0;
+        var one_char = "";
+        var str2 = "";
+
+        for(var i=0; i<str_len; i++){
+            one_char = str.charAt(i);
+            if(escape(one_char).length > 4){
+    			rbyte += 2;//한글2Byte
+    		} else {
+    		    rbyte++;//영문 등 나머지 1Byte
+            }
+    		if(rbyte <= maxByte){
+                rlen = i+1;//return할 문자열 갯수
+            }
+         }
+         if(rbyte > maxByte){
+      		// alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+      		alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+      		str2 = str.substr(0,rlen);//문자열 자르기
+      		obj.value = str2;
+      		fnChkByte(obj, maxByte);
+         }else{
+            //document.getElementById('byteInfo').innerText = rbyte;
+         }
     }
 </script>
 </html>
