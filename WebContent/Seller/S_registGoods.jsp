@@ -85,7 +85,9 @@
             </tr>
             <tr>
                 <td class="column-name" >상품설명</td>
-                <td><textarea name="p_content" id="p_content" cols="50" rows="10" style="resize: none;"></textarea></td>
+                <td><textarea name="p_content" id="p_content" cols="50" rows="10" 
+                onKeyUp="fnChkByte(this,'1000')"
+                style="resize: none;"></textarea></td>
             </tr>
             <tr>
                 <td colspan="3" class="btnArea">

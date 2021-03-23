@@ -69,7 +69,7 @@ String fullpath = savePath +"\\";
 	        max-height: 100%; /* Scale up to fill container height */ 
 	        object-fit: contain;
         }
-        a{
+        td>p>a{
         	color: black; text-decoration: none;
         }
     </style>
@@ -80,8 +80,8 @@ String fullpath = savePath +"\\";
     <div id="content"><!--본문 : 등록 물품 리스트 -->
         <table>
             <tr>
-                <td colspan="6" class="title">등록 물품 리스트</td>
-                <td><button onclick = "location.href='S_registGoods.jsp'">물품등록</button></td>
+                <td colspan="5" class="title">등록 물품 리스트</td>
+                <td colspan="2" style="text-align:right"><button onclick = "location.href='S_registGoods.jsp'">물품등록</button></td>
             </tr>
             <tr>
                 <th>물품 번호</th>
@@ -95,7 +95,7 @@ String fullpath = savePath +"\\";
             
             <c:forEach items="${list}" var="item">
             <tr>
-                <td>${item.p_idx}</td>
+                <td style="width:80px">${item.p_idx}</td>
                 <td>${item.category}</td>
                 <td id="registContent">
                     <p><a href="sItemDetail?p_idx=${item.p_idx}">${item.p_name}</a></p>
@@ -123,11 +123,11 @@ String fullpath = savePath +"\\";
 			         -->
 			         </a>
                 </td>
-                <td>${item.p_price} 원</td>
+                <td style="width:120px">${item.p_price} 원</td>
                 <td>
                 	<form action="sUpdateItemForm" method="post">
                 		<input type="hidden" name="p_idx" value="${item.p_idx }"/>
-	                	<button id="reviseButton">수정하기</button>
+	                	<button id="reviseButton" style="width:70px">수정하기</button>
                 	</form>
                 </td>
                 <td>
