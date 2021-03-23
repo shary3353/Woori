@@ -58,6 +58,8 @@ public class MainService {
 
 	public void CitemReservation() throws ServletException, IOException {
 		String loginID = (String) req.getSession().getAttribute("loginID");
+		String msg = "";
+		String page = "";
 		System.out.println(loginID);
 		if (loginID != null) {
 		String pidx = req.getParameter("p_idx");
@@ -65,7 +67,7 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ProductDTO dto = dao.Creservationdetail(pidx);
 		System.out.println(dto);
-		String page = "/";
+		page = "/";
 		if(dto != null) {
 			page="./C_ItemReservation.jsp";
 			req.setAttribute("dto", dto);
@@ -73,7 +75,11 @@ public class MainService {
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 		}else {
-			resp.sendRedirect("./C_login.jsp");
+			msg = "로그인을 해주세요.";
+			page="./C_login.jsp";
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page);
+			dis.forward(req, resp);
 		}
 	}
 
@@ -171,29 +177,35 @@ public class MainService {
 	}
 	
 	public void Clikeplus() throws ServletException, IOException {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		String cid = req.getParameter("cid");
-		String pidx = req.getParameter("pidx");
-		System.out.println(cid+"/"+pidx);
-		MainDAO dao = new MainDAO();
-		int success = dao.likesTableAdd(cid,pidx);
-		System.out.println("likes 테이블에 정상추가 : " + success);
-		if(success >0) {
-			dao = new MainDAO();
-			boolean success1 = dao.likePlus(pidx);
-			System.out.println("Product 테이블 like +1 " + success1);
-			dao.resClose();
-			map.put("plus", success1);
-			Gson gson = new Gson();
-			String json = gson.toJson(map);
-			System.out.println(json);
-			resp.getWriter().print(json);
+		String loginID = (String) req.getSession().getAttribute("loginID");
+		if (loginID != null) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			String cid = req.getParameter("cid");
+			String pidx = req.getParameter("pidx");
+			System.out.println(cid+"/"+pidx);
+			MainDAO dao = new MainDAO();
+			int success = dao.likesTableAdd(cid,pidx);
+			System.out.println("likes 테이블에 정상추가 : " + success);
+			if(success >0) {
+				dao = new MainDAO();
+				boolean success1 = dao.likePlus(pidx);
+				System.out.println("Product 테이블 like +1 " + success1);
+				dao.resClose();
+				map.put("plus", success1);
+				Gson gson = new Gson();
+				String json = gson.toJson(map);
+				System.out.println(json);
+				resp.getWriter().print(json);
+			}
+		}else {
+			resp.sendRedirect("./C_login.jsp");
 		}
 	}
 
 	public void Clikeminus() throws ServletException, IOException {
-		
+		String loginID = (String) req.getSession().getAttribute("loginID");
 		boolean success1 = false;
+		if (loginID != null) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String cid = req.getParameter("cid");
 		String pidx = req.getParameter("pidx");
@@ -210,6 +222,9 @@ public class MainService {
 			String json = gson.toJson(map);
 			System.out.println(json);
 			resp.getWriter().print(json);
+		}
+		}else {
+			resp.sendRedirect("./C_login.jsp");
 		}
 	}
 

@@ -179,10 +179,10 @@ nav .navilist:hover {
 			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=2">위스키</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=3">보드카</a>
+			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=3">꼬냑/브랜디</a>
 		</div>
 		<div class="navilist">
-			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=4">꼬냑/브랜디</a>
+			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=4">보드카</a>
 		</div>
 		<div class="navilist">
 			<a href="${pageContext.request.contextPath}/Consumer/NaviCategory?c_idx=5">샴페인</a>

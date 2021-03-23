@@ -125,11 +125,11 @@
 		if(msg!=""){
 			alert(msg);
 		}
-	//이미지 없을 때 이미지 대체
-	var $itemImage = $("#itemImage");
-	if($itemImage.attr('src') == "../Uploaded_Img/"){
-		$itemImage.attr("src", "${pageContext.request.contextPath}/img/no-image.png");
-	}
+		//이미지 없을 때 이미지 대체
+		var $itemImage = $("#itemImage");
+		if($itemImage.attr('src') == "../Uploaded_Img/"){
+			$itemImage.attr("src", "${pageContext.request.contextPath}/img/no-image.png");
+		}
 		
 		
 	 var loginid = '<%=(String)session.getAttribute("loginID")%>';	
