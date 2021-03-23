@@ -69,6 +69,8 @@ public class MainDAO {
 			System.out.println("list-size : " + list.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			resClose();
 		}
 		
 		return list;
