@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.woori.member.dao.ListDAO;
+import com.woori.product.dao.ProductDAO;
 import com.woori.report.dao.AdminReportDAO;
 import com.woori.report.dao.ReportDAO;
 import com.woori.report.dto.ReportDTO;
@@ -145,8 +146,17 @@ public class ReportService {
 			ReportDTO dto = new ReportDTO();
 			dto = dao.detail(idx);
 	
-			req.setAttribute("dto", dto);
-			dis = req.getRequestDispatcher("S_ReportDetail.jsp");
+			String page = "sReportList";//실패시
+			String msg = "본인이 신고한 내용 이외에는 볼 수 없습니다.";
+			String ckSid = dto.getReporter_id();
+			if(sid.equals(ckSid)) {//신고자아이디와 현재 로그인된 판매자가 동일한지 검사 -성공시
+				System.out.println("로그인된판매자와 해당신고자아이디가 일치합니다.");
+				req.setAttribute("dto", dto);				
+				page="S_ReportDetail.jsp";//S_ReportDetail.jsp로 이동
+				msg="";
+			}
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page); 
 			dis.forward(req, resp);
 		
 		} else { //로그인을 안 했으면 로그인페이지로

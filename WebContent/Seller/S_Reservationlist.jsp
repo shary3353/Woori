@@ -167,7 +167,7 @@
 		console.log($r_idx+' / '+$status);
 		
 		$.ajax({
-			type:'get'
+			type:'post'
 			,url:'updateResevationStatus'
 			,data:{"status":$status, "r_idx":$r_idx}
 			,dataType:'JSON'

@@ -254,7 +254,7 @@ public class QuestionDAO {
 	}
 
 	public QuestionDTO sAnswerDetail(int q_idx) { // 판매자 문의 상세보기 
-		String sql = "SELECT q.q_idx, qc.category, q.subject, q.content, q.cid, q.q_reg_date, q.s_answer " + 
+		String sql = "SELECT q.q_idx, q.sid, qc.category, q.subject, q.content, q.cid, q.q_reg_date, q.s_answer " + 
 				"    FROM question q, q_categories qc WHERE q.qc_idx = qc.qc_idx AND q_idx=?";
 		
 		QuestionDTO dto = new QuestionDTO();
@@ -264,6 +264,7 @@ public class QuestionDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				dto.setQ_idx(rs.getInt("q_idx"));
+				dto.setSid(rs.getString("sid"));//판매자
 				dto.setCategory(rs.getString("category"));
 				dto.setSubject(rs.getString("subject"));//제목
 				dto.setContent(rs.getString("content"));//내용

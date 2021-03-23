@@ -141,11 +141,21 @@ public class QuestionService {
 		  
 			int q_idx = Integer.parseInt(req.getParameter("q_idx"));
 			System.out.println("상세보기할 문의 p_idx :" + q_idx);
-	
+			
 			QuestionDAO dao = new QuestionDAO();
 			QuestionDTO dto = dao.sAnswerDetail(q_idx);
-			req.setAttribute("dto", dto);
-			dis = req.getRequestDispatcher("./S_answer.jsp");
+			
+			String page = "sQAList";//실패시
+			String msg = "본인이 받은 문의글 이외는 볼 수 없습니다.";
+			String ckSid = dto.getSid();
+			if(sid.equals(ckSid)) {//문의 판매자와 현재 로그인된 판매자가 동일한지 검사 -성공시
+				System.out.println("로그인된판매자와 해당문의글의 판매자가 일치합니다.");
+				req.setAttribute("dto", dto);
+				page="./S_answer.jsp";//./S_answer.jsp로 이동
+				msg="";
+			}
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page);
 			dis.forward(req, resp);
 		
 		} else { //로그인을 안 했으면 로그인페이지로 
@@ -165,8 +175,18 @@ public class QuestionService {
 	
 			QuestionDAO dao = new QuestionDAO();
 			QuestionDTO dto = dao.sAnswerDetail(q_idx);
-			req.setAttribute("dto", dto);
-			dis = req.getRequestDispatcher("./S_noAnswer.jsp");
+			
+			String page = "sQAList";//실패시
+			String msg = "본인이 받은 문의글 이외는 볼 수 없습니다.";
+			String ckSid = dto.getSid();
+			if(sid.equals(ckSid)) {//문의 판매자와 현재 로그인된 판매자가 동일한지 검사 -성공시
+				System.out.println("로그인된판매자와 해당문의글의 판매자가 일치합니다.");
+				req.setAttribute("dto", dto);
+				page="./S_noAnswer.jsp";//./S_noAnswer.jsp로 이동
+				msg="";
+			}
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page);
 			dis.forward(req, resp);
 		
 		} else { //로그인을 안 했으면 로그인페이지로 

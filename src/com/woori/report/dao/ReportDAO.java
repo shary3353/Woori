@@ -138,13 +138,12 @@ public class ReportDAO {
 		
 		String sql = "SELECT subject, reporter_id, target_id, rs.categories AS categories, status, content FROM\r\n" + 
 				"Report r, report_categories rs WHERE r.rc_code = rs.rc_idx AND r_idx = ?";
-		ReportDTO dto = null;
+		ReportDTO dto =  new ReportDTO();
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, idx);
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				dto = new ReportDTO();
 				dto.setSubject(rs.getString("subject"));
 				dto.setReporter_id(rs.getString("reporter_id"));
 				dto.setTarget_id(rs.getString("target_id"));

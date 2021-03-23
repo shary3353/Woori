@@ -108,4 +108,11 @@
         </div>
     </div>
 </body>
+<script>
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+	msg="";
+}
+</script>
 </html>
