@@ -14,7 +14,7 @@
             margin-top: 40px;
         }
         table{
-            width: 900px;
+            width: 960px;
             margin: auto;
         }
         table,th,td{
@@ -55,6 +55,16 @@
        	.red{ color: red;}
         .green{ color: green;}
         .blue{ color: blue;}
+        
+        .thumb { 
+        	overflow: hidden; height: 100px; width: 100px;
+        } 
+        .thumb img { 
+	        display: block; /* Otherwise it keeps some space around baseline */ 
+	        max-width: 100%; /* Scale up to fill container width */ 
+	        max-height: 100%; /* Scale up to fill container height */ 
+	        object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +89,7 @@
             <tr>
                 <td>${rlist.r_idx }</td>
                 <td>${rlist.p_idx }</td>
-                <td>
+                <td class="thumb">
                 <a href="sItemDetail?p_idx=${rlist.p_idx}">
                		<c:if test="${empty rlist.newFileName}">
                     	<img src="../img/no-image.png" width="100px" height="100px">

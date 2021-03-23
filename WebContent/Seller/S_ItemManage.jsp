@@ -17,7 +17,7 @@ String fullpath = savePath +"\\";
             margin-top: 40px;
         }
         table{
-            width: 800px;
+            width: 860px;
             margin: auto;
         }
         table,th,td{
@@ -60,6 +60,18 @@ String fullpath = savePath +"\\";
             padding: 5px 10px;
             background-color: #c0e1eb;
         }
+        .thumb { 
+        	overflow: hidden; height: 100px; width: 100px;
+        } 
+        .thumb img { 
+	        display: block; /* Otherwise it keeps some space around baseline */ 
+	        max-width: 100%; /* Scale up to fill container width */ 
+	        max-height: 100%; /* Scale up to fill container height */ 
+	        object-fit: contain;
+        }
+        a{
+        	color: black; text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -88,7 +100,8 @@ String fullpath = savePath +"\\";
                 <td id="registContent">
                     <p><a href="sItemDetail?p_idx=${item.p_idx}">${item.p_name}</a></p>
                 </td>
-                <td>
+                <td class="thumb">
+                	<a href="sItemDetail?p_idx=${item.p_idx}">
                     <c:if test="${empty item.newFileName}">
                     	<img src="../img/no-image.png" width="100px" height="100px">
                     </c:if>
@@ -108,6 +121,7 @@ String fullpath = savePath +"\\";
                     <!--	server.xml에 추가 할 것 
 			      			<Context docBase="D:\MVC\Woori\WebContent\Uploaded_Img" path="/Woori/Seller/photo"/>
 			         -->
+			         </a>
                 </td>
                 <td>${item.p_price} 원</td>
                 <td>

@@ -45,12 +45,11 @@
     <jsp:include page="S_navi.jsp"/>
 
     <div id="content"><!--본문 : 물품등록하기-->
+        <form action="registItem" method="post" enctype="multipart/form-data" onsubmit="return check()">
         <table>
             <tr>
                 <td colspan="3" class="title">물품등록하기</td>
             </tr>
-            
-            <form action="registItem" method="post" enctype="multipart/form-data" onsubmit="return check()">
             <tr>
                 <td rowspan="5">
                     <input type="file" name="photo" id="imageFile" accept="image/*">
@@ -86,15 +85,15 @@
             </tr>
             <tr>
                 <td class="column-name" >상품설명</td>
-                <td><textarea name="p_content" id="p_content" cols="50" rows="10" onKeyUp="fnChkByte(this,'1000')" style="resize: none;"></textarea></td>
+                <td><textarea name="p_content" id="p_content" cols="50" rows="10" style="resize: none;"></textarea></td>
             </tr>
             <tr>
                 <td colspan="3" class="btnArea">
                     <button>등록</button>
                 </td>
             </tr>
-            </form>
         </table>
+         </form>
     </div>
 </body>
 <script>
@@ -111,7 +110,7 @@
             console.log($('#p_price').val());
             alert("가격을 입력하세요!");
             return false;
-        }
+        } 
         return true;
     }
     
@@ -145,5 +144,14 @@
             //document.getElementById('byteInfo').innerText = rbyte;
          }
     }
+    /*
+    var newValue;
+    $("#p_content").on("propertychange change keyup paste input", function() {
+        newValue = $(this).val();// 현재 변경된 데이터 셋팅
+        //alert("텍스트 :: " + newValue);// 현재 실시간 데이터 표츌
+        fnChkByte(this, '1000');
+    });
+    */
+    
 </script>
 </html>

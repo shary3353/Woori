@@ -39,6 +39,16 @@
             width: 100px;
             text-align: center;
         }
+        
+        .thumb { 
+        	overflow: hidden; height: 600px; width: 300px;
+        } 
+        .thumb img { 
+	        display: block; /* Otherwise it keeps some space around baseline */ 
+	        max-width: 100%; /* Scale up to fill container width */ 
+	        max-height: 100%; /* Scale up to fill container height */ 
+	        object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -50,9 +60,9 @@
                 <td colspan="3" class="title">등록된 물품 상세보기</td>
             </tr>
             <tr>
-                <td rowspan="5" style="width: 300px;">
+                <td rowspan="5" style="width: 300px;" class="thumb">
                     <c:if test="${empty dto.newFileName}">
-                    	<img src="../img/no-image.png" width="300px">
+                    	<img src="../img/no-image.png" width="300px" >
                     </c:if>
 					<c:if test="${not empty dto.newFileName}">
 						<!-- 
