@@ -27,16 +27,15 @@ public class MainService {
 	}
 
 	public void Cmain() throws ServletException, IOException {
-		HashMap<String, Object> map = null;
 		MainDAO dao = new MainDAO();
-		for (int i = 1; i < 7; i++) {
-			map = new HashMap<String, Object>();
-			map = dao.Cmain(i);
-			System.out.println(map);
-			req.setAttribute("list"+i, map.get("list"+i));
-		}
-		dao.resClose();
-		
+			ArrayList<ProductDTO> 	list = dao.Cmain();
+			System.out.println(list);
+			req.setAttribute("list",list);
+			for(int k =0; k <list.size(); k++) {
+				if(list.get(k).getNewFileName()==null) {
+					list.get(k).setNewFileName("no-image.png");
+				}
+			}
 		String page="./C_main.jsp";
 		dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
@@ -138,8 +137,14 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ArrayList<ProductDTO> list = dao.mainSearch(searchname);
 		System.out.println(list);
+		System.out.println(list.get(0));
 		System.out.println("리스트 크기 : " + list.size());
 		String msg = "현재 존재하는 게시글이 없습니다.";
+		for(int i =0; i <list.size(); i++) {
+			if(list.get(i).getNewFileName()==null) {
+				list.get(i).setNewFileName("no-image.png");
+			}
+		}
 		if(list != null && list.size()>0) {
 			req.setAttribute("search", list);	
 			msg = searchtitle;
@@ -228,6 +233,11 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ArrayList<ProductDTO> list =  dao.categorySearch(c_idx);
 		System.out.println("리스트 크기 : " + list.size());
+		for(int i =0; i <list.size(); i++) {
+			if(list.get(i).getNewFileName()==null) {
+				list.get(i).setNewFileName("no-image.png");
+			}
+		}
 		String msg = "현재 존재하는 " +cate+ "이(가) 없습니다.";
 		if(list != null && list.size()>0) {
 			req.setAttribute("search", list);	

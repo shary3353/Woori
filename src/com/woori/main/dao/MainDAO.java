@@ -47,15 +47,13 @@ public class MainDAO {
 	}
 	
 
-	public HashMap<String, Object> Cmain(int i) {
+	public ArrayList<ProductDTO> Cmain() {
 		
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		String sql = "SELECT p.p_idx,p.p_name,p.likes,p.p_price,p.is_sold,t.orifilename,t.newfilename,rk FROM (SELECT p_idx,p_name,likes,p_price,is_sold,ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product WHERE is_sold=1) p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE rk=?";
-
+		String sql = "SELECT p.p_idx,p.p_name,p.likes,p.p_price,p.is_sold,t.orifilename,t.newfilename,rk FROM (SELECT p_idx,p_name,likes,p_price,is_sold,ROW_NUMBER() OVER(ORDER BY likes DESC) AS rk FROM product WHERE is_sold=1) p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE rk BETWEEN 1 AND 6 ORDER BY likes DESC";
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, i);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
@@ -69,12 +67,11 @@ public class MainDAO {
 				list.add(dto);
 			}
 			System.out.println("list-size : " + list.size());
-			map.put("list"+i, list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return map;
+		return list;
 	}
 
 
