@@ -81,6 +81,8 @@ public class MainService {
 	public void CReservation() throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String loginID = (String) req.getSession().getAttribute("loginID");
+		String page =""; 
+		String msg ="";
 		if (loginID != null) {
 		String pidx = req.getParameter("p_idx");
 		String sid = req.getParameter("sid");
@@ -90,8 +92,8 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ReservationDTO dto = new ReservationDTO();
 		boolean success = dao.Creservation(pidx,cid,visitdate);
-		String page = "./C_ItemReservation.jsp";
-		String msg = "예약이 되지않았습니다 다시 예약을 해주시길 바랍니다.";
+		page = "./C_ItemReservation.jsp";
+		msg = "예약이 되지않았습니다 다시 예약을 해주시길 바랍니다.";
 		if(success = true) {
 			page="/Consumer/cReservationList";
 			msg = "정상적으로 예약되었습니다.";

@@ -168,10 +168,9 @@
 	console.log($ReservationButton);
 	
 	$ReservationButton.click(function(){
-		
 		if($date.val() == ""){
 			alert('날짜를 입력해 주세요!');
-			location.href='${pageContext.request.contextPath}/Consumer/C_ItemReservation'
+			return false;
 		}
 	});
 	
