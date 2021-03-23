@@ -152,8 +152,10 @@ input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin
 							</tr>
 							<tr>
 								<td colspan="3" id="${list.q_idx }" style="display: none;">
-									<input id ="pw${status.index }" type="number"  style="-webkit-text-security: disc;" 
-									 maxlength="4"  name="password" oninput="maxLengthCheck(this)">
+									<input
+									 id ="pw${status.index }" type="text"  style="-webkit-text-security: disc;" 
+									 maxlength="4"  name="password" 
+									 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 									<button  class="viewBtn" name="viewButton" >확인</button>
 								</td>
 							</tr>

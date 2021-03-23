@@ -195,8 +195,11 @@ table {
 				</tr>
 				<tr>
 					<td class="column1">내용</td>
-					<td colspan="4"><textarea id="content" name="content"
-							id="content" cols="30" rows="10"></textarea></td>
+					<td colspan="4">
+						<textarea id="content" name="content"
+							id="content" cols="30" rows="10"></textarea>
+						<div id="content_cnt">(0 / 1000)</div>
+					</td>
 				</tr>
 				<tr>
 					<td class="column1">확인 비빌번호</td>
@@ -297,6 +300,17 @@ table {
           }
     }   
 	
+	 $(document).ready(function() {
+		    $('#content').on('keyup', function() {
+		        $('#content_cnt').html("("+$(this).val().length+" / 1000)");
+		 
+		        if($(this).val().length > 1000) {
+		            $(this).val($(this).val().substring(0, 1000));
+		            $('#content_cnt').html("(1000 / 1000)");
+		        }
+		    });
+		});
+
 	
 </script>
 </html>
