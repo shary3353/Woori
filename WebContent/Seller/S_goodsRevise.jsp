@@ -65,12 +65,12 @@
 	            <tr>
 	                <td class="column-name" >카테고리</td>
 	                <td>
-	                    <select name="c_idx" id="c_idx" value="${dto.c_idx}">
-	                        <option value="1">와인</option>
-	                        <option value="2">위스키</option>
-	                        <option value="3">꼬냑/브랜디</option>
-	                        <option value="4">보드카</option>
-	                        <option value="5">샴페인</option>
+	                    <select name="c_idx" id="c_idx">
+	                        <option value="1" <c:if test="${dto.c_idx == 1}">selected</c:if>>와인</option>
+	                        <option value="2" <c:if test="${dto.c_idx == 2}">selected</c:if>>위스키</option>
+	                        <option value="3" <c:if test="${dto.c_idx == 3}">selected</c:if>>꼬냑/브랜디</option>
+	                        <option value="4" <c:if test="${dto.c_idx == 4}">selected</c:if>>보드카</option>
+	                        <option value="5" <c:if test="${dto.c_idx == 5}">selected</c:if>>샴페인</option>
 	                    </select>
 	                </td>
 	            </tr>
