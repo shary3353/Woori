@@ -100,12 +100,18 @@
     function chkPw(){
        var inPw = $('#chkPw').val();
        console.log(inPw);
-       if(inPw === "${detail.pw}"){
+       
+       var regPw = /^[A-Za-z\d$@$!%*#?&]{3,}$/;
+       
+       if(!regPw.test(inPw)){
+			alert('유효 하지 않은 값입니다.');
+	   }else if(inPw === "${detail.pw}"){
     	   alert("비밀번호 일치");
     	   location.href='./sPfpUpdateForm?sid=${detail.sid}';
        } else{
     	   alert("비밀번호가 다릅니다.");
        }
+       
     };
 </script>
 </html>
