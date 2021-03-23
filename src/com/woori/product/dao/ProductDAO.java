@@ -104,7 +104,7 @@ public class ProductDAO {
 	}
 
 	public ProductDTO sItemDetail(int p_idx) {//판매자 물품상세보기
-		String sql = "SELECT p.p_idx, c.category, c.c_idx, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName" + 
+		String sql = "SELECT p.p_idx, p.sid, c.category, c.c_idx, p.p_name, p.p_content, p.p_price, th.oriFileName, th.newFileName" + 
 				" FROM product p, thumbfile th, categories c WHERE p.p_idx = th.p_idx(+) AND p.c_idx = c.c_idx AND p.p_idx = ?";
 		
 		ProductDTO dto = new ProductDTO();
@@ -114,6 +114,7 @@ public class ProductDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				dto.setP_idx(rs.getInt("p_idx"));
+				dto.setSid(rs.getString("sid"));
 				dto.setCategory(rs.getString("category"));
 				dto.setP_name(rs.getString("p_name"));
 				dto.setP_content(rs.getString("p_content"));
