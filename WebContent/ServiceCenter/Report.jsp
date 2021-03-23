@@ -67,14 +67,17 @@ h3 {
 
 table, th, td {
 	padding: 15px;
+	font-size:20px;
 }
 
 #content {
-	width: 650px;
+	width: 100%;
 	height: 200px;
+	font-size: 20px;
+	resize:none;
 }
 
-table, th {
+table, th , td	{
 	text-align: left;
 	border: 2px solid gray;
 	border-collapse: collapse;
@@ -92,6 +95,10 @@ table {
 	text-align: center;
 	width: 1298px;	
 	margin-top: 30px;
+}
+#subject , #rId , #tId , #cate {
+	height:20px;
+	font-size:15px;
 }
 </style>
 </head>
@@ -129,12 +136,11 @@ table {
 						<tr>
 							<th>신고제목</th>
 							<th><input id="subject" type="text" name="subject" style="width: 500px;"
-								placeholder="신고제목을 입력해주세요."></th>
+								placeholder="신고제목을 입력해주세요." maxlength="300"></th>
 						</tr>
 						<tr>
 							<th>신고자</th>
-							<td><input id="rId" type="text" name="userName"
-								value="${sessionScope.loginID}" readonly/></td>
+							<td><input id="rId" type="text" name="userName" value="${sessionScope.loginID}" readonly/></td>
 						
 						</tr>
 						<tr>
@@ -142,14 +148,10 @@ table {
 							<th>
 							<c:set var="targetId" value="<%=request.getParameter(\"sid\")%>"></c:set>
 							<c:if test="${targetId == null }">
-							<input id="tId" type="text" name="sellerId"
-								value="">
-								</c:if>
+								<input id="tId" type="text" name="sellerId" value=""></c:if>
 								<c:if test="${targetId != null}">
-									<input id="tId" type="text" name="sellerId"
-								value="<%=request.getParameter("sid")%>" readonly>
-								</c:if>
-								</th>
+								<input id="tId" type="text" name="sellerId" value="<%=request.getParameter("sid")%>" readonly></c:if>
+							</th>
 								
 						</tr>
 						<tr>
@@ -164,11 +166,11 @@ table {
 						</tr>
 						<tr>
 							<th>신고내용</th>
-							<th><textarea name="content" id="content" cols="30"
-									rows="10" placeholder="신고내용을 입력해주세요."></textarea></th>
+							<td><textarea name="content" id="content" cols="30" rows="10" placeholder="신고내용을 입력해주세요."></textarea>
+									<div id="content_cnt">(0 / 1000)</div>
+							</td>
 						</tr>
 						<tr>
-
 						</tr>
 					</table>
 					<div id="button">
@@ -251,5 +253,16 @@ table {
              location.replace("./Report.jsp");
           }
     }   
-</script>
+	 
+	 $(document).ready(function(){
+		 $('#content').on('keyup',function(){
+			 $('#content_cnt').html("("+$(this).val().length+" / 1000)");
+			 	
+			 if($(this).val().length > 1000){
+				 $(this).val($(this).val().substring(0,1000));
+			 	$('#content_cnt').html("(1000 / 1000)");
+			 }
+		 });
+	 });
+	 </script>
 </html>

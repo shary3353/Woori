@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,6 +99,12 @@ h3 {
 }
 input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}
 
+span{
+	padding:3px;
+}
+.viewBtn{
+padding:2px 7px;
+}
 </style>
 </head>
 <body>
@@ -171,23 +177,26 @@ input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin
 					<c:if test="${currPage > 1 }">
 						<a href="./qList?page=${1 }">처음</a>
 					</c:if>
-				</span> <span class="Page_Content"> <c:if test="${currPage == 1 }">이전</c:if>
+				</span> 
+				<span class="Page_Content"> <c:if test="${currPage == 1 }">이전</c:if>
 					<c:if test="${currPage > 1}">
 						<a href="./qList?page=${currPage-1 }">이전</a>
 					</c:if>
-				</span> <span id="Page_Number"><a>${currPage}</a></span> <span
-					class="Page_Content"> <c:if test="${currPage == maxPage }">다음</c:if>
+				</span>
+				<span id="Page_Number"><a>${currPage}</a></span>
+				 <span class="Page_Content"> <c:if test="${currPage == maxPage }">다음</c:if>
 					<c:if test="${currPage < maxPage }">
 						<a href="./qList?page=${currPage + 1}">다음</a>
 					</c:if>
-				</span> <span class="Page_Content"> <c:if
+				</span>
+				 <span class="Page_Content"> <c:if
 						test="${currPage < maxPage }">
 						<a href="./qList?page=${maxPage}">마지막</a>
 					</c:if>	
 				</span>
 				
 				<div style=" float: right;">
-					<button style="padding:3px 7px;" onclick="idCheck();"> 문의하기</button>
+					<button style="padding:7px 7px;" onclick="idCheck();"> 문의글 작성</button>
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,4 @@
+<%@page import="com.sun.jdi.Location"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -78,14 +79,7 @@ h3 {
 	padding: 15px 10px;
 	border: 2px solid gray;
 	border-collapse: collapse;
-}
-
-#form table td {
-	
-}
-
-#form table th {
-	
+	font-size:20px;
 }
 
 #setpass {
@@ -110,14 +104,17 @@ table {
 	width: 1300px;
 }
 
-#cId, #subject, #category, #productName, .sId, .productName {
+#cId, #subject, #category, #productName, .sId, .productName ,#pass , #submit {
 	height: 30px;
 	font-size: 15px;
 }
 
 #content {
 	font-size: 20px;
+	resize: none;
+	width:100%;
 }
+
 </style>
 </head>
 <body>
@@ -153,7 +150,7 @@ table {
 				<tr>
 					<td class="column1">작성자</td>
 					<td class="column2"><input type="text" id="cId"
-						name="consumerId" value="${sessionScope.loginID}" readonly/>
+						name="consumerId" value="${sessionScope.loginID}" maxlength="50" readonly/>
                       </td>
 					<td>카테고리 <select id="category" name="category" value="문의/카테고리">
 							<option value="100" selected="selected">상품관련</option>
@@ -164,50 +161,33 @@ table {
 					</td>
 					<td class="column1">문의상품</td>
 					<td class="culumn1" name="productName">
-					<c:set var="p_name"
-							value="<%=request.getParameter(\"p_name\")%>">
-					</c:set> 
-					<c:if test="${p_name != null}">
-							<input class="productName" name="p_name" maxlength='50'
-								value="<%=request.getParameter("p_name")%>" readonly>
-						</c:if> 
-						<c:if test="${p_name == null }">
-							<input class="productName" type="text" name="p_name">
-						</c:if>
-						</td>
+						<c:set var="p_name" value="<%=request.getParameter(\"p_name\")%>"></c:set> 
+						<c:if test="${p_name != null}"><input class="productName" name="p_name" maxlength='50' value="<%=request.getParameter("p_name")%>" readonly></c:if> 
+						<c:if test="${p_name == null }"><input class="productName" type="text" name="p_name" maxlength='50'></c:if>
+					</td>
 				</tr>
 				<tr>
 					<td class="column1">제목</td>
-					<td colspan="2"><input type="text" id="subject"
-						placeholder="제목을 입력해주세요" style="width: 380px" maxlength='50'
-						name="subject"></td>
+					<td colspan="2"><input type="text" id="subject" placeholder="제목을 입력해주세요" style="width: 380px" maxlength='50' name="subject"></td>
 					<td class="column1">판매자</td>
-
-					<td class="culumn1" name="sellerId"><c:set var="sId"
-							value="<%=request.getParameter(\"sId\")%>"></c:set> <c:if
-							test="${sId != null }">
-							<input type="text" class="sId"
-								value="<%=request.getParameter("sId")%>" readonly>
-						</c:if> <c:if test="${sId == null}">
-							<input type=text class="sId" name="sId">
-						</c:if></td>
+					<td class="culumn1" name="sellerId"><c:set var="sId" value="<%=request.getParameter(\"sId\")%>"></c:set> 
+						<c:if test="${sId != null }"><input type="text" class="sId" value="<%=request.getParameter("sId")%>" maxlength='50' readonly></c:if>
+						 <c:if test="${sId == null}"><input type=text class="sId" name="sId" maxlength='50'></c:if>
+					</td>
 				</tr>
 				<tr>
 					<td class="column1">내용</td>
 					<td colspan="4">
-						<textarea id="content" name="content"
-							id="content" cols="30" rows="10"></textarea>
+						<textarea id="content" name="content" id="content" cols="30" rows="10"></textarea>
 						<div id="content_cnt">(0 / 1000)</div>
 					</td>
 				</tr>
 				<tr>
 					<td class="column1">확인 비빌번호</td>
-					<td colspan="4" id="setpass"><input type="password" id="pass"
-						placeholder="숫자4자리 입력" style="text-align: left;" maxlength='4'
-						minlengt='4' name="passWord" />
+					<td colspan="4" id="setpass"><input type="password" id="pass" placeholder="숫자4자리 입력" style="text-align: left;" maxlength='4' minlengt='4' name="passWord" />
 						<button id="submit" style="display: inline;">저장</button>
-						<div style="display: inline; color: gray">비밀번호는 작성하신 글 확인시
-							사용됩니다.</div></td>
+						<div style="display: inline; color: gray">비밀번호는 작성하신 글 확인시 사용됩니다.</div>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -222,7 +202,7 @@ table {
 		var $sid = $(".sId");
 		var $content = $("#content");
 		var $pass = $("#pass")
-
+	
 		if ($product.val() == '') {
 			alert('상품이름을 입력해주세요');
 			$product.focus();
