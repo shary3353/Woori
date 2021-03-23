@@ -137,7 +137,6 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ArrayList<ProductDTO> list = dao.mainSearch(searchname);
 		System.out.println(list);
-		System.out.println(list.get(0));
 		System.out.println("리스트 크기 : " + list.size());
 		String msg = "현재 존재하는 게시글이 없습니다.";
 		for(int i =0; i <list.size(); i++) {
