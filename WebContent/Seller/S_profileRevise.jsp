@@ -149,7 +149,7 @@ function fnChkByte(obj, maxByte){//글자 bytes 제한
     for(var i=0; i<str_len; i++){
         one_char = str.charAt(i);
         if(escape(one_char).length > 4){
-			rbyte += 2;//한글2Byte
+			rbyte += 3;//한글3Byte
 		} else {
 		    rbyte++;//영문 등 나머지 1Byte
         }
