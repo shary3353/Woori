@@ -108,7 +108,12 @@
 		                </select><br/>
 		                <button id="updateResevationBtn${status.index}"  value="${rlist.r_idx}">예약현황변경</button>
 	            </td>
-                <td><button onclick="location.href='./sReprtForm?target_id=${rlist.cid}'">신고하기</button></td>
+                <td>
+                	<form action="sReprtForm" method="post">
+                		<input type="hidden" name="target_id" value="${rlist.cid }"/>
+	                	<button>신고하기</button>
+                	</form>
+                </td>
             </tr>
             </c:forEach>
         </table>

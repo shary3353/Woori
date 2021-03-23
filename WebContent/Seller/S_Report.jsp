@@ -53,7 +53,7 @@
                 	</tr>
                     <tr>
                         <th class="column-name">신고제목</th>
-                        <td><input type="text" name="subject" placeholder="신고제목을 입력해주세요." id="subject"></td>
+                        <td><input type="text" name="subject" placeholder="신고제목을 입력해주세요." id="subject" onKeyUp="fnChkByte(this,'50')"></td>
                     </tr>
                     <tr>
                         <th class="column-name">신고자</th>
@@ -78,7 +78,7 @@
                     </tr>
                     <tr>
                         <th class="column-name">신고내용</th>
-                        <td><textarea name="content" cols="85" rows="10" placeholder="신고내용을 입력해주세요." id="content"></textarea></td>
+                        <td><textarea name="content" cols="85" rows="10" placeholder="신고내용을 입력해주세요." id="content" onKeyUp="fnChkByte(this,'1000')" style="resize: none;"></textarea></td>
                     </tr>
                     <tr>
                     	<td colspan="2" class="btnArea">
@@ -105,6 +105,37 @@
                 return false;
             }
             return true;
+        }
+        
+        function fnChkByte(obj, maxByte){//글자 bytes 제한
+            var str = obj.value;
+            var str_len = str.length;
+
+            var rbyte = 0;
+            var rlen = 0;
+            var one_char = "";
+            var str2 = "";
+
+            for(var i=0; i<str_len; i++){
+                one_char = str.charAt(i);
+                if(escape(one_char).length > 4){
+        			rbyte += 2;//한글2Byte
+        		} else {
+        		    rbyte++;//영문 등 나머지 1Byte
+                }
+        		if(rbyte <= maxByte){
+                    rlen = i+1;//return할 문자열 갯수
+                }
+             }
+             if(rbyte > maxByte){
+          		// alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+          		alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+          		str2 = str.substr(0,rlen);//문자열 자르기
+          		obj.value = str2;
+          		fnChkByte(obj, maxByte);
+             }else{
+                //document.getElementById('byteInfo').innerText = rbyte;
+             }
         }
     </script>
 </html>
