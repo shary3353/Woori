@@ -280,7 +280,7 @@ public class MainDAO {
 	public ArrayList<ProductDTO> categorySearch(String c_idx) {
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		String sql="SELECT p.p_idx,p.p_name,p.likes,p.p_price,t.orifilename,t.newfilename " + 
-				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx WHERE c_idx=? AND is_sold=1";
+				"FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE c_idx=? AND is_sold=1";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(c_idx));
