@@ -90,7 +90,7 @@
             <table>
                 <tr>
                     <td rowspan="6" id="detailImg">
-                    		<img src="../Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName}" width="400px" height="600px"/>
+                    		<img id="itemImage" src="../Uploaded_Img/${dto.newFileName}"  alt="${dto.oriFileName}" width="400px" height="600px"/>
                     </td>
                     <td class="detailName" colspan="2">${dto.p_name}</td>
                 </tr>
@@ -125,7 +125,14 @@
 		if(msg!=""){
 			alert(msg);
 		}
-		 var loginid = '<%=(String)session.getAttribute("loginID")%>';	
+	//이미지 없을 때 이미지 대체
+	var $itemImage = $("#itemImage");
+	if($itemImage.attr('src') == "../Uploaded_Img/"){
+		$itemImage.attr("src", "${pageContext.request.contextPath}/img/no-image.png");
+	}
+		
+		
+	 var loginid = '<%=(String)session.getAttribute("loginID")%>';	
 	//좋아요 검사	
 	function likeConfirm(){
 		if(loginid != 'null'){

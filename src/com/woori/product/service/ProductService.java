@@ -65,12 +65,22 @@ public class ProductService {
 			ProductDAO dao = new ProductDAO();
 			ProductDTO dto = dao.sItemDetail(p_idx);//물품정보
 			System.out.println("상세보기 dto : "+dto);
-			dao = new ProductDAO();
-			int r_count = dao.sItemRcount(p_idx);//예약수
 			
-			req.setAttribute("dto", dto);
-			req.setAttribute("r_count", r_count);
-			dis = req.getRequestDispatcher("S_goodsInfo.jsp"); //S_goodsInfo.jsp로 이동
+			String page = "sItemList";//실패시
+			String msg = "본인이 등록한 물품 이외에는 볼 수 없습니다.";
+			String ckSid = dto.getSid();
+			System.out.println(sid+"=="+ckSid);
+			if(sid.equals(ckSid)) {//등록된물품의 판매자와 현재 로그인된 판매자가 동일한지 검사 -성공시
+				System.out.println("로그인된판매자와 해당물품의 판매자가 일치합니다.");
+				dao = new ProductDAO();
+				int r_count = dao.sItemRcount(p_idx);//예약수
+				req.setAttribute("dto", dto);				
+				req.setAttribute("r_count", r_count);
+				page="S_goodsInfo.jsp";//S_goodsInfo.jsp로 이동
+				msg="";
+			}
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page); 
 			dis.forward(req, resp);//값보냄
 		
 		} else { //로그인을 안 했으면 로그인페이지로

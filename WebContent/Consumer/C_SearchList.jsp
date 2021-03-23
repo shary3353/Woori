@@ -122,10 +122,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-	var $itemImage = $("#itemImage");
-	if($itemImage.attr('src') == "/Woori/Uploaded_Img/"){
-		$itemImage.attr("src", "${pageContext.request.contextPath}/img/no-image.png");
-	}
+	
 </script>
 </html>
 
