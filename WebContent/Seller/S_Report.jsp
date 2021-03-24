@@ -57,7 +57,7 @@
                     </tr>
                     <tr>
                         <th class="column-name">신고자</th>
-                        <td ><input type="text" name="reporter_id" value="${sessionScope.loginID}" readonly/></td> 
+                        <td ><input type="text" name="reporter_id" value="${sessionScope.sLoginID}" readonly/></td> 
                     </tr>
                     <tr>
                         <th class="column-name">신고대상자</th>
