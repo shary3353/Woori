@@ -116,7 +116,7 @@ th {
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" name="pw" class="inputs" id="pw" /></td>
+						<td><input type="password" name="pw" class="inputs" id="pw" onkeyup="fnChkByte(this, 200)"/></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인</th>
@@ -137,7 +137,7 @@ th {
 					<tr>
 						<th>이메일</th>
 						<td><input type="email" name="email" id="email"
-							class="inputs" value="${list.email}" /></td>
+							class="inputs" value="${list.email}" onkeyup="fnChkByte(this, 100)"/></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
@@ -162,7 +162,7 @@ var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)
 var regPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 var regPw = /^[A-Za-z\d$@$!%*_#?&]{3,}$/;
 
-pwCheckBox.addEventListener('keyup', () => {
+pwCheckBox.addEventListener('keyup', ()=>{
   if (pwBox.value == pwCheckBox.value) {
     pwCheckText.style.color = '#93c47d';
     pwCheckText.innerHTML = '비밀번호가 일치합니다.';
@@ -179,6 +179,37 @@ pwBox.addEventListener('keyup', ()=>{
 	    pwCheckText.style.color = 'red';
 	  }
 })
+
+function fnChkByte(obj, maxByte){//글자 bytes 제한
+    var str = obj.value;
+    var str_len = str.length;
+
+    var rbyte = 0;
+    var rlen = 0;
+    var one_char = "";
+    var str2 = "";
+
+    for(var i=0; i<str_len; i++){
+        one_char = str.charAt(i);
+        if(escape(one_char).length > 4){
+			rbyte += 3;//한글3Byte
+		} else {
+		    rbyte++;//영문 등 나머지 1Byte
+        }
+		if(rbyte <= maxByte){
+            rlen = i+1;//return할 문자열 갯수
+        }
+     }
+     if(rbyte > maxByte){
+  		// alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+  		alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+  		str2 = str.substr(0,rlen);//문자열 자르기
+  		obj.value = str2;
+  		fnChkByte(obj, maxByte);
+     }else{
+        //document.getElementById('byteInfo').innerText = rbyte;
+     }
+}
 
 $('#updateBtn').click(()=>{
 	console.log(pwBox.value);
