@@ -171,7 +171,7 @@ a {
 								</td>
 							</c:if>
 							<td><a href="cReservationCancle?r_idx=${list.r_idx}" class="reportBtn">예약취소</a></td>
-							<td><a href="cReportForm?sid=${list.sid}" class="reportBtn">신고하기</a></td>
+							<td><a href="../ServiceCenter/cReportForm?sid=${list.sid}" class="reportBtn">신고하기</a></td>
 						</tr>
 					</c:forEach>
 				</table>
