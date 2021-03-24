@@ -15,7 +15,7 @@ import com.woori.member.service.MemberService;
  	구매.판매.관리자 로그인,로그아웃,구매.판매.관리자회원가입, ~리스트
 	,판매자회원상세보기, 판매자 회원정보수정폼 보기, 판매자 회원정보 수정하기
  */
-@WebServlet({"/Consumer/cLogin", "/Seller/sLogin", "/AdminLogin", "/Consumer/overlay" ,"/logout", "/Consumer/cJoin", "/Seller/sJoin", "/Admin/cList", "/Admin/sList"
+@WebServlet({"/Consumer/cLogin", "/Seller/sLogin", "/AdminLogin", "/Consumer/overlay" ,"/adminLogout", "/logout", "/Consumer/cJoin", "/Seller/sJoin", "/Admin/cList", "/Admin/sList"
 	, "/Seller/sPfpDetail","/Seller/sPfpUpdateForm","/Seller/sPfpUpdate", "/Admin/cSearch", "/Admin/sSearch", "/Admin/sDetail", "/Admin/cDetail"
 	, "/Consumer/cDetail", "/Consumer/cUpadateForm", "/Consumer/cUpdateInfo"
 	,"/Seller/soverlay"})
@@ -59,6 +59,12 @@ public class MemberController extends HttpServlet {
 				String loginID = (String)req.getSession().getAttribute("loginID");
 				System.out.println("지워질 세션ID: "+ loginID);
 				req.getSession().removeAttribute("loginID");
+				resp.sendRedirect("index.jsp");
+				break;
+            case "/adminLogout":
+				String adminLoginID = (String)req.getSession().getAttribute("adminLoginID");
+				System.out.println("지워질 세션ID: "+ adminLoginID);
+				req.getSession().removeAttribute("adminLoginID");
 				resp.sendRedirect("index.jsp");
 				break;
 			

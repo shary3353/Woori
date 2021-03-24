@@ -235,7 +235,7 @@ public class MemberService {
 	}
 
 	public void cList() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			int group = 1;
 			String page = req.getParameter("page");
@@ -257,7 +257,7 @@ public class MemberService {
 	}
 
 	public void sList() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			int group = 1;
 			String page = req.getParameter("page");
@@ -280,7 +280,7 @@ public class MemberService {
 	}
 
 	public void cSearch() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			String inputC = req.getParameter("cSearch");
@@ -299,7 +299,7 @@ public class MemberService {
 	}
 
 	public void sSearch() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			String inputS = req.getParameter("sSearch");
@@ -479,7 +479,7 @@ public class MemberService {
 	}
 
 	public void AdminCustomerDetail() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			HashMap<String, Object> map = new HashMap<>();
@@ -525,7 +525,7 @@ public class MemberService {
 	}
 
 	public void AdminSellerDetail() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			HashMap<String, Object> map = new HashMap<>();
@@ -580,7 +580,7 @@ public class MemberService {
 		String msg = "아이디와 비밀번호를 확인해주세요.";
 		if(dao.adminLogin(adminID, adminPW)) {
 			System.out.println("관리자 로그인 성공");
-			req.getSession().setAttribute("loginID", adminID);
+			req.getSession().setAttribute("adminLoginID", adminID);
 			page = "AdminMain";
 			msg = "";
 		}

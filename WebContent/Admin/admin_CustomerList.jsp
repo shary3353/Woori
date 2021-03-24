@@ -59,7 +59,7 @@
 
             <div id="Admin_Searching">   <!--구매자자리스트 검색 부분-->
                 <form action="cSearch">
-                    <input type="text" name="cSearch" id="searchingSellerInput" placeholder="ID검색란"><button type="submit" formaction="cSearch">검색</button>
+                    <input type="text" name="cSearch" id="searchingSellerInput" placeholder="ID검색란" onkeyup="fnChkByte(this, '50')"><button type="submit" formaction="cSearch">검색</button>
                 </form>
             </div>  <!--구매자리스트 검색 닫음-->
 
@@ -135,6 +135,37 @@
 		}
 		
 	}); 
+	
+	function fnChkByte(obj, maxByte){
+    	var str = obj.value;
+    	var str_len = str.length;
+    	
+    	var rByte = 0;		//카운팅 할 변수
+    	var rLen = 0;		//잘라낼 글자수
+    	var one_char = "";	//하나씩 카운팅하기 위한 변수
+    	var str2 = "";		//잘라낸 문자열을 담을 변수
+    	
+    	for(var i=0; i<str_len; i++){
+    		one_char = str.charAt(i);
+    		if(escape(one_char).length > 4){
+    			rByte += 3;	//한글은 3byte
+    		}else{
+    			rByte ++;	//나머지 1byte
+    		}
+    		
+    		if(rByte <= maxByte){	//맥스바이트에 도달하면
+    			rLen = i+1;	//잘라낼 위치 지정
+    		}
+    	}
+    	
+    	if(rByte > maxByte){
+    		alert(Math.ceil((maxByte/3))+"자를 초과할 수 없습니다.");
+    		str2 = str.substr(0, rLen);
+    		obj.value = str2;
+    		fnChkByte(obj, maxByte);
+    	}
+    	
+    }
 	
 	
 </script>

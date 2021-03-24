@@ -24,7 +24,7 @@ public class AdminReportService {
 	
 	
 	public void rList() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			int group = 1;
 			String page = req.getParameter("page");
@@ -47,7 +47,7 @@ public class AdminReportService {
 	}
 
     public void rSearch() throws ServletException, IOException {
-    	String loginID = (String)req.getSession().getAttribute("loginID");
+    	String loginID = (String)req.getSession().getAttribute("adminLoginID");
     	if(loginID != null) {
     		req.setCharacterEncoding("utf-8");
     		int group = 1;
@@ -90,7 +90,7 @@ public class AdminReportService {
 
 
 	public void rStatusUpdate() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			HashMap<String, Object> map = new HashMap<>();
@@ -115,7 +115,7 @@ public class AdminReportService {
 
 
 	public void rDetail() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			int r_idx = Integer.parseInt(req.getParameter("r_idx"));

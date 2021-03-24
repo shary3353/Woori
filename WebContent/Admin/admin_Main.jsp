@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:if test="${sessionScope.loginID eq null }">
+<c:if test="${sessionScope.adminLoginID eq null }">
 	<script type="text/javascript">
 	location.href = "./admin_Login.jsp";
-</script>
+	</script>
 </c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,15 +18,15 @@
 <body>
     <div id="Wrapper">
         <div id="Admin_Header">  <!-- 로그인 알림 영역 -->
-	        <span id="Inform_Text"><img id="Admin_Login_Notice" src="${pageContext.request.contextPath}/img/admin_login_notice.png" alt="/로그인알림로고/" />&nbsp;현재 로그인중인 <b>관리자</b> 아이디 : ${sessionScope.loginID}</span>
-        	<c:if test="${sessionScope.loginID ne null}">
-	            <span id="Logout_Link"><a href="${pageContext.request.contextPath}/logout">로그아웃 ></a></span>
+	        <span id="Inform_Text"><img id="Admin_Login_Notice" src="${pageContext.request.contextPath}/img/admin_login_notice.png" alt="/로그인알림로고/" />&nbsp;현재 로그인중인 <b>관리자</b> 아이디 : ${sessionScope.adminLoginID}</span>
+        	<c:if test="${sessionScope.adminLoginID ne null}">
+	            <span id="Logout_Link"><a href="${pageContext.request.contextPath}/adminLogout">로그아웃 ></a></span>
         	</c:if>
         </div>
 
         <div id="Admin_Content"> <!-- 관리자 메인 컨텐츠 영역 -->
             <div id="Hello_Admin"> <!-- 인사글 -->
-                <h3>관리자 <span>${sessionScope.loginID }</span>님 반갑습니다.</h3>
+                <h3>관리자 <span>${sessionScope.adminLoginID }</span>님 반갑습니다.</h3>
             </div>
             <div id="Admin_Menu">  <!-- 메인메뉴 -->
                 <div id="customer" class="Menu_Btn" style="background-color: #1ABC9C;"><a href="${pageContext.request.contextPath}/Admin/cList">구매회원 관리</a></div>

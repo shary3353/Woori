@@ -23,7 +23,7 @@ public class BlackService {
 	}
 	
 	public void bList() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			int group = 1;
 			String page = req.getParameter("page");
@@ -45,7 +45,7 @@ public class BlackService {
 	}
 	
 	public void bSearch() throws ServletException, IOException {
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			String inputB = req.getParameter("bSearch");
@@ -75,7 +75,7 @@ public class BlackService {
     
     //블랙리스트에 추가시 필요한 데이터 - id, admin_id, reason
   	public void sBlackRegist() throws ServletException, IOException {
-  		String loginID = (String)req.getSession().getAttribute("loginID");
+  		String loginID = (String)req.getSession().getAttribute("adminLoginID");
   		if(loginID != null) {
   			req.setCharacterEncoding("utf-8");
   			HashMap<String, Object> map = new HashMap<>();
@@ -115,7 +115,7 @@ public class BlackService {
   	}
   	
   	public void cBlackRegist() throws ServletException, IOException {
-  		String loginID = (String)req.getSession().getAttribute("loginID");
+  		String loginID = (String)req.getSession().getAttribute("adminLoginID");
   		if(loginID != null) {
   			req.setCharacterEncoding("utf-8");
   			HashMap<String, Object> map = new HashMap<>();
@@ -154,7 +154,7 @@ public class BlackService {
   	}
   	
 	public void blackCancel() throws ServletException, IOException{
-		String loginID = (String)req.getSession().getAttribute("loginID");
+		String loginID = (String)req.getSession().getAttribute("adminLoginID");
 		if(loginID != null) {
 			req.setCharacterEncoding("utf-8");
 			String id = req.getParameter("id");
