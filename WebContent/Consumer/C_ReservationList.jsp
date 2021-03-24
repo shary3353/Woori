@@ -164,7 +164,11 @@ a {
 								<td class="reserProcess" style="color:tomato;">${list.status}</td>
 							</c:if>
 							<c:if test="${list.status eq '취소완료'}">
-								<td class="reserProcess" style="color:#01DF74;">${list.status}</td>
+								<td class="reserProcess" style="color:#01DF74;">${list.status}
+								<br/>
+								<br/>
+									<a href="cReservationDelete?r_idx=${list.r_idx}" class="reportBtn">내역삭제</a>
+								</td>
 							</c:if>
 							<td><a href="cReservationCancle?r_idx=${list.r_idx}" class="reportBtn">예약취소</a></td>
 							<td><a href="cReportForm?sid=${list.sid}" class="reportBtn">신고하기</a></td>

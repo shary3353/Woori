@@ -240,4 +240,34 @@ public class ReservationDAO {
 		return status;
 	}
 
+	public int cReservationCancle(String r_idx) {
+		String sql = "UPDATE reservation SET rs_idx = 3 WHERE r_idx=?";
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, r_idx);
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return success;
+	}
+
+	public int cReservationDelete(String r_idx) {
+		String sql = "DELETE reservation WHERE r_idx=?";
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, r_idx);
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return success;
+	}
+
 }

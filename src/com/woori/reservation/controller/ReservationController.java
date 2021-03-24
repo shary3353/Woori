@@ -14,7 +14,7 @@ import com.woori.reservation.service.ReservationService;
         구매자 예약내역 리스트
  */
 @WebServlet({"/Seller/sReservationList","/Seller/updateResevationStatus"
-	, "/Consumer/cReservationList", "/Consumer/cMyPageMain", "/Consumer/cReservationCancle"})
+	, "/Consumer/cReservationList", "/Consumer/cMyPageMain", "/Consumer/cReservationCancle", "/Consumer/cReservationDelete"})
 public class ReservationController extends HttpServlet {
 
 	@Override
@@ -62,6 +62,11 @@ public class ReservationController extends HttpServlet {
 			break;
 		case "/Consumer/cReservationCancle":
 			System.out.println("Request cReservationCancle");
+			service.cReservationCancle();
+			break;
+		case "/Consumer/cReservationDelete":
+			System.out.println("Requset cReservationDelete");
+			service.cReservationDelete();
 			break;
 			
 		}
