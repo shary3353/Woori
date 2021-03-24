@@ -183,12 +183,16 @@ function checkPassword(Pw){
 				$("#overlay").click(function () {
 					var inputCid = $('#sid').val();
 					var Exp =/^[a-zA-Z0-9]{4,12}$/;
+					var text = $('#sid').val();
+					var find ="admin";
+					
 					if (inputCid == "") {
 						alert('아이디를 입력하세요.');
-					} 
-					if(inputCid == "admin"){
-						alert('admim은 사용할 수 없습니다.');
-					}if(Exp.test(sid.value)){
+					} else if(text.indexOf(find)!=-1){
+						alert("admin을 포함할 수 없습니다.");
+					}
+					
+					else if(Exp.test(sid.value)){
 						alert('id는 사업자등록번호로만 입력할 수 있습니다');
 					}
 					else {

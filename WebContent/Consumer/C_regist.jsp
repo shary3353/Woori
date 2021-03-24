@@ -193,8 +193,7 @@
 			    	alert('미성년자는 가입할 수 없습니다.');
 				}
 			});
-				
-			
+			 
 		
 
 
@@ -204,11 +203,15 @@
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
 					var Exp =/^[a-zA-Z0-9]{4,12}$/;
+					var text = $('#cid').val();
+					var find ="admin";
+					
 					if (inputCid == "") {
 						alert('아이디를 입력하세요.');
-					}else if(inputCid == "admin"){
-						alert('admim은 사용할 수 없습니다.');
-					}else if(!Exp.test(cid.value)){
+					} else if(text.indexOf(find)!=-1){
+						alert("admin을 포함할 수 없습니다.");
+					}
+					else if(!Exp.test(cid.value)){
 						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
 					}
 					else {
