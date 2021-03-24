@@ -168,4 +168,25 @@ public class WishDAO {
 		}
 	}
 
+	public boolean chkWishList(String p_idx, String loginID) {
+		String sql = "SELECT wish_idx, cid, p_idx FROM wishlist WHERE p_idx=? AND cid=?";
+		boolean success = false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, p_idx);
+			ps.setString(2, loginID);
+			rs = ps.executeQuery();
+			if(!rs.next()) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return success;
+	}
+	
+	
+
 }
