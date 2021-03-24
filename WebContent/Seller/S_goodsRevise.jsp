@@ -60,7 +60,7 @@
 	                    <input type="file" name="photo" id="imageFile" accept="image/*"/>
 	                </td>
 	                <td class="column-name" >물품이름</td>
-	                <td><input type="text" value="${dto.p_name}" name="p_name" id="p_name" onKeyUp="fnChkByte(this,'50')"/></td>
+	                <td><input type="text" value="${dto.p_name}" name="p_name" id="p_name" onKeyUp="fnChkByte(this,'100')"/></td>
 	            </tr>
 	            <tr>
 	                <td class="column-name" >카테고리</td>
@@ -89,7 +89,7 @@
 	            </tr>
 	            <tr>
 	                <td class="column-name" >상품설명</td>
-	                <td><textarea name="p_content" id="p_content" cols="50" rows="10" onKeyUp="fnChkByte(this,'1000')" style="resize: none;">${dto.p_content}</textarea></td>
+	                <td><textarea name="p_content" id="p_content" cols="50" rows="10" onKeyUp="fnChkByte(this,'2000')" style="resize: none;">${dto.p_content}</textarea></td>
 	            </tr>
 	            <tr>
 	                <td colspan="3" class="btnArea">
