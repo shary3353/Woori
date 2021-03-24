@@ -186,6 +186,7 @@ function checkPassword(Pw){
 					var text = $('#sid').val();
 					var find ="admin";
 					var sidArr = new Array();
+					
 					if (inputCid == "") {
 						alert('아이디를 입력하세요.');
 					} else if(text.indexOf(find)!=-1){
@@ -233,7 +234,8 @@ function checkPassword(Pw){
 					var $store_call = $("#store_call");
 					var $gender = $("input[name='gender']:checked");
 					var $email = $("#email");
-
+					var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+					
 					if (overChk) {
 						if ($id.val() == '') {
 							alert('아이디를 입력해 주세요!');
@@ -256,7 +258,11 @@ function checkPassword(Pw){
 						} else if ($email.val().indexOf('@') < 0) {
 							alert('@를 입력해 주세요!');
 							$email.focus();
-						} else if ($phone.val() == '') {
+						} 
+						else if(!regEmail.test($email.val())){
+							alert('이메일 주소가 유효하지 않습니다.');
+							$email.focus();
+						}else if ($phone.val() == '') {
 							alert('핸드폰 번호를 입력해 주세요!');
 							$phone.focus();
 						} else if($store_call.val() == ''){
