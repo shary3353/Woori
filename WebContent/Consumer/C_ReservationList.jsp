@@ -126,6 +126,7 @@ a {
 						<th>예약등록일</th>
 						<th>방문예정일</th>
 						<th>예약상황</th>
+						<th>예약취소</th>
 						<th>신고하기</th>
 					</tr>
 					<c:forEach items="${list}" var="list">
@@ -159,6 +160,13 @@ a {
 							<c:if test="${list.status eq '신청중'}">
 								<td class="reserProcess" style="color:tomato;">${list.status}</td>
 							</c:if>
+							<c:if test="${list.status eq '취소신청'}">
+								<td class="reserProcess" style="color:tomato;">${list.status}</td>
+							</c:if>
+							<c:if test="${list.status eq '취소완료'}">
+								<td class="reserProcess" style="color:#01DF74;">${list.status}</td>
+							</c:if>
+							<td><a href="cReservationCancle?r_idx=${list.r_idx}" class="reportBtn">예약취소</a></td>
 							<td><a href="cReportForm?sid=${list.sid}" class="reportBtn">신고하기</a></td>
 						</tr>
 					</c:forEach>

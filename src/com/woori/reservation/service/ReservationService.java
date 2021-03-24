@@ -145,4 +145,12 @@ public class ReservationService {
 		
 	}
 
+	public void cReservationCancle() {
+		String loginID=(String) req.getSession().getAttribute("loginID");
+		String r_idx = req.getParameter("r_idx");
+		String msg = "";
+		
+		
+	}
+
 }
