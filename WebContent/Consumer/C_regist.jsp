@@ -102,7 +102,7 @@
 
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" id="Pw" name="pw" value="" placeholder="비밀번호를 입력해주세요." /></td>
+						<td><input type="password" id="Pw" name="pw" value="" placeholder="비밀번호를 입력해주세요."/></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인</th>
@@ -141,16 +141,26 @@
 				</table>
 		</body>
 		<script>
+			
+		
+		
+		
+		
+		
+		
 			$(function () {
 				$('#Pw').keyup(function () {
 					$('#check').html('');
+					
 				});
 
 				$('#PwChk').keyup(function () {
+					
 					if ($('#Pw').val() != $('#PwChk').val()) {
 						$('#check').html('비밀번호 일치하지 않음');
 						$('#check').attr('color', '#f82a2aa3');
-						} else {
+						}
+								else {
 						$('#check').html('비밀번호 일치');
 						$('#check').attr('color', '#199894b3');
 					}
@@ -175,7 +185,6 @@
 			});
 				
 			
-			    
 		
 
 
@@ -184,9 +193,17 @@
 
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
+					var Exp =/^[a-zA-Z0-9]{4,12}$/;
 					if (inputCid == "") {
 						alert('아이디를 입력하세요.');
-					} else {
+					}if(inputCid == "admin"){
+						alert('admim은 사용할 수 없습니다.');
+					}if(!Exp.test(cid.value)){
+						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
+					}
+					else {
+						
+					
 
 						$.ajax({
 							type: 'get'
@@ -228,7 +245,8 @@
 						}else if ($pw.val() == '') {
 							alert('비밀번호를 입력해 주세요!');
 							$pw.focus();
-						} else if ($name.val() == '') {
+						} 
+						else if ($name.val() == '') {
 							alert('이름을 입력해 주세요!');
 							$name.focus();
 						} else if ($birth.val() == '') {
@@ -285,10 +303,10 @@
 
 
 		</script>
-
-
-
-
-
-
 		</html>
+					
+
+
+
+
+
