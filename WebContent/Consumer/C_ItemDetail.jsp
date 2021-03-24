@@ -237,7 +237,7 @@
              location.replace("./C_login.jsp");
           }
           else{
-             location.replace("./Q_write.jsp");
+             location.replace("../ServiceCenter/Q_write.jsp?p_name=${dto.p_name}&sId=${dto.sid}");
           }
     }  
 	
