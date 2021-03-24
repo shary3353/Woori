@@ -136,7 +136,7 @@ table {
 						<tr>
 							<th>신고제목</th>
 							<th><input id="subject" type="text" name="subject" style="width: 500px;"
-								placeholder="신고제목을 입력해주세요." maxlength="300"></th>
+								placeholder="신고제목을 입력해주세요." onKeyUp="fnChkByte(this,'50')"></th>
 						</tr>
 						<tr>
 							<th>신고자</th>
@@ -148,7 +148,7 @@ table {
 							<th>
 							<c:set var="targetId" value="<%=request.getParameter(\"sid\")%>"></c:set>
 							<c:if test="${targetId == null }">
-								<input id="tId" type="text" name="sellerId" value=""></c:if>
+								<input id="tId" type="text" name="sellerId" value="" onKeyUp="fnChkByte(this,'50')"></c:if>
 								<c:if test="${targetId != null}">
 								<input id="tId" type="text" name="sellerId" value="<%=request.getParameter("sid")%>" readonly></c:if>
 							</th>
@@ -166,8 +166,8 @@ table {
 						</tr>
 						<tr>
 							<th>신고내용</th>
-							<td><textarea name="content" id="content" cols="30" rows="10" placeholder="신고내용을 입력해주세요."></textarea>
-									<div id="content_cnt">(0 / 1000)</div>
+							<td><textarea name="content" id="content" cols="30" rows="10" placeholder="신고내용을 입력해주세요." onKeyUp="fnChkByte(this,'1000')"></textarea>
+									<!-- <div id="content_cnt">(0 / 1000)</div> -->
 							</td>
 						</tr>
 						<tr>
@@ -254,7 +254,7 @@ table {
           }
     }   
 	 
-	 $(document).ready(function(){
+	/*  $(document).ready(function(){
 		 $('#content').on('keyup',function(){
 			 $('#content_cnt').html("("+$(this).val().length+" / 1000)");
 			 	
@@ -263,6 +263,38 @@ table {
 			 	$('#content_cnt').html("(1000 / 1000)");
 			 }
 		 });
-	 });
+	 }); */
+	 
+	    function fnChkByte(obj, maxByte){//글자 bytes 제한
+	        var str = obj.value;
+	        var str_len = str.length;
+
+	        var rbyte = 0;
+	        var rlen = 0;
+	        var one_char = "";
+	        var str2 = "";
+
+	        for(var i=0; i<str_len; i++){
+	            one_char = str.charAt(i);
+	            if(escape(one_char).length > 4){
+	             rbyte += 3;//한글3Byte
+	          } else {
+	              rbyte++;//영문 등 나머지 1Byte
+	            }
+	          if(rbyte <= maxByte){
+	                rlen = i+1;//return할 문자열 갯수
+	            }
+	         }
+	         if(rbyte > maxByte){
+	            // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+	            alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+	            str2 = str.substr(0,rlen);//문자열 자르기
+	            obj.value = str2;
+	            fnChkByte(obj, maxByte);
+	         }else{
+	            //document.getElementById('byteInfo').innerText = rbyte;
+	         }
+	    }
+	
 	 </script>
 </html>
