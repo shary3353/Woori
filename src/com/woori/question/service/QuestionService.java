@@ -246,7 +246,10 @@ public class QuestionService {
 		resp.getWriter().print(json);
 		
 		} else { //로그인을 안 했으면 로그인페이지로 
-			resp.sendRedirect("../Consumer/C_login.jsp"); 
+		String msg= "로그인이 필요합니다.";
+		req.setAttribute("msg", msg);
+		dis = req.getRequestDispatcher("../Consumer/C_login.jsp");
+		dis.forward(req, resp);
 		}
 	}
 
