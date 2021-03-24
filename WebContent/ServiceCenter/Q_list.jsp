@@ -110,11 +110,11 @@ padding:2px 7px;
 <body>
 	<div style="min-width: 1920px">
 		<c:choose>
-    		<c:when test="${sessionScope.loginID eq null}">
+    		<c:when test="${sessionScope.cLoginID eq null}">
 			<jsp:include page="../Include/loginnavi.jsp"></jsp:include>
     		</c:when>
    
-    		<c:when test="${sessionScope.loginID ne null}">
+    		<c:when test="${sessionScope.cLoginID ne null}">
 			<jsp:include page="../Include/navi.jsp"></jsp:include>
     		</c:when>
     	</c:choose>
@@ -221,7 +221,7 @@ padding:2px 7px;
 		alert(msg);
 	}
     function idCheck(){ 
-        var uid = '<%=(String)session.getAttribute("loginID")%>';
+        var uid = '<%=(String)session.getAttribute("cLoginID")%>';
 		console.log(uid);
          if(uid=="null"){ 
             alert("로그인이 필요한 항목입니다."); 
@@ -232,7 +232,7 @@ padding:2px 7px;
    }  
 	
 	 function idCheck2(){ 
-        var uid = '<%=(String)session.getAttribute("loginID")%>';
+        var uid = '<%=(String)session.getAttribute("cLoginID")%>';
 		console.log(uid);
          if(uid=="null"){ 
             alert("로그인이 필요한 항목입니다."); 
