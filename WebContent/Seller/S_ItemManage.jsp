@@ -27,6 +27,9 @@ String fullpath = savePath +"\\";
             padding: 10pX;
             text-align: center;
         }
+        th{
+        	background-color: rgb(231, 231, 231);
+        }
         .btnArea{
             text-align: right;
             border-bottom: 1px solid white;

@@ -206,9 +206,9 @@
 					var Exp =/^[a-zA-Z0-9]{4,12}$/;
 					if (inputCid == "") {
 						alert('아이디를 입력하세요.');
-					}if(inputCid == "admin"){
+					}else if(inputCid == "admin"){
 						alert('admim은 사용할 수 없습니다.');
-					}if(!Exp.test(cid.value)){
+					}else if(!Exp.test(cid.value)){
 						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
 					}
 					else {
@@ -218,7 +218,7 @@
 						$.ajax({
 							type: 'get'
 							, url: 'overlay'
-							, data: { "cid": $("#cid").val() }
+							, data: { "cid": $("#cid").val()}
 							, dataType: 'JSON'
 							, success: function (data) {
 								console.log(data);
@@ -227,7 +227,8 @@
 									//$("#cid").css({ backgroundColor: 'yellowgreen' });
 									//overChk = true; //사용할 수 있는 아이디로 판정 받는다면
 								}
-								else {
+								else{
+									
 									console.log(data.use);
 									alert('이미 사용중인 아이디 입니다.');
 									$("#cid").val('');
