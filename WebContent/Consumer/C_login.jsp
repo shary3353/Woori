@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<c:if test="${sessionScope.loginID ne null }">
+	<c:set var="id" value="${sessionScope.loginID }"></c:set>
+	<c:if test="${fn:indexOf(id, '-') == -1 }">	<!-- '-'미포함 : 구매자 -->
+		<script type="text/javascript">
+			location.href = "./C_main";
+		</script>
+	</c:if>
+	<c:if test="${fn:indexOf(id, '-') > -1 }">	<!-- '-'포함 : 판매자 -->
+		<script type="text/javascript">
+			location.href = "../Seller/sItemList";
+		</script>
+	</c:if>
+</c:if>
 <!DOCTYPE html>
 <html>
 
