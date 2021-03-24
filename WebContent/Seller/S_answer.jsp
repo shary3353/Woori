@@ -52,7 +52,9 @@
             </tr>
             <tr>
                 <td class="column-name">제목</td>
-                <td colspan="5">${dto.subject}</td>
+                <td colspan="3">${dto.subject}</td>
+                <td class="column-name">문의상품</td>
+                <td colspan="3">${dto.p_name}</td>
             </tr>
             <tr>
                 <td class="column-name" >질문자</td>
