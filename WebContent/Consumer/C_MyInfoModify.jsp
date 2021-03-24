@@ -74,6 +74,15 @@ th {
 	border: none;
 	text-align: center;
 	font-size: 15px;
+	width: 350px;
+	height: 35px;
+	margin: 9px 0 0 9px;
+	border: 2px solid white;
+	line-height: 21px;
+	font-weight: bold;
+	font-size: 16px;
+	outline: none;
+	padding-left: 15px;
 }
 
 .headDESC {
@@ -88,8 +97,8 @@ th {
 </head>
 
 <body>
-	<%@include file="../Include/navi.jsp" %>
-	<%@include file="../Include/SideBar.jsp" %>
+	<%@include file="../Include/navi.jsp"%>
+	<%@include file="../Include/SideBar.jsp"%>
 	<div id="myInfo">
 		<form action="cUpdateInfo" method="POST" name="updateForm">
 			<div id="infoBox">
@@ -99,6 +108,11 @@ th {
 						<th>아이디</th>
 						<td><input type="text" name="cid" class="readonlyInputs"
 							value="${list.cid}" readonly></td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td><input type="text" name="birthday" class="readonlyInputs"
+							value="${list.name}" readonly></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
@@ -143,6 +157,11 @@ const pwCheckBox = document.getElementById('pwCfm');
 const pwCheckText = document.getElementById('pwCfmMsg');
 const emailBox = document.getElementById('email');
 const phoneBox = document.getElementById('phone');
+
+var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+var regPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+var regPw = /^[A-Za-z\d$@$!%*_#?&]{3,}$/;
+
 pwCheckBox.addEventListener('keyup', () => {
   if (pwBox.value == pwCheckBox.value) {
     pwCheckText.style.color = '#93c47d';
@@ -152,6 +171,15 @@ pwCheckBox.addEventListener('keyup', () => {
   }
 });
 
+pwBox.addEventListener('keyup', ()=>{
+	if (pwBox.value == pwCheckBox.value) {
+	    pwCheckText.style.color = '#93c47d';
+	    pwCheckText.innerHTML = '비밀번호가 일치합니다.';
+	  } else {
+	    pwCheckText.style.color = 'red';
+	  }
+})
+
 $('#updateBtn').click(()=>{
 	console.log(pwBox.value);
 	if(pwBox.value == ""){
@@ -160,10 +188,19 @@ $('#updateBtn').click(()=>{
 		alert("비밀번호확인을 입력해주세요.");
 	} else if (pwBox.value != pwCheckBox.value){
 		alert("비밀번호를 다시 확인해주세요.");
+	} else if(!regPw.test(pwBox.value)){
+		alert('비밀번호는 영문,숫자,특수문자@$!%*_#?&만 허용됩니다.');
+		$pw.focus();
 	} else if (emailBox.value == ""){
 		alert("이메일을 입력해주세요.");
+	} else if(!regEmail.test(emailBox.value)){
+		alert('이메일 주소가 유효하지 않습니다.');
+		$email.focus();
 	} else if (phoneBox.value == ""){
 		alert("전화번호을 입력해주세요.");
+	} else if(!regPhone.test(phoneBox.value)){
+		alert('전화번호가 유효하지 않습니다.');
+		$phone.focus();
 	} else {
 		document.updateForm.submit();
 	}
