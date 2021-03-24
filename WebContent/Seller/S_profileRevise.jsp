@@ -80,7 +80,8 @@
 	            </tr>
 	            <tr>
 	                <td class="column-name">이름</td>
-	                <td class="info"><input type="text" value="${detail.name}" class="newProfile" name="name" id="name"></td>
+	                <td class="info"><input type="text" value="${detail.name}" class="newProfile" name="name" id="name"
+	                onkeyup="fnChkByte(this,'50')"/></td>
             	</tr>
 	            <tr>   
 	                <td class="column-name">새로운 비밀번호</td>
