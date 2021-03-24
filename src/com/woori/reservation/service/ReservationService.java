@@ -178,9 +178,13 @@ public class ReservationService {
 			int success = 0;
 			ReservationDAO dao = new ReservationDAO();
 			success = dao.cReservationDelete(r_idx);
-
-			resp.sendRedirect("cReservationList");
-
+			
+			if(success>0) {
+				msg = r_idx+"번 예약이 내역에서 삭제됩니다.";
+			}
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("cReservationList");
+			dis.forward(req, resp);
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);
