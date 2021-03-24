@@ -73,6 +73,10 @@ th {
 						<td>${list.cid}</td>
 					</tr>
 					<tr>
+						<th>이름</th>
+						<td>${list.name}</td>
+					</tr>
+					<tr>
 						<th>생년월일</th>
 						<td>${list.birthday}</td>
 					</tr>

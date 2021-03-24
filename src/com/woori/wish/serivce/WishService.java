@@ -35,7 +35,8 @@ public class WishService {
 			}
 			WishDAO dao = new WishDAO();
 			HashMap<String, Object> map = dao.pagingList(group, loginID);
-
+			
+			req.setAttribute("msg", req.getAttribute("msg"));
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
 			req.setAttribute("currPage", group);
@@ -60,8 +61,13 @@ public class WishService {
 			System.out.println("삭제하고 싶은 WishList idx : " + wish_idx);
 			WishDAO dao = new WishDAO();
 			int success = dao.delWishList(wish_idx);
-
-			resp.sendRedirect("wishPaging");
+			if(success>0) {
+				msg = wish_idx+"번 위시리스트가 삭제되었습니다.";
+			}
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("wishPaging");
+			dis.forward(req, resp);
+			
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);

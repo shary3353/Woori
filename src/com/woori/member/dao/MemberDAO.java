@@ -256,7 +256,7 @@ public class MemberDAO {
 	}
 
 	public CustomerDTO cDetail(String cid) {
-		String sql = "SELECT cid, gender, email, to_char(birthday, 'yyyy-mm-dd') birthday, phone FROM consumer WHERE cid=?";
+		String sql = "SELECT cid, gender, email, to_char(birthday, 'yyyy-mm-dd') birthday, phone, name FROM consumer WHERE cid=?";
 		CustomerDTO dto = new CustomerDTO();
 		try {
 			ps = conn.prepareStatement(sql);
@@ -268,8 +268,9 @@ public class MemberDAO {
 				dto.setEmail(rs.getString(3));
 				dto.setBirthday(rs.getString(4));
 				dto.setPhone(rs.getString(5));
+				dto.setName(rs.getString(6));
 			}
-			System.out.println(dto.getCid()+" / "+dto.getGender()+" / "+dto.getEmail()+" / "+dto.getBirthday()+" / "+dto.getPhone());
+			System.out.println(dto.getCid()+" / "+dto.getGender()+" / "+dto.getEmail()+" / "+dto.getBirthday()+" / "+dto.getPhone()+" / "+dto.getName());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -279,7 +280,7 @@ public class MemberDAO {
 	}
 
 	public CustomerDTO cUpadateForm(String cid, String pw) {
-		String sql = "SELECT cid, gender, email, to_char(birthday, 'yyyy-mm-dd') birthday, phone FROM consumer WHERE cid=? and pw=?";
+		String sql = "SELECT cid, gender, email, to_char(birthday, 'yyyy-mm-dd') birthday, phone, name FROM consumer WHERE cid=? and pw=?";
 		CustomerDTO dto = new CustomerDTO();
 		try {
 			ps= conn.prepareStatement(sql);
@@ -292,6 +293,7 @@ public class MemberDAO {
 				dto.setEmail(rs.getString(3));
 				dto.setBirthday(rs.getString(4));
 				dto.setPhone(rs.getString(5));
+				dto.setName(rs.getString(6));
 			} else {
 				return null;
 			}
