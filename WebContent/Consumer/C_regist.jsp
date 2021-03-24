@@ -145,7 +145,7 @@
 				checkPassword($('#Pw').val());
 			});
 			function checkPassword(Pw){
-				if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.[0-9]).{3,10}$/.test(Pw)){
+				if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.[0-9]).{3,15}$/.test(Pw)){
 					alert('숫자+영문자+특수문자 조합으로 3자리 이상 사용해야 합니다.()미포함');
 					$('#Pw').val('').focus();
 					return false;
