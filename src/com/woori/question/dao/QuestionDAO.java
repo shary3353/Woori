@@ -205,7 +205,7 @@ public class QuestionDAO {
 		int start = end -(pagePerCnt - 1);
 		ArrayList<QuestionDTO> list = new ArrayList<QuestionDTO>();
 		String sql = "SELECT q_idx,subject,q_reg_date FROM"
-				+"(SELECT ROW_NUMBER() OVER(ORDER BY q_idx DESC) AS rnum, q_idx,subject,q_reg_date FROM Question)"
+				+"(SELECT ROW_NUMBER() OVER(ORDER BY q_idx DESC) AS rnum, q_idx,subject,to_char(q_reg_date , 'yyyy-mm-dd') AS q_reg_date FROM Question)"
 				 +"WHERE rnum BETWEEN ? AND ?";
 			
 		try {
@@ -217,7 +217,7 @@ public class QuestionDAO {
 				QuestionDTO dto = new QuestionDTO();
 				dto.setQ_idx(rs.getInt("q_idx"));
 				dto.setSubject(rs.getString("subject"));
-				dto.setQ_reg_date(rs.getString("q_reg_Date"));
+				dto.setQ_reg_date(rs.getString("q_reg_date"));
 				list.add(dto);
 			}
 			map.put("list", list);
@@ -328,7 +328,7 @@ public class QuestionDAO {
 	}
 
 	public HashMap<String, Object> qDetail(String q_idx, String q_pw) {
-		String sql =   "SELECT  subject, cid, category, q_reg_date, sid, content, s_answer, p_name FROM\r\n" + 
+		String sql =   "SELECT  subject, cid, category, to_char(q_reg_date, 'yyyy-mm-dd') AS q_reg_date ,sid, content, s_answer, p_name FROM\r\n" + 
 				"Question q, Q_Categories qc WHERE q.qc_idx = qc.qc_idx AND q_idx=? AND q_pw=?";
 		boolean success = false;
 		HashMap<String, Object> map = new HashMap<String, Object>();
