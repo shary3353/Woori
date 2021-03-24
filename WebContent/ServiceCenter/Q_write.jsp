@@ -163,23 +163,23 @@ table {
 					<td class="culumn1" name="productName">
 						<c:set var="p_name" value="<%=request.getParameter(\"p_name\")%>"></c:set> 
 						<c:if test="${p_name != null}"><input class="productName" name="p_name" maxlength='50' value="<%=request.getParameter("p_name")%>" readonly></c:if> 
-						<c:if test="${p_name == null }"><input class="productName" type="text" name="p_name" maxlength='50'></c:if>
+						<c:if test="${p_name == null }"><input class="productName" type="text" name="p_name"  onKeyUp="fnChkByte(this,'50')"></c:if>
 					</td>
 				</tr>
 				<tr>
 					<td class="column1">제목</td>
-					<td colspan="2"><input type="text" id="subject" placeholder="제목을 입력해주세요" style="width: 380px" maxlength='50' name="subject"></td>
+					<td colspan="2"><input type="text" id="subject" placeholder="제목을 입력해주세요" style="width: 380px" name="subject"  onKeyUp="fnChkByte(this,'50')"></td>
 					<td class="column1">판매자</td>
 					<td class="culumn1" name="sellerId"><c:set var="sId" value="<%=request.getParameter(\"sId\")%>"></c:set> 
 						<c:if test="${sId != null }"><input type="text" class="sId" value="<%=request.getParameter("sId")%>" maxlength='50' readonly></c:if>
-						 <c:if test="${sId == null}"><input type=text class="sId" name="sId" maxlength='50'></c:if>
+						 <c:if test="${sId == null}"><input type=text class="sId" name="sId"  onKeyUp="fnChkByte(this,'50')"></c:if>
 					</td>
 				</tr>
 				<tr>
 					<td class="column1">내용</td>
 					<td colspan="4">
-						<textarea id="content" name="content" id="content" cols="30" rows="10"></textarea>
-						<div id="content_cnt">(0 / 1000)</div>
+						<textarea id="content" name="content" id="content" cols="30" rows="10" onKeyUp="fnChkByte(this,'1000')"></textarea>
+				<!-- <div id="content_cnt">(0 byte / 1000 byte)</div> -->
 					</td>
 				</tr>
 				<tr>
@@ -279,17 +279,48 @@ table {
           }
     }   
 	
-	 $(document).ready(function() {
+/* 	 $(document).ready(function() {
 		    $('#content').on('keyup', function() {
-		        $('#content_cnt').html("("+$(this).val().length+" / 1000)");
-		 
+		        $('#content_cnt').html("("+rbyte+" byte / 1000 byte)");
+		   
+		     
 		        if($(this).val().length > 1000) {
 		            $(this).val($(this).val().substring(0, 1000));
 		            $('#content_cnt').html("(1000 / 1000)");
 		        }
 		    });
 		});
+ */
+	    function fnChkByte(obj, maxByte){//글자 bytes 제한
+	        var str = obj.value;
+	        var str_len = str.length;
 
+	        var rbyte = 0;
+	        var rlen = 0;
+	        var one_char = "";
+	        var str2 = "";
+
+	        for(var i=0; i<str_len; i++){
+	            one_char = str.charAt(i);
+	            if(escape(one_char).length > 4){
+	             rbyte += 3;//한글3Byte
+	          } else {
+	              rbyte++;//영문 등 나머지 1Byte
+	            }
+	          if(rbyte <= maxByte){
+	                rlen = i+1;//return할 문자열 갯수
+	            }
+	         }
+	         if(rbyte > maxByte){
+	            // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+	            alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+	            str2 = str.substr(0,rlen);//문자열 자르기
+	            obj.value = str2;
+	            fnChkByte(obj, maxByte);
+	         }else{
+	            //document.getElementById('byteInfo').innerText = rbyte;
+	         }
+	    }
 	
 </script>
 </html>
