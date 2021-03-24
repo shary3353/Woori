@@ -106,7 +106,7 @@ public class ReservationService {
 			}
 			ReservationDAO dao = new ReservationDAO();
 			HashMap<String, Object> map = dao.cReservationList(group, loginID);
-
+			
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
 			req.setAttribute("currPage", group);
