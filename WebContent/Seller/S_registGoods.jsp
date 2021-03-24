@@ -74,7 +74,7 @@
                 <td class="column-name">가격</td>
                 <td>
                     <input type="text" placeholder="가격(원)을 입력해주세요." name="p_price" id="p_price"
-                    onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>원
+                    onKeyup="this.value=this.value.replace(/[^0-9]/g,''); onPriceChk(this);"/>원
                 </td>
             </tr>
             <tr>
@@ -154,6 +154,16 @@
         fnChkByte(this, '1000');
     });
     */
+    
+    function onPriceChk(obj){
+    	var str = obj.value;
+    	var str2 = "";
+        if(str>=2100000000){
+    		alert("21억이상 입력불가");
+    		str2 =str.substr(0,9);
+    		obj.value = str2;
+    	}
+    }
     
 </script>
 </html>
