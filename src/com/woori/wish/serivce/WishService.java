@@ -89,11 +89,13 @@ public class WishService {
 			success = dao.chkWishList(p_idx, loginID);
 			if(success) {				
 				dao.addWishList(p_idx, loginID);
+				dao.resClose();
 				req.setAttribute("p_idx", p_idx);
 				RequestDispatcher dis = req.getRequestDispatcher("wishPaging?page=1");
 				dis.forward(req, resp);
 			} else {
 				msg = "이미 위시리스트에 추가된 상품입니다.";
+				dao.resClose();
 				req.setAttribute("msg", msg);
 				RequestDispatcher dis = req.getRequestDispatcher("C_itemDetail?p_idx="+p_idx);
 				dis.forward(req, resp);
