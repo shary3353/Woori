@@ -55,7 +55,7 @@ public class WishDAO {
 		ArrayList<WishDTO> list = new ArrayList<WishDTO>();
 		String sql = "SELECT w.wish_idx, w.p_idx, p.p_name, p.sid, p.p_price, p.newfilename, p.is_sold\r\n" + 
 				"    FROM (SELECT ROW_NUMBER() OVER(ORDER BY wish_idx DESC) AS rnum,wish_idx,p_idx,w_date,cid FROM wishlist WHERE cid=?) w, (SELECT p.p_idx, p.p_name, p.p_price, p.sid, p.is_sold, t.newfilename FROM product p, thumbfile t WHERE p.p_idx=t.p_idx) p\r\n" + 
-				"    WHERE w.p_idx = p.p_idx(+) and rnum BETWEEN ? AND ?";
+				"    WHERE w.p_idx = p.p_idx(+) and w.rnum BETWEEN ? AND ? ORDER BY w.rnum";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cid);
@@ -167,5 +167,26 @@ public class WishDAO {
 			resClose();
 		}
 	}
+
+	public boolean chkWishList(String p_idx, String loginID) {
+		String sql = "SELECT wish_idx, cid, p_idx FROM wishlist WHERE p_idx=? AND cid=?";
+		boolean success = false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, p_idx);
+			ps.setString(2, loginID);
+			rs = ps.executeQuery();
+			if(!rs.next()) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return success;
+	}
+	
+	
 
 }

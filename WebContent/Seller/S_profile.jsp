@@ -101,7 +101,7 @@
        var inPw = $('#chkPw').val();
        console.log(inPw);
        
-       var regPw = /^[A-Za-z\d$@$!%*#?&]{3,}$/;
+       var regPw = /^[A-Za-z\d$@$!%*_#?&]{3,}$/;
        
        if(!regPw.test(inPw)){
 			alert('유효 하지 않은 값입니다.');

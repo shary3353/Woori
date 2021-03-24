@@ -75,14 +75,23 @@ public class WishService {
 		String loginID = (String) req.getSession().getAttribute("loginID");
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
+		boolean success = false;
 		if (loginID != null) {
 			String p_idx = req.getParameter("p_idx");
 			System.out.println("Add Wish List p_idx : " + p_idx);
 			WishDAO dao = new WishDAO();
-			dao.addWishList(p_idx, loginID);
-			req.setAttribute("p_idx", p_idx);
-			RequestDispatcher dis = req.getRequestDispatcher("wishPaging?page=1");
-			dis.forward(req, resp);
+			success = dao.chkWishList(p_idx, loginID);
+			if(success) {				
+				dao.addWishList(p_idx, loginID);
+				req.setAttribute("p_idx", p_idx);
+				RequestDispatcher dis = req.getRequestDispatcher("wishPaging?page=1");
+				dis.forward(req, resp);
+			} else {
+				msg = "이미 위시리스트에 추가된 상품입니다.";
+				req.setAttribute("msg", msg);
+				RequestDispatcher dis = req.getRequestDispatcher("C_itemDetail?p_idx="+p_idx);
+				dis.forward(req, resp);
+			}
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);
