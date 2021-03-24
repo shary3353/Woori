@@ -224,9 +224,10 @@
 								console.log(data);
 								if (data.use) {
 									alert('사용할 수 있는 아이디 입니다.');
-									$("#cid").css({ backgroundColor: 'yellowgreen' });
-									overChk = true; //사용할 수 있는 아이디로 판정 받는다면
-								} else {
+									//$("#cid").css({ backgroundColor: 'yellowgreen' });
+									//overChk = true; //사용할 수 있는 아이디로 판정 받는다면
+								}
+								else {
 									console.log(data.use);
 									alert('이미 사용중인 아이디 입니다.');
 									$("#cid").val('');
