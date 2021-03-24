@@ -191,7 +191,7 @@ public class MemberService {
 			if (success) {
 				page = "C_main";//로그인되었을때,
 				msg = cid + " 님 반갑 습니다.";
-				req.getSession().setAttribute("loginID", cid);
+				req.getSession().setAttribute("cLoginID", cid);
 				System.out.println("로그인성공");
 			}
 		} else if(isblack) {//블락이면
@@ -222,7 +222,7 @@ public class MemberService {
 			if (success) {
 				page = "/Seller/sItemList";
 				msg = sid + " 님 반갑 습니다.";
-				req.getSession().setAttribute("loginID", sid);
+				req.getSession().setAttribute("sLoginID", sid);
 			}
 		} else if(isblack) {//블락이면
 			msg = "블랙리스트에 등록된 아이디입니다.";
@@ -320,7 +320,7 @@ public class MemberService {
 	public void sPfpDetail() throws ServletException, IOException { // 판매자메인 - 판매자 회원정보 상세보기
 		// 로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		  
 			System.out.println(sid+"의 회원정보"); // 로그인한 아이디 확인
@@ -339,7 +339,7 @@ public class MemberService {
 	public void sPfpUpdateForm() throws ServletException, IOException {// 판매자메인 - 판매자 수정폼 보기
 		// 로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		  
 			System.out.println("수정할 sid :" + sid);
@@ -358,7 +358,7 @@ public class MemberService {
 	public void sPfpUpdate() throws ServletException, IOException {// 판매자메인 - 판매자 회원정보 수정
 		// 로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("sLoginID");
 		if(loginID != null) {//로그인 여부 판별
 			
 			String sid = req.getParameter("sid");
@@ -397,7 +397,7 @@ public class MemberService {
 
 	public void cDetail() throws ServletException, IOException {
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			System.out.println("상세보기할 cid : " + loginID);
@@ -418,7 +418,7 @@ public class MemberService {
 	}
 
 	public void cUpdateForm() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			String cid = req.getParameter("cid");
@@ -446,7 +446,7 @@ public class MemberService {
 
 	public void cUpdateInfo() throws ServletException, IOException {
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			String cid = req.getParameter("cid");

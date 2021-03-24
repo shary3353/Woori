@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${sessionScope.sLoginID eq null }">
+	<script type="text/javascript">
+			location.href = "../Consumer/C_login.jsp";
+	</script>
+</c:if>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -63,7 +68,7 @@
     <div id="seller-login">
         <img id="notice-img" src="../img/seller_login_notice.png" alt="seller-login-notice">
         <span>&nbsp;현재 판매자 아이디로 로그인 중입니다.&nbsp;</span>
-        <span><a href="../logout">로그아웃></a></span>
+        <span><a href="../sLogout">로그아웃></a></span>
         <img id="logo-img" src="../img/small_logo.png" alt="logo">
     </div>
     <nav>

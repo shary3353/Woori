@@ -31,7 +31,7 @@ public class ReportService {
 	public void sReportList() throws ServletException, IOException { // 판매자 신고내역 리스트
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 			
 			System.out.println("판매자" + sid + "의 신고 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
@@ -60,7 +60,7 @@ public class ReportService {
 	}
 
 	public void report() throws ServletException, IOException {
-		String id = (String)req.getSession().getAttribute("loginID");
+		String id = (String)req.getSession().getAttribute("cLoginID");
 		if(id != null) {//로그인 여부 판별
 		String subejct = req.getParameter("subject");
 		String reporter_id = req.getParameter("rId");
@@ -107,7 +107,7 @@ public class ReportService {
 	}
 
 	public void cReportList() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			System.out.println(loginID + " 의 신고내역 불러오기");
@@ -137,7 +137,7 @@ public class ReportService {
 	public void sReportDetail() throws ServletException, IOException {//판매자 신고상세보기
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 			
 			String idx = req.getParameter("idx");
@@ -165,7 +165,7 @@ public class ReportService {
 	}
 
 	public void cReportDetail() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			String r_idx = req.getParameter("r_idx");
@@ -188,7 +188,7 @@ public class ReportService {
 	public void sReportForm() throws ServletException, IOException { //판매자 신고하기 폼 보여주기
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 			
 			String target_id = req.getParameter("target_id");
@@ -205,7 +205,7 @@ public class ReportService {
 	public void sReport() throws ServletException, IOException {//판매자가 신고하기
 		//로그인검사 추가예정
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		
 			String subejct = req.getParameter("subject");
@@ -240,7 +240,7 @@ public class ReportService {
 	}
 
 	public void cReportForm() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			String target_id = req.getParameter("t_id");

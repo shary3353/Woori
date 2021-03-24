@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <% 
 //사진파일경로가지고오기
 String savePath = request.getSession().getServletContext().getRealPath("Uploaded_Img");

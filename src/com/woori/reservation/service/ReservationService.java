@@ -30,7 +30,7 @@ public class ReservationService {
 	public void sReservationList() throws ServletException, IOException { // 판매자 예약내역 리스트
 		// 로그인검사 추가됨.
 		// req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if (sid != null) {// 로그인 여부 판별
 
 			System.out.println("판매자" + sid + "의 예약 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
@@ -61,7 +61,7 @@ public class ReservationService {
 	public void updateResevationStatus() throws ServletException, IOException {// 판매자 예약현황변경
 		// 로그인검사 추가됨.
 		// req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if (sid != null) {// 로그인 여부 판별
 
 			System.out.println("판매자" + sid + "가 예약 현황을 변경합니다."); // 로그인한 아이디 확인& 판매자 확인
@@ -94,7 +94,7 @@ public class ReservationService {
 	}
 
 	public void cReservationList() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			System.out.println(loginID + " 의 예약내역 불러오기");
@@ -123,7 +123,7 @@ public class ReservationService {
 	}
 
 	public void cMyPageMain() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			ReservationDAO dao = new ReservationDAO();
@@ -146,7 +146,7 @@ public class ReservationService {
 	}
 
 	public void cReservationCancle() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			String r_idx = req.getParameter("r_idx");
@@ -166,7 +166,7 @@ public class ReservationService {
 	}
 
 	public void cReservationDelete() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			String r_idx = req.getParameter("r_idx");

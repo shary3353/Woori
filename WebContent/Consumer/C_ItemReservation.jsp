@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +136,7 @@
                     <td><li class="ReservationName">구매자 : </li></td>
                     <td class="ReservationContent">
                     	<!-- 로그인 세션처리 안해서 구매자 id 임시 지정 -->
-                    	<input type="text" name="cid"   value="${sessionScope.loginID}" readonly  style="border:none;  font-size: 20px;  padding-top: 8px;"/>
+                    	<input type="text" name="cid"   value="${sessionScope.cLoginID}" readonly  style="border:none;  font-size: 20px;  padding-top: 8px;"/>
                     </td>
                 </tr>
                 <tr>

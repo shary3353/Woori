@@ -57,7 +57,7 @@ public class MainService {
 	}
 
 	public void CitemReservation() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		String page = "";
 		System.out.println(loginID);
@@ -85,7 +85,7 @@ public class MainService {
 
 	public void CReservation() throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String page =""; 
 		String msg ="";
 		if (loginID != null) {
@@ -177,7 +177,7 @@ public class MainService {
 	}
 	
 	public void Clikeplus() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		if (loginID != null) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			String cid = req.getParameter("cid");
@@ -203,7 +203,7 @@ public class MainService {
 	}
 
 	public void Clikeminus() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		boolean success1 = false;
 		if (loginID != null) {
 		HashMap<String, Object> map = new HashMap<String, Object>();

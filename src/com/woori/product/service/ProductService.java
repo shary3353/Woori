@@ -25,7 +25,7 @@ public class ProductService {
 	public void sItemList() throws ServletException, IOException {//판매자 등록물품리스트 요청
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 			
 			System.out.println("판매자"+ sid +"의 물품 리스트입니다."); //로그인한 아이디 확인& 판매자 확인
@@ -56,7 +56,7 @@ public class ProductService {
 	public void sItemDetail() throws ServletException, IOException {//판매자 등록뭎룸 상세보기
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 			
 			int p_idx = Integer.parseInt(req.getParameter("p_idx"));//물품번호
@@ -91,7 +91,7 @@ public class ProductService {
 	public void registItem() throws ServletException, IOException {// 판매자 물품 등록하기
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		
 			// FileService 에 파일과 관련된 내용을 추가 예정
@@ -119,7 +119,7 @@ public class ProductService {
 	public void sUpdateItemForm() throws ServletException, IOException {//등록물품 수정하기 폼 보이기
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 			
 			int p_idx = Integer.parseInt(req.getParameter("p_idx"));
@@ -142,7 +142,7 @@ public class ProductService {
 	public void sUpdateItem() throws IOException { //물품상세보기 수정
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		
 			FileService upload = new FileService(req);//파일처리객체생성
@@ -179,7 +179,7 @@ public class ProductService {
 	public void sDeleteItem() throws IOException { //판매자 상품 판매중지
 		//로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID","123-12-12345");//test용 -- 로그인
-		String sid = (String)req.getSession().getAttribute("loginID");
+		String sid = (String)req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		
 			int p_idx = Integer.parseInt(req.getParameter("p_idx"));

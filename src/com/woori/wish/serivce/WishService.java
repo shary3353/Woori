@@ -23,7 +23,7 @@ public class WishService {
 	}
 
 	public void wishPaging() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		String msg = "";
 		if (loginID != null) {
 			System.out.println(loginID + " 의 위시리스트 불러오기");
@@ -52,7 +52,7 @@ public class WishService {
 	}
 
 	public void delWishList() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
 		if (loginID != null) {
@@ -72,7 +72,7 @@ public class WishService {
 
 	public void addWishList() throws ServletException, IOException {
 
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
 		boolean success = false;

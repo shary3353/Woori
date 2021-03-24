@@ -30,7 +30,7 @@ public class QuestionService {
 	public void sQAList() throws ServletException, IOException {// 판매자 문의 내역 리스트
 		// 로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 			
 			System.out.println("판매자" + sid + "의 문의 내역입니다."); // 로그인한 아이디 확인& 판매자 확인
@@ -59,7 +59,7 @@ public class QuestionService {
 	}
 
 	public void cQuestionList() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 		String msg = "";
 		if (loginID != null) {
@@ -91,7 +91,7 @@ public class QuestionService {
 	}
 
 	public void cQuestionDetail() throws ServletException, IOException {
-		String loginID = (String) req.getSession().getAttribute("loginID");
+		String loginID = (String) req.getSession().getAttribute("cLoginID");
 		//req.getSession().setAttribute("loginId", "test1"); // 테스트용
 
 		String msg = "";
@@ -136,7 +136,7 @@ public class QuestionService {
 	public void sAnswerDetail() throws ServletException, IOException { // 판매자 문의내역 상세보기
 		// 로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		  
 			int q_idx = Integer.parseInt(req.getParameter("q_idx"));
@@ -167,7 +167,7 @@ public class QuestionService {
 	public void sAnswerForm() throws ServletException, IOException { // 판매자 문의답변하기 폼
 		// 로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		
 			int q_idx = Integer.parseInt(req.getParameter("q_idx"));
@@ -197,7 +197,7 @@ public class QuestionService {
 	public void sAnswer() throws IOException { // 판매자 문의답변하기
 		// 로그인검사 추가됨.
 		//req.getSession().setAttribute("loginID", "123-12-12345");// test용 -- 로그인
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		 
 			int q_idx = Integer.parseInt(req.getParameter("q_idx"));
@@ -215,7 +215,7 @@ public class QuestionService {
 	}
 
 	public void qWrite() throws ServletException, IOException {
-		String sid = (String) req.getSession().getAttribute("loginID");
+		String sid = (String) req.getSession().getAttribute("sLoginID");
 		if(sid != null) {//로그인 여부 판별
 		String sId = req.getParameter("sid");
 		String cId = req.getParameter("cid");
