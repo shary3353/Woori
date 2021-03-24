@@ -177,7 +177,7 @@ function idCheck2(){
     var uid = '<%=(String)session.getAttribute("loginID")%>';
 	console.log(uid);
      if(uid=="null"){
-        alert("로그인이 필요한 항목입니다."); 
+        alert("로그인을 해주세요."); 
      }
      else{
         location.replace("./Report.jsp");
