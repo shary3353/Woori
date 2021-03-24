@@ -107,6 +107,7 @@ public class ReservationService {
 			ReservationDAO dao = new ReservationDAO();
 			HashMap<String, Object> map = dao.cReservationList(group, loginID);
 			
+			req.setAttribute("msg", req.getAttribute("msg"));
 			req.setAttribute("maxPage", map.get("maxPage"));
 			req.setAttribute("list", map.get("list"));
 			req.setAttribute("currPage", group);
@@ -154,8 +155,12 @@ public class ReservationService {
 			ReservationDAO dao = new ReservationDAO();
 			success = dao.cReservationCancle(r_idx);
 
-			resp.sendRedirect("cReservationList");
-
+			if(success>0) {
+				msg = r_idx+"번 예약이 취소신청 되었습니다.";
+			}
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("cReservationList");
+			dis.forward(req, resp);
 		} else {
 			msg = "로그인을 해주세요.";
 			req.setAttribute("msg", msg);
