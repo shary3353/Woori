@@ -295,7 +295,7 @@ function checkPassword(Pw){
 						}
 
 					} else {
-						alert('중복 체크 해주세요!');
+						alert('형식에 맞는지 체크 해주세요!');
 						$id.focus();
 					}
 
