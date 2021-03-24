@@ -133,7 +133,7 @@
 		}
 		
 		
-	 var loginid = '<%=(String)session.getAttribute("loginID")%>';	
+	 var loginid = '<%=(String)session.getAttribute("cLoginID")%>';	
 	//좋아요 검사	
 	function likeConfirm(){
 		if(loginid != 'null'){
