@@ -104,7 +104,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="detailButtons">
-                        <button id="questionButton" onclick="location.href='${pageContext.request.contextPath}/ServiceCenter/qWrite?p_name=${dto.p_name}&sId=${dto.sid}'">문의하기</button>
+                        <button id="questionButton" onclick="Question()">문의하기</button>
                         <a href="C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
                         <button id="reservationButton">예약하기</button>
                         </a>
@@ -229,5 +229,17 @@
 		})
 	})
 
+	 function Question(){ 
+         var uid = '<%=(String)session.getAttribute("loginID")%>';
+		console.log(uid);
+          if(uid=="null"){ 
+             alert("로그인이 필요한 항목입니다.");
+             location.replace("./C_login.jsp");
+          }
+          else{
+             location.replace("./Q_write.jsp");
+          }
+    }  
+	
 </script>
 </html>
