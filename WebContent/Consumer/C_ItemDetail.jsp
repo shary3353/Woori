@@ -113,7 +113,7 @@
                         <button id="likeButton"> &nbsp;좋아요</button>
                         <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요 취소</button>
                         <button id="wishlistButton" onclick="location.href='${pageContext.request.contextPath}/Consumer/addWishList?p_idx=${dto.p_idx}'">위시리스트</button>
-                        <button id="reportButton" onclick="location.href='${pageContext.request.contextPath}/Consumer/cReportForm?sid=${dto.sid}'">신고하기</button>
+                        <button id="reportButton" onclick="location.href='${pageContext.request.contextPath}/ServiceCenter/cReportForm?sid=${dto.sid}'">신고하기</button>
                     </td>
                 </tr>
             </table>
