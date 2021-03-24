@@ -115,6 +115,8 @@
 		                    <option value="0">신청중</option>
 		                    <option value="1">예약완료</option>
 		                    <option value="2">상담완료</option>
+		                    <option value="3">취소신청</option>
+		                    <option value="4">취소완료</option>
 		                </select><br/>
 		                <button id="updateResevationBtn${status.index}"  value="${rlist.r_idx}">예약현황변경</button>
 	            </td>
@@ -163,6 +165,10 @@
 		        chktext[i].classList.add('green');
 		    } else if (chktext[i].textContent === "예약완료"){
 		        chktext[i].classList.add('blue');
+			} else if (chktext[i].textContent === "취소신청"){
+		        chktext[i].classList.add('red');
+			} else if (chktext[i].textContent === "취소완료"){
+		        chktext[i].classList.add('green');
 			}
 		}		
 	}
@@ -190,8 +196,12 @@
 						$('#chk'+number).css("color","blue");
 					} else if(obj.status == "상담완료"){
 						$('#chk'+number).css("color","green");
-					} else{
+					} else  if(obj.status == "신청중"){
 						$('#chk'+number).css("color","red");
+					} else  if(obj.status == "취소신청"){
+						$('#chk'+number).css("color","red");
+					} else  if(obj.status == "취소완료"){
+						$('#chk'+number).css("color","green");
 					}
 				} else{
 					alert('변경 실패');
