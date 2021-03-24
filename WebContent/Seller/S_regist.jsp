@@ -185,11 +185,14 @@ function checkPassword(Pw){
 					var Exp =/^[a-zA-Z0-9]{4,12}$/;
 					var text = $('#sid').val();
 					var find ="admin";
-					
+					var sidArr = new Array();
 					if (inputCid == "") {
 						alert('아이디를 입력하세요.');
 					} else if(text.indexOf(find)!=-1){
 						alert("admin을 포함할 수 없습니다.");
+					} else if(sidArr.length < 12){
+						alert("사업자 등록번호 형식에 맞게 입력해주세요.");
+						return false;
 					}
 					
 					else if(Exp.test(sid.value)){
