@@ -115,6 +115,7 @@ h3 {
 			</div>
 		</div>
 
+
 		<div id="form">
 			<h3>문의 내용</h3>
 			<table id="table">
