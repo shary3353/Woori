@@ -30,7 +30,7 @@ public class WishDAO {
 		}
 	}
 
-	private void resClose() { // 자원 반납
+	public void resClose() { // 자원 반납
 		try {
 			if (rs != null) {
 				rs.close();
@@ -163,8 +163,6 @@ public class WishDAO {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			resClose();
 		}
 	}
 
@@ -181,8 +179,6 @@ public class WishDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			resClose();
 		}
 		return success;
 	}
