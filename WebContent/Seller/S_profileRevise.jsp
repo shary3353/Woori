@@ -94,7 +94,7 @@
 	                <td class="column-name">비밀번호 확인</td>
 	                <td>
 	                	<input type="password" placeholder="새로운 비밀번호를 확인하세요" class="newPassword" id="pw_ck"  
-	                		onkeyup="chkPw()"/>
+	                		onkeyup="chkPw(),  fnChkByte(this,'200')"/>
 	                	<br/>
 	                	<span id="chkPw"></span>
 	                </td>

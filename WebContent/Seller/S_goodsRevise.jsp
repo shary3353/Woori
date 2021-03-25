@@ -78,13 +78,13 @@
 	                <td class="column-name" >가격</td>
 	                <td>
 	                    <input type="text" placeholder="가격(원)을 입력해주세요." value="${dto.p_price}" name ="p_price" id="p_price"
-	                    onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>원
+	                    onKeyup="this.value=this.value.replace(/[^0-9]/g,''); onPriceChk(this);"/>원
 	                </td>
 	            </tr>
 	            <tr>
 	                <td class="column-name" >판매자</td>
-	                <td>${sessionScope.loginID}
-	                	<input type="hidden" name="sid" value="${sessionScope.loginID}" />
+	                <td>${sessionScope.sLoginID}
+	                	<input type="hidden" name="sid" value="${sessionScope.sLoginID}" />
 	                </td>
 	            </tr>
 	            <tr>
@@ -143,6 +143,16 @@
          }else{
             //document.getElementById('byteInfo').innerText = rbyte;
          }
+    }
+    
+    function onPriceChk(obj){
+    	var str = obj.value;
+    	var str2 = "";
+        if(str>=10000000){
+    		alert("1천만원이상 입력불가");
+    		str2 =str.substr(0,7);
+    		obj.value = str2;
+    	}
     }
 </script>
 </html>

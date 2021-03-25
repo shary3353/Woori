@@ -148,8 +148,7 @@ table {
 			<table id="table">
 				<tr>
 					<td class="column1">작성자</td>
-					<td class="column2"><input type="text" id="cId"
-						name="consumerId" value="${sessionScope.loginID}" maxlength="50" readonly/>
+					<td class="column2"><input type="text" id="cId" name="consumerId" value="${sessionScope.cLoginID}" maxlength="50" readonly/>
                       </td>
 					<td>카테고리 <select id="category" name="category" value="문의/카테고리">
 							<option value="100" selected="selected">상품관련</option>

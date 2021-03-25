@@ -170,7 +170,7 @@ public class QuestionDAO {
 	}
 
 	public QuestionDTO cQuestionDetail(String q_idx) {
-		String sql = "SELECT q.subject, q.cid, q.qc_idx, to_char(q.q_reg_date,'yyyy-mm-dd') q_reg_date, q.sid, q.content, q.s_answer, ca.category "
+		String sql = "SELECT q.subject, q.cid, q.qc_idx, to_char(q.q_reg_date,'yyyy-mm-dd') q_reg_date, q.sid, q.content, q.s_answer, ca.category, q.p_name "
 				+ "FROM question q, q_categories ca "
 				+ "WHERE q.q_idx=? AND q.qc_idx = ca.qc_idx";
 		QuestionDTO dto = new QuestionDTO();
@@ -187,6 +187,7 @@ public class QuestionDAO {
 				dto.setContent(rs.getString(6));
 				dto.setS_answer(rs.getString(7));
 				dto.setCategory(rs.getString(8));
+				dto.setP_name(rs.getString(9));
 			}
 			System.out.println(dto.getSubject() + " / " + dto.getS_answer());
 		} catch (SQLException e) {
