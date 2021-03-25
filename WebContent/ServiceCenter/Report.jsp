@@ -140,7 +140,7 @@ table {
 						</tr>
 						<tr>
 							<th>신고자</th>
-							<td><input id="rId" type="text" name="userName" value="${sessionScope.loginID}" readonly/></td>
+							<td><input id="rId" type="text" name="userName" value="${sessionScope.cLoginID}" readonly/></td>
 						
 						</tr>
 						<tr>

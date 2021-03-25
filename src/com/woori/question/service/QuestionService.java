@@ -215,7 +215,7 @@ public class QuestionService {
 	}
 
 	public void qWrite() throws ServletException, IOException {
-		String sid = (String) req.getSession().getAttribute("sLoginID");
+		String sid = (String) req.getSession().getAttribute("cLoginID");
 		if(sid != null) {//로그인 여부 판별
 		String sId = req.getParameter("sid");
 		String cId = req.getParameter("cid");
