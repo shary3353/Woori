@@ -148,8 +148,8 @@
     function onPriceChk(obj){
     	var str = obj.value;
     	var str2 = "";
-        if(str>=2100000000){
-    		alert("21억이상 입력불가");
+        if(str>=10000000){
+    		alert("1천만원이상 입력불가");
     		str2 =str.substr(0,9);
     		obj.value = str2;
     	}
