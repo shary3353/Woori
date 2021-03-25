@@ -79,8 +79,8 @@
             </tr>
             <tr>
                 <td class="column-name" >판매자</td>
-                <td><%= session.getAttribute("loginID")%>
-                <input type="hidden" value ="<%= session.getAttribute("loginID")%>" name="sid"/>
+                <td><%= session.getAttribute("sLoginID")%>
+                <input type="hidden" value ="<%= session.getAttribute("sLoginID")%>" name="sid"/>
                 </td>
             </tr>
             <tr>
@@ -160,7 +160,7 @@
     	var str2 = "";
         if(str>=10000000){
     		alert("1천만원이상 입력불가");
-    		str2 =str.substr(0,9);
+    		str2 =str.substr(0,7);
     		obj.value = str2;
     	}
     }
