@@ -145,14 +145,14 @@
 				checkPassword($('#Pw').val());
 			});
 			function checkPassword(Pw){
-				var ptn = /^[A-Za-z\d$@$!%*_#?&]{3,}$/;
-				if(!ptn.test(Pw)){
+				if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.[0-9]).{3,10}$/.test(Pw)){
 					alert('숫자+영문자+특수문자 조합으로 3자리 이상 사용해야 합니다.()미포함');
 					$('#Pw').val('').focus();
 					return false;
 				}
 				return true;
 			}
+
 		
 		
 		
@@ -203,7 +203,7 @@
 
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
-					var Exp =/^[a-zA-Z0-9]{4,12}$/;
+					var Exp =/^[a-zA-Z0-9]$/;
 					var text = $('#cid').val();
 					var find ="admin";
 					
@@ -228,8 +228,8 @@
 								console.log(data);
 								if (data.use) {
 									alert('사용할 수 있는 아이디 입니다.');
-									//$("#cid").css({ backgroundColor: 'yellowgreen' });
-									//overChk = true; //사용할 수 있는 아이디로 판정 받는다면
+									$("#cid").css({ backgroundColor: 'yellowgreen' });
+									overChk = true; //사용할 수 있는 아이디로 판정 받는다면
 								}
 								else{
 									
@@ -253,7 +253,10 @@
 					var $gender = $("input[name='gender']:checked");
 					var $email = $("#email");
 					var $phone = $("#phone");
-
+					
+					var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+					var regPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+					
 					if (overChk) {
 						if ($id.val() == '') {
 							alert('아이디를 입력해 주세요!');
@@ -277,11 +280,18 @@
 						} else if ($email.val().indexOf('@') < 0) {
 							alert('@를 입력해 주세요!');
 							$email.focus();
+						}else if(!regEmail.test($email.val())){
+							alert('이메일 주소가 유효하지 않습니다.');
+							$email.focus();
+							
 						}else if ($phone.val() == '') {
 							alert('핸드폰 번호를 입력해 주세요!');
 							$phone.focus();
 
-						} else {
+						} else if(!regPhone.test($phone.val())){
+							alert('핸드폰번호가 유효하지 않습니다.');
+							$phone.focus(); 
+						}else {
 							var params = {};
 							params.id = $id.val();
 							params.pw = $pw.val();
@@ -311,7 +321,7 @@
 						}
 
 					} else {
-						alert('중복 체크 해주세요!');
+						alert('형식에 맞는지 체크 해주세요!');
 						$id.focus();
 					}
 
