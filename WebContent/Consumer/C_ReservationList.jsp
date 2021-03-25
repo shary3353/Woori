@@ -81,6 +81,17 @@ form {
 	border: 1px solid lightgray;
 	border-radius: 5px;
 }
+.reportBtnDisable {
+	background-color: white;
+	color: gray;
+	text-decoration: none;
+	font-weight: 600;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+}
+.reportBtnDisable:hover {
+	cursor: default;
+}
 
 .reportBtn:hover {
 	background-color: lightblue;
@@ -170,7 +181,12 @@ a {
 									<a href="cReservationDelete?r_idx=${list.r_idx}" class="reportBtn">내역삭제</a>
 								</td>
 							</c:if>
-							<td><a href="cReservationCancle?r_idx=${list.r_idx}" class="reportBtn">예약취소</a></td>
+							<c:if test="${list.status eq '취소신청' || list.status eq '취소완료'}">
+								<td><a href="#" class="reportBtnDisable" >예약취소</a></td>
+							</c:if>
+							<c:if test="${list.status ne '취소신청' && list.status ne '취소완료'}">
+								<td><a href="cReservationCancle?r_idx=${list.r_idx}" class="reportBtn" >예약취소</a></td>
+							</c:if>
 							<td><a href="../ServiceCenter/cReportForm?sid=${list.sid}" class="reportBtn">신고하기</a></td>
 						</tr>
 					</c:forEach>
