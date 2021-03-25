@@ -60,6 +60,9 @@ th {
 	outline: none;
 	padding-left: 15px;
 }
+.inputs::placeholder {
+	color: lightgray;
+}
 
 #pwCfmMsg {
 	color: red;
@@ -116,12 +119,12 @@ th {
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" name="pw" class="inputs" id="pw" onkeyup="fnChkByte(this, 200)"/></td>
+						<td><input type="password" name="pw" class="inputs" id="pw" placeholder="새 비밀번호를 입력해주세요." onkeyup="fnChkByte(this, 200)"/></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인</th>
 						<td><input type="password" name="pwCfm" id="pwCfm"
-							class="inputs" /><br> <span id="pwCfmMsg">비밀번호가 일치하지
+							class="inputs" placeholder="새 비밀번호를 한번 더 입력해주세요."/><br> <span id="pwCfmMsg">비밀번호가 일치하지
 								않습니다.</span></td>
 					</tr>
 					<tr>
@@ -160,7 +163,7 @@ const phoneBox = document.getElementById('phone');
 
 var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 var regPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-var regPw = /^[A-Za-z\d$@$!%*_#?&]{3,}$/;
+var regPw = /^[A-Za-z\d$@$!%*_#?&]{3,15}$/;
 
 pwCheckBox.addEventListener('keyup', ()=>{
   if (pwBox.value == pwCheckBox.value) {
@@ -215,13 +218,18 @@ $('#updateBtn').click(()=>{
 	console.log(pwBox.value);
 	if(pwBox.value == ""){
 		alert("비밀번호를 입력해주세요.");
+		pwBox.focus();
 	} else if (pwCheckBox.value == ""){
 		alert("비밀번호확인을 입력해주세요.");
+		pwCheckBox.focus();
 	} else if (pwBox.value != pwCheckBox.value){
 		alert("비밀번호를 다시 확인해주세요.");
+		pwBox.focus();
 	} else if(!regPw.test(pwBox.value)){
 		alert('비밀번호는 영문,숫자,특수문자@$!%*_#?&만 허용됩니다.');
-		$pw.focus();
+		pwBox.value = '';
+		pwCheckBox.value = '';
+		pwBox.focus();
 	} else if (emailBox.value == ""){
 		alert("이메일을 입력해주세요.");
 	} else if(!regEmail.test(emailBox.value)){
