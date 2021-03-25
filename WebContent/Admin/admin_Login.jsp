@@ -124,6 +124,12 @@
 			alert('비밀번호를 입력하세요.');
 			$('#userPW').focus();
 			return false;
+		}else if(inputPW.indexOf('(') > 0){
+			alert('알 수 없는 키워드가 입력되었습니다.');
+			return false;
+		}else if(inputID.indexOf('(') > 0){
+			alert('알 수 없는 키워드가 입력되었습니다.');
+			return false;
 		}
 	});
 	
