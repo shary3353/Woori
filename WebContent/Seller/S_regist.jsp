@@ -72,8 +72,8 @@ table{
 			<tr>
 				<th>아이디</th>
 				<td><input type="text" id="sid" name="SellerId" value=""
-					placeholder="***-**-*****" /> <input type="button" id="overlay"
-					value="중복확인"></td>
+					placeholder="***-**-*****" />
+					 <input type="button" id="overlay" value="중복확인"  ></td>
 			</tr>
 
 			<tr>
@@ -130,6 +130,10 @@ table{
 
 </body>
 <script>
+
+
+
+
 $("#Pw").change(function(){
 	checkPassword($('#Pw').val());
 });
@@ -181,20 +185,25 @@ function checkPassword(Pw){
 				var overChk = false;//중복체크 여부
 
 				$("#overlay").click(function () {
-					var inputCid = $('#sid').val();
-					var Exp =/^[a-zA-Z0-9]{4,12}$/;
+					var inputSid = $('#sid').val();
+					var Exp =/^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]{4,12}$/;
 					var text = $('#sid').val();
 					var find ="admin";
-					var sidArr = new Array();
 					
-					if (inputCid == "") {
+					var regPhone = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
+					//var sidArr = new Array();
+					
+					if (inputSid == "") {
 						alert('아이디를 입력하세요.');
+					}  else if(!regPhone.test(inputSid)){
+						alert('사업자번호가 유효하지 않습니다.');
+					 return false;
 					} else if(text.indexOf(find)!=-1){
 						alert("admin을 포함할 수 없습니다.");
-					} else if(sidArr.length < 12){
-						alert("사업자 등록번호 형식에 맞게 입력해주세요.");
-						return false;
-					}
+					} //else if(sidArr.length < 12){
+						//alert("사업자 등록번호 형식에 맞게 입력해주세요.");
+						//return false;
+					//}
 					
 					else if(Exp.test(sid.value)){
 						alert('id는 사업자등록번호로만 입력할 수 있습니다');
@@ -234,13 +243,18 @@ function checkPassword(Pw){
 					var $store_call = $("#store_call");
 					var $gender = $("input[name='gender']:checked");
 					var $email = $("#email");
+					
 					var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+					var regPhone = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
 					
 					if (overChk) {
 						if ($id.val() == '') {
 							alert('아이디를 입력해 주세요!');
 							$id.focus();
-						} else if ($pw.val() == '') {
+						} else if(!regPhone.test($id.val())){
+							alert('사업자번호가 유효하지 않습니다.');
+							$id.focus();}
+						else if ($pw.val() == '') {
 							alert('비밀번호를 입력해 주세요!');
 							$pw.focus();
 						} else if ($name.val() == '') {
