@@ -83,7 +83,7 @@ form {
 }
 .reportBtnDisable {
 	background-color: white;
-	color: gray;
+	color: lightgray;
 	text-decoration: none;
 	font-weight: 600;
 	border: 1px solid lightgray;
