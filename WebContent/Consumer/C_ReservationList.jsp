@@ -182,7 +182,7 @@ a {
 								</td>
 							</c:if>
 							<c:if test="${list.status eq '취소신청' || list.status eq '취소완료'}">
-								<td><a href="#" class="reportBtnDisable" >예약취소</a></td>
+								<td><a href="#" class="reportBtnDisable" onclick="cancleAlert()">예약취소</a></td>
 							</c:if>
 							<c:if test="${list.status ne '취소신청' && list.status ne '취소완료'}">
 								<td><a href="cReservationCancle?r_idx=${list.r_idx}" class="reportBtn" >예약취소</a></td>
@@ -228,6 +228,11 @@ var msg = "${msg}";
 if(msg != ""){
 	alert(msg);
 	msg="";
+}
+
+function cancleAlert() {
+	alert('이미 취소신청이 된 예약입니다.');
+	location.href="cReservationList?page=1";
 }
 </script>
 
