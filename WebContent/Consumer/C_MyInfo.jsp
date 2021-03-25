@@ -96,7 +96,7 @@ th {
 				<div id="pwInputBox">
 					<span id="pwBox" style="visibility: hidden">비밀번호 : <input
 						type="password" placeholder="비밀번호를 입력하세요." name="pw"
-						style="width: 150px;"><input type="submit" value="확인"></span>
+						style="width: 150px;"><input type="submit" value="확인" id="cfmBtn"></span>
 					<span style="text-align: right"><input type="button"
 						value="수정하기" onclick="modifyBtn()" /></span>
 				</div>
@@ -107,6 +107,11 @@ th {
 <script>
 function modifyBtn() {
     document.getElementById('pwBox').style.visibility ='visible';
+}
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+	msg="";
 }
 </script>
 

@@ -432,6 +432,9 @@ public class MemberService {
 			if (dto != null) {
 				page = "./C_MyInfoModify.jsp";
 				req.setAttribute("list", dto);
+			} else {
+				msg = "비밀번호가 맞지 않습니다.";
+				req.setAttribute("msg", msg);
 			}
 			RequestDispatcher dis = req.getRequestDispatcher(page);
 			dis.forward(req, resp);
