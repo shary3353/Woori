@@ -150,8 +150,9 @@ table {
 					<td class="column1">작성자</td>
 					<td class="column2"><input type="text" id="cId" name="consumerId" value="${sessionScope.cLoginID}" maxlength="50" readonly/>
                       </td>
-					<td>카테고리 <select id="category" name="category" value="문의/카테고리">
-							<option value="100" selected="selected">상품관련</option>
+					<td>카테고리 <select id="category" name="category" >
+							<option value="0" selected="selected">문의 / 카테고리</option>
+							<option value="100" >상품관련</option>
 							<option value="200">예약관련</option>
 							<option value="300">매장관련</option>
 							<option value="400">교환/반품/반납</option>
@@ -199,6 +200,7 @@ table {
 		var $subject = $("#subject");
 		var $sid = $(".sId");
 		var $content = $("#content");
+		var $category = $("#category");
 		var $pass = $("#pass")
 	
 		if ($product.val() == '') {
@@ -210,6 +212,9 @@ table {
 		} else if ($sid.val() == '') {
 			alert('판매자를 입력해주세요');
 			$sid.focus();
+		} else if ($category.val() == 0){
+			alert('카테고리 선택해세주세요');
+			 $category.focus();
 		} else if ($content.val() == '') {
 			alert('내용을 입력해주세요');
 			$content.focus();
@@ -241,7 +246,7 @@ table {
 					console.log(data)
 					console.log(data.q_idx)
 					if (data.success == true) {
-						alert('문의등록에  성공하였습니다.');
+						alert('문의등록의  성공하였습니다.');
 						location.href = "qList";
 					} else {
 						alert('판매자 ID를 확인해주세요');
