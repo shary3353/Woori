@@ -80,7 +80,7 @@ public class BlackService {
   			req.setCharacterEncoding("utf-8");
   			HashMap<String, Object> map = new HashMap<>();
   			String sid = req.getParameter("id");
-  			String admin_id = (String) req.getSession().getAttribute("loginID");
+  			String admin_id = (String) req.getSession().getAttribute("adminLoginID");
   			
   			String reason = req.getParameter("bReason");
   			System.out.println(sid+" / "+reason);
@@ -120,7 +120,7 @@ public class BlackService {
   			req.setCharacterEncoding("utf-8");
   			HashMap<String, Object> map = new HashMap<>();
   			String cid = req.getParameter("id");
-  			String admin_id = (String) req.getSession().getAttribute("loginID");
+  			String admin_id = (String) req.getSession().getAttribute("adminLoginID");
   			String reason = req.getParameter("bReason");
   			System.out.println(cid+" / "+reason);
   			

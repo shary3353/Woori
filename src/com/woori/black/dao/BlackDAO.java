@@ -135,8 +135,8 @@ public class BlackDAO {
 	}
 
 	private int getMaxBlackPage() {
-		String sql1 = "SELECT count(sid) AS cnt FROM s_blacklist";
-		String sql2 = "SELECT count(cid) AS cnt FROM c_blacklist";
+		String sql1 = "SELECT count(sid) AS cnt FROM s_blacklist WHERE isblack=1";
+		String sql2 = "SELECT count(cid) AS cnt FROM c_blacklist WHERE isblack=1";
 		int maxS = 0;
 		int maxC = 0;
 		int max = 0;
