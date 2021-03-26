@@ -90,7 +90,8 @@
 				<table>
 					<tr>
 						<th>이름</th>
-						<td><input type="text" name="cunsumername" id="cunsumername" value="" placeholder="이름을 입력해주세요." /></td>
+						<td><input type="text" name="cunsumername" id="cunsumername" value="" placeholder="이름을 입력해주세요."
+						onkeyup="fnChkByte(this,'50')" /></td>
 
 					</tr>
 					<tr>
@@ -102,12 +103,14 @@
 
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" id="Pw" name="pw" value="" placeholder="비밀번호를 입력해주세요."/></td>
+						<td><input type="password" id="Pw" name="pw" value="" placeholder="비밀번호를 입력해주세요."
+						onkeyup="chkPw(), fnChkByte(this,'200')"/></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인</th>
-						<td><input type="password" id="PwChk" name="PwChk" value="" placeholder="비밀번호를 입력해주세요." />
-							<font id="check" size="1"></font>
+						<td><input type="password" id="PwChk" name="PwChk" value="" placeholder="비밀번호를 입력해주세요."
+						onkeyup="chkPw(), fnChkByte(this,'200')" />
+							<font id="check" size="1" ></font>
 						</td>
 					</tr>
 					<tr>
@@ -145,8 +148,8 @@
 				checkPassword($('#Pw').val());
 			});
 			function checkPassword(Pw){
-				if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.[0-9]).{3,10}$/.test(Pw)){
-					alert('숫자+영문자+특수문자 조합으로 3자리 이상 사용해야 합니다.()미포함');
+				if(!/^[A-Za-z\d$@$!%*_#?&]{3,}$/.test(Pw)){
+					alert('비밀번호는 영문,숫자,특수문자@$!%*_#?&만 허용됩니다.');
 					$('#Pw').val('').focus();
 					return false;
 				}
@@ -155,7 +158,37 @@
 
 		
 		
-		
+			function fnChkByte(obj, maxByte){//글자 bytes 제한
+			    var str = obj.value;
+			    var str_len = str.length;
+
+			    var rbyte = 0;
+			    var rlen = 0;
+			    var one_char = "";
+			    var str2 = "";
+
+			    for(var i=0; i<str_len; i++){
+			        one_char = str.charAt(i);
+			        if(escape(one_char).length > 4){
+						rbyte += 3;//한글3Byte
+					} else {
+					    rbyte++;//영문 등 나머지 1Byte
+			        }
+					if(rbyte <= maxByte){
+			            rlen = i+1;//return할 문자열 갯수
+			        }
+			     }
+			     if(rbyte > maxByte){
+			  		// alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+			  		alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+			  		str2 = str.substr(0,rlen);//문자열 자르기
+			  		obj.value = str2;
+			  		fnChkByte(obj, maxByte);
+			     }else{
+			        //document.getElementById('byteInfo').innerText = rbyte;
+			     }
+			}
+
 		
 		
 		
@@ -203,7 +236,7 @@
 
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
-					var Exp =RegExp(/^[a-zA-Z0-9]$/);
+					var Exp =/^[a-zA-z0-9]{4,12}$/;
 					var text = $('#cid').val();
 					var find ="admin";
 					
@@ -211,13 +244,11 @@
 						alert('아이디를 입력하세요.');
 					} else if(text.indexOf(find)!=-1){
 						alert("admin을 포함할 수 없습니다.");
-					} else if(Exp.test($("#cid").val())){
+					} else if(!Exp.test(inputCid)){
 						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
 						$("#cid").val("");
 						$("#cid").focus();
-						return false;
-						
-						
+					
 						
 					}
 					else {
