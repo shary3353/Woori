@@ -90,7 +90,8 @@
 				<table>
 					<tr>
 						<th>이름</th>
-						<td><input type="text" name="cunsumername" id="cunsumername" value="" placeholder="이름을 입력해주세요." /></td>
+						<td><input type="text" name="cunsumername" id="cunsumername" value="" placeholder="이름을 입력해주세요."
+						onkeyup="fnChkByte(this,'50')" /></td>
 
 					</tr>
 					<tr>
@@ -102,12 +103,14 @@
 
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" id="Pw" name="pw" value="" placeholder="비밀번호를 입력해주세요."/></td>
+						<td><input type="password" id="Pw" name="pw" value="" placeholder="비밀번호를 입력해주세요."
+						onkeyup="chkPw(), fnChkByte(this,'200')"/></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인</th>
-						<td><input type="password" id="PwChk" name="PwChk" value="" placeholder="비밀번호를 입력해주세요." />
-							<font id="check" size="1"></font>
+						<td><input type="password" id="PwChk" name="PwChk" value="" placeholder="비밀번호를 입력해주세요."
+						onkeyup="chkPw(), fnChkByte(this,'200')" />
+							<font id="check" size="1" ></font>
 						</td>
 					</tr>
 					<tr>
@@ -155,7 +158,37 @@
 
 		
 		
-		
+			function fnChkByte(obj, maxByte){//글자 bytes 제한
+			    var str = obj.value;
+			    var str_len = str.length;
+
+			    var rbyte = 0;
+			    var rlen = 0;
+			    var one_char = "";
+			    var str2 = "";
+
+			    for(var i=0; i<str_len; i++){
+			        one_char = str.charAt(i);
+			        if(escape(one_char).length > 4){
+						rbyte += 3;//한글3Byte
+					} else {
+					    rbyte++;//영문 등 나머지 1Byte
+			        }
+					if(rbyte <= maxByte){
+			            rlen = i+1;//return할 문자열 갯수
+			        }
+			     }
+			     if(rbyte > maxByte){
+			  		// alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+			  		alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+			  		str2 = str.substr(0,rlen);//문자열 자르기
+			  		obj.value = str2;
+			  		fnChkByte(obj, maxByte);
+			     }else{
+			        //document.getElementById('byteInfo').innerText = rbyte;
+			     }
+			}
+
 		
 		
 		
@@ -215,7 +248,7 @@
 						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
 						$("#cid").val("");
 						$("#cid").focus();
-						return false;
+					
 						
 						
 						
