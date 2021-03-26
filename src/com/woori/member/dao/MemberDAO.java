@@ -119,33 +119,6 @@ public class MemberDAO {
 	}
 
 
-	
-	
-	//관리자 로그인,구매자 판매자 로그인
-	public boolean login(String id, String pw) {
-		boolean success = false;
-		String sql ="SELECT id FROM admin WHERE id=? AND pw=?";
-		try {
-			ps= conn.prepareStatement(sql);
-			ps.setString(1, id);
-			ps.setString(2, pw);
-			rs = ps.executeQuery();
-			success = rs.next();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-			
-				rs.close();
-				ps.close();
-				conn.close();
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
-		}
-		return success;
-	}
 	public HashMap<String, Boolean> clogin(String cid, String pw) {//구매자 로그인		
 		String sql ="SELECT c.cid, b.isblack FROM consumer c, c_blacklist b WHERE c.cid = b.cid(+) AND c.cid=? AND c.pw=?";
 		

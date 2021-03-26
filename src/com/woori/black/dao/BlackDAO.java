@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.woori.member.dto.BlackListDTO;
+import com.woori.black.dto.BlackListDTO;
 
 public class BlackDAO {
 	Connection conn = null;

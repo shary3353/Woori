@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.woori.black.dao.BlackDAO;
-import com.woori.member.dto.BlackListDTO;
+import com.woori.black.dto.BlackListDTO;
 
 public class BlackService {
 	HttpServletRequest req = null;
