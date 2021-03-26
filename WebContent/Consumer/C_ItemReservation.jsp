@@ -140,7 +140,9 @@
                 </tr>
                 <tr>
                     <td><li class="ReservationName">방문날짜 : </li></td>
-                    <td><input type="text" name="visitdate" id="ReservationDate" readonly/></td>
+                    <td><input type="text" name="visitdate" id="ReservationDate" readonly 
+                    style="background: url(${pageContext.request.contextPath}/img/calendar.png) no-repeat 2px 2px;
+                    background-size:25px " /></td>
                 </tr>
                 </ol>
                 <tr>
