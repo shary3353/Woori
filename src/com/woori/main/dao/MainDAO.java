@@ -79,7 +79,7 @@ public class MainDAO {
 
 	public ProductDTO  Citemdetail(String pidx) {
 		ProductDTO dto = null;
-		String sql="SELECT p.p_idx,p.p_name,p.p_content,p.p_price,p.sid,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE p.p_idx=?";
+		String sql="SELECT p.p_idx,p.p_name,p.p_content,p.p_price,p.sid,p.likes,t.orifilename,t.newfilename FROM product p JOIN thumbfile t ON p.p_idx = t.p_idx(+) WHERE p.p_idx=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(pidx));
@@ -91,6 +91,7 @@ public class MainDAO {
 				dto.setP_content(rs.getString("p_content"));
 				dto.setP_price(rs.getInt("p_price"));
 				dto.setSid(rs.getString("sid"));
+				dto.setLikes(rs.getInt("likes"));
 				dto.setOriFileName(rs.getString("orifilename"));
 				dto.setNewFileName(rs.getString("newfilename"));
 			}

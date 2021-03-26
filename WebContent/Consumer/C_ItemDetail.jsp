@@ -96,6 +96,9 @@
                     <td class="detailName" colspan="2">${dto.p_name}</td>
                 </tr>
                 <tr>
+                	<td style="font-size: 27px; font-weight: 600;">❤️${dto.likes}</td>
+                </tr>
+                <tr>
                     <td colspan="2" class="detailPrice">${dto.p_price} 원</td>
                 </tr>
                 <tr>
