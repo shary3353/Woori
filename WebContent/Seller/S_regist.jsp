@@ -138,8 +138,8 @@ $("#Pw").change(function(){
 	checkPassword($('#Pw').val());
 });
 function checkPassword(Pw){
-	if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.[0-9]).{3,10}$/.test(Pw)){
-		alert('숫자+영문자+특수문자 조합으로 3자리 이상 사용해야 합니다.()미포함');
+	if(!/^[A-Za-z\d$@$!%*_#?&]{3,}$/.test(Pw)){
+		alert('비밀번호는 영문,숫자,특수문자@$!%*_#?&만 허용됩니다.');
 		$('#Pw').val('').focus();
 		return false;
 	}

@@ -106,7 +106,7 @@
                 <tr>
                     <td colspan="2" class="detailButtons">
                         <button id="questionButton" onclick="Question()">문의하기</button>
-                        <a href="C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
+                        <a href="${pageContext.request.contextPath}/Consumer/C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
                         <button id="reservationButton">예약하기</button>
                         </a>
                         <!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
