@@ -98,12 +98,12 @@ table{
 			<tr>
 				<th>개인전화번호</th>
 				<td><input type="text" id="phone" name="phoneNumber"
-					placeholder="개인 전화번호를 입력해주세요." onkeyup="fnChkByte(this,'20')"/></td>
+					placeholder="ex.000-0000-0000" onkeyup="fnChkByte(this,'20')"/></td>
 			</tr>
 			<tr>
 				<th>매장전화번호</th>
 				<td><input type="text" id="store_call" name="phoneNumber"
-					placeholder="매장 전화번호를 입력해주세요." onkeyup="fnChkByte(this,'20')"/></td>
+					placeholder="ex)02-000-0000" onkeyup="fnChkByte(this,'20')"/></td>
 			</tr>
 
 			<tr>
