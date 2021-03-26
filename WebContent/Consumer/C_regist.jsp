@@ -133,7 +133,7 @@
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td><input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요." /> </td>
+						<td><input type="text" id="phone" name="phone" placeholder="000-0000-0000" /> </td>
 					</tr>
 
 					<tr>
@@ -245,7 +245,7 @@
 					} else if(text.indexOf(find)!=-1){
 						alert("admin을 포함할 수 없습니다.");
 					} else if(!Exp.test(inputCid)){
-						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
+						alert('id는 영문 대소문자와 숫자로만 입력해주세요.4자~12자 이하로 만들어주세요.');
 						$("#cid").val("");
 						$("#cid").focus();
 					
@@ -325,7 +325,7 @@
 							$phone.focus();
 
 						} else if(!regPhone.test($phone.val())){
-							alert('핸드폰번호가 유효하지 않습니다.');
+							alert('형식에 맞게 입력해주세요.');
 							$phone.focus(); 
 						}else {
 							var params = {};
