@@ -145,8 +145,8 @@
 				checkPassword($('#Pw').val());
 			});
 			function checkPassword(Pw){
-				if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.[0-9]).{3,10}$/.test(Pw)){
-					alert('숫자+영문자+특수문자 조합으로 3자리 이상 사용해야 합니다.()미포함');
+				if(!/^[A-Za-z\d$@$!%*_#?&]{3,}$/.test(Pw)){
+					alert('비밀번호는 영문,숫자,특수문자@$!%*_#?&만 허용됩니다.');
 					$('#Pw').val('').focus();
 					return false;
 				}
@@ -203,7 +203,7 @@
 
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
-					var Exp =RegExp(/^[a-zA-Z0-9]$/);
+					var Exp =/^[a-zA-z0-9]{4,12}$/;
 					var text = $('#cid').val();
 					var find ="admin";
 					
@@ -211,13 +211,11 @@
 						alert('아이디를 입력하세요.');
 					} else if(text.indexOf(find)!=-1){
 						alert("admin을 포함할 수 없습니다.");
-					} else if(Exp.test($("#cid").val())){
+					} else if(!Exp.test(inputCid)){
 						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
 						$("#cid").val("");
 						$("#cid").focus();
 						return false;
-						
-						
 						
 					}
 					else {
