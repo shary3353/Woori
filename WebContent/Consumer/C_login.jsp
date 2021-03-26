@@ -251,6 +251,10 @@
 	if(msg != ""){
 		alert(msg);
 	}
+	
+	
+	
+	
 	 function fnChkByte(obj, maxByte){
 	    	var str = obj.value;
 	    	var str_len = str.length;
