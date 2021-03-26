@@ -70,7 +70,6 @@ public class MainService {
 		MainDAO dao = new MainDAO();
 		ProductDTO dto = dao.Creservationdetail(pidx);
 		System.out.println(dto);
-		page = "/";
 		if(dto != null) {
 			page="./C_ItemReservation.jsp";
 			req.setAttribute("dto", dto);
