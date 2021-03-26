@@ -46,6 +46,9 @@ public class MainService {
 		System.out.println(pidx);
 		MainDAO dao = new MainDAO();
 		ProductDTO dto = dao.Citemdetail(pidx);
+		if(dto.getNewFileName()==null) {
+			dto.setNewFileName("no-image.png");
+		}
 		System.out.println(dto);
 		String page = "";
 		if(dto != null) {
