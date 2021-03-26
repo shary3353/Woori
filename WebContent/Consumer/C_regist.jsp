@@ -203,7 +203,7 @@
 
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
-					var Exp =/^[a-zA-Z0-9]$/;
+					var Exp =RegExp(/^[a-zA-Z0-9]$/);
 					var text = $('#cid').val();
 					var find ="admin";
 					
@@ -211,9 +211,14 @@
 						alert('아이디를 입력하세요.');
 					} else if(text.indexOf(find)!=-1){
 						alert("admin을 포함할 수 없습니다.");
-					}
-					else if(!Exp.test(cid.value)){
+					} else if(Exp.test($("#cid").val())){
 						alert('id는 영문 대소문자와 숫자로만 입력해주세요.');
+						$("#cid").val("");
+						$("#cid").focus();
+						return false;
+						
+						
+						
 					}
 					else {
 						
