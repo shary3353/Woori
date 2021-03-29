@@ -236,7 +236,7 @@
 
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
-					var Exp =/^[a-zA-z0-9]{4,12}$/;
+					var Exp = /^[a-zA-z0-9]{4,12}$/;
 					var text = $('#cid').val();
 					var find ="admin";
 					

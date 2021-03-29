@@ -145,7 +145,7 @@ nav .navilist:hover {
 		<div id="searchmenu">
 		<form action="../Consumer/C_SearchList" method="post">
 			<span id='search_border'> <input type='text' id='searchbar' name='searchname'
-				placeholder="검색어를 입력하세요"/>
+				placeholder="상품이름을 입력하세요"/>
 			</span>
 			<button id='search'>검색</button>
 		</form>
