@@ -144,7 +144,10 @@
 				</table>
 		</body>
 		<script>
-			$("#Pw").change(function(){
+			
+		
+		
+		$("#Pw").change(function(){
 				checkPassword($('#Pw').val());
 			});
 			function checkPassword(Pw){
@@ -236,7 +239,9 @@
 
 				$("#overlay").click(function () {
 					var inputCid = $('#cid').val();
-					var Exp = /^[a-zA-z0-9]{4,12}$/;
+					
+					//var Exp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,12}$/;
+					var Exp = /^[a-zA-z0-9].{4,12}$/;
 					var text = $('#cid').val();
 					var find ="admin";
 					
@@ -248,6 +253,7 @@
 						alert('id는 영문 대소문자와 숫자로만 입력해주세요.4자~12자 이하로 만들어주세요.');
 						$("#cid").val("");
 						$("#cid").focus();
+						
 					
 						
 					}
