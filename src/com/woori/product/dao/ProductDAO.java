@@ -223,6 +223,8 @@ public class ProductDAO {
 			System.out.println("업데이트 완료된 갯수 : "+success);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			resClose();
 		}
 		return success;
 	}

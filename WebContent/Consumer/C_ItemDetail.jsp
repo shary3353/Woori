@@ -96,6 +96,9 @@
                     <td class="detailName" colspan="2">${dto.p_name}</td>
                 </tr>
                 <tr>
+                	<td style="font-size: 27px; font-weight: 600;">❤️${dto.likes}</td>
+                </tr>
+                <tr>
                     <td colspan="2" class="detailPrice">${dto.p_price} 원</td>
                 </tr>
                 <tr>
@@ -106,12 +109,12 @@
                 <tr>
                     <td colspan="2" class="detailButtons">
                         <button id="questionButton" onclick="Question()">문의하기</button>
-                        <a href="C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
+                        <a href="${pageContext.request.contextPath}/Consumer/C_ItemReservation?p_idx=${dto.p_idx}" class="alink">
                         <button id="reservationButton">예약하기</button>
                         </a>
                         <!-- 로그인 세션처리 아직 안해서 임시값 대체함-->
                         <button id="likeButton"> &nbsp;좋아요</button>
-                        <button id="dislikeButton" style="display: none">❤️ &nbsp;좋아요 취소</button>
+                        <button id="dislikeButton" style="display: none; font-size:15px;">❤️ &nbsp;좋아요 취소</button>
                         <button id="wishlistButton" onclick="location.href='${pageContext.request.contextPath}/Consumer/addWishList?p_idx=${dto.p_idx}'">위시리스트</button>
                         <button id="reportButton" onclick="location.href='${pageContext.request.contextPath}/ServiceCenter/cReportForm?sid=${dto.sid}'">신고하기</button>
                     </td>
@@ -127,11 +130,12 @@
 			alert(msg);
 		}
 		//이미지 없을 때 이미지 대체
+		/* 
 		var $itemImage = $("#itemImage");
 		if($itemImage.attr('src') == "../Uploaded_Img/"){
 			$itemImage.attr("src", "${pageContext.request.contextPath}/img/no-image.png");
 		}
-		
+		 */
 		
 	 var loginid = '<%=(String)session.getAttribute("cLoginID")%>';	
 	//좋아요 검사	

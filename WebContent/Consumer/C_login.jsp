@@ -135,7 +135,7 @@
         <div class="container-body" style="background-color:  rgb(240, 239, 236);" id="c_login_tab" >
                 <!--구매자 로그인 탭열기-->
         		<div class="tab_content" >
-      	<form name="cform" action="cLogin" method="POST">
+      	<form name="cform" action="../Consumer/cLogin" method="POST">
                     <div>
                         <table>
                             <tr>
@@ -145,7 +145,7 @@
                                 <td>
 
                                     <input type="text" id="cid" placeholder="아이디를 입력해주세요." name="cid"
-                                        style="width: 300px;" />
+                                        style="width: 300px;" onkeyup="fnChkByte(this, '50')"/>
                                 </td>
 
                             </tr>
@@ -155,7 +155,7 @@
                                 </th>
                                 <td>
                                     <input type="password" id="pw" placeholder="비밀번호를 입력해주세요" name="pw"
-                                        style="width: 300px;">
+                                        style="width: 300px;" onkeyup="fnChkByte(this, '200')">
                                 </td>
                             </tr>
                         </table>
@@ -186,7 +186,7 @@
                                 </th>
                                 <td>
                                     <input type="text" id="sid" placeholder="아이디를 입력해주세요." name="sid"
-                                        style="width: 300px;" />
+                                        style="width: 300px;" onkeyup="fnChkByte(this, '50')"/>
                                 </td>
 
                             </tr>
@@ -196,7 +196,7 @@
                                 </th>
                                 <td>
                                     <input type="password" id="pw" placeholder="비밀번호를 입력해주세요" name="pw"
-                                        style="width: 300px;">
+                                        style="width: 300px;" onkeyup="fnChkByte(this, '200')">
                                 </td>
                             </tr>
                         </table>
@@ -251,6 +251,40 @@
 	if(msg != ""){
 		alert(msg);
 	}
+	
+	
+	
+	
+	 function fnChkByte(obj, maxByte){
+	    	var str = obj.value;
+	    	var str_len = str.length;
+	    	
+	    	var rByte = 0;		//카운팅 할 변수
+	    	var rLen = 0;		//잘라낼 글자수
+	    	var one_char = "";	//하나씩 카운팅하기 위한 변수
+	    	var str2 = "";		//잘라낸 문자열을 담을 변수
+	    	
+	    	for(var i=0; i<str_len; i++){
+	    		one_char = str.charAt(i);
+	    		if(escape(one_char).length > 4){
+	    			rByte += 3;	//한글은 3byte
+	    		}else{
+	    			rByte ++;	//나머지 1byte
+	    		}
+	    		
+	    		if(rByte <= maxByte){	//맥스바이트에 도달하면
+	    			rLen = i+1;	//잘라낼 위치 지정
+	    		}
+	    	}
+	    	
+	    	if(rByte > maxByte){
+	    		alert(Math.ceil((maxByte/3))+"자를 초과할 수 없습니다.");
+	    		str2 = str.substr(0, rLen);
+	    		obj.value = str2;
+	    		fnChkByte(obj, maxByte);
+	    	}
+	    	
+	    }
 	
 </script>
 </html>

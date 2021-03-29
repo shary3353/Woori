@@ -79,7 +79,7 @@
                     <select name="rSearchOption" id="">
                         <option value="100"  selected="selected">신고자ID</option>
                         <option value="200">신고대상자ID</option>
-                    </select><input type="text" name="inputR" id="searchingSellerInput" placeholder="ID검색란" onkeyup="fnChkByte(this, '50')"><button>검색</button>
+                    </select><input type="text" name="inputR" id="searchingSellerInput" placeholder="ID검색란" onkeyup="fnChkByte(this, '50')"><button id="searchBtn">검색</button>
                 </form>
             </div>  <!--판매자리스트 검색 닫음-->
 
@@ -154,6 +154,15 @@
     </div>  <!--Wrapper 닫음-->
 </body>
 <script type="text/javascript">
+
+$('#searchBtn').click(function(){
+	var inputID = $('#searchingSellerInput').val();
+	if(inputID == ""){
+		alert("검색할 아이디를 입력하세요.");
+		return false;
+	}
+});
+
 	$("body").on("click", "[id^=rStatusUpdateBtn]", function(event) {
 		var r_idx = $('#'+this.id).val();
 		var number = this.id.slice(-1);

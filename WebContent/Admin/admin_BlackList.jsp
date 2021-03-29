@@ -55,7 +55,7 @@
 	                        <option value="100"  selected="selected">판매자</option>
 	                        <option value="200">구매자</option>
 	                    </select>
-	                    <input type="text" name="bSearch" id="searchingSellerInput" placeholder="ID검색란" onkeyup="fnChkByte(this, '50')"><button>검색</button>
+	                    <input type="text" name="bSearch" id="searchingSellerInput" placeholder="ID검색란" onkeyup="fnChkByte(this, '50')"><button id="searchBtn">검색</button>
 	                </form>
             </div>  <!--판매자리스트 검색 닫음-->
 
@@ -99,6 +99,14 @@
     </div>  <!--Wrapper 닫음-->
 </body>
 <script type="text/javascript">
+$('#searchBtn').click(function(){
+	var inputID = $('#searchingSellerInput').val();
+	if(inputID == ""){
+		alert("검색할 아이디를 입력하세요.");
+		return false;
+	}
+});
+
 function fnChkByte(obj, maxByte){
 	var str = obj.value;
 	var str_len = str.length;
@@ -120,6 +128,7 @@ function fnChkByte(obj, maxByte){
 			rLen = i+1;	//잘라낼 위치 지정
 		}
 	}
+	
 	
 	if(rByte > maxByte){
 		alert(Math.ceil((maxByte/3))+"자를 초과할 수 없습니다.");

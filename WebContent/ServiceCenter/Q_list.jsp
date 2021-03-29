@@ -99,9 +99,6 @@ h3 {
 }
 input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}
 
-span{
-	padding:3px;
-}
 .viewBtn{
 padding:2px 7px;
 }

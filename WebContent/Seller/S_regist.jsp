@@ -79,17 +79,17 @@ table{
 			<tr>
 				<th>비밀번호</th>
 				<td><input type="password" id="Pw" name="Pw" value=""
-					placeholder="비밀번호를 입력해주세요." /></td>
+					placeholder="비밀번호를 입력해주세요." onkeyup="chkPw(), fnChkByte(this,'200')"/></td>
 			</tr>
 			<tr>
 				<th>비밀번호 확인</th>
 				<td><input type="password" id="PwChk" name="PwChk" value=""
-					placeholder="비밀번호를 입력해주세요." /> <font id="check" size="1"></font></td>
+					placeholder="비밀번호를 입력해주세요." onkeyup="chkPw(), fnChkByte(this,'200')"/> <font id="check" size="1"></font></td>
 			</tr>
 			<tr>
 				<th>이름</th>
 				<td><input type="text" id="sellername" name="sellername" value=""
-					placeholder="이름을 입력해주세요." /></td>
+					placeholder="이름을 입력해주세요." onkeyup="fnChkByte(this,'50')"/></td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
@@ -98,12 +98,12 @@ table{
 			<tr>
 				<th>개인전화번호</th>
 				<td><input type="text" id="phone" name="phoneNumber"
-					placeholder="개인 전화번호를 입력해주세요." /></td>
+					placeholder="ex.000-0000-0000" onkeyup="fnChkByte(this,'20')"/></td>
 			</tr>
 			<tr>
 				<th>매장전화번호</th>
 				<td><input type="text" id="store_call" name="phoneNumber"
-					placeholder="매장 전화번호를 입력해주세요." /></td>
+					placeholder="ex)02-000-0000" onkeyup="fnChkByte(this,'20')"/></td>
 			</tr>
 
 			<tr>
@@ -113,7 +113,7 @@ table{
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." />
+				<td><input type="email" id="email" name="email" placeholder="이메일을 입력해주세요."onkeyup="fnChkByte(this,'200')" />
 				</td>
 			</tr>
 			<tr>
@@ -130,6 +130,36 @@ table{
 
 </body>
 <script>
+function fnChkByte(obj, maxByte){//글자 bytes 제한
+    var str = obj.value;
+    var str_len = str.length;
+
+    var rbyte = 0;
+    var rlen = 0;
+    var one_char = "";
+    var str2 = "";
+
+    for(var i=0; i<str_len; i++){
+        one_char = str.charAt(i);
+        if(escape(one_char).length > 4){
+			rbyte += 3;//한글3Byte
+		} else {
+		    rbyte++;//영문 등 나머지 1Byte
+        }
+		if(rbyte <= maxByte){
+            rlen = i+1;//return할 문자열 갯수
+        }
+     }
+     if(rbyte > maxByte){
+  		// alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+  		alert("최대 " + maxByte + "byte를 초과할 수 없습니다.")
+  		str2 = str.substr(0,rlen);//문자열 자르기
+  		obj.value = str2;
+  		fnChkByte(obj, maxByte);
+     }else{
+        //document.getElementById('byteInfo').innerText = rbyte;
+     }
+}
 
 
 
@@ -138,8 +168,8 @@ $("#Pw").change(function(){
 	checkPassword($('#Pw').val());
 });
 function checkPassword(Pw){
-	if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.[0-9]).{3,10}$/.test(Pw)){
-		alert('숫자+영문자+특수문자 조합으로 3자리 이상 사용해야 합니다.()미포함');
+	if(!/^[A-Za-z\d$@$!%*_#?&]{3,}$/.test(Pw)){
+		alert('비밀번호는 영문,숫자,특수문자@$!%*_#?&만 허용됩니다.');
 		$('#Pw').val('').focus();
 		return false;
 	}
@@ -246,6 +276,7 @@ function checkPassword(Pw){
 					
 					var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 					var regPhone = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
+					var Phone = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
 					
 					if (overChk) {
 						if ($id.val() == '') {
@@ -279,9 +310,16 @@ function checkPassword(Pw){
 						}else if ($phone.val() == '') {
 							alert('핸드폰 번호를 입력해 주세요!');
 							$phone.focus();
-						} else if($store_call.val() == ''){
+						} else if(!Phone.test($phone.val())){
+							alert('-를 포함하여 입력해주세요.');
+							$phone.focus();
+					    
+						}else if($store_call.val() == ''){
 							 alert('사업장 번호를 입력해 주세요!');
 							 $store_call.focus();
+						}else if(!Phone.test($store_call.val())){
+							alert('-를 포함하여 입력해주세요.');
+							$store_call.focus();
 							
 						
 
