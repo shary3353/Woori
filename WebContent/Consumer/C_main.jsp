@@ -138,7 +138,7 @@
 					<table>
 						<tr>
 							<td rowspan="3" class="bestImage" >
-								<img id="itemImage1" src="${pageContext.request.contextPath}/Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="400px" />
+								<img id="itemImage1" src="${pageContext.request.contextPath}/Uploaded_Img/${best.newFileName}"  alt="${best.oriFileName}"width="300px" height="398px" />
 							</td>
 							<td class="bestName">
 								${best.p_name}

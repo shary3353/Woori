@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td rowspan="5">
-                    <input type="file" name="photo" id="imageFile" accept="image/*">
+                    <input type="file" name="photo" id="imageFile" accept="image/*" onchange="checkSize(this)">
                 </td>
                 <td class="column-name" >물품이름</td>
                 <td><input type="text" placeholder="물품이름을 입력해주세요." name="p_name" id="p_name" onKeyUp="fnChkByte(this,'100')"/></td>
@@ -163,6 +163,13 @@
     		str2 =str.substr(0,7);
     		obj.value = str2;
     	}
+    }
+    
+    function checkSize(input) {
+        if (input.files && input.files[0].size > (10 * 1024 * 1024)) {
+            alert("파일 사이즈가 10mb 를 넘습니다.");
+            input.value = null;
+        }
     }
     
 </script>

@@ -51,7 +51,10 @@
 		text-align: right;
 		padding-right: 10px;
     }
-
+	td{
+	width: 250px;
+	text-align: center;
+	}
     .searchList table .listItemImg{
         text-align: center;
     }
@@ -61,7 +64,6 @@
 		font-weight: 520;
 		font-size: 20px;
 		text-align: center;
-		padding-right: 10px;
         font-weight: 800;
     }
 
@@ -70,7 +72,6 @@
 		font-weight: 520;
 		font-size: 18px;
 		text-align: center;
-		padding-right: 10px;
         font-weight: 700;
     }
 
@@ -103,7 +104,7 @@
 					</tr>
 					<tr>
 						<td class="listItemImg">
-								<img id="itemImage" src="${pageContext.request.contextPath}/Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="300px"/>
+								<img id="itemImage" src="${pageContext.request.contextPath}/Uploaded_Img/${search.newFileName}" alt="${search.oriFileName}" width="200px"  height="280px"/>
 
 						</td>
 					</tr>
