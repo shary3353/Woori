@@ -31,8 +31,10 @@ public class MainService {
 			ArrayList<ProductDTO> 	list = dao.Cmain();
 			System.out.println(list);
 			req.setAttribute("list",list);
+			System.out.println(list.get(3).getNewFileName());
 			for(int k =0; k <list.size(); k++) {
 				if(list.get(k).getNewFileName()==null) {
+					
 					list.get(k).setNewFileName("no-image.png");
 				}
 			}
