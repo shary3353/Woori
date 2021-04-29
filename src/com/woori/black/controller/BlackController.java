@@ -28,6 +28,7 @@ public class BlackController extends HttpServlet {
 		System.out.println("get request url : " + sub);
 
 		BlackService service = new BlackService(req, resp);
+		System.out.println("테마변경테스트");
 
 		switch (sub) {
 		case "/Admin/bList":
